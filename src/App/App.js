@@ -1,19 +1,20 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "../common/pages/Main";
-import Login from "../common/pages/Login";
-import Error from "../common/pages/Error";
-import Navigation from "../common/component/Navigation";
-import { Body, Header } from "./Style";
-import Modal from "../common/component/Modal";
-import { useState } from "react";
-import ModalTest from "../common/component/ModalContents/test";
+import { Body, Footer, FooterLine, Header } from "./Style";
+import { useSetRecoilState } from "recoil";
+import { ModalOpenState } from "@./Atom";
+import Main from "@pages/Main";
+import Login from "@pages/Login";
+import Error from "@pages/Error";
+import Navigation from "@components/Navigation";
+import Modal from "@components/Modal";
+import TestContent from "@components/ModalContents/TestContents";
 
 const App = () => {
-  const [ModalOpen, setModalOpen] = useState(true);
+  const setModalOpen = useSetRecoilState(ModalOpenState);
   return (
     <div>
       <BrowserRouter>
-                <Modal ModalOpen={ModalOpen} setModalOpen={setModalOpen} innerContents={<ModalTest setModalOpen={setModalOpen}/>}/>
+        <Modal innerContents={<TestContent/>}/>
         <Header>
           <Navigation/>
         </Header>
@@ -25,6 +26,11 @@ const App = () => {
           </Routes>
           <button onClick={()=>{setModalOpen(true)}}>Modal Open Test</button>
         </Body>
+        <Footer>
+          <FooterLine>
+            Footer
+          </FooterLine>
+        </Footer>
       </BrowserRouter>
     </div>
   );
