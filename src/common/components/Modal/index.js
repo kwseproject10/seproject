@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useRecoilState } from "recoil";
-import { ComponentLayOut, BG, ModalInner } from "./Style.js"
+import { ComponentLayOut, BG, ModalInner } from "./style.js"
 import { ModalOpenState } from "@./Atom";
 
 const Modal = ({innerContents}) => {

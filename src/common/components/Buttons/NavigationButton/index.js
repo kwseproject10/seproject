@@ -1,4 +1,4 @@
-import { NavigationButtonStyle } from "./Style";
+import { NavigationButtonStyle } from "./style";
 
 const NavigationButton = ({text}) => {
     

@@ -1,15 +1,15 @@
 import NavigationButton from "../Buttons/NavigationButton";
-import { NavigationBar } from "./Style";
+import { NavigationBar } from "./style";
 
 
 const Navigation = () => {
     return(
         <NavigationBar>
-            <NavigationButton text={"BUTTON1"}/>
-            <NavigationButton text={"BUTTON2"}/>
-            <NavigationButton text={"BUTTON3"}/>
-            <NavigationButton text={"BUTTON4"}/>
-            <NavigationButton text={"BUTTON5"}/>
+            <NavigationButton text={"MAIN"}/>
+            <NavigationButton text={"시간표"}/>
+            <NavigationButton text={"수강 중인 강의"}/>
+            <NavigationButton text={"수강 관리"}/>
+            <NavigationButton text={"로그아웃"}/>
         </NavigationBar>
     )
 }
