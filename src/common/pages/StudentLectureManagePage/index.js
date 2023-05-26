@@ -1,7 +1,7 @@
 const StudentLectureManagePage = () => {
     return(
         <div>
-            StudentLectureManagePage page
+            StudentLectureManagePage
         </div>
     )
 }

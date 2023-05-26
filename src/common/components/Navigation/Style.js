@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+export const Header = styled.div`
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    background-color: #eeeeee;
+    z-index: 2;
+`
+
 export const NavigationBar = styled.div`
     margin-top: 15px;
     width: 100%;

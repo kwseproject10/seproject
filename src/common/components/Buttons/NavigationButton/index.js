@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import { NavigationButtonStyle } from "./style";
 
-const NavigationButton = ({text}) => {
+const NavigationButton = ({text, link, onClick = () => {} }) => {
     
     return(
-        <NavigationButtonStyle>
-            {text}
+        <NavigationButtonStyle onClick={() => {onClick()}}>
+            <Link to={`/${link}`}>{text}</Link>
         </NavigationButtonStyle>
     )
 }

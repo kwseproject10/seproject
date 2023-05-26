@@ -1,7 +1,7 @@
 const TimeTablePage = () => {
     return(
         <div>
-            TimeTablePage page
+            TimeTablePage
         </div>
     )
 }

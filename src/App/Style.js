@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-export const Header = styled.div`
-    height: 60px;
-    width: 100%;
-    position: fixed;
-    background-color: #eeeeee;
-    z-index: 2;
-`
-
 export const Body = styled.div`
     padding-top: 60px;
     min-height: 600px;

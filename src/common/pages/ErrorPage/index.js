@@ -1,7 +1,7 @@
 const ErrorPage = () => {
     return(
         <div>
-            ErrorPage page
+            ErrorPage
         </div>
     )
 }
