@@ -102,11 +102,16 @@ export const SignButton = styled.div`
     text-align: center;
     color: white;
     background-color: ${(props) => props.BG || "gray" };
-    
+    ${(props) => props.Enable?
+    `
     &:hover{
         color: black;
         transform: translateY(0px);
         transition: 0.3s;
+    }
+    `
+    :
+    ""
     }
 `
 

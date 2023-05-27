@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { DropDownElement } from "./DropDownElement";
-import { DropDownButton, DropDownList } from "./style";
+import { DropDownButton, DropDownList, DropDownWrap, ExpandIconWrap } from "./style";
+import { ReactComponent as ExpandIcon } from "@images/expand_down_icon.svg"
 
 const DropDown = ({ state, setState, isOpen, setIsOpen, list, width, listWidth, height }) => {
     const outsideRef = useRef(null);
@@ -17,7 +18,8 @@ const DropDown = ({ state, setState, isOpen, setIsOpen, list, width, listWidth, 
         };
     }, [outsideRef, setIsOpen]);
     return(
-        <div ref={outsideRef}>
+        <div>
+        <DropDownWrap ref={outsideRef}>
         <DropDownButton
             type='button'
             isOpen={isOpen}
@@ -26,6 +28,12 @@ const DropDown = ({ state, setState, isOpen, setIsOpen, list, width, listWidth, 
             onClick={()=>{setIsOpen((prev)=>!prev)}}
             value={state}
         />
+            <ExpandIconWrap
+            onClick={()=>{setIsOpen((prev)=>!prev)}}
+            >
+                <ExpandIcon/>
+            </ExpandIconWrap>
+        </DropDownWrap>
             {
                 isOpen ?
                     <DropDownList

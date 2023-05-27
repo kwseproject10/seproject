@@ -11,7 +11,7 @@ const SignUpPage = () => {
     const [ EmailDomain, setEmailDomain ] = useState('gmail.com');
     const [ EmailDropDown, setEmailDropDown ] = useState(false);
     const EmailDomainList = [ 'gmail.com', 'naver.com', 'nate.com', 'kw.ac.kr' ]
-    const [ major, setMajor ] = useState("");
+    const [ major, setMajor ] = useState("컴퓨터정보공학부");
     const [ majorDropDown, setMajorDropDown ] = useState(false);
     const majorList = [ '컴퓨터정보공학부', '소프트웨어학부', '정보융합학부', '법학부', '경영학부' ];
 
@@ -32,7 +32,7 @@ const SignUpPage = () => {
     const [ birthDay, setBirthDay ] = useState("");
     const [ EmailID, setEmailID ] = useState("");
 
-    const [ Alret, setAlret ] = useState("");
+    const [ Alret, setAlret ] = useState("학번을 입력해주세요.");
     const [ canSubmit, setCanSubmit ] = useState(false);
 
     const checkValidate = (studentID, password, rePassword, name, phoneNum1, phoneNum2, phoneNum3, birthYear, birthMonth, birthDay, EmailID, EmailDomain, checkInformPolicy) => {
@@ -305,13 +305,30 @@ const SignUpPage = () => {
                     canSubmit
                 ?
                     <LinkStyle to="/">
-                        <SignButton BG={"green"} onClick={() => {OnSubmit();}}>SIGN UP</SignButton>
+                        <SignButton
+                            BG={"green"}
+                            onClick={() => {OnSubmit();}}
+                            Enable={true}
+                        >
+                            SIGN UP
+                        </SignButton>
                     </LinkStyle>
                 :
-                    <SignButton BG={"rgba(139,11,2,0.5)"} onClick={() => {}}>SIGN UP</SignButton>
+                    <SignButton
+                        BG={"rgba(139,11,2,0.5)"}
+                        Enable={false}
+                    >
+                        SIGN UP
+                    </SignButton>
                 }
                 <LinkStyle to="/">
-                    <SignButton BG={"gray"} onClick={() => {}}>CANCEL</SignButton>
+                    <SignButton 
+                        BG={"gray"}
+                        onClick={() => {OnSubmit();}}
+                        Enable={true}
+                    >
+                        CANCEL
+                    </SignButton>
                 </LinkStyle>
             </ButtonRow>
         </div>

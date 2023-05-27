@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const DropDownWrap = styled.div`
+    display:flex;
+    position: relative;
+`
+
 export const DropDownButton = styled.input`
     padding: 10px;
     text-align: left;
@@ -57,4 +62,11 @@ export const DropDownLi = styled.li`
     &:hover{
         background-color: rgba(180,180,180,1);
     }
+`
+
+export const ExpandIconWrap = styled.div`
+    position:absolute;
+    right: 3px;
+    top: 5px;
+    cursor: pointer;
 `
