@@ -1,16 +1,19 @@
 import { Outlet } from "react-router-dom";
 import { Body, Footer, FooterLine } from "./style";
-import { useSetRecoilState } from "recoil";
-import { ModalOpenState } from "@./Atom";
 import StudentNavigation from "@components/StudentNavigation";
 import Modal from "@components/Modal";
 import TestContent from "@components/ModalContents/TestContents";
+import { useState } from "react";
 
 const StudentPages = () => {
-  const setModalOpen = useSetRecoilState(ModalOpenState);
+  const [modalOpen, setModalOpen] = useState(false);
   return (
     <div>
-        <Modal innerContents={<TestContent/>}/>
+        <Modal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          innerContents={<TestContent setModalOpen={setModalOpen}/>}
+        />
             <StudentNavigation/>
         <Body>
             <Outlet/>

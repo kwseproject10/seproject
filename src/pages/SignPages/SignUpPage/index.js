@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { AlretRow, BirthDayRow, ButtonRow, CheckBox, CheckRow, EmailRow, Input, InputBirth, InputEmail, InputNum, InputTitle, LinkStyle, PhoneNumRow, SignButton, Title } from "./style";
+import { AlretRow, BirthDayRow, ButtonRow, CheckBox, CheckRow, EmailRow, Input, InputBirth, InputEmail, InputNum, InputTitle, LinkStyle, PhoneNumRow, Policy, SignButton, Title } from "./style";
 import DropDown from "@components/DropDown";
+import { useOutletContext } from "react-router-dom";
 
 const SignUpPage = () => {
     const [ checkInformPolicy, setCheckInformPolicy ] = useState(false);
@@ -18,6 +19,7 @@ const SignUpPage = () => {
         setCheckInformPolicy((prev)=>!prev);
         console.log(checkInformPolicy);
     }
+    const { setPolicyModalOpen } = useOutletContext();
 
     const [ studentID, setStudentID ] = useState("");
     const [ password, setPassword ] = useState("");
@@ -291,9 +293,9 @@ const SignUpPage = () => {
                 />
             </EmailRow>
 
-            <CheckRow onClick={() => {checkInformPolicyHandler()}}>
-                <CheckBox type="checkbox" checked={checkInformPolicy}/>
-                개인정보 처리방침에 동의합니다.
+            <CheckRow>
+                <CheckBox type="checkbox" checked={checkInformPolicy} onClick={() => {checkInformPolicyHandler()}}/>
+                <Policy onClick={()=>{setPolicyModalOpen(true)}}>개인정보 처리방침</Policy>에 동의합니다.
             </CheckRow>
             <AlretRow>
                 {Alret}

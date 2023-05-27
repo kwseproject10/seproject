@@ -1,14 +1,11 @@
 import { useRef } from "react";
-import { useRecoilState } from "recoil";
 import { ComponentLayOut, BG, ModalInner } from "./style.js"
-import { ModalOpenState } from "@./Atom";
 
-const Modal = ({innerContents}) => {
-    const [ModalOpen, setModalOpen] = useRecoilState(ModalOpenState);
+const Modal = ({modalOpen, setModalOpen, innerContents}) => {
     const ModalBG = useRef();
     return(
         <ComponentLayOut>
-        {ModalOpen ?
+        {modalOpen ?
           (
             <BG ref={ModalBG} onClick={(e)=>{
                 if(ModalBG.current === e.target){

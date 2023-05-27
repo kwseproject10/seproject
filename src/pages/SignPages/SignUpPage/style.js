@@ -58,25 +58,30 @@ export const InputEmail = styled(Input)`
     width: 138px;
 `
 
-
 export const CheckRow = styled.div`
     margin-left: 3px;
     margin-top: 10px;
     width: 100%;
     font-size: 12px;
+    display: flex;
 `
 
 export const CheckBox = styled.input`
     position: relative;
-    top: 2px;
+    top: 1px;
     margin-right: 3px;
+`
+
+export const Policy = styled.div`
+    color: rgba(50,50,200,1);
+    cursor: pointer;
 `
 
 export const AlretRow = styled.div`
     margin-top: 25px;
     margin-bottom: 10px;
     font-size: 13px;
-    color: rgba(255,0,0,0.8);
+    color: rgba(200,50,50,1);
     width: 100%;
     text-align: center;
     user-select: none;

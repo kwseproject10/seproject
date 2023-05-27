@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { ButtonRow, Input, InputTitle, LinkStyle, LoginPageLogo, SignButton } from "./style";
+import { AlretRow, ButtonRow, Input, InputTitle, LinkStyle, LoginPageLogo, SignButton } from "./style";
 import { AuthState } from "@./Atom";
 import KWSeal from "@images/KWSeal_NonBG.png";
 import { useState } from "react";
@@ -34,6 +34,7 @@ const LoginPage = () => {
             <img src={KWSeal}
             width='120' alt="KWSeal"/>
             </LoginPageLogo>
+            
             <InputTitle>STUDENT ID</InputTitle>
             <Input
                 type="number"
@@ -48,6 +49,7 @@ const LoginPage = () => {
                 value={inputID}
                 placeholder="학번을 입력하세요."
             />
+
             <InputTitle>PASSWORD</InputTitle>
             <Input
                 type="password"
@@ -56,7 +58,12 @@ const LoginPage = () => {
                 }}
                 value={inputPW}
                 placeholder="비밀번호를 입력하세요."
-            /> 
+            />
+
+            <AlretRow>
+                {Alret}
+            </AlretRow>
+
             <ButtonRow>
                 <LinkStyle to="/">
                     <SignButton onClick={() => {logInSubmit()}}>LOG IN</SignButton>
@@ -65,6 +72,7 @@ const LoginPage = () => {
                     <SignButton onClick={() => {}}>SIGN UP</SignButton>
                 </LinkStyle>
             </ButtonRow>
+
             <ButtonRow>
                 <LinkStyle to="/student">
                     <SignButton onClick={() => {setAuth(true)}}>STUDENT TEST</SignButton>

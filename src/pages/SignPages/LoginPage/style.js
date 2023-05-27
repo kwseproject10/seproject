@@ -32,6 +32,16 @@ export const PWInput = styled.input`
     border: 1px rgba(180,180,180,1) solid;
     width: 278px;
 `
+
+export const AlretRow = styled.div`
+    margin-top: 20px;
+    font-size: 13px;
+    color: rgba(255,0,0,0.8);
+    width: 100%;
+    text-align: center;
+    user-select: none;
+`
+
 export const ButtonRow = styled.div`
     margin-top: 30px;
     display: flex;

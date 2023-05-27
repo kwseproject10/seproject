@@ -1,8 +1,4 @@
-import { ModalOpenState } from "@./Atom";
-import { useSetRecoilState } from "recoil";
-
-const TestContent = () => {
-    const setModalOpen = useSetRecoilState(ModalOpenState);
+const TestContent = ({ setModalOpen }) => {
     return(
         <div>
             TestContent
