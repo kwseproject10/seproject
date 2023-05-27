@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.js": "/seproject/static/js/main.70f98aaa.js",
+    "static/media/LoginBG.jpg": "/seproject/static/media/LoginBG.8af92e7a62afe2f4328a.jpg",
+    "static/media/PlusJakartaSansRegular.ttf": "/seproject/static/media/PlusJakartaSansRegular.982a269245e9109ef7e3.ttf",
+    "static/media/KWSeal_NonBG.png": "/seproject/static/media/KWSeal_NonBG.5bd70c3f68cafa934273.png",
+    "static/media/NotoSansKRRegular.ttf": "/seproject/static/media/NotoSansKRRegular.0e489996dbd258fc2416.ttf",
+    "index.html": "/seproject/index.html",
+    "main.70f98aaa.js.map": "/seproject/static/js/main.70f98aaa.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.70f98aaa.js"
+  ]
+}
