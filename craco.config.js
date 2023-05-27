@@ -9,12 +9,11 @@ module.exports = {
         baseUrl: './',
         aliases: {
             '@.': './src',
-            '@api': './src/api',
-            '@components': './src/common/components',
-            '@pages': './src/common/pages',
+            '@components': './src/components',
+            '@pages': './src/pages',
             '@style': './src/style',
             '@utils': './src/utils',
-            '@images': './src/images'
+            '@images': './src/images',
         },
       },
     },
