@@ -6,18 +6,18 @@ export const LoginPageLogo = styled.div`
 `
 
 export const InputTitle = styled.div`
-    margin-top: 20px;
-    font-size: 16px;
-    margin-bottom: 5px;
-    width: 300px;
+    margin-top: 1.25rem;
+    font-size: var(--font-size-md);
+    margin-bottom: 0.3125rem;;
+    width: 18.75rem;
 `
 
 export const Input = styled.input`
-    padding: 10px;
-    font-size: 15px;
-    color: rgba(150,150,150,1);
-    border: 1px rgba(180,180,180,1) solid;
-    width: 278px;
+    padding: 0.625rem;
+    font-size: var(--font-size-md);
+    color: var(--color-dg);
+    border: 0.0625rem var(--color-gr) solid;
+    width: 17.375rem;
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -25,38 +25,38 @@ export const Input = styled.input`
 `
 
 export const PWInput = styled.input`
-    padding: 10px;
-    font-size: 15px;
-    color: rgba(150,150,150,1);
-    border: 1px rgba(180,180,180,1) solid;
-    width: 278px;
+    padding: 0.625rem;
+    font-size: var(--font-size-md);
+    color: var(--color-dg);
+    border: 0.0625rem var(--color-gr) solid;
+    width: 17.375rem;
 `
 
 export const AlretRow = styled.div`
-    margin-top: 20px;
-    font-size: 13px;
-    color: rgba(255,0,0,0.8);
+    margin-top: 1.25rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-nm);
     width: 100%;
     text-align: center;
 `
 
 export const ButtonRow = styled.div`
-    margin-top: 30px;
+    margin-top: 1.875rem;
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
 `
 
 export const SignButton = styled.div`
-    width: 125px;
-    height: 30px;
-    line-height: 30px;
+    width: 7.8125rem;
+    height: 1.875rem;
+    line-height: 1.875rem;
     text-align: center;
-    background-color: rgba(139,11,2);
+    background-color: var(--color-nm);
     color: white;
     &:hover{
         color: black;
-        transform: translateY(0px);
+        transform: translateY(0);
         transition: 0.3s;
     }
 `

@@ -54,7 +54,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
 const Calendar = ({ schedules }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const date = ['Sun', 'Mon', 'Thu', 'Wed', 'Thrs', 'Fri', 'Sat'];
+  const date = ['일','월','화','수','목','금','토'];
 
   const prevMonth = () => {
     setCurrentMonth(subMonths(currentMonth, 1));

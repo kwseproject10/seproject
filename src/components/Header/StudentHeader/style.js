@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const HeaderWrap = styled.div`
   position: fixed;
-  height: 60px;
+  height: 3.75rem;
   width: 100%;
   position: fixed;
-  background-color: rgba(58,5,31);
+  background-color: var(--color-dk);
   z-index: 2;
   color:white;
 `
@@ -25,7 +25,7 @@ export const LeftContentsWrap = styled.div`
 
 export const LeftContents = styled.div`
   display: flex;
-  margin-left: 200px;
+  margin-left: 12.5rem;
 `
 
 export const LogoWrap = styled.div`
@@ -38,15 +38,15 @@ export const LogoWrap = styled.div`
 
 export const UserName = styled.div`
   font-weight: bold;
-  font-size: 14px;
-  line-height: 34px;
-  margin-left: 60px;
+  font-size: var(--font-size-sm);
+  line-height: 2.125rem;
+  margin-left: 3.75rem;
 `
 
 export const UserType = styled.div`
-  font-size: 11px;
-  line-height: 34px;
-  margin-left: 10px;
+  font-size: var(--font-size-xs);
+  line-height: 2.125rem;
+  margin-left: 0.625rem;
   color: gray;
 `
 
@@ -58,10 +58,10 @@ export const RightContentsWrap = styled.div`
 
 export const RightContents = styled.div`
   display: flex;
-  margin-right: 200px;
+  margin-right: 12.5rem;
 `
 
 export const ButtonPartition = styled.div`
-  border-right: 1px rgba(150,150,150,1) solid;
-  height: 17px;
+  border-right: 0.0625rem var(--color-dg) solid;
+  height: 1.0625rem;
 `

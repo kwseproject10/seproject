@@ -20,7 +20,7 @@ export const PageLayout = styled.div`
 `
 
 export const BodyWrapper = styled.div`
-    padding-top: 120px;
+    padding-top: 7.5rem;
     display: flex;
     justify-content: center;
     height: 100%;
@@ -35,12 +35,12 @@ export const Body = styled.div`
     justify-content: center;
     overflow-Y: scroll;
     &::-webkit-scrollbar {
-      width: 4px;
-      border-radius: 2px;
+      width: 0.25rem;
+      border-radius: 0.125rem;
       background: rgba(255, 255, 255, 0.4);
     }
     &::-webkit-scrollbar-thumb {
-        border-radius: 2px;
-        background-color: rgba(100,100,100,1);
+        border-radius: 0.125rem;
+        background-color: var(--color-dg);
     }
 `

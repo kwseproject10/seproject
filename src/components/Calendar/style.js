@@ -29,8 +29,8 @@ export const HeaderRight = styled.div`
 `
 
 export const CalendarDays = styled.div`
-  border-top: solid 1px rgb(200,200,200);
-  border-bottom: solid 1px rgb(200,200,200);
+  border-top: solid 0.0625rem var(--color-gr);
+  border-bottom: solid 0.0625rem var(--color-gr);
   height: 1.5rem;
   line-height:1.5rem;
   margin-top: 1rem;
@@ -50,9 +50,9 @@ export const CalendarBody = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 15px;
+  font-size: var(--font-size-md);
   padding-bottom: 1rem;
-  border-bottom: solid 1px rgb(200,200,200);
+  border-bottom: solid 0.0625rem var(--color-gr);
 `
 
 export const BodyRow = styled.div`
@@ -64,15 +64,15 @@ export const Cell = styled.div`
   width: 2.5rem;
   ${(props)=>
     props.state === 'disabled' ?
-      `color: rgb(200,200,200);`
+      `color: var(--color-gr);`
     :
       props.state === 'selected' ?
-        `color: rgb(58,5,31);`
+        `color: var(--color-dk);`
       :
         props.state === 'not-valid' ?
           `color: white;`
         :
-          `color: rgb(120,120,120);`
+          `color: var(--color-dg);`
   }
   cursor: pointer;
 `

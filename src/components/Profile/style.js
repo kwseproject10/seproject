@@ -26,17 +26,17 @@ export const UserInformWrap = styled.div`
 
 export const NameRow = styled.div`
   width: 17rem;
-  border-bottom: 2px solid black;
+  border-bottom: 0.125rem solid black;
 `
 
 export const UserName = styled.div`
-  font-size: 19px;
+  font-size: var(--font-size-lg);;
   font-weight: bold;
 `
 
 export const InformRows = styled.div`
   margin-top: 0.3rem;
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   line-height: 1.5rem;
 `
 
@@ -59,10 +59,10 @@ export const Grade = styled.div`
 export const Bottom = styled.div`
   margin-top: 0.6rem;
   padding-top: 0.3rem;
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   width: 91%;
   height: 2.5rem;
-  border: 1px solid rgb(200,200,200);
+  border: 0.0625rem solid var(--color-gr);
   display: flex;
   justify-content:space-between;
 `
@@ -75,15 +75,15 @@ export const Left = styled.div`
 export const Center = styled.div`
   line-height: 2.3rem;
   width: 35%;
-  border-left: 1px solid rgb(200,200,200);
+  border-left: 0.0625rem solid var(--color-gr);
   height: 2.3rem;
   text-align:center;
 `
 
 export const Right = styled.div`
-  font-size: 12px;
+  font-size: var(--font-size-xs);
   width: 35%;
-  border-left: 1px solid rgb(200,200,200);
+  border-left: 0.0625rem solid var(--color-gr);
   height: 2.3rem;
   text-align:center;
 `

@@ -6,25 +6,25 @@ export const NavigationButtonStyle = styled.div`
   cursor: pointer;
   use-select: none;
   text-decoration: none;
-  line-height: 60px;
-  height: 58px;
-  color: rgba(58,5,31);
+  line-height: 3.75rem;
+  height: 3.7rem;
+  color: var(--color-dk);
   font-weight: bold;
-  font-size: 14px;
-  padding-left: 20px;
-  padding-right: 20px;
+  font-size: var(--font-size-sm);
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
   ${(props) => props.actived === props.index ?
     `
-      background-color: rgba(58,5,31);
+      background-color: var(--color-dk);
       color: white;
       cursor: default;
-      height: 60px;
+      height: 3.75rem;
     `
     :
     `
     &:hover{
-      color: rgba(0,0,0);
-      border-bottom: 2px rgba(0,0,0) solid;
+      color: black;
+      border-bottom: 0.125rem black solid;
     }
     `
   }
@@ -32,5 +32,5 @@ export const NavigationButtonStyle = styled.div`
 
 export const LinkStyle = styled(Link)`
   text-decoration: none;
-  height: 60px;
+  height: 3.75rem;
 `

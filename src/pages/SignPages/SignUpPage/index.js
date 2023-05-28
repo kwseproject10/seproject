@@ -186,10 +186,10 @@ const SignUpPage = () => {
                 isOpen={majorDropDown}
                 setIsOpen={setMajorDropDown}
                 list={majorList}
-                fontSize={"12px"}
-                width={"300px"}
-                listWidth={"260px"}
-                height={"30px"}
+                fontSize={"var(--font-size-xs)"}
+                width={"18.75rem"}
+                listWidth={"23.75rem"}
+                height={"1.875rem"}
             />
 
             <InputTitle>PHONE NUMBER</InputTitle>
@@ -200,10 +200,10 @@ const SignUpPage = () => {
                     isOpen={PhoneNumDropDown}
                     setIsOpen={setPhoneNumDropDown}
                     list={PhoneNum1List}
-                    fontSize={"12px"}
-                    width={"90px"}
-                    listWidth={"50px"}
-                    height={"30px"}
+                    fontSize={"var(--font-size-xs)"}
+                    width={"5.625rem"}
+                    listWidth={"3.125rem"}
+                    height={"1.875rem"}
                 />
                 <InputNum
                     type="number"
@@ -286,10 +286,10 @@ const SignUpPage = () => {
                     isOpen={EmailDropDown}
                     setIsOpen={setEmailDropDown}
                     list={EmailDomainList}
-                    fontSize={"12px"}
-                    width={"120px"}
-                    listWidth={"80px"}
-                    height={"30px"}
+                    fontSize={"var(--font-size-xs)"}
+                    width={"7.5rem"}
+                    listWidth={"5rem"}
+                    height={"1.875rem"}
                 />
             </EmailRow>
 

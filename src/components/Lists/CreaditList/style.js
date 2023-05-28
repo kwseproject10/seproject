@@ -16,9 +16,9 @@ export const TitleText = styled.div`
 `
 
 export const ListBox = styled.div`
-  border-top: 2px black solid;
+  border-top: 0.125rem black solid;
   padding: 0.5rem;
-  color: rgb(120,120,120);
+  color: var(--color-dg);
   width: 95%;
   height: 75%;
 `
@@ -30,6 +30,7 @@ export const Table = styled.table`
 `
 
 export const Thead = styled.thead`
+  font-size: var(--font-size-sm);
   color: black;
 `
 
@@ -40,9 +41,10 @@ export const Tr = styled.tr`
 `
 
 export const Td = styled.td`
-  border: 1px rgba(200,200,200) solid;
+  border: 0.0625rem var(--color-gr) solid;
   border-right: none;
   text-align: center;
+  font-size: var(--font-size-sm);
   &:nth-child(1){
     border-left:none;
     color: black;
@@ -51,7 +53,7 @@ export const Td = styled.td`
 
 export const Th = styled.th`
   font-weight: normal;
-  border: 1px rgba(200,200,200) solid;
+  border: 0.0625rem var(--color-gr) solid;
   border-right: none;
   &:nth-child(1){
     border-left:none;
@@ -65,32 +67,12 @@ export const ListRow = styled.div`
   height: 2.3rem;
   display: flex;
   justify-content: space-between;
-  color: rgb(120,120,120);
-  border-bottom: 1px rgba(200,200,200) solid;
+  color: var(--color-dg);
+  border-bottom: 0.0625rem var(--color-gr) solid;
   &:hover{
-    color: rgba(200,200,200);
-    transform: translateY(0px);
+    color: var(--color-gr);
+    transform: translateY(0);
     transition: 0.3s;
   }
   cursor: pointer;
-`
-
-export const Left = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`
-
-export const NoticeTitle = styled.div`
-  font-size: 14px;
-`
-
-export const NoticeSubject = styled.div`
-  font-size: 11px;
-`
-
-export const Right = styled.div`
-  font-size: 14px;
-  height: 2.3rem;
-  line-height: 1.8rem;
 `

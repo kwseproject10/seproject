@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Header = styled.div`
-    height: 60px;
+    height: 3.75rem;
     width: 100%;
     position: fixed;
     background-color: #eeeeee;

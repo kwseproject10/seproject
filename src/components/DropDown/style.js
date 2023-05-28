@@ -6,25 +6,25 @@ export const DropDownWrap = styled.div`
 `
 
 export const DropDownButton = styled.input`
-    padding: 10px;
+    padding: 0.625rem;
     text-align: left;
-    font-size: ${(props) => props.fontSize || `12px`};
-    color: rgba(150,150,150,1);
+    font-size: ${(props) => props.fontSize || `(--font-size-xs)`};
+    color: var(--color-dg);
     border: ${(props) =>
         props.isOpen ?
-            "2px black solid;"
+            "0.125rem black solid;"
         :
-            "1px rgba(180,180,180,1) solid;"
+            "0.0625rem var(--color-gr) solid;"
     }
     border-radius: ${(props) =>
         props.isOpen ?
-            "5px;"
+            "0.3125rem;;"
         :
-            "1px;"
+            "0.0625rem;"
     }
-    width: ${(props) => props.width || `100px` };
-    height: ${(props) => props.height || `30px` };
-    line-height: ${(props) => props.lineHeight || `0px`};
+    width: ${(props) => props.width || `6.25rem` };
+    height: ${(props) => props.height || `1.875rem` };
+    line-height: ${(props) => props.lineHeight || `0`};
     cursor: pointer;
 `
 
@@ -33,42 +33,42 @@ export const DropDownList = styled.ul`
     z-index: 2;
     position: absolute;
     background-color: white;
-    width: ${(props) => props.listWidth || `60px` };
-    font-size: 12px;
+    width: ${(props) => props.listWidth || `3.75rem` };
+    font-size: var(--font-size-xs);
     list-style: none;
     overflow-Y: scroll;
-    height: 90px;
-    border-radius: 3px;
-    margin-top: 3px;
-    border: 1px rgba(180,180,180,1) solid;
+    height: 5.625rem;
+    border-radius: 0.1875rem;
+    margin-top: 0.1875rem;
+    border: 0.0625rem var(--color-gr) solid;
     &::-webkit-scrollbar {
-      width: 4px;
-      border-radius: 2px;
+      width: 0.25rem;
+      border-radius: 0.125rem;
       background: rgba(255, 255, 255, 0.4);
     }
     &::-webkit-scrollbar-thumb {
-        border-radius: 2px;
-        background-color: rgba(100,100,100,1);
+        border-radius: 0.125rem;
+        background-color: var(--color-dg);
     }
 `
 
 export const DropDownLi = styled.li`
-    height: 30px;
-    line-height: 25px;
+    height: 1.875rem;
+    line-height: 1.5625rem;
     text-align: left;
-    margin-left: -40px;
-    padding-left: 8px;
-    border-bottom: 1px rgba(180,180,180,1) solid;
+    margin-left: -2.5rem;
+    padding-left: 0.5rem;
+    border-bottom: 0.0625rem var(--color-gr) solid;
     &:hover{
-        background-color: rgba(180,180,180,1);
-        transform: translateY(0px);
+        background-color: var(--color-gr);
+        transform: translateY(0);
         transition: 0.3s;
     }
 `
 
 export const ExpandIconWrap = styled.div`
     position:absolute;
-    right: 3px;
-    top: 5px;
+    right: 0.1875rem;
+    top: 0.3125rem;;
     cursor: pointer;
 `

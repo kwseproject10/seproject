@@ -5,31 +5,32 @@ export const MainPageWrap = styled.div`
   height: 100%;
   display: flex;
   flex-direction:column;
-  margin-left: 4px;
+  margin-left: 0.25rem;
+  overflow: hidden;
 `
 
 export const GridWrap = styled.div`
   height: 88%;
   display: flex;
   jusify-content: center;
-  padding: 20px;
-  padding-bottom: 10px;
+  padding: 1.25rem;
+  padding-bottom: 0.625rem;
 `
 export const GridContainer = styled.div`
   display: grid;
   width: 100%;
   height: 100%;
   grid-template-columns: repeat(8,1fr);
-  grid-template-rows: 235px 235px 275px;
-  row-gap: 20px;
-  column-gap: 20px;
+  grid-template-rows: 14.6875rem 14.6875rem 17.1875rem;
+  row-gap: 1.25rem;
+  column-gap: 1.25rem;
 `
 
 export const GridItem = styled.div`
   width: 100%;
   height: 100%;
   background-color: white;
-  border: 1px rgba(200,200,200) solid;
+  border: 0.0625rem var(--color-gr) solid;
 `
 
 export const ProfileCard = styled(GridItem)`
@@ -76,8 +77,8 @@ export const Footer = styled.div`
   width: 100%;
   background-color:white;
   position:fixed;
-  bottom: 0px;
-  left: 0px;
-  height: 60px;
-  border-top: 1px rgb(150,150,150) solid;
+  bottom: 0;
+  left: 0;
+  height: 3.75rem;
+  border-top: 0.0625rem var(--color-dg);
 `

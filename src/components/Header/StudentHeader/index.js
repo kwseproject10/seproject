@@ -27,7 +27,7 @@ const StudentHeader = () => {
                 <LogoWrap>
                   <img
                     src={HeaderLogoBlack}
-                    height={34}
+                    height="34"
                     alt="HeaderLogoBlack"
                   />
                 </LogoWrap>
