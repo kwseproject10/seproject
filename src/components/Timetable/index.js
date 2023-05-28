@@ -1,9 +1,12 @@
-const Timetable = () => {
+const RenderCells = () => {
+
+}
+
+const TimeTable = () => {
     return(
         <div>
-            Timetable component
         </div>
     )
 }
 
-export default Timetable;
+export default TimeTable;

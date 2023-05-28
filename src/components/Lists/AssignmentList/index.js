@@ -3,10 +3,10 @@ import { Dates, DueDate, EndDate, Left, ListBox, ListRow, ListTitle, ListWrap, N
 import { useEffect } from "react";
 
 const AssignmentList = () => {
-  const [ notices, setNotices ] = useState([]);
+  const [ assignment, setAssignment ] = useState([]);
 
-  const loadNotices = () => {
-    setNotices([
+  const loadAssignment = () => {
+    setAssignment([
       {
         key: "0",
         title: "Implementation of Ripple Carry Adder using Verilog",
@@ -49,7 +49,7 @@ const AssignmentList = () => {
       }
     ])
   }
-  useEffect(loadNotices,[])
+  useEffect(loadAssignment,[])
   return(
     <ListWrap>
       <ListTitle>
@@ -58,7 +58,7 @@ const AssignmentList = () => {
         </TitleText>
       </ListTitle>
       <ListBox>
-        {notices.map((element,index)=>{
+        {assignment.map((element,index)=>{
           return(
             <ListRow>
               <Left>

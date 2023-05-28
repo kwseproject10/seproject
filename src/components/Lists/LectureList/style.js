@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const ListWrap = styled.div`
   margin: 0.4rem;
-  margin-right: 1rem;
 `
 
 export const ListTitle = styled.div`
@@ -35,10 +34,19 @@ export const ListRow = styled.div`
   cursor: pointer;
 `
 
+export const Center = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+  font-size: 14px;
+  line-height: 1.5rem;
+`
+
 export const Left = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 40%;
 `
 
 export const NoticeTitle = styled.div`
@@ -53,4 +61,5 @@ export const Right = styled.div`
   font-size: 14px;
   height: 2.3rem;
   line-height: 1.8rem;
+  width: 30%;
 `

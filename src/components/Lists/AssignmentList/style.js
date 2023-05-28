@@ -14,7 +14,7 @@ export const TitleText = styled.div`
 `
 
 export const ListBox = styled.div`
-  border-top: 1px rgba(200,200,200) solid;
+  border-top: 2px black solid;
   list-style: none;
   margin: 0;
 `
