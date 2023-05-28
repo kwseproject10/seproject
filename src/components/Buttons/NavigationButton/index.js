@@ -1,10 +1,13 @@
 import { LinkStyle, NavigationButtonStyle } from "./style";
 
-const NavigationButton = ({text, link, onClick = () => {} }) => {
-    
+const NavigationButton = ({ actived, setActived, index, text, link }) => {
     return(
         <LinkStyle to={`/${link}`}>
-            <NavigationButtonStyle onClick={() => {onClick()}}>
+            <NavigationButtonStyle
+                actived={actived}
+                index={index}
+                onClick={() => {setActived(index)}}
+            >
                 {text}
             </NavigationButtonStyle>
         </LinkStyle>

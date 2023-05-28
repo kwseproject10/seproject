@@ -61,6 +61,8 @@ export const DropDownLi = styled.li`
     border-bottom: 1px rgba(180,180,180,1) solid;
     &:hover{
         background-color: rgba(180,180,180,1);
+        transform: translateY(0px);
+        transition: 0.3s;
     }
 `
 

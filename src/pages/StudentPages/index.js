@@ -1,31 +1,34 @@
 import { Outlet } from "react-router-dom";
-import { Body, Footer, FooterLine } from "./style";
-import StudentNavigation from "@components/StudentNavigation";
-import Modal from "@components/Modal";
-import TestContent from "@components/ModalContents/TestContents";
+import { Body, BodyWrapper, PageBG, PageLayout, PageViewer } from "./style";
 import { useState } from "react";
+import StudentNavigation from "@components/Navigation/StudentNavigation";
+import Modal from "@components/Modal";
+import TestContent from "@components/Modal/ModalContents/TestContents";
+import StudentHeader from "@components/Header/StudentHeader";
 
 const StudentPages = () => {
   const [modalOpen, setModalOpen] = useState(false);
   return (
-    <div>
-        <Modal
-          modalOpen={modalOpen}
-          setModalOpen={setModalOpen}
-          innerContents={<TestContent setModalOpen={setModalOpen}/>}
-        />
+    <PageViewer>
+      <PageBG>
+        <PageLayout>
+            <Modal
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+              innerContents={<TestContent setModalOpen={setModalOpen}/>}
+            />
+            <StudentHeader/>
             <StudentNavigation/>
-        <Body>
-            <Outlet/>
-        </Body>
-        <Footer>
-          <FooterLine>
-            Footer<br/>
-            <button onClick={()=>{setModalOpen(true)}}>Modal Open Test</button>
-          </FooterLine>
-        </Footer>
-    </div>
+
+            <BodyWrapper>
+              <Body>
+                  <Outlet/>
+              </Body>
+            </BodyWrapper>
+        </PageLayout>
+      </PageBG>
+    </PageViewer>
   );
 }
-
+//<div onClick={()=>{setModalOpen(true)}}>Modal Open Test</div>
 export default StudentPages;

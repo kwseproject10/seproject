@@ -1,7 +1,6 @@
 const StudentTimeTablePage = () => {
     return(
         <div>
-            StudentTimeTablePage
         </div>
     )
 }

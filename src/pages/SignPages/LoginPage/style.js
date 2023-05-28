@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 export const LoginPageLogo = styled.div`
     text-align: center;
-    user-select: none;
 `
 
 export const InputTitle = styled.div`
@@ -39,7 +38,6 @@ export const AlretRow = styled.div`
     color: rgba(255,0,0,0.8);
     width: 100%;
     text-align: center;
-    user-select: none;
 `
 
 export const ButtonRow = styled.div`
@@ -47,7 +45,6 @@ export const ButtonRow = styled.div`
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    user-select: none;
 `
 
 export const SignButton = styled.div`

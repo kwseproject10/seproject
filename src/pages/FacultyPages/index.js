@@ -3,8 +3,8 @@ import { Body, Footer, FooterLine } from "./style";
 import { useSetRecoilState } from "recoil";
 import { ModalOpenState } from "@./Atom";
 import Modal from "@components/Modal";
-import TestContent from "@components/ModalContents/TestContents";
-import FacultyNavigation from "@components/FacultyNavigation";
+import TestContent from "@components/Modal/ModalContents/TestContents";
+import FacultyNavigation from "@components/Navigation/FacultyNavigation";
 
 const FacultyPages = () => {
   const setModalOpen = useSetRecoilState(ModalOpenState);

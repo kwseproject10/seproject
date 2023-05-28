@@ -5,7 +5,6 @@ export const Title = styled.div`
     margin-bottom: 50px;
     text-align: center;
     font-size: 26px;
-    user-select: none;
 `
 
 export const InputTitle = styled.div`
@@ -84,7 +83,6 @@ export const AlretRow = styled.div`
     color: rgba(200,50,50,1);
     width: 100%;
     text-align: center;
-    user-select: none;
 `
 
 export const ButtonRow = styled.div`
@@ -92,7 +90,6 @@ export const ButtonRow = styled.div`
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    user-select: none;
 `
 
 export const SignButton = styled.div`
