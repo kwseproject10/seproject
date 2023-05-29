@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Size from "@style/Size.js";
 
 export const HeaderWrap = styled.div`
   position: fixed;
@@ -6,8 +7,15 @@ export const HeaderWrap = styled.div`
   width: 100%;
   position: fixed;
   background-color: var(--color-dk);
-  z-index: 2;
+  z-index: 3;
   color:white;
+  ${Size('large')}{
+    margin-left: 13%;
+    width: 87%;
+    background-color: white;
+    border-bottom: var(--color-dg) 0px solid;
+    color: black;
+  }
 `
 
 export const HeaderBar = styled.div`
@@ -15,6 +23,9 @@ export const HeaderBar = styled.div`
   height: 100%;
   display: flex;
   justify-content: space-between;
+  ${Size('small')}{
+    justify-content: center;
+  }
 `;
 
 export const LeftContentsWrap = styled.div`
@@ -25,7 +36,13 @@ export const LeftContentsWrap = styled.div`
 
 export const LeftContents = styled.div`
   display: flex;
-  margin-left: 12.5rem;
+  margin-left: 2rem;
+  ${Size('small')}{
+    margin: 0;
+  }
+  ${Size('large')}{
+    margin-left: -12.1875rem;
+  }
 `
 
 export const LogoWrap = styled.div`
@@ -34,13 +51,19 @@ export const LogoWrap = styled.div`
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
+  ${Size('large')}{
+    margin-right: 1.25rem;
+  }
 `
 
 export const UserName = styled.div`
-  font-weight: bold;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-nm);
   line-height: 2.125rem;
   margin-left: 3.75rem;
+  display: none;
+  ${Size('large')}{
+    display: block;
+  }
 `
 
 export const UserType = styled.div`
@@ -48,17 +71,27 @@ export const UserType = styled.div`
   line-height: 2.125rem;
   margin-left: 0.625rem;
   color: gray;
+  display: none;
+  ${Size('large')}{
+    display: block;
+  }
 `
 
 export const RightContentsWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  ${Size('small')}{
+    display: none;
+  }
+  ${Size('large')}{
+    margin-right: 1.25rem;
+  }
 `
 
 export const RightContents = styled.div`
   display: flex;
-  margin-right: 12.5rem;
+  justify-content: right;
 `
 
 export const ButtonPartition = styled.div`

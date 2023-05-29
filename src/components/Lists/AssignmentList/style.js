@@ -14,7 +14,7 @@ export const TitleText = styled.div`
 `
 
 export const ListBox = styled.div`
-  border-top: 0.125rem black solid;
+  border-top: 0.125rem var(--color-dk) solid;
   list-style: none;
   margin: 0;
 `
@@ -57,8 +57,8 @@ export const Right = styled.div`
   display: flex;
   justify-content: center;
   height: 100%;
-  font-size: var(--font-size-sm);
-  margin-top: -0.25rem;
+  font-size: var(--font-size-xs);
+  margin-top: -0.125rem;
 `
 
 export const Dates = styled.div`

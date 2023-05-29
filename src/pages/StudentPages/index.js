@@ -10,7 +10,6 @@ const StudentPages = () => {
   const [modalOpen, setModalOpen] = useState(false);
   return (
     <PageViewer>
-      <PageBG>
         <PageLayout>
             <Modal
               modalOpen={modalOpen}
@@ -26,7 +25,7 @@ const StudentPages = () => {
               </Body>
             </BodyWrapper>
         </PageLayout>
-      </PageBG>
+      <PageBG/>
     </PageViewer>
   );
 }

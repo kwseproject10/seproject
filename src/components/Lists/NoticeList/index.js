@@ -50,7 +50,7 @@ const NoticeList = () => {
       <ListBox>
         {notices.map((element,index)=>{
           return(
-            <ListRow>
+            <ListRow key={index}>
               <Left>
                 <NoticeTitle>{
                   element.title.length > 30 ?

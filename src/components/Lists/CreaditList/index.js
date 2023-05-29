@@ -6,7 +6,7 @@ const CreditList = () => {
   const [ credits, setCredits ] = useState(
     {
       creditCompleted : {
-        major : "33",
+        major : 33,
         general : 35,
         etc : 41,
         total : 109

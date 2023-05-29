@@ -1,28 +1,33 @@
 import { Outlet } from "react-router-dom";
-import { Body, Footer, FooterLine } from "./style";
-import { useSetRecoilState } from "recoil";
-import { ModalOpenState } from "@./Atom";
+import { Body, BodyWrapper, PageBG, PageLayout, PageViewer } from "./style";
+import { useState } from "react";
+import FacultyNavigation from "@components/Navigation/FacultyNavigation";
 import Modal from "@components/Modal";
 import TestContent from "@components/Modal/ModalContents/TestContents";
-import FacultyNavigation from "@components/Navigation/FacultyNavigation";
+import FacultyHeader from "../../components/Header/FacultyHeader";
 
 const FacultyPages = () => {
-  const setModalOpen = useSetRecoilState(ModalOpenState);
+  const [modalOpen, setModalOpen] = useState(false);
   return (
-    <div>
-        <Modal innerContents={<TestContent/>}/>
+    <PageViewer>
+        <PageLayout>
+            <Modal
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+              innerContents={<TestContent setModalOpen={setModalOpen}/>}
+            />
+            <FacultyHeader/>
             <FacultyNavigation/>
-        <Body>
-            <Outlet/>
-        </Body>
-        <Footer>
-          <FooterLine>
-            Footer<br/>
-            <button onClick={()=>{setModalOpen(true)}}>Modal Open Test</button>
-          </FooterLine>
-        </Footer>
-    </div>
+
+            <BodyWrapper>
+              <Body>
+                  <Outlet/>
+              </Body>
+            </BodyWrapper>
+        </PageLayout>
+      <PageBG/>
+    </PageViewer>
   );
 }
-
+//<div onClick={()=>{setModalOpen(true)}}>Modal Open Test</div>
 export default FacultyPages;

@@ -1,12 +1,22 @@
-import { HeaderButtonStyle, LinkStyle } from "./style";
+import { AStyle, HeaderButtonStyle, LinkStyle } from "./style";
 
-const HeaderButton = ({ text, link, onClick = () => {} }) => {
+const HeaderButton = ({ out, text, link, onClick = () => {} }) => {
   return(
-    <LinkStyle to={`/${link}`}>
-        <HeaderButtonStyle onClick={() => {onClick()}}>
-            {text}
-        </HeaderButtonStyle>
-    </LinkStyle>
+    <>
+      {out ?
+        <AStyle href={link} target='_blank' rel="noreferrer">
+          <HeaderButtonStyle onClick={() => {onClick()}}>
+              {text}
+          </HeaderButtonStyle>
+        </AStyle>
+        :
+        <LinkStyle to={`/${link}`}>
+            <HeaderButtonStyle onClick={() => {onClick()}}>
+                {text}
+            </HeaderButtonStyle>
+        </LinkStyle>
+      }
+    </>
   )
 }
 

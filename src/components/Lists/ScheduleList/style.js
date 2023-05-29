@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
 export const ListWrap = styled.div`
-  margin: 0.4rem;
-  margin-right: 1rem;
+  margin: 2%;
+  margin-right: 3%;
+  width: 95%;
+  height: 96%;
 `
 
 export const ListTitle = styled.div`
-  margin: 0.5rem;
+  margin: 3%;
+  width: 96%;
+  height: 5%;
 `
 
 export const TitleText = styled.div`
@@ -15,9 +19,10 @@ export const TitleText = styled.div`
 `
 
 export const ListBox = styled.div`
-  border-top: 0.125rem black solid;
+  border-top: 0.125rem var(--color-dk) solid;
   list-style: none;
-  margin: 0;
+  width: 100%;
+  height: 89%;
 `
 
 export const ListRow = styled.div`
@@ -50,7 +55,7 @@ export const NoticeSubject = styled.div`
 `
 
 export const Right = styled.div`
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   height: 2.3rem;
   line-height: 1.8rem;
 `

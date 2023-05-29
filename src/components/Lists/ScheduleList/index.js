@@ -11,7 +11,7 @@ const ScheduleList = ({ schedules }) => {
       <ListBox>
         {schedules.slice(0,5).map((element,index)=>{
           return(
-            <ListRow>
+            <ListRow key={index}>
               <Left>
                 <NoticeTitle>{
                   element.title.length > 30 ?

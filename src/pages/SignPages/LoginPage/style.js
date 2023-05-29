@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 export const LoginPageLogo = styled.div`
     text-align: center;
+    filter: hue-rotate(200deg);
 `
 
 export const InputTitle = styled.div`

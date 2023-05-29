@@ -14,7 +14,7 @@ export const TitleText = styled.div`
 `
 
 export const ListBox = styled.div`
-  border-top: 0.125rem black solid;
+  border-top: 0.125rem var(--color-dk) solid;
   list-style: none;
   margin: 0;
 `
@@ -50,7 +50,7 @@ export const Left = styled.div`
 `
 
 export const NoticeTitle = styled.div`
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
 `
 
 export const NoticeSubject = styled.div`
@@ -58,7 +58,7 @@ export const NoticeSubject = styled.div`
 `
 
 export const Right = styled.div`
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   height: 2.3rem;
   line-height: 1.8rem;
   width: 30%;

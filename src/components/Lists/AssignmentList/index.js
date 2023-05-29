@@ -60,7 +60,7 @@ const AssignmentList = () => {
       <ListBox>
         {assignment.map((element,index)=>{
           return(
-            <ListRow>
+            <ListRow key={index}>
               <Left>
                 <NoticeTitle>{
                   element.title.length > 25 ?

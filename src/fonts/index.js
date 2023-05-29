@@ -1,24 +1,30 @@
 import { createGlobalStyle } from "styled-components";
-import NotoSansKRRegular from "./NotoSansKRRegular.ttf";
-import NotoSansKRBold from "./NotoSansKRBold.ttf";
+import NotoSansKRRegular from "./NotoSansKRRegular.otf";
+import NotoSansKRLight from "./NotoSansKRLight.otf";
+import NotoSansKRBold from "./NotoSansKRBold.otf";
 import PlusJakartaSansRegular from "./PlusJakartaSansRegular.ttf";
 import PlusJakartaSansBold from "./PlusJakartaSansSemiBold.ttf";
 
 export const GlobalFonts = createGlobalStyle`
   @font-face {
     font-family: "Noto Sans KR";
-    src: url(${NotoSansKRRegular}) format("truetype");
-    unicode-range: U+AC00-D7A3;
+    src: url(${NotoSansKRBold}) format("otf");
+    font-style: normal;
+    font-wieght: bold;
+  }
+
+  @font-face {
+    font-family: "Noto Sans KR";
+    src: url(${NotoSansKRRegular}) format("otf");
     font-style: normal;
     font-weight: normal;
   }
 
   @font-face {
     font-family: "Noto Sans KR";
-    src: url(${NotoSansKRBold}) format("truetype");
-    unicode-range: U+AC00-D7A3;
+    src: url(${NotoSansKRLight}) format("otf");
     font-style: normal;
-    font-wieght: bold;
+    font-wieght: light;
   }
 
   @font-face {
@@ -26,7 +32,7 @@ export const GlobalFonts = createGlobalStyle`
     src: url(${PlusJakartaSansRegular}) format("truetype");
     unicode-range: U+0041-005A, U+0061-007A;
     font-style: normal;
-    font-weight: normal;
+    font-weight: light;
   }
 
   @font-face {
@@ -34,6 +40,6 @@ export const GlobalFonts = createGlobalStyle`
     src: url(${PlusJakartaSansBold}) format("truetype");
     unicode-range: U+0041-005A, U+0061-007A;
     font-style: normal;
-    font-weight: bold;
+    font-weight: normal;
   }
 `

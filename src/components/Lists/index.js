@@ -1,6 +1,6 @@
 import { ListBox, ListTitle, ListWrap, TitleText } from "./style";
 
-const LectureList = ({ listTitle, listRows, width, height, maxRow }) => {
+const Lists = ({ listTitle, listRows, Lefts, Centers, Rights, width, height, rowHeight, maxRow, contentRatio }) => {
   return(
     <ListWrap>
       <ListTitle>
@@ -15,4 +15,4 @@ const LectureList = ({ listTitle, listRows, width, height, maxRow }) => {
   )
 }
 
-export default LectureList;
+export default Lists;

@@ -11,7 +11,7 @@ const LectureList = ({ lectures }) => {
       <ListBox>
         {lectures.map((element,index)=>{
           return(
-            <ListRow>
+            <ListRow key={index}>
               <Left>
                 <NoticeTitle>{
                   element.name.length > 30 ?

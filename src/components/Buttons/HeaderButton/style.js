@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Size from "@style/Size.js";
 
 export const HeaderButtonStyle = styled.div`
   font-weight: bold;
@@ -12,9 +13,16 @@ export const HeaderButtonStyle = styled.div`
     color: white;
     transform: translateY(0);
     transition: 0.3s;
+    ${Size('large')}{
+      color:black;
+    }
   }
 `
 
 export const LinkStyle = styled(Link)`
+  text-decoration: none;
+`
+
+export const AStyle = styled.a`
   text-decoration: none;
 `

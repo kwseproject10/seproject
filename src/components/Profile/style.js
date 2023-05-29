@@ -1,32 +1,45 @@
 import styled from "styled-components";
+import Size from "@style/Size.js";
 
 export const ProfileWrap = styled.div`
-  margin: 1rem;
-  width: 100%;
+  margin: 1%;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 90%;
+  height: 98%;
   display: flex;
   flex-direction: column;
 `
 
 export const Top = styled.div`
   display: flex;
+  width: 100%;
+  height: 65%;
 `
 
 export const UserPhotoWrap = styled.div`
-  margin: 0.5rem;
-  width: 7rem;
-  height: 8rem;
+  margin: 2%;
+  width: 20%;
+  height: 96%;
+  ${Size('large')}{
+    width: 30%;
+  }
 `
 
 export const UserInformWrap = styled.div`
-  margin: 0.5rem;
+  margin: 2%;
+  width: 72%;
+  height: 96%;
   display: flex;
   flex-direction: column;
-  height: 8rem;
+  ${Size('large')}{
+    width: 62%;
+  }
 `
 
 export const NameRow = styled.div`
-  width: 17rem;
-  border-bottom: 0.125rem solid black;
+  width: 100%;
+  border-bottom: 0.125rem solid var(--color-dk);
 `
 
 export const UserName = styled.div`
@@ -60,9 +73,10 @@ export const Bottom = styled.div`
   margin-top: 0.6rem;
   padding-top: 0.3rem;
   font-size: var(--font-size-sm);
-  width: 91%;
+  width: 100%;
   height: 2.5rem;
   border: 0.0625rem solid var(--color-gr);
+  border-radius: 1rem;
   display: flex;
   justify-content:space-between;
 `

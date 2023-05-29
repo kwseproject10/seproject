@@ -1,4 +1,4 @@
-import { LinkStyle, NavigationButtonStyle } from "./style";
+import { Line, LinkStyle, NavigationButtonStyle } from "./style";
 
 const NavigationButton = ({ actived, setActived, index, text, link }) => {
     return(

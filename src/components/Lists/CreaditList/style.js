@@ -16,7 +16,7 @@ export const TitleText = styled.div`
 `
 
 export const ListBox = styled.div`
-  border-top: 0.125rem black solid;
+  border-top: 0.125rem var(--color-dk) solid;
   padding: 0.5rem;
   color: var(--color-dg);
   width: 95%;
@@ -52,7 +52,7 @@ export const Td = styled.td`
 `
 
 export const Th = styled.th`
-  font-weight: normal;
+  font-weight: bold;
   border: 0.0625rem var(--color-gr) solid;
   border-right: none;
   &:nth-child(1){

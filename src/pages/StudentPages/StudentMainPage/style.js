@@ -1,39 +1,47 @@
 import styled from "styled-components";
+import Size from "@./style/Size.js";
 
 export const MainPageWrap = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction:column;
-  margin-left: 0.25rem;
-  overflow: hidden;
+  overflow-X: hidden;
 `
 
 export const GridWrap = styled.div`
-  height: 88%;
+  height: 100%;
   display: flex;
   jusify-content: center;
   padding: 1.25rem;
   padding-bottom: 0.625rem;
 `
 export const GridContainer = styled.div`
-  display: grid;
-  width: 100%;
+  display:flex;
+  flex-direction:column;
   height: 100%;
-  grid-template-columns: repeat(8,1fr);
-  grid-template-rows: 14.6875rem 14.6875rem 17.1875rem;
-  row-gap: 1.25rem;
-  column-gap: 1.25rem;
+  width: 100%;
+  ${Size('large')}{
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    grid-template-rows: 14.6875rem 14.6875rem 17.1875rem;
+    row-gap: 1.875rem;
+    column-gap: 1.25rem;
+  }
 `
 
 export const GridItem = styled.div`
   width: 100%;
   height: 100%;
   background-color: white;
-  border: 0.0625rem var(--color-gr) solid;
+  margin-top: 1rem;
+  ${Size('large')}{
+    margin-top:0;
+  }
 `
 
 export const ProfileCard = styled(GridItem)`
+  margin-top: 0;
   grid-column: 1 / 3;
   grid-row: 1 / 2;
 `

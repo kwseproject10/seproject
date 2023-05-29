@@ -9,6 +9,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
   const monthEnd = endOfMonth(monthStart);
   const startDate = startOfWeek(monthStart);
   const endDate = endOfWeek(monthEnd);
+  const today = new Date();
 
   const rows = [];
   let days = [];
@@ -19,8 +20,11 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
     for (let i = 0; i < 7; i++) {
       formattedDate = format(day, 'd');
       const cloneDay = day;
+      const isToday = day.getFullYear() === today.getFullYear() && day.getMonth() === today.getMonth() && day.getDate() === today.getDate();
+
       days.push(
         <Cell
+          isToday={isToday}
           state={
             !isSameMonth(day, monthStart) ?
               'disabled'
@@ -73,7 +77,7 @@ const Calendar = ({ schedules }) => {
           <div onClick={()=>{prevMonth()}}>{` < `}</div>
         </HeaderLeft>
         <HeaderCenter>
-          {format(currentMonth, 'yyyy')}년 {format(currentMonth, 'M')}월
+          {format(currentMonth, 'yyyy')}.{format(currentMonth, 'MM')}
         </HeaderCenter>
         <HeaderRight>
           <div onClick={()=>{nextMonth()}}>{` > `}</div>

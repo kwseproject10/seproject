@@ -6,9 +6,12 @@ import SignUpPage from "@pages/SignPages/SignUpPage";
 
 import StudentPages from "@pages/StudentPages";
 import StudentMainPage from "@pages/StudentPages/StudentMainPage";
+import StudentTimeTablePage from "@pages/StudentPages/StudentTimeTablePage";
+import StudentCreditPage from "@pages/StudentPages/StudentCreditPage";
+import StudentMyPage from "@pages/StudentPages/StudentMyPage";
 import StudentLectureListPage from "@pages/StudentPages/StudentLectureListPage";
 import StudentLectureManagePage from "@pages/StudentPages/StudentLectureManagePage";
-import StudentTimeTablePage from "@pages/StudentPages/StudentTimeTablePage";
+import StudentLectureDetailPage from "@pages/StudentPages/StudentLectureDetailPage";
 
 import FacultyPages from "@pages/FacultyPages";
 import FacultyMainPage from "@pages/FacultyPages/FacultyMainPage";
@@ -27,9 +30,12 @@ const Routers = () => {
             </Route>
             <Route path="/student" element={<StudentPages/>}>
                 <Route path="" element={<StudentMainPage/>}></Route>
-                <Route path="lecturelist" element={<StudentLectureListPage/>}></Route>
-                <Route path="lecturemanage" element={<StudentLectureManagePage/>}></Route>
                 <Route path="timetable" element={<StudentTimeTablePage/>}></Route>
+                <Route path="credit" element={<StudentCreditPage/>}></Route>
+                <Route path="mypage" element={<StudentMyPage/>}></Route>
+                <Route path="lecturelist" element={<StudentLectureListPage/>}></Route>
+                <Route path="lecturedetail" element={<StudentLectureDetailPage/>}></Route>
+                <Route path="lecturemanage" element={<StudentLectureManagePage/>}></Route>
             </Route>
             <Route path="/faculty" element={<FacultyPages/>}>
                 <Route path="" element={<FacultyMainPage/>}></Route>

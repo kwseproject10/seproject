@@ -1,18 +1,46 @@
+import { FacultyNavigationState } from '@./Atom';
 import NavigationButton from "@components/Buttons/NavigationButton";
-import { Header, NavigationBar } from "./style";
+import { ButtonWrap, NavigationBar, NavigationWrap } from "./style";
+import { useRecoilState } from "recoil";
 
 
 const FacultyNavigation = () => {
-    return(
-        <Header>
-        <NavigationBar>
-            <NavigationButton text={"MAIN"} link={"faculty"}/>
-            <NavigationButton text={"시간표"} link={"faculty/timetable"}/>
-            <NavigationButton text={"개설된 강의"} link={"faculty/lecturelist"}/>
-            <NavigationButton text={"강의 관리"} link={"faculty/lecturemanage"}/>
-            <NavigationButton text={"로그아웃"} link={""}/>
-        </NavigationBar>
-        </Header>
+  const [actived, setActived] = useRecoilState(FacultyNavigationState);
+    return (
+        <NavigationWrap>
+            <NavigationBar>
+                <ButtonWrap>
+                    <NavigationButton
+                        actived={actived}
+                        setActived={setActived}
+                        index={0}
+                        text={"MAIN"}
+                        link={"faculty"}
+                    />
+                    <NavigationButton
+                        actived={actived}
+                        setActived={setActived}
+                        index={1}
+                        text={"시간표"}
+                        link={"faculty/timetable"}
+                    />
+                    <NavigationButton
+                        actived={actived}
+                        setActived={setActived}
+                        index={2}
+                        text={"강의 목록"}
+                        link={"faculty/lecturelist"}
+                    />
+                    <NavigationButton
+                        actived={actived}
+                        setActived={setActived}
+                        index={3}
+                        text={"강의 관리"}
+                        link={"faculty/lecturemanage"}
+                    />
+                </ButtonWrap>
+            </NavigationBar>
+        </NavigationWrap>
     )
 }
 

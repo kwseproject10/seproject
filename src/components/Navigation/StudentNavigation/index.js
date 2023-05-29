@@ -1,10 +1,11 @@
+import { StudentNavigationState } from '@./Atom';
 import NavigationButton from "@components/Buttons/NavigationButton";
 import { ButtonWrap, NavigationBar, NavigationWrap } from "./style";
-import { useState } from "react";
+import { useRecoilState } from "recoil";
 
 
 const StudentNavigation = () => {
-    const [ actived, setActived ] = useState(0);
+  const [actived, setActived] = useRecoilState(StudentNavigationState);
     return (
         <NavigationWrap>
             <NavigationBar>
@@ -13,7 +14,7 @@ const StudentNavigation = () => {
                         actived={actived}
                         setActived={setActived}
                         index={0}
-                        text={"전체보기"}
+                        text={"MAIN"}
                         link={"student"}
                     />
                     <NavigationButton
@@ -34,15 +35,29 @@ const StudentNavigation = () => {
                         actived={actived}
                         setActived={setActived}
                         index={3}
+                        text={"강의종합"}
+                        link={"student/lecturedetail"}
+                    />
+                    <NavigationButton
+                        actived={actived}
+                        setActived={setActived}
+                        index={4}
+                        text={"성적 조회"}
+                        link={"student/credit"}
+                    />
+                    <NavigationButton
+                        actived={actived}
+                        setActived={setActived}
+                        index={5}
                         text={"수강 관리"}
                         link={"student/lecturemanage"}
                     />
                     <NavigationButton
                         actived={actived}
                         setActived={setActived}
-                        index={4}
-                        text={"수강 관리"}
-                        link={"student/lecturemanage"}
+                        index={6}
+                        text={"MYPAGE"}
+                        link={"student/mypage"}
                     />
                 </ButtonWrap>
             </NavigationBar>
