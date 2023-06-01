@@ -68,15 +68,6 @@ const MainPageTimeTable = () => {
           time: ["월3","수4"],
           place: ["새빛203","새빛203"],
           ID: "H020-4-8483-01",
-        },
-        {
-          key: "0",
-          name: "test",
-          professor: "박철수",
-          type: "전공선택",
-          time: ["월7","수8"],
-          place: ["새빛203","새빛203"],
-          ID: "H020-4-8483-01",
         }
       ])
      }else{

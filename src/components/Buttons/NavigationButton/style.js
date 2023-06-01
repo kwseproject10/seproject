@@ -7,23 +7,26 @@ export const NavigationButtonStyle = styled.div`
   cursor: pointer;
   use-select: none;
   text-decoration: none;
-  line-height: 3.75rem;
-  height: 3.7rem;
+  height: 100%;
   color: var(--color-dk);
   font-weight: bold;
   font-size: var(--font-size-sm);
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   ${Size('large')}{
     color:var(--color-gr);
     font-size: var(--font-size-md);
+    height: 100%;
   }
   ${(props) => props.actived === props.index ?
     `
       background-color: var(--color-dk);
       color: white;
       cursor: default;
-      height: 3.75rem;
+      height: 100%;
       ${Size('large')}{
         background-color: var(--color-nm);
       }

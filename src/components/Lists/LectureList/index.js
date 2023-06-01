@@ -1,4 +1,4 @@
-import { Center, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitleText } from "./style";
+import { Center, LectureProfessor, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitleText } from "./style";
 
 const LectureList = ({ lectures }) => {
   return(
@@ -21,14 +21,12 @@ const LectureList = ({ lectures }) => {
                 }</NoticeTitle>
                 <NoticeSubject>{element.ID}</NoticeSubject>
               </Left>
-              <Center>
-                <div>
+                <LectureProfessor>
                   {element.professor}
-                </div>
-                <div>
+                </LectureProfessor>
+                <LectureType>
                   {element.type}
-                </div>
-              </Center>
+                </LectureType>
               <Right>
                 {element.time.map((e, i)=>{
                   return(

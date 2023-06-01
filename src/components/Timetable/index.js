@@ -2,7 +2,7 @@ import { useState } from "react";
 import DropDown from "../DropDown";
 import { Cell, HeaderLeft, HeaderRight, HeaderText, LectureTP, LectureTitle, Table, TableBox, TableHeader, TableWrap, Tbody, Td, Th, Thead, Tr } from "./Style";
 
-const RenderBody = ({ lectures }) => {
+const RenderBody = ({ isDetail, lectures }) => {
   let cells = {
     1 : [{},{},{},{},{},{}],
     2 : [{},{},{},{},{},{}],
@@ -11,11 +11,27 @@ const RenderBody = ({ lectures }) => {
     5 : [{},{},{},{},{},{}],
     6 : [{},{},{},{},{},{}]
   };
+  const times = {
+    0 : ["08:00","08:50"],
+    1 : ["09:00","10:15"],
+    2 : ["10:30","11:45"],
+    3 : ["12:00","13:15"],
+    4 : ["13:30","14:45"],
+    5 : ["15:00","16:15"],
+    6 : ["16:30","17:45"],
+    7 : ["18:00","18:45"],
+    8 : ["18:50","19:35"],
+    9 : ["19:40","20:25"],
+    10 : ["20:30","21:15"],
+    11 : ["21:20","22:05"]
+  };
   let classes = new Set([1,2,3,4,5,6]);
-  const dates = ['월','화','수','목','금','토', '일'];
+  let dates = ['월', '화', '수', '목', '금', '토'];
+
   for(let i = 0; i < lectures.length; i++){
     const name = lectures[i].name;
-    const time = lectures[i].time;
+    let time = lectures[i].time;
+    if(lectures[i].time > 11) time = 12;
     const place = lectures[i].place;
     for(let j = 0; j < time.length; j++){
       const cell = {
@@ -32,26 +48,31 @@ const RenderBody = ({ lectures }) => {
   }
 
   let Rows = [];
-  let classArr = [ ...classes ].sort();
-  for(let i = 0; i < classArr.length; i++){
-    let Row = [];
-    const nowCell = cells[classArr[i]];
-    Row.push(<Td>{i + 1}교시</Td>)
-    nowCell.forEach((e,index) => {
-      if(Object.keys(e).length > 0){
-        console.log(e);
-        Row.push(<Td>
-          <Cell>
-            <LectureTitle>{e.name}</LectureTitle>
-            <LectureTP>{e.time} {e.place}</LectureTP>
-          </Cell>
-        </Td>
-        )
-      }else{
-        Row.push(<Td></Td>)
+  for(let i = Math.min(...classes); i < Math.max(...classes) + 1; i++){
+    if(classes.has(i)){
+      let Row = [];
+      const nowCell = cells[i];
+      Row.push(<Td>{i}교시</Td>)
+      if(isDetail){
+        Row.push(<Td isDetail={isDetail}>
+          {i === 12 ? "" : <div>{times[i][0]}<br/> ~ <br/>{times[i][1]}</div>}          
+        </Td>)
       }
-    })
-    Rows.push(<Tr>{Row}</Tr>)
+      nowCell.forEach((e,index) => {
+        if(Object.keys(e).length > 0){
+          Row.push(<Td isDetail={isDetail}>
+            <Cell>
+              <LectureTitle>{e.name}</LectureTitle>
+              <LectureTP>{e.time} {e.place}</LectureTP>
+            </Cell>
+          </Td>
+          )
+        }else{
+          Row.push(<Td isDetail={isDetail}></Td>)
+        }
+      })
+      Rows.push(<Tr>{Row}</Tr>)
+    }
   }
 
   return(
@@ -59,8 +80,9 @@ const RenderBody = ({ lectures }) => {
   )
 }
 
-const TimeTable = ({ selectedSemester, setSelectedSemester, semesters,lectures }) => {
-  const date = ['월','화','수','목','금','토'];
+const TimeTable = ({ selectedSemester, setSelectedSemester, semesters, lectures, isDetail }) => {
+  let date = ['월','화','수','목','금','토'];
+  if(isDetail) date = ['시간', '월', '화', '수', '목', '금', '토'];
   const [ semeseterDropDownisOpen, setSemesterDropDownisOpen ] = useState(false);
   return (
     <TableWrap>
@@ -84,13 +106,13 @@ const TimeTable = ({ selectedSemester, setSelectedSemester, semesters,lectures }
         <Table>
           <Thead>
             <Tr>
-              <Th></Th>
+              <Th isDetail={isDetail}>교시</Th>
               {date.map((e,i)=>{return(
-                <Th key={i}>{e}</Th>
+                <Th key={i} isDetail={isDetail}>{e}</Th>
               )})}
             </Tr>
           </Thead>
-          <RenderBody lectures={lectures}/>
+          <RenderBody isDetail={isDetail} lectures={lectures}/>
         </Table>
       </TableBox>
     </TableWrap>

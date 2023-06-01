@@ -1,6 +1,8 @@
 import TimeTable from "@components/TimeTable";
+import TimeTablePageLectureList from "@components/Lists/TimeTablePageLectureList";
 import { useEffect } from "react";
 import { useState } from "react";
+import { LectureListWrap, PageRow, TimeTablePageWrap } from "./style";
 
 const StudentTimeTablePage = () => {
   const [ lectures, setLectures ] = useState([]);
@@ -32,7 +34,7 @@ const StudentTimeTablePage = () => {
           ID: "H020-4-0846-01",
         },
         {
-          key: "0",
+          key: "1",
           name: "디지털논리회로1",
           professor: "유지현",
           type: "전공필수",
@@ -41,7 +43,7 @@ const StudentTimeTablePage = () => {
           ID: "H020-2-0453-01",
         },
         {
-          key: "0",
+          key: "2",
           name: "신호및시스템",
           professor: "이성원",
           type: "전공선택",
@@ -50,7 +52,7 @@ const StudentTimeTablePage = () => {
           ID: "H020-3-2004-01",
         },
         {
-          key: "0",
+          key: "3",
           name: "임베디드시스템S/W설계",
           professor: "김태석",
           type: "전공선택",
@@ -59,20 +61,11 @@ const StudentTimeTablePage = () => {
           ID: "H020-4-5861-01",
         },
         {
-          key: "0",
+          key: "4",
           name: "머신러닝",
           professor: "박철수",
           type: "전공선택",
           time: ["월3","수4"],
-          place: ["새빛203","새빛203"],
-          ID: "H020-4-8483-01",
-        },
-        {
-          key: "0",
-          name: "test",
-          professor: "박철수",
-          type: "전공선택",
-          time: ["월7","수8"],
           place: ["새빛203","새빛203"],
           ID: "H020-4-8483-01",
         }
@@ -85,14 +78,22 @@ const StudentTimeTablePage = () => {
   useEffect(() => {loadLectures(selectedSemester);},[selectedSemester]);
 
   return(
-      <div>
-        <TimeTable
-          setSelectedSemester={setSelectedSemester}
-          selectedSemester={selectedSemester}
-          semesters={semesters}
-          lectures={lectures}
-        />
-      </div>
+      <TimeTablePageWrap>
+        <PageRow>
+          <TimeTable
+            setSelectedSemester={setSelectedSemester}
+            selectedSemester={selectedSemester}
+            semesters={semesters}
+            lectures={lectures}
+            isDetail={true}
+          />
+          <LectureListWrap>
+            <TimeTablePageLectureList
+              lectures={lectures}
+            />
+          </LectureListWrap>
+        </PageRow>
+      </TimeTablePageWrap>
   )
 }
 

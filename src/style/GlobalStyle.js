@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   html{
     ${Size("small")} {
-      font-size: 10px;
+      font-size: 12px;
     }
     ${Size("medium")} {
       font-size: 14px;

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ButtonPartition, HeaderBar, HeaderWrap, LeftContents, LeftContentsWrap, LogoWrap, RightContents, RightContentsWrap, UserName, UserType } from "./style";
 import HeaderLogoBlack from "@images/HeaderLogo.png";
 import HeaderButton from "@components/Buttons/HeaderButton";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSetRecoilState } from 'recoil';
 
 const StudentHeader = () => {
@@ -12,6 +12,8 @@ const StudentHeader = () => {
   const [ userID, setUserID ] = useState("");
   const [ userMajor, setUserMajor ] = useState("");
   const [ userType, setUserType ] = useState("");
+  const location = useLocation();
+  console.log(location["pathname"]);
 
   const getUserInform = () => {
     /** get userName, userMajor, userType API */

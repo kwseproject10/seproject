@@ -57,6 +57,16 @@ export const Center = styled.div`
   line-height: 1.5rem;
 `
 
+export const LectureType = styled.div`
+  font-size: var(--font-size-xs);
+  line-height: 1.5rem;
+`
+
+export const LectureProfessor = styled.div`
+  font-size: var(--font-size-xs);
+  line-height: 1.5rem;
+`
+
 export const Right = styled.div`
   font-size: var(--font-size-xs);
   height: 2.3rem;

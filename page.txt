@@ -1,0 +1,13 @@
+로그인 전 페이지
+LogInPage 로그인페이지
+SignUpPage 회원가입페이지
+
+
+학생용 페이지
+StudentMainPage 메인페이지
+StudentTimeTablePage 시간표페이지
+StudentLectureListPage 수강중인강의 페이지(과제, 출결 서머리 제공)
+StudentLectureDetailPage 강의 디테일 페이지
+StudentLectureManagePage 수강 관리 페이지 (수강 신청 기능)
+StudentMyPage 마이페이지 (개인정보 페이지)
+StudentCreditPage 성적조회 페이지

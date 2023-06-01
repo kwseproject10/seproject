@@ -60,15 +60,24 @@ export const Td = styled.td`
   text-align: center;
   font-size: var(--font-size-sm);
   &:nth-child(1){
-    border-left:none;
+    border-left: none;
     color: black;
     width: 4rem;
+  }
+  &:nth-child(2){
+    ${(props)=>props.isDetail?
+      `
+        width: 4rem;
+      `
+      :
+      ``
+    }
   }
 `
 
 export const Th = styled.th`
-  font-weight: light;
   border: 0.0625rem var(--color-sh) solid;
+  font-weight: light;
   border-right: none;
   border-top: none;
   width: 5rem;
@@ -76,6 +85,15 @@ export const Th = styled.th`
     border-left:none;
     color: black;
     width: 4rem;
+  }
+  &:nth-child(2){
+    ${(props)=>props.isDetail?
+      `
+        width: 4rem;
+      `
+      :
+      ``
+    }
   }
 `
 

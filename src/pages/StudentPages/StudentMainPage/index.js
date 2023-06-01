@@ -12,27 +12,27 @@ const StudentMainPage = () => {
       <GridWrap>
         <GridContainer>
           <ProfileCard>
-            <Profile/>
+            <Profile />
           </ProfileCard>
 
           <TimeTableCard>
-            <MainPageTimeTable/>
+            <MainPageTimeTable />
           </TimeTableCard>
 
           <CreditCard>
-            <CreditList/>
+            <CreditList />
           </CreditCard>
 
           <CalendarCard>
-            <MainPageCalendar/>
+            <MainPageCalendar />
           </CalendarCard>
 
           <NoticeCard>
-            <NoticeList/>
+            <NoticeList />
           </NoticeCard>
 
           <AssignmentCard>
-            <AssignmentList/>
+            <AssignmentList />
           </AssignmentCard>
         </GridContainer>
       </GridWrap>

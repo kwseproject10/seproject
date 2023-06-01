@@ -42,7 +42,7 @@ const RenderCells = ({ currentMonth, selectedDate, onDateClick }) => {
           key={day}
           onClick={() => onDateClick(cloneDay)}
         >
-          <CellText textValid={!format(currentMonth, 'M') !== format(day, 'M')}>
+          <CellText textValid={!format(currentMonth, 'M') !== format(day, 'M')} key={day}>
             {formattedDate}
           </CellText>
         </Cell>,
