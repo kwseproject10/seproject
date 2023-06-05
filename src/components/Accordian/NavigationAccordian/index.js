@@ -52,7 +52,7 @@ const NavigationAccordian = ({ actived, setActived, index, text }) => {
               <LinkStyle
                 to={`/student/lecturedetail`}
                 onClick={() => {
-                  setSelectedLecture(element.name);
+                  setSelectedLecture(element.ID);
                 }}
                 key={lecIndex}
               >

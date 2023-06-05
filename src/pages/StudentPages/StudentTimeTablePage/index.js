@@ -68,6 +68,15 @@ const StudentTimeTablePage = () => {
           time: ["월3","수4"],
           place: ["새빛203","새빛203"],
           ID: "H020-4-8483-01",
+        },
+        {
+          key: "4",
+          name: "머신러닝",
+          professor: "박철수",
+          type: "전공선택",
+          time: ["월9","수2"],
+          place: ["새빛203","새빛203"],
+          ID: "H020-4-8483-01",
         }
       ])
      }else{

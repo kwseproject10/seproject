@@ -40,7 +40,7 @@ export const Body = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    overflow-Y: scroll;
+    overflow-Y: auto;
     &::-webkit-scrollbar {
       width: 0.25rem;
       border-radius: 0.125rem;
