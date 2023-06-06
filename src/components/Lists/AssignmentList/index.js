@@ -59,6 +59,7 @@ const AssignmentList = () => {
       </ListTitle>
       <ListBox>
         {assignment.map((element,index)=>{
+          if(index > 4){return ""}
           return(
             <ListRow key={index}>
               <Left>
