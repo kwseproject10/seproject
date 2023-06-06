@@ -9,11 +9,11 @@ export const AccordianWrap = styled.div`
   transition: height ease 0.3s;
   ${(props) => props.actived ?
     `
-      height: 3.75rem;
+      height: ${props.numRows * 2 + 3.91}rem;
     `
   :
     `
-      height: ${props.numRows * 2 + 3.91}rem;
+      height: 3.75rem;
     `
   }
 `
@@ -58,7 +58,7 @@ export const AccordianOpenButton = styled.div`
 export const AccordianContents = styled.div`
   ${(props) => `height: ${props.numRows * 2}rem;`}
   background-color: white;
-  ${(props) => !props.actived ? `border: 1px solid black;` : ``}
+  ${(props) => props.actived ? `border: 1px solid black;` : ``}
   border-top: none;
   ${Size('large')}{
     background-color: rgba(0,0,0,0);

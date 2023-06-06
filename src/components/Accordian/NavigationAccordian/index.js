@@ -1,12 +1,13 @@
 import { useSetRecoilState } from "recoil";
 import { AccordianContent, AccordianContents, AccordianOpenButton, AccordianWrap, LinkStyle, OpenButtonWrap } from "./style";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { LectureSelectedState } from "@./Atom";
 import { useEffect } from "react";
+
 const NavigationAccordian = ({ actived, setActived, index, text }) => {
   const [AccordianActived, setAccordianActived] = useState(false);
   const [lecturesName, setLecturesName] = useState([]);
-  const setSelectedLecture = useSetRecoilState(LectureSelectedState)
+  const setSelectedLecture = useSetRecoilState(LectureSelectedState);
   const loadLecturesName = () => {
     setLecturesName([
       {
@@ -33,8 +34,23 @@ const NavigationAccordian = ({ actived, setActived, index, text }) => {
   }
 
   useEffect(loadLecturesName, []);
+
+  const outsideRef = useRef(null);
+  useEffect(()=> {
+      function handleClickOutside(e){
+          if(outsideRef.current && !outsideRef.current.contains(e.target)){
+                  setAccordianActived(false);
+          }
+      }
+      document.addEventListener("click", handleClickOutside);
+
+      return () => {
+          document.removeEventListener("click", handleClickOutside);
+      };
+  }, [outsideRef, setAccordianActived]);
+
   return (
-    <AccordianWrap actived={AccordianActived} numRows={lecturesName.length}>
+    <AccordianWrap ref={outsideRef} actived={AccordianActived} numRows={lecturesName.length}>
       <OpenButtonWrap
           AccordianActive={AccordianActived}
           actived={actived}

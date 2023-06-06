@@ -46,6 +46,7 @@ export const LoginPageInner = styled.div`
     display: flex;
     flex-direction: column;
     color: var(--color-dg);
+    overflow: auto;
 `;
 
 export const LoginPageFooter = styled.div`

@@ -11,7 +11,7 @@ export const Size = (Size) => {
 const breakpoints = {
     small: "576px",
     medium: "821px",
-    large: "112.5rem",
+    large: "1440px",
 };
 
 export default Size;
