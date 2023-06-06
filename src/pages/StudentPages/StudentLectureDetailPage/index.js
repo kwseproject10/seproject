@@ -3,10 +3,16 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { DetailPageContents, DetailPageHeader, DetailPageLectureName, DetailPageLectureNum, DetailPageLectureWrap, DetailPageNavigation, DetailPageNavigationButton, DetailPageNavigationButtonWrap, DetailPageWrap, Hidden } from "./style";
+import LectureDetailMain from "./LectureDetailMain";
+import LectureDetailNotice from "./LectureDetailNotice";
+import LectureDetailArchive from "./LectureDetailArchive";
+import LectureDetailAssignment from "./LectureDetailAssignment";
 
 const StudentLectureDetailPage = () => {
   const [selectedLecture, setSelectedLecture] = useRecoilState(LectureSelectedState);
   const [lectureInform, setLectureInform] = useState({})
+  const [navigationIndex, setNavigationindex] = useState(0);
+
   const loadLectureInform = () => {
     switch(selectedLecture){
       case "H020-4-0846-01":
@@ -41,17 +47,33 @@ const StudentLectureDetailPage = () => {
         break;
     }
   }
-  const [navigationIndex, setNavigationindex] = useState(0);
   const RenderContents = () => {
     switch (navigationIndex){
       case 0:
-        return ;
+        return (
+          <LectureDetailMain
+            selectedLecture={selectedLecture}
+            setNavigationindex={setNavigationindex}
+          />
+        );
       case 1:
-        return "공지사항";
+        return (
+          <LectureDetailNotice
+            selectedLecture={selectedLecture}
+          />
+        );
       case 2:
-        return "자료실";
+        return (
+          <LectureDetailArchive
+            selectedLecture={selectedLecture}
+          />
+        );
       case 3:
-        return "과제";
+        return (
+          <LectureDetailAssignment
+            selectedLecture={selectedLecture}
+          />
+        );
       default:
         return "error";
     }

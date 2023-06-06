@@ -1,7 +1,7 @@
 import { Dates, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitlePlusButton, TitleText } from "./style";
 import { TbPlus } from "react-icons/tb";
 
-const NoticeList = ({ listTitle, list, maxRows, height, width, subjectName, onClickPlusButton }) => {
+const ArchiveList = ({ listTitle, list, maxRows, height, width, subjectName, onClickPlusButton }) => {
   return(
     <ListWrap>
       <ListTitle>
@@ -45,4 +45,4 @@ const NoticeList = ({ listTitle, list, maxRows, height, width, subjectName, onCl
   )
 }
 
-export default NoticeList;
+export default ArchiveList;

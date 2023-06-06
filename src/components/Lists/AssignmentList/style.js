@@ -6,6 +6,8 @@ export const ListWrap = styled.div`
 
 export const ListTitle = styled.div`
   margin: 0.5rem;
+  display: flex;
+  justify-content: space-between;
 `
 
 export const TitleText = styled.div`
@@ -13,15 +15,23 @@ export const TitleText = styled.div`
   color: black;
 `
 
+export const TitlePlusButton = styled.div`
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+
 export const ListBox = styled.div`
   border-top: 0.125rem var(--color-dk) solid;
   list-style: none;
   margin: 0;
+  width: 100%;
 `
 
 export const ListRow = styled.div`
-  margin: 0.5rem;
-  height: 2.3rem;
+  height: 2.8rem;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   color: var(--color-dg);
@@ -35,13 +45,24 @@ export const ListRow = styled.div`
 `
 
 export const Left = styled.div`
+  margin-left: 2%;
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 60%;
+  justify-content: center;
 `
 
 export const NoticeTitle = styled.div`
-  font-size: var(--font-size-sm);
+  ${(props)=>props.subjectName ? 
+    `
+      font-size: var(--font-size-xs);
+    `
+  :
+    `
+      font-size: var(--font-size-nm);
+    `
+  }
 `
 
 export const NoticeSubject = styled.div`
@@ -50,20 +71,27 @@ export const NoticeSubject = styled.div`
 
 export const DueDate = styled.div`
   margin-right: 0.625rem;
-  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 13%;
+  height: 100%;
+  font-size: var(--font-size-xs);
 `
 
 export const Right = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: right;
+  margin-right: 2%;
   height: 100%;
+  width: 20%;
   font-size: var(--font-size-xs);
-  margin-top: -0.125rem;
 `
 
 export const Dates = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `
 
 export const StartDate = styled.div`

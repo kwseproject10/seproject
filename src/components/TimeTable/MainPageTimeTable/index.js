@@ -102,7 +102,12 @@ const MainPageTimeTable = () => {
             />
           </Left>
           <Right>
-            <LectureList lectures={lectures}/>
+            <LectureList
+              lectures={lectures}
+              onClickPlusButton={() => {
+                
+              }}
+            />
           </Right>
         </>
         }

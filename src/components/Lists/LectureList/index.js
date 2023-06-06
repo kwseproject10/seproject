@@ -1,12 +1,18 @@
-import { Center, LectureProfessor, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitleText } from "./style";
+import { Center, LectureProfessor, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitlePlusButton, TitleText } from "./style";
+import { TbPlus } from "react-icons/tb";
 
-const LectureList = ({ lectures }) => {
+const LectureList = ({ lectures, onClickPlusButton }) => {
   return(
     <ListWrap>
       <ListTitle>
         <TitleText>
           수강 중인 강의
         </TitleText>
+        <TitlePlusButton
+          onClick={onClickPlusButton}
+        >
+          <TbPlus/>
+        </TitlePlusButton>
       </ListTitle>
       <ListBox>
         {lectures.map((element,index)=>{

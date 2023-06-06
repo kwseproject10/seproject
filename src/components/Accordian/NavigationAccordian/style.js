@@ -29,7 +29,6 @@ export const OpenButtonWrap = styled.div`
     `
       background-color: var(--color-dk);
       color: white;
-      cursor: default;
       ${Size('large')}{
         background-color: var(--color-nm);
       }

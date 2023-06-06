@@ -5,12 +5,21 @@ export const ListWrap = styled.div`
 `
 
 export const ListTitle = styled.div`
-  margin: 0.5rem;
+margin: 0.5rem;
+display: flex;
+justify-content: space-between;
 `
 
 export const TitleText = styled.div`
-  font-weight: bold;
-  color: black;
+font-weight: bold;
+color: black;
+`
+
+export const TitlePlusButton = styled.div`
+cursor: pointer;
+display: flex;
+flex-direction: column;
+justify-content: center;
 `
 
 export const ListBox = styled.div`

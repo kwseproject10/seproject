@@ -74,5 +74,5 @@ export const Hidden = styled.div`
 `
 
 export const DetailPageContents = styled.div`
-  height: 80%;
+  height: 90%;
 `
