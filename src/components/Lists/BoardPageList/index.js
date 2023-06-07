@@ -1,5 +1,30 @@
 import { useEffect, useState } from "react";
-import { Center, Left, LeftButton, ListBody, ListHeader, ListRow, ListWrap, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, Right, RightButton } from "./style";
+import { HeaderPostDate, HeaderPostHit, HeaderPostName, HeaderPoster, LeftButton, ListBody, ListHeader, ListRow, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostHit, PostName, Poster, RightButton } from "./style";
+
+const RenderList = ({ list, linePerPage }) => {
+  let Rows = [];
+  for(let i = 0; i < linePerPage; i++){
+    if(list===undefined || list[i]===undefined){
+      Rows.push(
+        <ListRow linePerPage={linePerPage} hidden={true}/>
+      )
+    }else{
+      Rows.push(
+        <ListRow linePerPage={linePerPage} hidden={false}>
+          <PostName>{list[i].title}</PostName>
+          <Poster>{list[i].poster}</Poster>
+          <PostDate>{list[i].date}</PostDate>
+          <PostHit>{list[i].hit}</PostHit>
+        </ListRow>
+      )
+    }
+  }
+  return(
+    <ListBody>
+      {Rows.map((e)=>{return e;})}
+    </ListBody>
+  )
+}
 
 const BoardPageList = ({ list, linePerPage }) => {
   const [ selectedPage, setSelectedPage ] = useState(1);
@@ -23,8 +48,7 @@ const BoardPageList = ({ list, linePerPage }) => {
   }
 
   const sliceList = () => {
-    setSelectedList(list.slice((selectedPage - 1) * linePerPage, (selectedPage - 1) * linePerPage + linePerPage))
-    console.log(selectedList);
+    setSelectedList(list.slice((selectedPage - 1) * linePerPage, (selectedPage - 1) * linePerPage + linePerPage));
   };
 
   useEffect(sliceList, [ selectedPage, setSelectedList, list, linePerPage ]);
@@ -32,35 +56,17 @@ const BoardPageList = ({ list, linePerPage }) => {
   return (
     <>
       <ListWrap>
-        <ListHeader>
-          <Left>
-            제목
-          </Left>
-          <Center>
-            조회수
-          </Center>
-          <Right>
-            작성일
-          </Right>
-        </ListHeader>
-        <ListBody>
-          {selectedList.map((element, index)=>{
-            return(
-              <ListRow>
-                <Left>
-
-                </Left>
-                <Center>
-
-                </Center>
-                <Right>
-
-                </Right>
-              </ListRow>
-            )
-          })}
-        </ListBody>
+        <ListWrapAlign>
+          <ListHeader>
+            <HeaderPostName>제목</HeaderPostName>
+            <HeaderPoster>작성자</HeaderPoster>
+            <HeaderPostDate>작성일</HeaderPostDate>
+            <HeaderPostHit>조회수</HeaderPostHit>
+          </ListHeader>
+          <RenderList list={selectedList} linePerPage={linePerPage} />
+        </ListWrapAlign>
       </ListWrap>
+      
       <PageSelectorWrap>
         <PageSelector>
           <PageButtonWrap>
