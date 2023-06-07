@@ -7,6 +7,7 @@ import Calendar from "..";
 const MainPageCalendar = () => {
   const [ schedules, setSchedules ] = useState([]);
 
+  //API call
   const loadSchedules = () => {
     setSchedules([
       {

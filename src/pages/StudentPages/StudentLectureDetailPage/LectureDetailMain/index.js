@@ -14,6 +14,7 @@ const LectureDetailMain = ({ setNavigationindex }) => {
   const [archiveList, setArchiveList] = useState([]);
   const [assignmentList, setAssignmentList] = useState([]);
 
+  //API call
   const loadInforms = (selectedLecture) => {
     setAssignmentList([
       {

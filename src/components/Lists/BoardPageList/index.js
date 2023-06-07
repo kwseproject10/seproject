@@ -37,7 +37,6 @@ const BoardPageList = ({ list, linePerPage }) => {
       <PageButton
         onClick={()=>{
           setSelectedPage(i + 1);
-          console.log(selectedPage);
         }}
         index={i + 1}
         selectedPage={selectedPage}
@@ -48,6 +47,7 @@ const BoardPageList = ({ list, linePerPage }) => {
   }
 
   const sliceList = () => {
+    setSelectedList([]);
     setSelectedList(list.slice((selectedPage - 1) * linePerPage, (selectedPage - 1) * linePerPage + linePerPage));
   };
 

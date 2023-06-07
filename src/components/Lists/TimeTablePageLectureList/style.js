@@ -18,7 +18,6 @@ export const TitleText = styled.div`
 
 export const ListBox = styled.div`
   border-top: 0.125rem var(--color-dk) solid;
-  height: 92.4%;
   list-style: none;
   margin: 0;
   overflow-Y: auto;
@@ -26,17 +25,18 @@ export const ListBox = styled.div`
 
 export const ListRow = styled.div`
   display: flex;
-  height: 13.9%;
+  height: 6rem;
   flex-direction: column;
-  justify-content: center;
   color: var(--color-dg);
-  border-bottom: 0.0625rem black solid;
+  border-bottom: 0.0625rem var(--color-gr) solid;
+  padding-bottom: 0.5rem;
 `
 
 export const DefaultRow = styled.div`
-  height: 25%;
+  height: 30%;
   display: flex;
   justify-content: space-between;
+  background-color: var(--color-sh);
   &:hover{
     color: black;
     transform: translateY(0);
@@ -51,44 +51,39 @@ export const Left = styled.div`
   width: 40%;
 `
 
-export const NoticeTitle = styled.div`
+export const Item = styled.div`
+  font-size: var(--font-size-xs);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  ${Size('small')}{
+    font-size:var(--font-size-xxs);
+   }
+`
+
+export const NoticeTitle = styled(Item)`
   font-size: var(--font-size-sm);
-  margin-top: 0.5%;
   color: black;
   ${Size('small')}{
     font-size:var(--font-size-xxs);
    }
 `
 
-export const NoticeSubject = styled.div`
+export const NoticeSubject = styled(Item)`
   font-size: var(--font-size-xs);
-  margin-left: 1rem;
-  margin-top: 0.6%;
+  margin-left: 0.5rem;
   ${Size('small')}{
     font-size:var(--font-size-xxs);
    }
 `
 
-export const LectureType = styled.div`
-  font-size: var(--font-size-xs);
-  ${Size('small')}{
-    font-size:var(--font-size-xxs);
-   }
+export const LectureType = styled(Item)`
 `
 
-export const LectureProfessor = styled.div`
-  font-size: var(--font-size-xs);
-  ${Size('small')}{
-    font-size:var(--font-size-xxs);
-   }
+export const LectureProfessor = styled(Item)`
 `
 
-export const Right = styled.div`
-  font-size: var(--font-size-xs);
-  height: 2.3rem;
-  ${Size('small')}{
-    font-size:var(--font-size-xxs);
-   }
+export const Right = styled(Item)`
 `
 
 export const AttendanceChartRow = styled.div`
@@ -121,13 +116,13 @@ export const AttendanceChartChild = styled.div`
 `
 
 export const DetailInformRow = styled.div`
-  height: 20%;
+  height: 30%;
   display: flex;
   justify-content: space-between;
   font-size: var(--font-size-xs);
 `
 
-export const DetailLeft = styled.div`
+export const DetailLeft = styled(Item)`
   &:hover{
     color: black;
     transform: translateY(0);
@@ -136,7 +131,7 @@ export const DetailLeft = styled.div`
   cursor: pointer;
 `
 
-export const DetailCenter = styled.div`
+export const DetailCenter = styled(Item)`
   &:hover{
     color: black;
     transform: translateY(0);
@@ -145,7 +140,7 @@ export const DetailCenter = styled.div`
   cursor: pointer;
 `
 
-export const DetailRight = styled.div`
+export const DetailRight = styled(Item)`
   &:hover{
     color: black;
     transform: translateY(0);

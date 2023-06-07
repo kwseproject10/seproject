@@ -49,7 +49,7 @@ const StudentNavigation = () => {
             actived={actived}
             setActived={setActived}
             index={4}
-            text={"MYPAGE"}
+            text={"개인정보 관리"}
             link={"student/mypage"}
           />
         </ButtonWrap>

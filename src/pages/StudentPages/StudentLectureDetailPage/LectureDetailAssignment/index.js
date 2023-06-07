@@ -7,6 +7,8 @@ import BoardPageList from "@components/Lists/BoardPageList";
 const LecutreDetailAssignment = () => {
   const [selectedLecture, setSelectedLecture] = useRecoilState(LectureSelectedState);
   const [noticeList, setNoticeList] = useState([]);
+  
+  //API call
   const loadNoticeList = () => {
     setNoticeList([
       {

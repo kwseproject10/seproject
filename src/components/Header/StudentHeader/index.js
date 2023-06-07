@@ -13,8 +13,8 @@ const StudentHeader = () => {
   const [ userMajor, setUserMajor ] = useState("");
   const [ userType, setUserType ] = useState("");
 
+  //API call
   const getUserInform = () => {
-    /** get userName, userMajor, userType API */
     setUserName("홍길동");
     setUserID("2023123456");
     setUserMajor("컴퓨터정보공학부");
@@ -50,7 +50,9 @@ const StudentHeader = () => {
                 <ButtonPartition/>
                 <HeaderButton text={"광운대학교"} out={true} link={"https://www.kw.ac.kr/ko/"} onClick={() => {}}/>
                 <ButtonPartition/>
-                <HeaderButton text={"로그아웃"} out={false} link={""} onClick={() => {}}/>
+                <HeaderButton text={"로그아웃"} out={false} link={""} onClick={() => {
+                  setActived(0);
+                }}/>
               </RightContents>
             </RightContentsWrap>
 

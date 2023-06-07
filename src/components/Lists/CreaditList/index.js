@@ -25,6 +25,8 @@ const CreditList = () => {
       }
     });
   const [ GPA, setGPA ] = useState({});
+  
+  //API call
   const loadCredit = () => {
     setCredits(
       {

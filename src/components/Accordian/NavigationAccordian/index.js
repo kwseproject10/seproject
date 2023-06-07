@@ -8,6 +8,8 @@ const NavigationAccordian = ({ actived, setActived, index, text }) => {
   const [AccordianActived, setAccordianActived] = useState(false);
   const [lecturesName, setLecturesName] = useState([]);
   const setSelectedLecture = useSetRecoilState(LectureSelectedState);
+
+  //API call
   const loadLecturesName = () => {
     setLecturesName([
       {

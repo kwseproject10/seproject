@@ -1,27 +1,30 @@
 import { useRef } from "react";
 import { ComponentLayOut, BG, ModalInner } from "./style.js"
 
-const Modal = ({modalOpen, setModalOpen, innerContents}) => {
-    const ModalBG = useRef();
-    return(
-        <ComponentLayOut>
-        {modalOpen ?
+const Modal = ({ modalOpen, setModalOpen, innerContents }) => {
+  const ModalBG = useRef();
+  return (
+    <>
+      {
+        modalOpen ?
           (
-            <BG ref={ModalBG} onClick={(e)=>{
-                if(ModalBG.current === e.target){
-                    setModalOpen(false);
+            <ComponentLayOut>
+              <BG ref={ModalBG} onClick={(e) => {
+                if (ModalBG.current === e.target) {
+                  setModalOpen(false);
                 }
-            }}>
+              }}>
                 <ModalInner>
-                    {innerContents}
+                  {innerContents}
                 </ModalInner>
-            </BG>
+              </BG>
+            </ComponentLayOut>
           )
-        :
-            null
-        }
-        </ComponentLayOut>
-    )
+          :
+          null
+      }
+    </>
+  )
 }
 
 export default Modal;

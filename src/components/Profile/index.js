@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { AdvisorEmail, AdvisorName, AdvisorNum, Bottom, Center, Grade, GradeWrap, InformRows, LastConnect, Left, NameRow, ProfileWrap, Right, Top, UserID, UserInformWrap, UserMajor, UserName, UserPhotoWrap } from "./style";
+import { AdvisorEmail, AdvisorName, AdvisorNum, Bottom, Center, Grade, GradeWrap, InformRows, LastConnect, Left, NameRow, ProfileWrap, Right, TitlePlusButton, Top, UserID, UserInformWrap, UserMajor, UserName, UserPhotoWrap } from "./style";
 import EmptyProfileImage from "@images/EmptyProfileImage.png";
+import { TbPlus } from "react-icons/tb";
 
-const Profile = () => {
+const Profile = ({ onClickPlusButton }) => {
   const [ userInform, setUserInform ] = useState({
     name : "홍길동",
     type : "학부생",
@@ -17,6 +18,7 @@ const Profile = () => {
     state : "재학"
   })
 
+  //API call
   const loadUserInform = () => {
     setUserInform({
       name : "홍길동",
@@ -47,6 +49,11 @@ const Profile = () => {
         <UserInformWrap>
           <NameRow>
             <UserName>{userInform.name}</UserName>
+            <TitlePlusButton
+              onClick={onClickPlusButton}
+            >
+              <TbPlus/>
+            </TitlePlusButton>
           </NameRow>
           <InformRows>
             <UserID>{userInform.ID}</UserID>

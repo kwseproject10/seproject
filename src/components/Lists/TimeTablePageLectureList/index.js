@@ -4,6 +4,7 @@ import { AttendanceChart, AttendanceChartChild, AttendanceChartRow,  DefaultRow,
 const TimeTablePageLectureList = ({ lectures }) => {
   const [ attendance, setAttendance ] = useState({});
   
+  //API call
   const loadAttendance = () => {
     setAttendance({
       "H020-4-0846-01": [

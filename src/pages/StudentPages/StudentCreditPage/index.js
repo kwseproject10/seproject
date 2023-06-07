@@ -1,14 +1,17 @@
 import CreditList from "@components/Lists/CreaditList";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Bottom, CreditListPerSemesters, CreditListPerSemestersVisualized, CreditListWrap, CreditPageWrap, LectureCreditList, LectureCreditListHeader, LectureCreditListLectureCredit, LectureCreditListLectureGrade, LectureCreditListLectureID, LectureCreditListLectureMajor, LectureCreditListLectureTitle, LectureCreditListLectureType, LectureCreditListRow, LectureCreditListSemester, LectureCreditListWrap, Middle, ProfileCard, Top } from "./style";
+import { Bottom, CreditListPerSemestersVisualized, CreditListWrap, CreditPageWrap, Middle, MiddleTitle, ProfileCard, Title, TitleRow, Top } from "./style";
+import EnrollmentList from "../../../components/Lists/EnrollmentList";
+import SemesterResultList from "../../../components/Lists/SemesterResultList";
+import CreditChart from "../../../components/Chart/CreditBarChart";
 
 const StudentCreditPage = () => {
   const [lecturesEachSemester, setLectureEachSemeters] = useState({});
   const [creditEachSemesters, setCreditEachSemesters] = useState({});
-  const [GPAEachSemesters, setGPAEachSemesters] = useState({});
   const [semesters, setSemesters] = useState([[2023, 1]]);
   
+  //API call
   const loadLectureEachSemesters = () => {
     setLectureEachSemeters({
       2023: {
@@ -410,7 +413,7 @@ const StudentCreditPage = () => {
         ]
       }
     })
-  }
+  };
 
   const loadSemsters = () => {
     setSemesters([
@@ -431,7 +434,8 @@ const StudentCreditPage = () => {
           major : 15,
           general : 0,
           etc : 0,
-          total : 15
+          total : 15,
+          GPA : -1
         }
       },
       2022 : {
@@ -439,13 +443,15 @@ const StudentCreditPage = () => {
           major : 18,
           general : 0,
           etc : 0,
-          total : 18
+          total : 18,
+          GPA : 4.1
         },
         1 : {
           major : 17,
           general : 0,
           etc : 0,
-          total : 17
+          total : 17,
+          GPA : 4.0
         }
       },
       2021 : {
@@ -453,13 +459,15 @@ const StudentCreditPage = () => {
           major : 18,
           general : 0,
           etc : 0,
-          total : 18
+          total : 18,
+          GPA : 4.0
         },
         1 : {
           major : 15,
           general : 6,
           etc : 0,
-          total : 21
+          total : 21,
+          GPA : 4.0
         }
       },
       2020 : {
@@ -467,162 +475,49 @@ const StudentCreditPage = () => {
           major : 9,
           general : 16,
           etc : 0,
-          total : 25
+          total : 25,
+          GPA : 4.0
         },
         1 : {
           major : 6,
           general : 13,
           etc : 0,
-          total : 19
+          total : 19,
+          GPA : 4.0
         }
       }
     })
-  }
-
-  const loadGPAEachSemesters = () => {
-    setGPAEachSemesters({
-      2023 : {
-        1 : 5.0
-      },
-      2022 : {
-        1 : 4.0,
-        2 : 4.0
-      },
-      2021 : {
-        1 : 4.0,
-        2 : 4.0
-      },
-      2020 : {
-        1 : 4.0,
-        2 : 4.0
-      }
-    })
-  }
+  };
 
   useEffect(loadLectureEachSemesters, []);
   useEffect(loadSemsters, []);
   useEffect(loadCreaditEachSemesters, []);
-  useEffect(loadGPAEachSemesters, []);
   return (
     <CreditPageWrap>
-      <Top>
-        <ProfileCard>
-          프로필<br />프로필<br />프로필<br />프로필<br />프로필<br />프로필<br />프로필<br />프로필<br />프로필<br />프로필
-        </ProfileCard>
-        <CreditListWrap>
-          <CreditList />
-        </CreditListWrap>
-      </Top>
-
+      <TitleRow>
+      <Title>학기별 성적 현황</Title>
+      </TitleRow>
       <Middle>
+        <SemesterResultList
+          semesters={semesters}
+          creditEachSemesters={creditEachSemesters}
+        />
         <CreditListPerSemestersVisualized>
-          그래프
+          <CreditChart
+            semesters={semesters}
+            creditEachSemesters={creditEachSemesters}
+          />
         </CreditListPerSemestersVisualized>
-        <CreditListPerSemesters>
-          {semesters !== undefined ?
-              semesters.map((element, index) => {
-                if(element === undefined) return "";
-                if(element[0] === undefined) return "";
-                if(element[1] === undefined) return "";
-                const year = element[0];
-                const semester = element[1];
-                let credits, GPA;
-                if(creditEachSemesters !== undefined){
-                  credits = creditEachSemesters[year][semester];
-                }else{
-                  credits = {
-                    major : 0,
-                    general : 0,
-                    etc : 0,
-                    total : 0
-                  };
-                }
-                if(GPAEachSemesters !== undefined){
-                  GPA = GPAEachSemesters[year][semester];
-                }else{
-                  GPA = 0;
-                }
-                return (
-                  <>
-                    {year}학년도 {semester}학기<br/>
-                    {credits.major} {credits.general} {credits.etc} {credits.total}<br/>
-                    {GPA}<br/>
-                  </>
-                )
-              })
-            :
-              ""
-          }
-        </CreditListPerSemesters>
       </Middle>
 
+      <TitleRow>
+      <Title>수강 강의 목록</Title>
+      </TitleRow>
       <Bottom>
-        <LectureCreditListWrap>
-          {semesters.map((element, index) => {
-            if(element === undefined) return "";
-            if(element[0] === undefined) return "";
-            if(element[1] === undefined) return "";
-            const year = element[0];
-            const semester = element[1];
-            return(
-              <LectureCreditList>
-                <LectureCreditListSemester>
-                  {year}학년도 {semester}학기
-                </LectureCreditListSemester>
-                <LectureCreditListHeader>
-                  <LectureCreditListLectureID>
-                    학정번호
-                  </LectureCreditListLectureID>
-                  <LectureCreditListLectureTitle>
-                    강의명
-                  </LectureCreditListLectureTitle>
-                  <LectureCreditListLectureMajor>
-                    개설학과
-                  </LectureCreditListLectureMajor>
-                  <LectureCreditListLectureType>
-                    분류
-                  </LectureCreditListLectureType>
-                  <LectureCreditListLectureCredit>
-                    학점
-                  </LectureCreditListLectureCredit>
-                  <LectureCreditListLectureGrade>
-                    성적
-                  </LectureCreditListLectureGrade>
-                  <br/>
-                </LectureCreditListHeader>
-                {lecturesEachSemester !== undefined && lecturesEachSemester[year] !== undefined && lecturesEachSemester[year][semester] !== undefined ?
-                lecturesEachSemester[year][semester].map((lecture,lectureIndexl)=>{
-                  return(
-                    <LectureCreditListRow>
-                      <LectureCreditListLectureID>
-                        {lecture.ID}
-                      </LectureCreditListLectureID>
-                      <LectureCreditListLectureTitle>
-                        {lecture.title}
-                      </LectureCreditListLectureTitle>
-                      <LectureCreditListLectureMajor>
-                        {lecture.major}
-                      </LectureCreditListLectureMajor>
-                      <LectureCreditListLectureType>
-                        {lecture.type}
-                      </LectureCreditListLectureType>
-                      <LectureCreditListLectureCredit>
-                        {lecture.credit}
-                      </LectureCreditListLectureCredit>
-                      <LectureCreditListLectureGrade>
-                        {lecture.grade}
-                      </LectureCreditListLectureGrade>
-                      <br/>
-                    </LectureCreditListRow>
-                  )
-                })
-                :
-                ""
-              }
-              </LectureCreditList>
-            )
-          })}
-        </LectureCreditListWrap>
+        <EnrollmentList
+          semesters={semesters}
+          lecturesEachSemester={lecturesEachSemester}
+        />
       </Bottom>
     </CreditPageWrap>
   )

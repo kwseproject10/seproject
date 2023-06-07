@@ -11,6 +11,7 @@ const StudentMainPage = () => {
   const [ assignment, setAssignment ] = useState([]);
   const [ notices, setNotices ] = useState([]);
 
+  //API call
   const loadAssignment = () => {
     setAssignment([
       {
@@ -98,7 +99,11 @@ const StudentMainPage = () => {
       <GridWrap>
         <GridContainer>
           <ProfileCard>
-            <Profile />
+            <Profile
+              onClickPlusButton={() => {
+                    
+              }}
+            />
           </ProfileCard>
 
           <TimeTableCard>

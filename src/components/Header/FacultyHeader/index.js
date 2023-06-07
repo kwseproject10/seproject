@@ -13,8 +13,8 @@ const FacultyHeader = () => {
   const [ userMajor, setUserMajor ] = useState("");
   const [ userType, setUserType ] = useState("");
 
+  //API call
   const getUserInform = () => {
-    /** get userName, userMajor, userType API */
     setUserName("홍길동");
     setUserID("1998123456");
     setUserMajor("컴퓨터정보공학부");

@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 export const ComponentLayOut = styled.div`
     width:100%;
+    height:100vh;
+    left: 0;
+    top: 0;
     position: fixed;
     z-index: 30;
 `

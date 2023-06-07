@@ -39,12 +39,20 @@ export const UserInformWrap = styled.div`
 
 export const NameRow = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: space-between;
   border-bottom: 0.125rem solid var(--color-dk);
 `
 
 export const UserName = styled.div`
-  font-size: var(--font-size-lg);;
-  font-weight: bold;
+  font-size: var(--font-size-lg);
+`
+
+export const TitlePlusButton = styled.div`
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
 
 export const InformRows = styled.div`
