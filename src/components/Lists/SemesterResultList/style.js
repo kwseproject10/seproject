@@ -1,9 +1,16 @@
 import styled from "styled-components";
+import Size from "@style/Size";
 
 export const ListWrap = styled.div`
   height: 100%;
-  width: 40%;
-  margin-left: 1%;
+  width: 90%;
+  margin-bottom: 3%;
+  margin-left: 5%;
+  ${Size('large')}{
+    width: 40%;
+    margin-bottom:0;
+    margin-left: 1%;
+  }
 `
 
 export const ListRow = styled.div`

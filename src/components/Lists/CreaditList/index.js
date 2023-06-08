@@ -24,7 +24,6 @@ const CreditList = () => {
         total : 130
       }
     });
-  const [ GPA, setGPA ] = useState({});
   
   //API call
   const loadCredit = () => {
@@ -51,12 +50,8 @@ const CreditList = () => {
       }
     )
   };
-  const loadGPA = () => {
-
-  }
 
   useEffect(loadCredit,[]);
-  useEffect(loadGPA, []);
   return(
     <ListWrap>
       <ListTitle>

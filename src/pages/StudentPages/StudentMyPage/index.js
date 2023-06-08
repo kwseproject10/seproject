@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { ButtonRow, ButtonWrap, FileInput, FileInputWrap, HeaderTitle, ModifyButton, ModifyCancelButton, ModifySubmitButton, MyPageWrap, PasswordSubmit, PhotoRow, PhotoRowContent, Profile, ProfileHeader, ProfileRow, ProfileWrap, RowContent, RowInput, RowInputWrap, RowTitle, SubmitButtonWrap, SubmitWrap, UserPhotoWrap } from "./style";
-import { useEffect } from "react";
 import EmptyProfileImage from "@images/EmptyProfileImage.png";
+import { useEffect, useState } from "react";
+import { ButtonRow, ButtonWrap, FileInputWrap, HeaderTitle, ModifyButton, ModifyCancelButton, ModifySubmitButton, MyPageWrap, PasswordSubmit, PhotoRow, PhotoRowContent, Profile, ProfileHeader, ProfileRow, ProfileWrap, RowContent, RowInput, RowInputWrap, RowTitle, SubmitButtonWrap, SubmitWrap, UserPhotoWrap } from "./style";
 
 const StudentMyPageAuthed = () => {
   const [userInform, setUserInform] = useState({});
@@ -46,7 +45,6 @@ const StudentMyPageAuthed = () => {
     userInform.birthday = inputBirthDay;
     userInform.email = inputEmail;
     userInform.phoneNum = inputPhoneNum;
-    console.log(temp);
     setUserInform(temp);
   }
 

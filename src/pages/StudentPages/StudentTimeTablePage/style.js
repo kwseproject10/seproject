@@ -3,7 +3,6 @@ import Size from "@style/Size";
 
 export const TimeTablePageWrap = styled.div`
   width: 100%;
-  height: 100%;
   margin-top: 2%;
   display: flex;
   flex-direction:column;
@@ -13,7 +12,6 @@ export const TimeTablePageWrap = styled.div`
 export const PageRow = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   background-color: white;
   width: 100%;
   ${Size('large')}{

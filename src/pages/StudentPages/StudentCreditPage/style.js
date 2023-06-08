@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Size from "@style/Size";
 
 export const CreditPageWrap = styled.div`
   width: 100%;
@@ -15,25 +16,17 @@ export const Top = styled.div`
   justify-content: center;
 `
 
-export const ProfileCard = styled.div`
-  height: 100%;
-  width: 60%;
-  margin-right: 1%;
-`
-
-export const CreditListWrap = styled.div`
-  height: 100%;
-  width: 30%;
-  margin-left: 1%;
-`
-
 export const Middle = styled.div`
   width: 100%;
   min-height: 40%;
   margin-top: 1%;
   margin-bottom: 2%;
   display: flex;
-  justify-content: center;
+  flex-direction:column;
+  ${Size('large')}{
+    flex-direction:row;
+    justify-content: center;
+  }
 `
 
 export const TitleRow = styled.div`
@@ -42,6 +35,7 @@ export const TitleRow = styled.div`
   margin-bottom: 1%;
   margin-top: 1%;
 `
+
 export const Title = styled.div`
   width: 92%;
   margin-left: 4%;

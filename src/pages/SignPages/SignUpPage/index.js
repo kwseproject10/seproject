@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { AlretRow, BirthDayRow, ButtonRow, CheckBox, CheckRow, EmailRow, Input, InputBirth, InputEmail, InputNum, InputTitle, LinkStyle, PhoneNumRow, Policy, SignButton, Title } from "./style";
 import DropDown from "@components/DropDown";
+import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { AlretRow, BirthDayRow, ButtonRow, CheckBox, CheckRow, EmailRow, Input, InputBirth, InputEmail, InputNum, InputTitle, LinkStyle, PhoneNumRow, Policy, SignButton, Title } from "./style";
 
 const SignUpPage = () => {
     const [ checkInformPolicy, setCheckInformPolicy ] = useState(false);

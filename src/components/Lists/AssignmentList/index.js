@@ -1,18 +1,12 @@
-import { Dates, DueDate, EndDate, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, StartDate, TitlePlusButton, TitleText } from "./style";
-import { TbPlus } from "react-icons/tb";
+import { Dates, DueDate, EndDate, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, StartDate, TitleText } from "./style";
 
-const AssignmentList = ({ listTitle, list, maxRows, height, width, subjectName, onClickPlusButton }) => {
+const AssignmentList = ({ listTitle, list, maxRows, height, width, subjectName }) => {
   return(
     <ListWrap>
       <ListTitle>
         <TitleText>
           {listTitle}
         </TitleText>
-        <TitlePlusButton
-          onClick={onClickPlusButton}
-        >
-          <TbPlus/>
-        </TitlePlusButton>
       </ListTitle>
       <ListBox>
         {list.map((element,index)=>{

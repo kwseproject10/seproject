@@ -52,15 +52,15 @@ const RenderBody = ({ isDetail, lectures }) => {
     if(classes.has(i)){
       let Row = [];
       const nowCell = cells[i];
-      Row.push(<Td>{i}교시</Td>)
+      Row.push(<Td key={i}>{i}교시</Td>)
       if(isDetail){
-        Row.push(<Td isDetail={isDetail}>
+        Row.push(<Td key={i} isDetail={isDetail}>
           {i === 12 ? "" : <div>{times[i][0]}<br/> ~ <br/>{times[i][1]}</div>}          
         </Td>)
       }
       nowCell.forEach((e,index) => {
         if(Object.keys(e).length > 0){
-          Row.push(<Td isDetail={isDetail}>
+          Row.push(<Td key={i} isDetail={isDetail}>
             <Cell>
               <LectureTitle>{e.name}</LectureTitle>
               <LectureTP>{e.time} {e.place}</LectureTP>

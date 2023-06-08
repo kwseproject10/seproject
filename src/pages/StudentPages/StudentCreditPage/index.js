@@ -1,10 +1,9 @@
-import CreditList from "@components/Lists/CreaditList";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Bottom, CreditListPerSemestersVisualized, CreditListWrap, CreditPageWrap, Middle, MiddleTitle, ProfileCard, Title, TitleRow, Top } from "./style";
-import EnrollmentList from "../../../components/Lists/EnrollmentList";
-import SemesterResultList from "../../../components/Lists/SemesterResultList";
-import CreditChart from "../../../components/Chart/CreditBarChart";
+import { Bottom, CreditListPerSemestersVisualized, CreditPageWrap, Middle, Title, TitleRow } from "./style";
+import EnrollmentList from "@components/Lists/EnrollmentList";
+import SemesterResultList from "@components/Lists/SemesterResultList";
+import CreditChart from "@components/Chart/CreditBarChart";
 
 const StudentCreditPage = () => {
   const [lecturesEachSemester, setLectureEachSemeters] = useState({});

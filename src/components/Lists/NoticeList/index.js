@@ -1,18 +1,12 @@
-import { Dates, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitlePlusButton, TitleText } from "./style";
-import { TbPlus } from "react-icons/tb";
+import { Dates, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitleText } from "./style";
 
-const NoticeList = ({ listTitle, list, maxRows, height, width, subjectName, onClickPlusButton }) => {
+const NoticeList = ({ listTitle, list, maxRows, height, width, subjectName }) => {
   return(
     <ListWrap>
       <ListTitle>
         <TitleText>
           {listTitle}
         </TitleText>
-        <TitlePlusButton
-          onClick={onClickPlusButton}
-        >
-          <TbPlus/>
-        </TitlePlusButton>
       </ListTitle>
       <ListBox>
         {list.map((element,index)=>{

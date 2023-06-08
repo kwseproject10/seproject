@@ -4,13 +4,11 @@ import Size from "@style/Size";
 
 export const MyPageWrap = styled.div`
   width: 100%;
-  height: 100%;
   margin-bottom: 5%;
 `
 
 export const ProfileWrap = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   ${Size('large')}{

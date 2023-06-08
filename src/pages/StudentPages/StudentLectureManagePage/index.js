@@ -4,10 +4,9 @@ import { useEffect } from "react";
 import DropDown from "@components/DropDown";
 import Modal from "@components/Modal";
 import Syllabus from "@components/Modal/ModalContents/Syllabus";
-import LectureDelete from "@components/Modal/ModalContents/LectureDelete";
-import LectureAdd from "@components/Modal/ModalContents/LectureAdd";
+import { useCallback } from "react";
 
-const RenderList = ({ lectures, button, rowPerPage, setSyllabusModalOpen, setButtonModalOpen }) => {
+const RenderList = ({ lectures, button, rowPerPage, setSyllabusModalOpen, onButtonClick }) => {
   let Rows = [];
   for (let i = 0; i < rowPerPage; i++) {
     const lecture = lectures[i]
@@ -30,7 +29,7 @@ const RenderList = ({ lectures, button, rowPerPage, setSyllabusModalOpen, setBut
             <SyllabusOpen/>
           </SyllabusOpenWrap>
           <ButtonWrap
-            onClick={()=>{setButtonModalOpen(true)}}
+            onClick={()=>{onButtonClick(lecture.ID, lecture.name)}}
           >
             {button === "Add" ? <AddButton/> : <DeleteButton/>}
           </ButtonWrap>
@@ -81,8 +80,6 @@ const StudentLectureManagePage = () => {
     "강의시간"
   ]
   const [syllabusModalOpen, setSyllabusModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [addModalOpen, setAddModalOpen] = useState(false);
 
   //API call
   const loadWholeLectures = () => {
@@ -416,6 +413,25 @@ const StudentLectureManagePage = () => {
     loadMyLectures();
   }, []);
 
+  const onAddButtonClick = useCallback((lectureID, lectureName) => {
+    let result = window.confirm(`${lectureID}: ${lectureName} 강의 수강을 신청하시겠습니까?`);
+    if(result){
+      window.alert(`${lectureName} 강의 수강이 신청되었습니다.`);
+    }else{
+      return;
+    }
+  }, []);
+
+  const onDeleteButtonClick = useCallback((lectureID, lectureName) => {
+    let result = window.confirm(`${lectureID}: ${lectureName} 강의를 삭제하시겠습니까?
+    * 삭제시 출석, 성적 등 수강 관련 정보는 복구할 수 없습니다.`);
+    if(result){
+      window.alert(`${lectureName} 강의가 수강목록에서 삭제되었습니다.`);
+    }else{
+      return;
+    }
+  }, []);
+
   useEffect(initSearchedLectures, [ wholeLectures ])
 
   //page control
@@ -502,17 +518,7 @@ const StudentLectureManagePage = () => {
       <Modal
         modalOpen={syllabusModalOpen}
         setModalOpen={setSyllabusModalOpen}
-        innerContents={<Syllabus/>}
-      />
-      <Modal
-        modalOpen={deleteModalOpen}
-        setModalOpen={setDeleteModalOpen}
-        innerContents={<LectureDelete/>}
-      />
-      <Modal
-        modalOpen={addModalOpen}
-        setModalOpen={setAddModalOpen}
-        innerContents={<LectureAdd/>}
+        innerContents={<Syllabus setModalOpen={setSyllabusModalOpen}/>}
       />
       <Body>
         <MyLectureListWrap>
@@ -523,7 +529,7 @@ const StudentLectureManagePage = () => {
               button={"Delete"}
               rowPerPage={10}
               setSyllabusModalOpen={setSyllabusModalOpen}
-              setButtonModalOpen={setDeleteModalOpen}
+              onButtonClick={onDeleteButtonClick}
             />
           </MyLectureList>
         </MyLectureListWrap>
@@ -535,7 +541,7 @@ const StudentLectureManagePage = () => {
               button={"Add"}
               rowPerPage={10}
               setSyllabusModalOpen={setSyllabusModalOpen}
-              setButtonModalOpen={setAddModalOpen}
+              onButtonClick={onAddButtonClick}
             />
           </WholeLectureList>
           <PageSelectorWrap>

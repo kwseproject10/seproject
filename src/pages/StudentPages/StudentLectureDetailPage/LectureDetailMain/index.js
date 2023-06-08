@@ -1,20 +1,28 @@
 import { LectureSelectedState } from "@./Atom";
-import { useRecoilState } from "recoil";
-import { useEffect, useState } from "react";
-import { ArchiveCard, AssignmentCard, AttendanceCard, AttendanceRow, BottomContents, BottomContentsWrap, MainWrap, NoticeCard } from "./style";
-import NoticeList from "@components/Lists/NoticeList";
-import AttendanceList from "@components/Lists/AttendanceList";
 import ArchiveList from "@components/Lists/ArchiveList";
 import AssignmentList from "@components/Lists/AssignmentList";
+import AttendanceList from "@components/Lists/AttendanceList";
+import NoticeList from "@components/Lists/NoticeList";
+import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { getAPI } from "../../../../APIs";
+import { userIDState } from "../../../../Atom";
+import { ArchiveCard, AssignmentCard, AttendanceCard, AttendanceRow, BottomContents, BottomContentsWrap, MainWrap, NoticeCard } from "./style";
 
 const LectureDetailMain = ({ setNavigationindex }) => {
-  const [selectedLecture, setSelectedLecture] = useRecoilState(LectureSelectedState);
+  const selectedLecture = useRecoilValue(LectureSelectedState);
   const [attendance, setAttendance] = useState([]);
   const [noticeList, setNoticeList] = useState([]);
   const [archiveList, setArchiveList] = useState([]);
   const [assignmentList, setAssignmentList] = useState([]);
 
   //API call
+  const userID = useRecoilValue(userIDState);
+
+  useEffect(() => {
+    getAPI(setAttendance, 'attendance', userID).catch(error => console.log(error))
+  }, [ userID ]);
+
   const loadInforms = (selectedLecture) => {
     setAssignmentList([
       {
@@ -90,24 +98,6 @@ const LectureDetailMain = ({ setNavigationindex }) => {
         date: "2022.01.01(월)"
       }
     ]);
-    const AttendanceAll = {
-      "H020-4-0846-01": [
-        [1, 0], [1, 1], [0, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1]
-      ],
-      "H020-2-0453-01": [
-        [1], [0.6], [1], [1], [0], [1], [1], [1], [1, 1], [1, 1], [1, 1], [0, 1, 1], [1, 1]
-      ],
-      "H020-3-2004-01": [
-        [1, 1], [1, 0], [0, 1], [1, 1], [1, 1], [1, 1], [1, 1], [], [0.6, 0], [1, 0.6], [1, 0.6], [1, 0.6], [1, 1]
-      ],
-      "H020-4-5861-01": [
-        [0], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [], [1, 1], [1, 1], [1, 1], [1, 1, 1], [1, 0], [1, 1]
-      ],
-      "H020-4-8483-01": [
-        [1, 1, 1, 1], [1, 1, 1, 0], [1, 1, 0, 0], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1], [1], [1], [0], [1, 0], [1]
-      ]
-    };
-    setAttendance(AttendanceAll[selectedLecture]);
     setArchiveList([
       {
         key: "0",
@@ -175,7 +165,7 @@ const LectureDetailMain = ({ setNavigationindex }) => {
         <AttendanceCard>
           <AttendanceList
             listTitle={"출석 현황"}
-            list={attendance}
+            list={attendance[selectedLecture]}
           />
         </AttendanceCard>
       </AttendanceRow>

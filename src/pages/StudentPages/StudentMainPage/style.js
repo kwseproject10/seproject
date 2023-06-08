@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Size from "@./style/Size.js";
+import Size from "@style/Size.js";
 
 export const MainPageWrap = styled.div`
   width: 100%;

@@ -1,15 +1,18 @@
-import { AssignmentCard, CalendarCard, CreditCard, Footer, GridContainer, GridWrap, MainPageWrap, NoticeCard, ProfileCard, TimeTableCard } from "./style";
-import AssignmentList from "@components/Lists/AssignmentList";
 import MainPageCalendar from "@components/Calendar/MainPageCalendar";
-import MainPageTimeTable from "@components/TimeTable/MainPageTimeTable";
+import AssignmentList from "@components/Lists/AssignmentList";
 import CreditList from "@components/Lists/CreaditList";
-import Profile from "@components/Profile";
 import NoticeList from "@components/Lists/NoticeList";
+import Profile from "@components/Profile";
+import MainPageTimeTable from "@components/TimeTable/MainPageTimeTable";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { StudentNavigationState } from "../../../Atom";
+import { AssignmentCard, CalendarCard, CreditCard, GridContainer, GridWrap, MainPageWrap, NoticeCard, ProfileCard, TimeTableCard } from "./style";
 
 const StudentMainPage = () => {
-  const [ assignment, setAssignment ] = useState([]);
-  const [ notices, setNotices ] = useState([]);
+  const [assignment, setAssignment] = useState([]);
+  const [notices, setNotices] = useState([]);
 
   //API call
   const loadAssignment = () => {
@@ -91,8 +94,19 @@ const StudentMainPage = () => {
     ])
   };
 
-  useEffect(loadAssignment,[]);
-  useEffect(loadNotices,[]);
+  useEffect(loadAssignment, []);
+  useEffect(loadNotices, []);
+
+  const movePage = useNavigate();
+  const setNavigationIndex = useSetRecoilState(StudentNavigationState);
+
+  const goProfile = () => {
+    movePage('/student/mypage');
+  }
+
+  const goLectureList = () => {
+    movePage('/student/timetable');
+  }
 
   return (
     <MainPageWrap>
@@ -101,13 +115,19 @@ const StudentMainPage = () => {
           <ProfileCard>
             <Profile
               onClickPlusButton={() => {
-                    
+                goProfile();
+                setNavigationIndex(4);
               }}
             />
           </ProfileCard>
 
           <TimeTableCard>
-            <MainPageTimeTable />
+            <MainPageTimeTable
+              onClickPlusButton={() => {
+                goLectureList();
+                setNavigationIndex(1);
+              }}
+            />
           </TimeTableCard>
 
           <CreditCard>
@@ -124,9 +144,6 @@ const StudentMainPage = () => {
               list={notices}
               maxRows={5}
               subjectName={true}
-              onClickPlusButton={() => {
-
-              }}
             />
           </NoticeCard>
 
@@ -136,9 +153,6 @@ const StudentMainPage = () => {
               list={assignment}
               maxRows={5}
               subjectName={true}
-              onClickPlusButton={() => {
-                
-              }}
             />
           </AssignmentCard>
         </GridContainer>

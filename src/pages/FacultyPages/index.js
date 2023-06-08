@@ -4,7 +4,7 @@ import { useState } from "react";
 import FacultyNavigation from "@components/Navigation/FacultyNavigation";
 import Modal from "@components/Modal";
 import TestContent from "@components/Modal/ModalContents/TestContents";
-import FacultyHeader from "../../components/Header/FacultyHeader";
+import FacultyHeader from "@components/Header/FacultyHeader";
 
 const FacultyPages = () => {
   const [modalOpen, setModalOpen] = useState(false);

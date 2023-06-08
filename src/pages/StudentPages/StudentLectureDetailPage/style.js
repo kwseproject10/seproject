@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import Size from "@style/Size";
 
 export const DetailPageWrap = styled.div`
-  height: 50rem;
+  min-height: 50rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -17,11 +18,11 @@ export const DetailPageHeader = styled.div`
 `
 
 export const DetailPageLectureWrap = styled.div`
-  width: 20%;
   height: 100%;
   line-height: 3.75rem;
   display: flex;
   color: white;
+  width: 40%;
 `
 
 export const DetailPageLectureName = styled.div`
@@ -35,21 +36,27 @@ export const DetailPageLectureNum = styled.div`
 `
 
 export const DetailPageNavigation = styled.div`
-  width: 50%;
   height: 100%;
-  display: flex;
-  justify-content: center;
+  ${Size('large')}{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  }
 `
 
 export const DetailPageNavigationButtonWrap = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 100%;
+  ${Size('large')}{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
 `
 
 export const DetailPageNavigationButton = styled.div`
   height: 100%;
-  width: 15%;
+  padding-left: 1rem;
+  padding-right: 1rem;
   line-height: 3.75rem;
   text-align: center;
   cursor: pointer;
@@ -65,6 +72,11 @@ export const DetailPageNavigationButton = styled.div`
       color:var(--color-dg);
     }
   `
+  }
+
+  
+  ${Size('large')}{
+    width: 20%;
   }
 `
 

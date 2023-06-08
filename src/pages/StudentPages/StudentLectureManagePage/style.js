@@ -1,18 +1,21 @@
 import { TbArrowLeft, TbArrowRight, TbCirclePlus, TbReportSearch, TbSearch, TbTrash } from "react-icons/tb";
 import styled from "styled-components";
+import Size from "@style/Size";
 
 export const LectureManagePageWrap = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
 `
 
 export const Body = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   margin-top: 2%;
+  flex-direction: column;
+  ${Size('large')}{
+    flex-direction: row;
+  }
 `
 
 export const ListTitle = styled.div`
@@ -23,11 +26,16 @@ export const ListTitle = styled.div`
 `
 
 export const MyLectureListWrap = styled.div`
-  width: 45%;
-  margin-left: 2%;
-  margin-right: 1%;
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 5%;
   display: flex;
   flex-direction:column;
+  ${Size('large')}{
+    width: 45%;
+    margin-left: 2%;
+    margin-right: 1%;
+  }
 `
 
 export const MyLectureList = styled.div`
@@ -38,11 +46,16 @@ export const MyLectureList = styled.div`
 `
 
 export const WholeLectureListWrap = styled.div`
-  width: 45%;
-  margin-right: 2%;
-  margin-left: 1%;
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 5%;
   display: flex;
   flex-direction:column;
+  ${Size('large')}{
+    width: 45%;
+    margin-right: 2%;
+    margin-left: 1%;
+  }
 `
 
 export const WholeLectureList = styled.div`

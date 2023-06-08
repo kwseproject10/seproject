@@ -1,41 +1,22 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { AccordianContent, AccordianContents, AccordianOpenButton, AccordianWrap, LinkStyle, OpenButtonWrap } from "./style";
 import { useRef, useState } from "react";
 import { LectureSelectedState } from "@./Atom";
 import { useEffect } from "react";
+import { userIDState } from "../../../Atom";
+import { getAPI } from "../../../APIs";
 
 const NavigationAccordian = ({ actived, setActived, index, text }) => {
   const [AccordianActived, setAccordianActived] = useState(false);
-  const [lecturesName, setLecturesName] = useState([]);
+  const [lectures, setLectures] = useState([]);
   const setSelectedLecture = useSetRecoilState(LectureSelectedState);
 
   //API call
-  const loadLecturesName = () => {
-    setLecturesName([
-      {
-        name: "소프트웨어공학",
-        ID: "H020-4-0846-01"
-      },
-      {
-        name: "디지털논리회로1",
-        ID: "H020-2-0453-01"
-      },
-      {
-        name: "신호및시스템",
-        ID: "H020-3-2004-01"
-      },
-      {
-        name: "임베디드시스템S/W설계",
-        ID: "H020-4-5861-01"
-      },
-      {
-        name: "머신러닝",
-        ID: "H020-4-8483-01"
-      }
-    ]);
-  }
+  const userID = useRecoilValue(userIDState);
 
-  useEffect(loadLecturesName, []);
+  useEffect(() => {
+    getAPI(setLectures, 'lecturelist', userID).catch(error => console.log(error))
+  }, [ userID ]);
 
   const outsideRef = useRef(null);
   useEffect(()=> {
@@ -52,7 +33,7 @@ const NavigationAccordian = ({ actived, setActived, index, text }) => {
   }, [outsideRef, setAccordianActived]);
 
   return (
-    <AccordianWrap ref={outsideRef} actived={AccordianActived} numRows={lecturesName.length}>
+    <AccordianWrap ref={outsideRef} actived={AccordianActived} numRows={lectures.length}>
       <OpenButtonWrap
           AccordianActive={AccordianActived}
           actived={actived}
@@ -63,8 +44,8 @@ const NavigationAccordian = ({ actived, setActived, index, text }) => {
           {text}
         </AccordianOpenButton>
       </OpenButtonWrap>
-      <AccordianContents  actived={AccordianActived} numRows={lecturesName.length}>
-        {lecturesName.map((element, lecIndex) => {
+      <AccordianContents  actived={AccordianActived} numRows={lectures.length}>
+        {lectures.map((element, lecIndex) => {
           return (
             <>
               <LinkStyle

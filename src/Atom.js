@@ -1,13 +1,23 @@
 import { atom } from "recoil";
 
+export const userIDState = atom({
+  key: 'userID',
+  default: 0
+})
+
+export const userTypeState = atom({
+  key: 'userType',
+  default: "s"
+})
+
 export const ModalOpenState = atom({
-    key: 'ModalOpen',
-    default: false
+  key: 'ModalOpen',
+  default: false
 })
 
 export const AuthState = atom({
-    key: 'Auth',
-    default: false
+  key: 'Auth',
+  default: false
 })
 
 export const StudentNavigationState = atom({

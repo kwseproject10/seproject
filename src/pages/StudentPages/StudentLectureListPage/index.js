@@ -1,23 +1,12 @@
-import { useEffect } from "react";
-import { useState } from "react";
 import LectureList from "@components/Lists/LectureList";
+import { useEffect, useState } from "react";
 
 const StudentLectureListPage = () => {
   const [ lectures, setLectures ] = useState([]);
   const [ selectedSemester, setSelectedSemester ] = useState("");
-  const [ semesters, setSemesters ] = useState([]);
 
   //API call
   const loadSemsters = () => {
-    setSemesters([
-      "2023학년도 1학기",
-      "2022학년도 2학기",
-      "2022학년도 1학기",
-      "2021학년도 2학기",
-      "2021학년도 1학기",
-      "2020학년도 2학기",
-      "2020학년도 1학기",
-    ]);
     setSelectedSemester("2023학년도 1학기");
   };
   const loadLectures = (semester) => {

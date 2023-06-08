@@ -21,7 +21,6 @@ const SemesterResultList = ({semesters, creditEachSemesters, GPAEachSemesters}) 
         let credits, GPA;
         if (creditEachSemesters !== undefined && creditEachSemesters[year] !== undefined && creditEachSemesters[year][semester] !== undefined) {
           credits = creditEachSemesters[year][semester];
-          console.log(credits);
         } else {
           credits = {
             major: 0,

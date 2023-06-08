@@ -3,39 +3,19 @@ import { useState } from "react";
 import { AdvisorEmail, AdvisorName, AdvisorNum, Bottom, Center, Grade, GradeWrap, InformRows, LastConnect, Left, NameRow, ProfileWrap, Right, TitlePlusButton, Top, UserID, UserInformWrap, UserMajor, UserName, UserPhotoWrap } from "./style";
 import EmptyProfileImage from "@images/EmptyProfileImage.png";
 import { TbPlus } from "react-icons/tb";
+import { useRecoilValue } from "recoil";
+import { userIDState } from "../../Atom";
+import { getAPI } from "../../APIs";
 
 const Profile = ({ onClickPlusButton }) => {
-  const [ userInform, setUserInform ] = useState({
-    name : "홍길동",
-    type : "학부생",
-    major : "컴퓨터정보공학부",
-    ID : "2023123456",
-    grade : 4,
-    numberOfTerm : 7,
-    advisor : "이기훈",
-    advisorEmail : "kihoonlee@kw.ac.kr",
-    advisorNum : "02-940-8674",
-    state : "재학"
-  })
+  const userID = useRecoilValue(userIDState);
+  const [userInform, setUserInform] = useState({});
 
-  //API call
-  const loadUserInform = () => {
-    setUserInform({
-      name : "홍길동",
-      type : "학부생",
-      major : "컴퓨터정보공학부",
-      ID : "2023123456",
-      grade : 4,
-      numberOfTerm : 7,
-      advisor : "이기훈",
-      advisorEmail : "kihoonlee@kw.ac.kr",
-      advisorNum : "02-940-8674",
-      state : "재학"
-    });
-  };
-  useEffect(loadUserInform,[]);
+  useEffect(() => {
+    getAPI(setUserInform, 'userinform', userID).catch(error => console.log(error))
+  }, [ userID ]);
 
-  return(
+  return (
     <ProfileWrap>
       <Top>
         <UserPhotoWrap>
@@ -52,7 +32,7 @@ const Profile = ({ onClickPlusButton }) => {
             <TitlePlusButton
               onClick={onClickPlusButton}
             >
-              <TbPlus/>
+              <TbPlus />
             </TitlePlusButton>
           </NameRow>
           <InformRows>

@@ -1,5 +1,5 @@
-import { Center, LectureProfessor, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitlePlusButton, TitleText } from "./style";
 import { TbPlus } from "react-icons/tb";
+import { LectureProfessor, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitlePlusButton, TitleText } from "./style";
 
 const LectureList = ({ lectures, onClickPlusButton }) => {
   return(

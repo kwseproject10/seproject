@@ -1,15 +1,14 @@
 import { LectureSelectedState } from "@./Atom";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { DetailPageContents, DetailPageHeader, DetailPageLectureName, DetailPageLectureNum, DetailPageLectureWrap, DetailPageNavigation, DetailPageNavigationButton, DetailPageNavigationButtonWrap, DetailPageWrap, Hidden } from "./style";
-import LectureDetailMain from "./LectureDetailMain";
-import LectureDetailNotice from "./LectureDetailNotice";
+import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 import LectureDetailArchive from "./LectureDetailArchive";
 import LectureDetailAssignment from "./LectureDetailAssignment";
+import LectureDetailMain from "./LectureDetailMain";
+import LectureDetailNotice from "./LectureDetailNotice";
+import { DetailPageContents, DetailPageHeader, DetailPageLectureName, DetailPageLectureNum, DetailPageLectureWrap, DetailPageNavigation, DetailPageNavigationButton, DetailPageNavigationButtonWrap, DetailPageWrap, Hidden } from "./style";
 
 const StudentLectureDetailPage = () => {
-  const [selectedLecture, setSelectedLecture] = useRecoilState(LectureSelectedState);
+  const selectedLecture = useRecoilValue(LectureSelectedState);
   const [lectureInform, setLectureInform] = useState({})
   const [navigationIndex, setNavigationindex] = useState(0);
 

@@ -3,7 +3,6 @@ import { ETCCredit, GPA, GeneralCredit, ListBody, ListHeader, ListRow, ListWrap,
 import { useEffect } from "react";
 
 const RenderRow = ({ semesters, creditEachSemesters }) => {
-  console.log(semesters, creditEachSemesters);
   let Rows = [];
   for (let i = 0; i < semesters.length; i++) {
     if (semesters[i] === undefined || semesters[i][0] === undefined || semesters[i][1] === undefined) {

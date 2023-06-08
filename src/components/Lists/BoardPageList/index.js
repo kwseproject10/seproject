@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import { HeaderPostDate, HeaderPostHit, HeaderPostName, HeaderPoster, LeftButton, ListBody, ListHeader, ListRow, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostHit, PostName, Poster, RightButton } from "./style";
 
-const RenderList = ({ list, linePerPage }) => {
+const RenderList = ({ list, linePerPage, setInDetail, setPostID }) => {
   let Rows = [];
-  for(let i = 0; i < linePerPage; i++){
-    if(list===undefined || list[i]===undefined){
+  for (let i = 0; i < linePerPage; i++) {
+    if (list === undefined || list[i] === undefined) {
       Rows.push(
-        <ListRow linePerPage={linePerPage} hidden={true}/>
+        <ListRow linePerPage={linePerPage} hidden={true} />
       )
-    }else{
+    } else {
       Rows.push(
-        <ListRow linePerPage={linePerPage} hidden={false}>
+        <ListRow
+          linePerPage={linePerPage}
+          hidden={false}
+          onClick={() => {
+            setInDetail(true);
+            setPostID(list[i].ID);
+          }}
+        >
           <PostName>{list[i].title}</PostName>
           <Poster>{list[i].poster}</Poster>
           <PostDate>{list[i].date}</PostDate>
@@ -19,23 +26,23 @@ const RenderList = ({ list, linePerPage }) => {
       )
     }
   }
-  return(
+  return (
     <ListBody>
-      {Rows.map((e)=>{return e;})}
+      {Rows.map((e) => { return e; })}
     </ListBody>
   )
 }
 
-const BoardPageList = ({ list, linePerPage }) => {
-  const [ selectedPage, setSelectedPage ] = useState(1);
-  const [ selectedList, setSelectedList ] = useState([]);
+const BoardPageList = ({ list, linePerPage, setInDetail, setPostID }) => {
+  const [selectedPage, setSelectedPage] = useState(1);
+  const [selectedList, setSelectedList] = useState([]);
   let page = 1;
-  if(list !== undefined) page = parseInt(list.length / linePerPage) + 1;
+  if (list !== undefined) page = parseInt(list.length / linePerPage) + 1;
   let pageButtons = [];
-  for(let i = 0; i < page; i++){
+  for (let i = 0; i < page; i++) {
     pageButtons.push(
       <PageButton
-        onClick={()=>{
+        onClick={() => {
           setSelectedPage(i + 1);
         }}
         index={i + 1}
@@ -51,7 +58,7 @@ const BoardPageList = ({ list, linePerPage }) => {
     setSelectedList(list.slice((selectedPage - 1) * linePerPage, (selectedPage - 1) * linePerPage + linePerPage));
   };
 
-  useEffect(sliceList, [ selectedPage, setSelectedList, list, linePerPage ]);
+  useEffect(sliceList, [selectedPage, setSelectedList, list, linePerPage]);
 
   return (
     <>
@@ -63,27 +70,30 @@ const BoardPageList = ({ list, linePerPage }) => {
             <HeaderPostDate>작성일</HeaderPostDate>
             <HeaderPostHit>조회수</HeaderPostHit>
           </ListHeader>
-          <RenderList list={selectedList} linePerPage={linePerPage} />
+          <RenderList
+            list={selectedList}
+            linePerPage={linePerPage}
+            setInDetail={setInDetail}
+            setPostID={setPostID}
+          />
         </ListWrapAlign>
       </ListWrap>
-      
+
       <PageSelectorWrap>
         <PageSelector>
           <PageButtonWrap>
             <PageButton>
               <LeftButton
-                onClick={()=>{
-                  if(selectedPage > 1) setSelectedPage(prev => prev - 1);
-                  console.log(selectedPage);
+                onClick={() => {
+                  if (selectedPage > 1) setSelectedPage(prev => prev - 1);
                 }}
               />
             </PageButton>
-            {pageButtons.map((e)=>{return e;})}
+            {pageButtons.map((e) => { return e; })}
             <PageButton>
               <RightButton
-                onClick={()=>{
-                  if(selectedPage < page) setSelectedPage(prev => prev + 1);
-                  console.log(selectedPage);
+                onClick={() => {
+                  if (selectedPage < page) setSelectedPage(prev => prev + 1);
                 }}
               />
             </PageButton>

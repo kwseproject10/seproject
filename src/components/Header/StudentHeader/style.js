@@ -12,6 +12,7 @@ export const HeaderWrap = styled.div`
   ${Size('large')}{
     margin-left: 13%;
     width: 87%;
+    height: 7vh;
     background-color: white;
     border-bottom: var(--color-dg) 0px solid;
     color: black;

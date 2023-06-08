@@ -1,10 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import TimeTable from "..";
 import LectureList from "../../Lists/LectureList";
 import { CardWrap, Left, Right } from "./Style";
-import { useState } from "react";
 
-const MainPageTimeTable = () => {
+const MainPageTimeTable = ({ onClickPlusButton }) => {
   const [ lectures, setLectures ] = useState([]);
   const [ selectedSemester, setSelectedSemester ] = useState("");
   const [ semesters, setSemesters ] = useState([]);
@@ -105,9 +104,7 @@ const MainPageTimeTable = () => {
           <Right>
             <LectureList
               lectures={lectures}
-              onClickPlusButton={() => {
-                
-              }}
+              onClickPlusButton={onClickPlusButton}
             />
           </Right>
         </>

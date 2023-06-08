@@ -1,31 +1,17 @@
 import { useEffect, useState } from "react";
 import { AttendanceChart, AttendanceChartChild, AttendanceChartRow,  DefaultRow, DetailCenter, DetailInformRow, DetailLeft, DetailRight, LectureProfessor, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitleText } from "./style";
+import { useRecoilValue } from "recoil";
+import { userIDState } from "../../../Atom";
+import { getAPI } from "../../../APIs";
 
 const TimeTablePageLectureList = ({ lectures }) => {
+  const userID = useRecoilValue(userIDState);
   const [ attendance, setAttendance ] = useState({});
   
-  //API call
-  const loadAttendance = () => {
-    setAttendance({
-      "H020-4-0846-01": [
-        [1,0],[1,1],[0,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]
-      ],
-      "H020-2-0453-01": [
-        [1],[0.6],[1],[1],[0],[1],[1],[1],[1,1],[1,1],[1,1],[0,1,1],[1,1]
-      ],
-      "H020-3-2004-01": [
-        [1,1],[1,0],[0,1],[1,1],[1,1],[1,1],[1,1],[],[0.6,0],[1,0.6],[1,0.6],[1,0.6],[1,1]
-      ],
-      "H020-4-5861-01": [
-        [0],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[],[1,1],[1,1],[1,1],[1,1,1],[1,0],[1,1]
-      ],
-      "H020-4-8483-01": [
-        [1,1,1,1],[1,1,1,0],[1,1,0,0],[1,1,1,1],[1,1,1,1],[1,1,1,1],[1,1,1,1],[1,1,1,1],[1],[1],[1],[0],[1,0],[1]
-      ]
-    });
-  }
-
-  useEffect(loadAttendance,[]);
+  //API call done
+  useEffect(() => {
+    getAPI(setAttendance, 'attendance', userID).catch(error => console.log(error))
+  }, [ userID ]);
 
   return(
     <ListWrap>

@@ -29,7 +29,7 @@ export const BodyWrapper = styled.div`
     height: 100%;
     width: 100%;
     ${Size('large')}{
-      padding-top: 3.75rem;
+      padding-top: 7vh;
       padding-left: 13%;
       width: 87%;
     }
@@ -52,5 +52,6 @@ export const Body = styled.div`
     }
     ${Size('large')}{
       background-color: var(--color-sh);
+      height: 93vh;
     }
 `

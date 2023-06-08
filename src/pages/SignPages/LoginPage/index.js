@@ -1,8 +1,8 @@
-import { useSetRecoilState } from "recoil";
-import { AlretRow, ButtonRow, Input, InputTitle, LinkStyle, LoginPageLogo, SignButton } from "./style";
 import { AuthState } from "@./Atom";
 import KWSeal from "@images/KWSeal_NonBG.png";
 import { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { AlretRow, ButtonRow, Input, InputTitle, LinkStyle, LoginPageLogo, SignButton } from "./style";
 
 const LoginPage = () => {
     const [ inputID, setInputID ] = useState("");
@@ -19,13 +19,8 @@ const LoginPage = () => {
             setAlret("비밀번호를 입력하세요.");
         }
         //로그인 유효성 검사 및 alret 설정
-        const req = {
-            'studentID' : inputID,
-            'password' : inputPW
-        }
         setInputID("");
         setInputPW("");
-        console.log(req);
     }
 
     return(
