@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { HeaderPostDate, HeaderPostHit, HeaderPostName, HeaderPoster, LeftButton, ListBody, ListHeader, ListRow, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostHit, PostName, Poster, RightButton } from "./style";
+import DropDown from "../../DropDown";
+import { DropDownWrap, HeaderPostDate, HeaderPostHit, HeaderPostName, HeaderPoster, LeftButton, ListBody, ListHeader, ListRow, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostHit, PostName, Poster, RightButton, SearchBar, SearchBarWrap, SearchIcon, SearchIconWrap, SearchInput } from "./style";
 
 const RenderList = ({ list, linePerPage, setInDetail, setPostID }) => {
   let Rows = [];
@@ -36,8 +37,17 @@ const RenderList = ({ list, linePerPage, setInDetail, setPostID }) => {
 const BoardPageList = ({ list, linePerPage, setInDetail, setPostID }) => {
   const [selectedPage, setSelectedPage] = useState(1);
   const [selectedList, setSelectedList] = useState([]);
+  const [searchedList, setSearchedList] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [searchType, setSearchType] = useState("제목");
+  const [searchDropIsOpen, setSearchDropIsOpen] = useState(false);
+  const searchTypeList = [
+    "제목",
+    "작성자",
+    "작성일"
+  ]
   let page = 1;
-  if (list !== undefined) page = parseInt(list.length / linePerPage) + 1;
+  if (searchedList !== undefined) page = parseInt(searchedList.length / linePerPage) + 1;
   let pageButtons = [];
   for (let i = 0; i < page; i++) {
     pageButtons.push(
@@ -57,8 +67,35 @@ const BoardPageList = ({ list, linePerPage, setInDetail, setPostID }) => {
     setSelectedList([]);
     setSelectedList(list.slice((selectedPage - 1) * linePerPage, (selectedPage - 1) * linePerPage + linePerPage));
   };
+  const initSearchedList = () => {
+    setSearchedList(list);
+  }
 
   useEffect(sliceList, [selectedPage, setSelectedList, list, linePerPage]);
+  useEffect(initSearchedList, [list]);
+
+  //searchBar control
+  const onClickSearch = () => {
+    setSelectedPage(1);
+    if (searchText === "") {
+      initSearchedList();
+      setSearchType("제목");
+      return;
+    }
+    setSearchedList(list.filter(
+      (e) => {
+        switch (searchType) {
+          case "제목":
+            return e.title.indexOf(searchText) !== -1;
+          case "작성일자":
+            return e.date.indexOf(searchText) !== -1;
+          default:
+            return true;
+        }
+      }
+    ))
+    setSearchText("");
+  }
 
   return (
     <>
@@ -71,7 +108,7 @@ const BoardPageList = ({ list, linePerPage, setInDetail, setPostID }) => {
             <HeaderPostHit>조회수</HeaderPostHit>
           </ListHeader>
           <RenderList
-            list={selectedList}
+            list={searchedList}
             linePerPage={linePerPage}
             setInDetail={setInDetail}
             setPostID={setPostID}
@@ -100,6 +137,34 @@ const BoardPageList = ({ list, linePerPage, setInDetail, setPostID }) => {
           </PageButtonWrap>
         </PageSelector>
       </PageSelectorWrap>
+      <SearchBarWrap>
+        <SearchBar>
+          <DropDownWrap>
+            <DropDown
+              state={searchType}
+              setState={setSearchType}
+              isOpen={searchDropIsOpen}
+              setIsOpen={setSearchDropIsOpen}
+              list={searchTypeList}
+              fontSize={"var(--font-size-xs)"}
+              width={"6rem"}
+              listWidth={"3.5rem"}
+              height={"1.875rem"}
+            />
+          </DropDownWrap>
+          <SearchInput
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <SearchIconWrap>
+            <SearchIcon
+              onClick={onClickSearch}
+            />
+          </SearchIconWrap>
+        </SearchBar>
+      </SearchBarWrap>
     </>
   );
 }

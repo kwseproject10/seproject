@@ -1,5 +1,5 @@
+import { TbArrowLeft, TbArrowRight, TbSearch } from "react-icons/tb";
 import styled from "styled-components";
-import { TbArrowLeft, TbArrowRight } from "react-icons/tb";
 
 
 export const ListWrap = styled.div`
@@ -166,4 +166,51 @@ export const RightButton = styled(TbArrowRight)`
     transform: translateY(0);
     transition: 0.3s;
   }
+`
+
+export const SearchBarWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+
+export const SearchBar = styled.div`
+  height: 2.5rem;
+  width: 35%;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--color-gr);
+  border-radius: 0.25rem;
+  background-color: white;
+`
+
+export const SearchInput = styled.input`
+  width: 100%;
+  border: none;
+  margin-left: 3px;
+`
+
+export const SearchIconWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 3%;
+`
+export const SearchIcon = styled(TbSearch)`
+  cursor: pointer;
+  color: var(--color-dg);
+  width: 1.5rem;
+  height: 1.5rem;
+  &:hover{
+    color: black;
+    transform: translateY(0);
+    transition: 0.3s;
+  }
+`
+
+export const DropDownWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 2%;
 `

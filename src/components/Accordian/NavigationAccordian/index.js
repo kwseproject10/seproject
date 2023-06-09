@@ -1,12 +1,11 @@
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { AccordianContent, AccordianContents, AccordianOpenButton, AccordianWrap, LinkStyle, OpenButtonWrap } from "./style";
-import { useRef, useState } from "react";
 import { LectureSelectedState } from "@./Atom";
-import { useEffect } from "react";
-import { userIDState } from "../../../Atom";
+import { useEffect, useRef, useState } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { getAPI } from "../../../APIs";
+import { userIDState } from "../../../Atom";
+import { AccordianContent, AccordianContents, AccordianOpenButton, AccordianWrap, LinkStyle, OpenButtonWrap } from "./style";
 
-const NavigationAccordian = ({ actived, setActived, index, text }) => {
+const NavigationAccordian = ({ actived, setActived, index, text, link }) => {
   const [AccordianActived, setAccordianActived] = useState(false);
   const [lectures, setLectures] = useState([]);
   const setSelectedLecture = useSetRecoilState(LectureSelectedState);
@@ -49,7 +48,7 @@ const NavigationAccordian = ({ actived, setActived, index, text }) => {
           return (
             <>
               <LinkStyle
-                to={`/student/lecturedetail`}
+                to={link}
                 onClick={() => {
                   setSelectedLecture(element.ID);
                 }}

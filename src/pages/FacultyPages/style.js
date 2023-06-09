@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import Size from "@style/Size.js";
+import styled from "styled-components";
 
 export const PageViewer = styled.div`
     z-index: 0;
@@ -29,7 +29,7 @@ export const BodyWrapper = styled.div`
     height: 100%;
     width: 100%;
     ${Size('large')}{
-      padding-top: 3.75rem;
+      padding-top: 7vh;
       padding-left: 13%;
       width: 87%;
     }
@@ -40,7 +40,7 @@ export const Body = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    overflow-Y: scroll;
+    overflow-Y: auto;
     &::-webkit-scrollbar {
       width: 0.25rem;
       border-radius: 0.125rem;
@@ -52,5 +52,6 @@ export const Body = styled.div`
     }
     ${Size('large')}{
       background-color: var(--color-sh);
+      height: 93vh;
     }
 `

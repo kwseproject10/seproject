@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import Size from "@style/Size.js";
+import styled from "styled-components";
 
 export const NavigationWrap = styled.div`
   position: fixed;

@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import Size from "@style/Size.js";
+import styled from "styled-components";
 
 export const HeaderWrap = styled.div`
   position: fixed;
@@ -12,6 +12,7 @@ export const HeaderWrap = styled.div`
   ${Size('large')}{
     margin-left: 13%;
     width: 87%;
+    height: 7vh;
     background-color: white;
     border-bottom: var(--color-dg) 0px solid;
     color: black;

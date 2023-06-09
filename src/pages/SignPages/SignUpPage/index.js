@@ -116,19 +116,19 @@ const SignUpPage = () => {
     
     const OnSubmit = () => {
         const request = {
-            'studentID' : studentID,
-            'password' : password,
-            'rePassword' : rePassword,
-            'name' : name,
-            'phoneNum1' : phoneNum1,
-            'phoneNum2' : phoneNum2,
-            'phoneNum3' : phoneNum3,
-            'birthYear' : birthYear,
-            'birthMonth' : birthMonth,
-            'birthDay' : birthDay,
-            'EmailID' : EmailID,
-            'EmailDomain' : EmailDomain,
-            'checkInformPolicy' : checkInformPolicy
+            "studentID" : studentID,
+            "password" : password,
+            "rePassword" : rePassword,
+            "name" : name,
+            "phoneNum1" : phoneNum1,
+            "phoneNum2" : phoneNum2,
+            "phoneNum3" : phoneNum3,
+            "birthYear" : birthYear,
+            "birthMonth" : birthMonth,
+            "birthDay" : birthDay,
+            "EmailID" : EmailID,
+            "EmailDomain" : EmailDomain,
+            "checkInformPolicy" : checkInformPolicy
         }
         console.log(request);
     }

@@ -10,11 +10,6 @@ export const userTypeState = atom({
   default: "s"
 })
 
-export const ModalOpenState = atom({
-  key: 'ModalOpen',
-  default: false
-})
-
 export const AuthState = atom({
   key: 'Auth',
   default: false
@@ -27,6 +22,11 @@ export const StudentNavigationState = atom({
 
 export const FacultyNavigationState = atom({
   key: 'FacultyNavigationIndex',
+  default: 0
+})
+
+export const FacultyNavigationAccordianState = atom({
+  key: 'FacultyNavigationAccordian',
   default: 0
 })
 

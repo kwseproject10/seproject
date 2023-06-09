@@ -1,9 +1,9 @@
 const FacultyLectureManagePage = () => {
-    return(
-        <div>
-            FacultyLectureManagePage
-        </div>
-    )
+  return (
+    <div>
+      FacultyLectureManagePage
+    </div>
+  )
 }
 
 export default FacultyLectureManagePage;

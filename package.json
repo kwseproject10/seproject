@@ -7,12 +7,12 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.4.0",
     "craco-alias": "^3.0.1",
     "date-fns": "^2.30.0",
     "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icon": "^1.0.0",
     "react-icons": "^4.9.0",
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
@@ -22,7 +22,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "set PORT=8080 && craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",

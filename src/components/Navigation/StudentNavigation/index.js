@@ -1,8 +1,8 @@
 import { StudentNavigationState } from '@./Atom';
 import NavigationButton from "@components/Buttons/NavigationButton";
-import { ButtonWrap, NavigationBar, NavigationWrap } from "./style";
 import { useRecoilState } from "recoil";
 import NavigationAccordian from '../../Accordian/NavigationAccordian';
+import { ButtonWrap, NavigationBar, NavigationWrap } from "./style";
 
 const StudentNavigation = () => {
   const [actived, setActived] = useRecoilState(StudentNavigationState);
@@ -29,7 +29,7 @@ const StudentNavigation = () => {
             setActived={setActived}
             index={5}
             text={"개별강의종합"}
-            link={"student/lecturedetail"}
+            link={"lecturedetail"}
           />
           <NavigationButton
             actived={actived}

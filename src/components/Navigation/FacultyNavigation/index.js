@@ -1,8 +1,8 @@
 import { FacultyNavigationState } from '@./Atom';
 import NavigationButton from "@components/Buttons/NavigationButton";
-import { ButtonWrap, NavigationBar, NavigationWrap } from "./style";
 import { useRecoilState } from "recoil";
-import NavigationAccordian from '../../Accordian/NavigationAccordian';
+import FacultyNavigationAccordian from '../../Accordian/FacultyNavigationAccordian';
+import { ButtonWrap, NavigationBar, NavigationWrap } from "./style";
 
 
 const FacultyNavigation = () => {
@@ -22,22 +22,22 @@ const FacultyNavigation = () => {
             actived={actived}
             setActived={setActived}
             index={1}
-            text={"시간표"}
+            text={"시간표 / 강의 목록"}
             link={"faculty/timetable"}
+          />
+          <FacultyNavigationAccordian
+            actived={actived}
+            setActived={setActived}
+            index={4}
+            text={"강의 관리"}
+            link={"manage"}
           />
           <NavigationButton
             actived={actived}
             setActived={setActived}
-            index={2}
-            text={"강의 목록"}
-            link={"faculty/lecturelist"}
-          />
-          <NavigationAccordian
-            actived={actived}
-            setActived={setActived}
             index={3}
-            text={"개별강의종합"}
-            link={"faculty/lecturedetail"}
+            text={"개인정보 관리"}
+            link={"faculty/mypage"}
           />
         </ButtonWrap>
       </NavigationBar>

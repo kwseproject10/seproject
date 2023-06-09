@@ -1,10 +1,10 @@
-import { FacultyNavigationState } from '@./Atom';
-import { useEffect, useState } from "react";
-import { ButtonPartition, HeaderBar, HeaderWrap, LeftContents, LeftContentsWrap, LogoWrap, RightContents, RightContentsWrap, UserName, UserType } from "./style";
-import HeaderLogoBlack from "@images/HeaderLogo.png";
 import HeaderButton from "@components/Buttons/HeaderButton";
+import HeaderLogoBlack from "@images/HeaderLogo.png";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSetRecoilState } from 'recoil';
+import { FacultyNavigationState } from '../../../Atom';
+import { ButtonPartition, HeaderBar, HeaderWrap, LeftContents, LeftContentsWrap, LogoWrap, RightContents, RightContentsWrap, UserName, UserType } from "./style";
 
 const FacultyHeader = () => {
   const setActived = useSetRecoilState(FacultyNavigationState);
@@ -50,7 +50,9 @@ const FacultyHeader = () => {
                 <ButtonPartition/>
                 <HeaderButton text={"광운대학교"} out={true} link={"https://www.kw.ac.kr/ko/"} onClick={() => {}}/>
                 <ButtonPartition/>
-                <HeaderButton text={"로그아웃"} out={false} link={""} onClick={() => {}}/>
+                <HeaderButton text={"로그아웃"} out={false} link={""} onClick={() => {
+                  setActived(0);
+                }}/>
               </RightContents>
             </RightContentsWrap>
 

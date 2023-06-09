@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
-styled.div`
-
-`;
+export const PageWrap = styled.div`
+  
+`

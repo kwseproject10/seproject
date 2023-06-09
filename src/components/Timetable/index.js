@@ -74,6 +74,7 @@ const RenderBody = ({ isDetail, lectures }) => {
       Rows.push(<Tr>{Row}</Tr>)
     }
   }
+  console.log(Rows);
 
   return(
     <Tbody>{Rows}</Tbody>
