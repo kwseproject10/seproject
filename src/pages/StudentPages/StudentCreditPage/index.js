@@ -1,14 +1,17 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import { Bottom, CreditListPerSemestersVisualized, CreditPageWrap, Middle, Title, TitleRow } from "./style";
+import CreditChart from "@components/Chart/CreditBarChart";
 import EnrollmentList from "@components/Lists/EnrollmentList";
 import SemesterResultList from "@components/Lists/SemesterResultList";
-import CreditChart from "@components/Chart/CreditBarChart";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { userIDState } from "../../../Atom";
+import { Bottom, CreditListPerSemestersVisualized, CreditPageWrap, Middle, Title, TitleRow } from "./style";
 
 const StudentCreditPage = () => {
   const [lecturesEachSemester, setLectureEachSemeters] = useState({});
   const [creditEachSemesters, setCreditEachSemesters] = useState({});
-  const [semesters, setSemesters] = useState([[2023, 1]]);
+  const [semesters, setSemesters] = useState([]);
+  const userID = useRecoilValue(userIDState);
   
   //API call
   const loadLectureEachSemesters = () => {
@@ -414,83 +417,46 @@ const StudentCreditPage = () => {
     })
   };
 
-  const loadSemsters = () => {
-    setSemesters([
-      [2023, 1],
-      [2022, 2],
-      [2022, 1],
-      [2021, 2],
-      [2021, 1],
-      [2020, 2],
-      [2020, 1]
-    ]);
-  };
-
-  const loadCreaditEachSemesters = () => {
-    setCreditEachSemesters({
-      2023 : {
-        1 : {
-          major : 15,
-          general : 0,
-          etc : 0,
-          total : 15,
-          GPA : -1
-        }
-      },
-      2022 : {
-        2 : {
-          major : 18,
-          general : 0,
-          etc : 0,
-          total : 18,
-          GPA : 4.1
-        },
-        1 : {
-          major : 17,
-          general : 0,
-          etc : 0,
-          total : 17,
-          GPA : 4.0
-        }
-      },
-      2021 : {
-        2 : {
-          major : 18,
-          general : 0,
-          etc : 0,
-          total : 18,
-          GPA : 4.0
-        },
-        1 : {
-          major : 15,
-          general : 6,
-          etc : 0,
-          total : 21,
-          GPA : 4.0
-        }
-      },
-      2020 : {
-        2 : {
-          major : 9,
-          general : 16,
-          etc : 0,
-          total : 25,
-          GPA : 4.0
-        },
-        1 : {
-          major : 6,
-          general : 13,
-          etc : 0,
-          total : 19,
-          GPA : 4.0
-        }
-      }
-    })
-  };
-
   useEffect(loadLectureEachSemesters, []);
-  useEffect(loadSemsters, []);
-  useEffect(loadCreaditEachSemesters, []);
+
+  //load semesters
+  useEffect(() => {
+    const fetch = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/semesters?userID=${userID}`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("load credit fail");
+        return
+      }else{
+        console.log(res.data);
+        setSemesters(res.data);
+      }
+    }
+
+    fetch()
+  }, [ userID ])
+
+  //load credits
+  useEffect(() => {
+    const fetch = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/credit?userID=${userID}`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("load credit fail");
+        return
+      }else{
+        console.log(res.data.userCredit);
+        setCreditEachSemesters(res.data.userCredit);
+      }
+    }
+
+    fetch()
+  }, [ userID ])
+
   return (
     <CreditPageWrap>
       <TitleRow>

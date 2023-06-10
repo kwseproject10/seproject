@@ -1,6 +1,6 @@
+import Size from "@style/Size";
 import { TbArrowLeft, TbArrowRight, TbCirclePlus, TbReportSearch, TbSearch, TbTrash } from "react-icons/tb";
 import styled from "styled-components";
-import Size from "@style/Size";
 
 export const LectureManagePageWrap = styled.div`
   width: 100%;
@@ -193,7 +193,7 @@ export const PageButtonWrap = styled.div`
   width: 20%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   color: var(--color-dg);
 `
 
@@ -204,6 +204,8 @@ export const PageButton = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
   &:hover{
     color: black;
     transform: translateY(0);

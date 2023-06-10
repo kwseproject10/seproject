@@ -1,19 +1,31 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import { AdvisorEmail, AdvisorName, AdvisorNum, Bottom, Center, Grade, GradeWrap, InformRows, LastConnect, Left, NameRow, ProfileWrap, Right, TitlePlusButton, Top, UserID, UserInformWrap, UserMajor, UserName, UserPhotoWrap } from "./style";
 import EmptyProfileImage from "@images/EmptyProfileImage.png";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { TbPlus } from "react-icons/tb";
 import { useRecoilValue } from "recoil";
 import { userIDState } from "../../Atom";
-import { getAPI } from "../../APIs";
+import { AdvisorEmail, AdvisorName, AdvisorNum, Bottom, Center, Grade, GradeWrap, InformRows, LastConnect, Left, NameRow, ProfileWrap, Right, TitlePlusButton, Top, UserID, UserInformWrap, UserMajor, UserName, UserPhotoWrap } from "./style";
 
 const Profile = ({ onClickPlusButton }) => {
   const userID = useRecoilValue(userIDState);
   const [userInform, setUserInform] = useState({});
-
+  
   useEffect(() => {
-    getAPI(setUserInform, 'userinform', userID).catch(error => console.log(error))
-  }, [ userID ]);
+    const fetch = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/userinform?userID=${userID}`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("profile load error");
+        return
+      }
+      console.log(res.data);
+      setUserInform(res.data);
+    }
+
+    fetch()
+  }, [ userID ])
 
   return (
     <ProfileWrap>

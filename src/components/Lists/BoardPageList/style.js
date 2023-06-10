@@ -120,7 +120,7 @@ export const PageButtonWrap = styled.div`
   width: 20%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: selector;
   color: var(--color-dg);
 `
 
@@ -131,6 +131,8 @@ export const PageButton = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
   &:hover{
     color: black;
     transform: translateY(0);

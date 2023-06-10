@@ -49,16 +49,19 @@ const FacultyArchiveManagePage = ({ lectureName }) => {
   let pages = 1;
   if (searchedList !== undefined) pages = parseInt(searchedList.length / 10) + 1;
   let pageButtons = [];
-  for (let i = 0; i < pages; i++) {
+  let start = selectedPage - ((selectedPage-1) % 10)
+  let end = start + 10
+  if(pages >= start && pages < end)end = pages + 1;
+  for (let i = start; i < end; i++) {
     pageButtons.push(
       <PageButton
         onClick={() => {
-          setSelectedPage(i + 1);
+          setSelectedPage(i);
         }}
-        index={i + 1}
+        index={i}
         selectedPage={selectedPage}
       >
-        {i + 1}
+        {i}
       </PageButton>
     )
   }

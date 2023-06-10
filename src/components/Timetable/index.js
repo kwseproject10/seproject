@@ -1,5 +1,3 @@
-import { useState } from "react";
-import DropDown from "../DropDown";
 import { Cell, HeaderLeft, HeaderRight, HeaderText, LectureTP, LectureTitle, Table, TableBox, TableHeader, TableWrap, Tbody, Td, Th, Thead, Tr } from "./Style";
 
 const RenderBody = ({ isDetail, lectures }) => {
@@ -74,7 +72,6 @@ const RenderBody = ({ isDetail, lectures }) => {
       Rows.push(<Tr>{Row}</Tr>)
     }
   }
-  console.log(Rows);
 
   return(
     <Tbody>{Rows}</Tbody>
@@ -84,7 +81,6 @@ const RenderBody = ({ isDetail, lectures }) => {
 const TimeTable = ({ selectedSemester, setSelectedSemester, semesters, lectures, isDetail }) => {
   let date = ['월','화','수','목','금','토'];
   if(isDetail) date = ['시간', '월', '화', '수', '목', '금', '토'];
-  const [ semeseterDropDownisOpen, setSemesterDropDownisOpen ] = useState(false);
   return (
     <TableWrap>
       <TableHeader>
@@ -92,15 +88,6 @@ const TimeTable = ({ selectedSemester, setSelectedSemester, semesters, lectures,
           <HeaderText>시간표</HeaderText>
         </HeaderLeft>
         <HeaderRight>
-          <DropDown
-            state={selectedSemester}
-            setState={setSelectedSemester}
-            isOpen={semeseterDropDownisOpen}
-            setIsOpen={setSemesterDropDownisOpen}
-            list={semesters}
-            width={"9rem"}
-            listWidth={"6.5rem"}
-          />
         </HeaderRight>
       </TableHeader>
       <TableBox>
@@ -121,3 +108,16 @@ const TimeTable = ({ selectedSemester, setSelectedSemester, semesters, lectures,
 }
 
 export default TimeTable;
+
+/**
+  const [ semeseterDropDownisOpen, setSemesterDropDownisOpen ] = useState(false);
+  <DropDown
+    state={selectedSemester}
+    setState={setSelectedSemester}
+    isOpen={semeseterDropDownisOpen}
+    setIsOpen={setSemesterDropDownisOpen}
+    list={semesters}
+    width={"9rem"}
+    listWidth={"6.5rem"}
+  />
+ */

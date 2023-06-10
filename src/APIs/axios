@@ -1,0 +1,39 @@
+
+    const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/auth?userID=${inputID}&PW=${inputPW}`;
+    const res = await axios.get(
+      route
+    );
+    if (res.data.result === "true") {
+      setUserID(res.data.userID);
+      setAuth(true);
+      if (res.data.userType === "student") {
+        goStudent();
+      } else if (res.data.userType === "professor") {
+        goFaculty();
+      }
+    } else if (res.data.result === "false") {
+      setAlret("로그인 정보가 일치하지 않습니다.");
+      return;
+    }
+    setAlret("로그인 오류가 발생하였습니다.");
+    return;
+
+    
+  const userID = useRecoilValue(userIDState);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/userinform?userID=${userID}`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("load fail");
+        return
+      }
+      console.log(res.data);
+      setUserInform(res.data);
+    }
+
+    fetch()
+  }, [ userID ])

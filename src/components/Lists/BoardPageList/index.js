@@ -46,21 +46,25 @@ const BoardPageList = ({ list, linePerPage, setInDetail, setPostID }) => {
     "작성자",
     "작성일"
   ]
+  //page control
   let page = 1;
-  if (searchedList !== undefined) page = parseInt(searchedList.length / linePerPage) + 1;
+  if (searchedList !== undefined) page = parseInt(searchedList.length / 10) + 1;
   let pageButtons = [];
-  for (let i = 0; i < page; i++) {
+  let start = selectedPage - ((selectedPage-1) % 10)
+  let end = start + 10
+  if(page >= start && page < end)end = page + 1;
+  for (let i = start; i < end; i++) {
     pageButtons.push(
       <PageButton
         onClick={() => {
-          setSelectedPage(i + 1);
+          setSelectedPage(i);
         }}
-        index={i + 1}
+        index={i}
         selectedPage={selectedPage}
       >
-        {i + 1}
+        {i}
       </PageButton>
-    );
+    )
   }
 
   const sliceList = () => {

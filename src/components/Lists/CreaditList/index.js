@@ -1,57 +1,84 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { userIDState } from './../../../Atom';
 import { ListBox, ListTitle, ListWrap, Table, Tbody, Td, Th, Thead, TitleText, Tr } from "./style";
-import { useEffect } from "react";
 
 const CreditList = () => {
+  const userID = useRecoilValue(userIDState);
   const [ credits, setCredits ] = useState(
     {
       creditCompleted : {
-        major : 33,
-        general : 35,
-        etc : 41,
-        total : 109
+        major : 0,
+        general : 0,
+        etc : 0,
+        total : 0
       },
       creditInProgress : {
-        major : 9,
-        general : 3,
-        etc : 6,
-        total : 18
+        major : 0,
+        general : 0,
+        etc : 0,
+        total : 0
       },
       creditForGrad : {
-        major : 39,
-        general : 40,
+        major : 0,
+        general : 0,
         etc : 0,
-        total : 130
+        total : 0
       }
     });
-  
-  //API call
-  const loadCredit = () => {
-    setCredits(
-      {
+
+  useEffect(() => {
+    const fetch = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/credit?userID=${userID}`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("no credit data");
+        return
+      }
+      console.log(res.data);
+      let temp = {
         creditCompleted : {
-          major : 33,
-          general : 35,
-          etc : 41,
-          total : 109
+          major : 0,
+          general : 0,
+          etc : 0,
+          total : 0
         },
         creditInProgress : {
-          major : 9,
-          general : 3,
-          etc : 6,
-          total : 18
-        },
-        creditForGrad : {
-          major : 39,
-          general : 40,
+          major : 0,
+          general : 0,
           etc : 0,
-          total : 130
+          total : 0
         }
       }
-    )
-  };
+      Object.keys(res.data.userCredit).forEach(
+        year => {
+          Object.keys(res.data.userCredit[year]).forEach(
+            semester => {
+              if(year === "2023" && semester === "1"){
+                temp.creditInProgress.major += parseInt(res.data.userCredit[year][semester].major);
+                temp.creditInProgress.general += parseInt(res.data.userCredit[year][semester].general);
+                temp.creditInProgress.etc += parseInt(res.data.userCredit[year][semester].etc);
+                temp.creditInProgress.total += parseInt(res.data.userCredit[year][semester].total);
+              }else{
+                temp.creditCompleted.major += parseInt(res.data.userCredit[year][semester].major);
+                temp.creditCompleted.general += parseInt(res.data.userCredit[year][semester].general);
+                temp.creditCompleted.etc += parseInt(res.data.userCredit[year][semester].etc);
+                temp.creditCompleted.total += parseInt(res.data.userCredit[year][semester].total);
+              }
+            }
+          )
+        }
+      )
+      temp.creditForGrad = res.data.creditForGrad;
+      setCredits(temp);
+    }
 
-  useEffect(loadCredit,[]);
+    fetch()
+  }, [ userID ])
+
   return(
     <ListWrap>
       <ListTitle>

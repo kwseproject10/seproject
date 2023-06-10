@@ -15,22 +15,25 @@ const initSearchedLectures = () => {
 }
 
 //page control
-let pages = 1;
-if (searchedList !== undefined) pages = parseInt(searchedList.length / 10) + 1;
-let pageButtons = [];
-for (let i = 0; i < pages; i++) {
-  pageButtons.push(
-    <PageButton
-      onClick={() => {
-        setSelectedPage(i + 1);
-      }}
-      index={i + 1}
-      selectedPage={selectedPage}
-    >
-      {i + 1}
-    </PageButton>
-  )
-}
+  let pages = 1;
+  if (searchedList !== undefined) pages = parseInt(searchedList.length / 10) + 1;
+  let pageButtons = [];
+  let start = selectedPage - ((selectedPage-1) % 10)
+  let end = start + 10
+  if(pages >= start && pages < end)end = pages + 1;
+  for (let i = start; i < end; i++) {
+    pageButtons.push(
+      <PageButton
+        onClick={() => {
+          setSelectedPage(i);
+        }}
+        index={i}
+        selectedPage={selectedPage}
+      >
+        {i}
+      </PageButton>
+    )
+  }
 
 const sliceList = () => {
   setSelectedList([]);

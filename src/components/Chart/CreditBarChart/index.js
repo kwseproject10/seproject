@@ -1,79 +1,35 @@
-import { useEffect } from "react";
-import { useState } from "react";
 import { Bar, CartesianGrid, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 const CreditChart = ({ semesters, creditEachSemesters }) => {
-  const [data, setData] = useState([]);
-  
-  //API call
-  const loadData = () => {
-    setData([
-      {
-        name: '2020-1',
-        평점: 4.3,
-        전공학점: 6,
-        교양학점: 13,
-        기타학점: 0,
-        총학점: 19
-      },
-      {
-        name: '2020-2',
-        평점: 4.0,
-        전공학점: 9,
-        교양학점: 16,
-        기타학점: 0,
-        총학점: 25
-      },
-      {
-        name: '2021-1',
-        평점: 4.1,
-        전공학점: 15,
-        교양학점: 6,
-        기타학점: 0,
-        총학점: 21
-      },
-      {
-        name: '2021-2',
-        평점: 3.9,
-        전공학점: 18,
-        교양학점: 0,
-        기타학점: 0,
-        총학점: 18
-      },
-      {
-        name: '2022-1',
-        평점: 3.0,
-        전공학점: 17,
-        교양학점: 0,
-        기타학점: 0,
-        총학점: 17
-      },
-      {
-        name: '2022-2',
-        평점: 4.0,
-        전공학점: 18,
-        교양학점: 0,
-        기타학점: 0,
-        총학점: 18
-      },
-      {
-        name: '2023-1',
-        전공학점: 15,
-        교양학점: 0,
-        기타학점: 0,
-        총학점: 15
-      }
-    ])
-  };
+  let datas = [];
 
-  useEffect(loadData,[]);
-
+  Object.keys(creditEachSemesters).forEach(
+    year => {
+      Object.keys(creditEachSemesters[year]).forEach(
+        semester => {
+          let temp = {
+            name: `${year}-${semester}`,
+              전공학점: creditEachSemesters[year][semester].major,
+              교양학점: creditEachSemesters[year][semester].general,
+              기타학점: creditEachSemesters[year][semester].etc,
+              총학점: creditEachSemesters[year][semester].total
+          };
+          if(creditEachSemesters[year][semester].GPA !== -1){
+            Object.assign(temp,{
+              평점: creditEachSemesters[year][semester].GPA
+            })
+          }
+          datas.push(temp);
+        }
+      )
+    }
+  )
   return (
     <ResponsiveContainer>
       <ComposedChart
         width={500}
         height={300}
-        data={data}
+        data={datas}
         margin={{
           top: 5,
           right: -30,

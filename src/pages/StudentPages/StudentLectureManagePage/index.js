@@ -1,10 +1,9 @@
-import { useState } from "react";
-import { AddButton, Body, ButtonWrap, DeleteButton, DropDownWrap, LectureCredit, LectureID, LectureMajor, LectureManagePageWrap, LectureNumOfTime, LectureProfessor, LectureSearchBar, LectureSearchBarWrap, LectureTimePlace, LectureTitle, LectureType, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, MyLectureList, MyLectureListWrap, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, RightButton, SearchIcon, SearchIconWrap, SearchInput, SyllabusOpen, SyllabusOpenWrap, WholeLectureList, WholeLectureListWrap } from "./style";
-import { useEffect } from "react";
 import DropDown from "@components/DropDown";
 import Modal from "@components/Modal";
 import Syllabus from "@components/Modal/ModalContents/Syllabus";
-import { useCallback } from "react";
+import axios from "axios";
+import { useCallback, useEffect, useState } from "react";
+import { AddButton, Body, ButtonWrap, DeleteButton, DropDownWrap, LectureCredit, LectureID, LectureMajor, LectureManagePageWrap, LectureNumOfTime, LectureProfessor, LectureSearchBar, LectureSearchBarWrap, LectureTimePlace, LectureTitle, LectureType, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, MyLectureList, MyLectureListWrap, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, RightButton, SearchIcon, SearchIconWrap, SearchInput, SyllabusOpen, SyllabusOpenWrap, WholeLectureList, WholeLectureListWrap } from "./style";
 
 const RenderList = ({ lectures, button, rowPerPage, setSyllabusModalOpen, onButtonClick }) => {
   let Rows = [];
@@ -82,263 +81,6 @@ const StudentLectureManagePage = () => {
   const [syllabusModalOpen, setSyllabusModalOpen] = useState(false);
 
   //API call
-  const loadWholeLectures = () => {
-    setWholeLectures([
-      {
-        key: "0",
-        ID: "H020-3-3831-01",
-        name: "컴퓨터구조실험",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "1",
-        numOfTime: "2",
-        professor: "이성원",
-        time: "수7,8",
-        place: ""
-      },
-      {
-        key: "1",
-        ID: "H020-3-3831-02",
-        name: "컴퓨터구조실험",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "1",
-        numOfTime: "2",
-        professor: "이혁준",
-        time: "금3,4",
-        place: ""
-      },
-      {
-        key: "2",
-        ID: "H020-3-8993-01",
-        name: "소프트웨어프로젝트1",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "4",
-        professor: "이우신",
-        time: "월1,7,8,수2",
-        place: ""
-      },
-      {
-        key: "3",
-        ID: "H020-4-0846-01",
-        name: "소프트웨어공학",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "이기훈",
-        time: "월5,수6",
-        place: ""
-      },
-      {
-        key: "4",
-        ID: "H020-4-3112-01",
-        name: "무선이동네트워크및5G",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "이형근",
-        time: "화5,목6",
-        place: ""
-      },
-      {
-        key: "5",
-        ID: "H020-4-4136-01",
-        name: "컴퓨터비젼",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "심동규",
-        time: "월4,수3",
-        place: ""
-      },
-      {
-        key: "6",
-        ID: "H020-4-5861-01",
-        name: "임베디드시스템S/W설계",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "김태석",
-        time: "월6,수5",
-        place: ""
-      },
-      {
-        key: "7",
-        ID: "H020-4-8483-01",
-        name: "머신러닝",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "박철수",
-        time: "월3,수4",
-        place: ""
-      },
-      {
-        key: "8",
-        ID: "H020-4-8995-01",
-        name: "산학협력캡스톤설계1",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "이형근",
-        time: "화6,목5",
-        place: ""
-      },
-      {
-        key: "9",
-        ID: "F030-3-3873-01",
-        name: "상표법",
-        major: "법학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "권지현",
-        time: "금5,6",
-        place: ""
-      },
-      {
-        key: "10",
-        ID: "F030-3-4221-01",
-        name: "민사집행법",
-        major: "법학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "",
-        time: "화2,목1",
-        place: ""
-      },
-      {
-        key: "0",
-        ID: "F030-3-5564-01",
-        name: "정보통신법개론",
-        major: "법학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "",
-        time: "화4,목3",
-        place: ""
-      },
-      {
-        key: "0",
-        ID: "F030-3-5694-01",
-        name: "경력개발과취업전략",
-        major: "법학부",
-        type: "전선",
-        credit: "2",
-        numOfTime: "2",
-        professor: "권지현",
-        time: "목6,7",
-        place: ""
-      },
-      {
-        key: "0",
-        ID: "F030-3-8544-01",
-        name: "부동산공법",
-        major: "법학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "정영철",
-        time: "월6,수5",
-        place: ""
-      },
-      {
-        key: "0",
-        ID: "F030-3-8908-01",
-        name: "사회보장법",
-        major: "법학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "이준희",
-        time: "월5,수6",
-        place: ""
-      },
-      {
-        key: "0",
-        ID: "F030-4-0121-01",
-        name: "경제법",
-        major: "법학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "조현진",
-        time: "수5",
-        place: ""
-      },
-      {
-        key: "0",
-        ID: "F030-4-1898-01",
-        name: "형사소송실무",
-        major: "법학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "이두희",
-        time: "금1,2",
-        place: ""
-      },
-      {
-        key: "0",
-        ID: "F030-4-3759-01",
-        name: "디지털법률행위론",
-        major: "법학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "",
-        time: "목8,9,10",
-        place: ""
-      },
-      {
-        key: "0",
-        ID: "F030-4-5541-01",
-        name: "형사법판례세미나",
-        major: "법학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "한재경",
-        time: "월2,수1",
-        place: ""
-      },
-      {
-        key: "0",
-        ID: "F030-4-5570-01",
-        name: "특허심판과소송실무",
-        major: "법학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "오승준",
-        time: "월1",
-        place: ""
-      },
-      {
-        key: "0",
-        ID: "F030-4-9226-01",
-        name: "행정법판례세미나",
-        major: "법학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        professor: "정영철",
-        time: "월5,수6",
-        place: ""
-      }
-    ]);
-  }
-
   const loadMyLectures = () => {
     setMyLectures([
       {
@@ -409,9 +151,24 @@ const StudentLectureManagePage = () => {
   }
 
   useEffect(() => {
-    loadWholeLectures();
     loadMyLectures();
   }, []);
+
+  useEffect(() => {
+    const fetchLectureAll = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/loadlectureall`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("profile load error");
+        return
+      }
+      setWholeLectures(res.data);
+    }
+
+    fetchLectureAll();
+  }, [])
 
   const onAddButtonClick = useCallback((lectureID, lectureName) => {
     let result = window.confirm(`${lectureID}: ${lectureName} 강의 수강을 신청하시겠습니까?`);
@@ -438,16 +195,19 @@ const StudentLectureManagePage = () => {
   let pages = 1;
   if (searchedLectures !== undefined) pages = parseInt(searchedLectures.length / 10) + 1;
   let pageButtons = [];
-  for (let i = 0; i < pages; i++) {
+  let start = selectedPage - ((selectedPage-1) % 10)
+  let end = start + 10
+  if(pages >= start && pages < end)end = pages + 1;
+  for (let i = start; i < end; i++) {
     pageButtons.push(
       <PageButton
         onClick={() => {
-          setSelectedPage(i + 1);
+          setSelectedPage(i);
         }}
-        index={i + 1}
+        index={i}
         selectedPage={selectedPage}
       >
-        {i + 1}
+        {i}
       </PageButton>
     )
   }
