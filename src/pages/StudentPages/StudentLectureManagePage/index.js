@@ -3,6 +3,8 @@ import Modal from "@components/Modal";
 import Syllabus from "@components/Modal/ModalContents/Syllabus";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { LecturesState } from "../../../Atom";
 import { AddButton, Body, ButtonWrap, DeleteButton, DropDownWrap, LectureCredit, LectureID, LectureMajor, LectureManagePageWrap, LectureNumOfTime, LectureProfessor, LectureSearchBar, LectureSearchBarWrap, LectureTimePlace, LectureTitle, LectureType, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, MyLectureList, MyLectureListWrap, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, RightButton, SearchIcon, SearchIconWrap, SearchInput, SyllabusOpen, SyllabusOpenWrap, WholeLectureList, WholeLectureListWrap } from "./style";
 
 const RenderList = ({ lectures, button, rowPerPage, setSyllabusModalOpen, onButtonClick }) => {
@@ -60,7 +62,7 @@ const RenderList = ({ lectures, button, rowPerPage, setSyllabusModalOpen, onButt
 }
 
 const StudentLectureManagePage = () => {
-  const [myLectures, setMyLectures] = useState([]);
+  const myLectures = useRecoilValue(LecturesState);
   const [wholeLectures, setWholeLectures] = useState([]);
   const [searchedLectures, setSearchedLectures] = useState([]);
   const [selectedPage, setSelectedPage] = useState(1);
@@ -80,79 +82,9 @@ const StudentLectureManagePage = () => {
   ]
   const [syllabusModalOpen, setSyllabusModalOpen] = useState(false);
 
-  //API call
-  const loadMyLectures = () => {
-    setMyLectures([
-      {
-        key: "0",
-        name: "소프트웨어공학",
-        professor: "이기훈",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        time: ["월5", "수6"],
-        place: ["새빛205", "새빛205"],
-        ID: "H020-4-0846-01",
-      },
-      {
-        key: "0",
-        name: "디지털논리회로1",
-        professor: "유지현",
-        major: "컴퓨터정보공학부",
-        type: "전필",
-        credit: "3",
-        numOfTime: "3",
-        time: ["금5", "금6"],
-        place: ["새빛203", "새빛203"],
-        ID: "H020-2-0453-01",
-      },
-      {
-        key: "0",
-        name: "신호및시스템",
-        professor: "이성원",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        time: ["월4", "수3"],
-        place: ["새빛102", "새빛102"],
-        ID: "H020-3-2004-01",
-      },
-      {
-        key: "0",
-        name: "임베디드시스템S/W설계",
-        professor: "김태석",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        time: ["월6", "수5"],
-        place: ["새빛205", "새빛205"],
-        ID: "H020-4-5861-01",
-      },
-      {
-        key: "0",
-        name: "머신러닝",
-        professor: "박철수",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        time: ["월3", "수4"],
-        place: ["새빛203", "새빛203"],
-        ID: "H020-4-8483-01",
-      }
-    ]);
-  }
-
   const initSearchedLectures = () => {
     setSearchedLectures(wholeLectures);
   }
-
-  useEffect(() => {
-    loadMyLectures();
-  }, []);
 
   useEffect(() => {
     const fetchLectureAll = async () => {

@@ -1,17 +1,29 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { AttendanceChart, AttendanceChartChild, AttendanceChartRow,  DefaultRow, DetailCenter, DetailInformRow, DetailLeft, DetailRight, LectureProfessor, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitleText } from "./style";
 import { useRecoilValue } from "recoil";
 import { userIDState } from "../../../Atom";
-import { getAPI } from "../../../APIs";
+import { AttendanceChart, AttendanceChartChild, AttendanceChartRow, DefaultRow, DetailCenter, DetailInformRow, DetailLeft, DetailRight, LectureProfessor, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitleText } from "./style";
 
 const TimeTablePageLectureList = ({ lectures }) => {
   const userID = useRecoilValue(userIDState);
   const [ attendance, setAttendance ] = useState({});
   
-  //API call done
   useEffect(() => {
-    getAPI(setAttendance, 'attendance', userID).catch(error => console.log(error))
-  }, [ userID ]);
+    const fetch = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/wholeattendance?userID=${userID}`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("load fail");
+        return
+      }
+      console.log(res.data);
+      setAttendance(res.data);
+    }
+
+    fetch()
+  }, [ userID ])
 
   return(
     <ListWrap>

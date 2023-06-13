@@ -1,26 +1,16 @@
 import { StudentNavigationState } from '@./Atom';
-import { useEffect, useState } from "react";
-import { ButtonPartition, HeaderBar, HeaderWrap, LeftContents, LeftContentsWrap, LogoWrap, RightContents, RightContentsWrap, UserName, UserType } from "./style";
-import HeaderLogoBlack from "@images/HeaderLogo.png";
 import HeaderButton from "@components/Buttons/HeaderButton";
+import HeaderLogoBlack from "@images/HeaderLogo.png";
 import { Link } from "react-router-dom";
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { AuthState, userIDState, userInformState } from './../../../Atom';
+import { ButtonPartition, HeaderBar, HeaderWrap, LeftContents, LeftContentsWrap, LogoWrap, RightContents, RightContentsWrap, UserName, UserType } from "./style";
 
 const StudentHeader = () => {
   const setActived = useSetRecoilState(StudentNavigationState);
-  const [ userName, setUserName ] = useState("");
-  const [ userID, setUserID ] = useState("");
-  const [ userMajor, setUserMajor ] = useState("");
-  const [ userType, setUserType ] = useState("");
-
-  //API call
-  const getUserInform = () => {
-    setUserName("홍길동");
-    setUserID("2023123456");
-    setUserMajor("컴퓨터정보공학부");
-    setUserType("재학");
-  }
-  useEffect(getUserInform,[]);
+  const [userInform, setUserInform] = useRecoilState(userInformState);
+  const [userID, setUserID] = useRecoilState(userIDState);
+  const setAuth = useSetRecoilState(AuthState);
 
     return(
         <HeaderWrap>
@@ -39,8 +29,8 @@ const StudentHeader = () => {
                     />
                   </LogoWrap>
                 </Link>
-                <UserName>{userName} 님</UserName>
-                <UserType>{userMajor} {userType} ({userID})</UserType>
+                <UserName>{userInform.name} 님</UserName>
+                <UserType>{userInform.major} {userInform.type === "student" ? "학부생" : "교수"} ({userID})</UserType>
               </LeftContents>
             </LeftContentsWrap>
 
@@ -51,6 +41,9 @@ const StudentHeader = () => {
                 <HeaderButton text={"광운대학교"} out={true} link={"https://www.kw.ac.kr/ko/"} onClick={() => {}}/>
                 <ButtonPartition/>
                 <HeaderButton text={"로그아웃"} out={false} link={""} onClick={() => {
+                  setUserInform({});
+                  setUserID(0);
+                  setAuth(false);
                   setActived(0);
                 }}/>
               </RightContents>

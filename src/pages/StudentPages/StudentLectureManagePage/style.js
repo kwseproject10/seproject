@@ -180,6 +180,8 @@ export const PageSelectorWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 `
 
 export const PageSelector = styled.div`
@@ -190,7 +192,7 @@ export const PageSelector = styled.div`
 `
 
 export const PageButtonWrap = styled.div`
-  width: 20%;
+  width: 40rem;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -198,7 +200,8 @@ export const PageButtonWrap = styled.div`
 `
 
 export const PageButton = styled.div`
-  font-size:var(--font-size-lg);
+  width: 6%;
+  font-size:var(--font-size-nm);
   cursor: pointer;
   text-align: center;
   display: flex;

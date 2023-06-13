@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { userIDState } from './../../../Atom';
+import { LecturesState, userIDState, userInformState } from './../../../Atom';
 import { AlretRow, ButtonRow, Input, InputTitle, LinkStyle, LoginPageLogo, SignButton } from "./style";
 
 const LoginPage = () => {
@@ -14,6 +14,8 @@ const LoginPage = () => {
   const setUserID = useSetRecoilState(userIDState);
   const setAuth = useSetRecoilState(AuthState);
   const movePage = useNavigate();
+  const setUserInform = useSetRecoilState(userInformState);
+  const setLectures = useSetRecoilState(LecturesState);
 
   const goStudent = () => {
     movePage('/student');
@@ -31,17 +33,39 @@ const LoginPage = () => {
       setAlret("비밀번호를 입력하세요.");
       return;
     }
-    const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/auth?userID=${inputID}&PW=${inputPW}`;
+    let route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/auth?userID=${inputID}&PW=${inputPW}`;
     const res = await axios.get(
       route
     );
     if (res.data.result === "true") {
       setUserID(res.data.userID);
       setAuth(true);
-      if (res.data.userType === "student") {
-        goStudent();
-      } else if (res.data.userType === "professor") {
-        goFaculty();
+
+      route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/userinform?userID=${inputID}`;
+      const res_user = await axios.get(
+        route
+      );
+      if(res_user.data.result === "false") {
+        console.log("profile load error");
+        setAlret("회원정보 출력 오류가 발생하였습니다.");
+        return
+      }else{
+        route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/lectures?userID=${inputID}`;
+        const res_lectures = await axios.get(
+          route
+        );
+
+        //console
+        console.log("log in, userInform get",res_user.data);
+        setUserInform(res_user.data);
+        console.log("log in, lectureInform get",res_lectures.data);
+        setLectures(res_lectures.data);
+  
+        if (res.data.userType === "student") {
+          goStudent();
+        } else if (res.data.userType === "professor") {
+          goFaculty();
+        }
       }
     } else if (res.data.result === "false") {
       setAlret("로그인 정보가 일치하지 않습니다.");
@@ -71,6 +95,11 @@ const LoginPage = () => {
         }}
         value={inputID}
         placeholder="학번을 입력하세요."
+        onKeyPress={(e) => {
+          if(e.key === 'Enter'){
+            logInSubmit();
+          }
+        }}
       />
 
       <InputTitle>PASSWORD</InputTitle>
@@ -81,6 +110,11 @@ const LoginPage = () => {
         }}
         value={inputPW}
         placeholder="비밀번호를 입력하세요."
+        onKeyPress={(e) => {
+          if(e.key === 'Enter'){
+            logInSubmit();
+          }
+        }}
       />
 
       <AlretRow>
@@ -89,7 +123,11 @@ const LoginPage = () => {
 
       <ButtonRow>
         <LinkStyle to="/">
-          <SignButton onClick={logInSubmit}>LOG IN</SignButton>
+          <SignButton
+            onClick={logInSubmit}
+          >
+            LOG IN
+          </SignButton>
         </LinkStyle>
         <LinkStyle to="/signup">
           <SignButton onClick={() => { }}>SIGN UP</SignButton>

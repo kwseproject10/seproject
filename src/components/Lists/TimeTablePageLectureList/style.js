@@ -1,9 +1,8 @@
-import styled from "styled-components";
 import Size from "@style/Size";
+import styled from "styled-components";
 
 export const ListWrap = styled.div`
   margin: 0.4rem;
-  height: 100%;
 `
 
 export const ListTitle = styled.div`

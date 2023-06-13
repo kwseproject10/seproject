@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import Size from "@style/Size";
+import styled from "styled-components";
 
 export const TimeTablePageWrap = styled.div`
   width: 100%;
@@ -23,6 +23,16 @@ export const PageRow = styled.div`
 
 export const LectureListWrap = styled.div`
   width: 100%;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 0.25rem;
+    border-radius: 0.125rem;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  &::-webkit-scrollbar-thumb {
+      border-radius: 0.125rem;
+      background-color: var(--color-dg);
+  }
  ${Size('large')}{
   width: 55%;
  }

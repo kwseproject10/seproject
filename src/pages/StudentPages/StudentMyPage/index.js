@@ -1,34 +1,18 @@
 import EmptyProfileImage from "@images/EmptyProfileImage.png";
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { userIDState, userInformState } from "../../../Atom";
 import { ButtonRow, ButtonWrap, FileInputWrap, HeaderTitle, ModifyButton, ModifyCancelButton, ModifySubmitButton, MyPageWrap, PasswordSubmit, PhotoRow, PhotoRowContent, Profile, ProfileHeader, ProfileRow, ProfileWrap, RowContent, RowInput, RowInputWrap, RowTitle, SubmitButtonWrap, SubmitWrap, UserPhotoWrap } from "./style";
 
 const StudentMyPageAuthed = () => {
-  const [userInform, setUserInform] = useState({});
   const [modifyMode, setModifyMode] = useState(false);
   const [inputBirthDay, setInputBirthDay] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputPhoneNum, setInputPhoneNum] = useState("");
   const [modifyPW, setModifyPW] = useState("");
   const [reModifyPW, setReModifyPW] = useState("");
-
-  //API call
-  const loadUserInform = () => {
-    setUserInform({
-      name: "홍길동",
-      type: "학부생",
-      major: "컴퓨터정보공학부",
-      ID: "2023123456",
-      grade: 4,
-      numberOfTerm: 7,
-      email: "gildong@gmail.com",
-      phoneNum: "010-1234-5678",
-      birthday: "1900.01.01",
-      advisor: "이기훈",
-      advisorEmail: "kihoonlee@kw.ac.kr",
-      advisorNum: "02-940-8674",
-      state: "재학"
-    })
-  }
+  const userInform = useRecoilValue(userInformState);
 
   const initInput = () => {
     setInputBirthDay(userInform.birthday);
@@ -36,16 +20,11 @@ const StudentMyPageAuthed = () => {
     setInputPhoneNum(userInform.phoneNum);
   }
 
-  useEffect(loadUserInform, []);
   useEffect(initInput, [userInform.birthday, userInform.email, userInform.phoneNum]);
 
   //API call
   const submitModifiedInform = () => {
-    let temp = userInform;
-    userInform.birthday = inputBirthDay;
-    userInform.email = inputEmail;
-    userInform.phoneNum = inputPhoneNum;
-    setUserInform(temp);
+    //post API
   }
 
   return (
@@ -94,7 +73,7 @@ const StudentMyPageAuthed = () => {
           </ProfileRow>
           <ProfileRow>
             <RowTitle>구분</RowTitle>
-            <RowContent>{userInform.type}</RowContent>
+            <RowContent>{userInform.type === "student" ? "학부생" : "교수"}</RowContent>
           </ProfileRow>
           <ProfileRow>
             <RowTitle>소속학과</RowTitle>
@@ -102,7 +81,7 @@ const StudentMyPageAuthed = () => {
           </ProfileRow>
           <ProfileRow>
             <RowTitle>상태</RowTitle>
-            <RowContent>{userInform.grade}학년, {userInform.numberOfTerm}학기 {userInform.state} 중</RowContent>
+            <RowContent>{userInform.grade}학년, {userInform.numberOfTerm}학기 {userInform.state === "enroll" ? "재학" : "휴학"} 중</RowContent>
           </ProfileRow>
           <ProfileRow>
             <RowTitle>학번</RowTitle>
@@ -223,16 +202,25 @@ const StudentMyPageAuthed = () => {
 const StudentMyPage = () => {
   const [inputPW, setInputPW] = useState("");
   const [authed, setAuthed] = useState(false);
+  const userID = useRecoilValue(userIDState);
 
   //API call
-  const submitPW = () => {
-    setAuthed(true);
+  const submitPW = async() => {
+    let route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/auth?userID=${userID}&PW=${inputPW}`;
+    const res = await axios.get(
+      route
+    );
+    if(res.data.result === "true"){
+      setAuthed(true);
+    }else{
+      alert("비밀번호가 일치하지 않습니다.");
+    }
   }
 
   return (
     <MyPageWrap>
       {authed ?
-        <StudentMyPageAuthed />
+        <StudentMyPageAuthed/>
         :
         <SubmitWrap>
           <ProfileWrap>
@@ -250,6 +238,11 @@ const StudentMyPage = () => {
                     }}
                     value={inputPW}
                     placeholder="비밀번호를 입력하세요."
+                    onKeyPress={(e) => {
+                      if(e.key === 'Enter'){
+                        submitPW();
+                      }
+                    }}
                   />
                 </RowInputWrap>
               </ProfileRow>

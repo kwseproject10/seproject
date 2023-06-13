@@ -20,8 +20,11 @@ import FacultyMyPage from '@pages/FacultyPages/FacultyMyPage';
 import FacultyTimeTablePage from "@pages/FacultyPages/FacultyTimeTablePage";
 
 import ErrorPage from "@pages/ErrorPage";
+import { useRecoilValue } from "recoil";
+import { AuthState } from "../Atom";
 
 const Routers = () => {
+  const auth = useRecoilValue(AuthState);
   return (
     <Routes>
       <Route path="/" element={<SignPages />}>
@@ -43,7 +46,7 @@ const Routers = () => {
         <Route path="manage" element={<FacultyManagePages />}></Route>
         <Route path="mypage" element={<FacultyMyPage/>}></Route>
       </Route>
-      <Route path="/*" element={<ErrorPage />}></Route>
+      <Route path="/*" element={<ErrorPage />}/>
     </Routes>
   )
 }
