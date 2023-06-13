@@ -2,14 +2,15 @@ import DropDown from "@components/DropDown";
 import Modal from "@components/Modal";
 import Syllabus from "@components/Modal/ModalContents/Syllabus";
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { LecturesState } from "../../../Atom";
-import { AddButton, Body, ButtonWrap, DeleteButton, DropDownWrap, LectureCredit, LectureID, LectureMajor, LectureManagePageWrap, LectureNumOfTime, LectureProfessor, LectureSearchBar, LectureSearchBarWrap, LectureTimePlace, LectureTitle, LectureType, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, MyLectureList, MyLectureListWrap, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, RightButton, SearchIcon, SearchIconWrap, SearchInput, SyllabusOpen, SyllabusOpenWrap, WholeLectureList, WholeLectureListWrap } from "./style";
+import { AddButton, Body, ButtonWrap, DeleteButton, DropDownWrap, LectureCredit, LectureID, LectureMajor, LectureManagePageWrap, LectureNumOfTime, LectureProfessor, LectureSearchBar, LectureSearchBarWrap, LectureTimePlace, LectureTitle, LectureType, ListBody, ListHeader, ListRow, ListTitle, ListWrap, MyLectureList, MyLectureListWrap, SearchIcon, SearchIconWrap, SearchInput, SyllabusOpen, SyllabusOpenWrap, WholeLectureList, WholeLectureListWrap } from "./style";
 
-const RenderList = ({ lectures, button, rowPerPage, setSyllabusModalOpen, onButtonClick }) => {
+const RenderList = React.memo(({ lectures, button, rowPerPage, setSyllabusModalOpen, onButtonClick }) => {
+  console.log("ReRender")
   let Rows = [];
-  for (let i = 0; i < rowPerPage; i++) {
+  for (let i = 0; i < lectures.length; i++) {
     const lecture = lectures[i]
     if (lecture === undefined) {
       Rows.push(<ListRow key={i}></ListRow>)
@@ -59,14 +60,12 @@ const RenderList = ({ lectures, button, rowPerPage, setSyllabusModalOpen, onButt
       </ListBody>
     </ListWrap>
   )
-}
+})
 
 const StudentLectureManagePage = () => {
   const myLectures = useRecoilValue(LecturesState);
   const [wholeLectures, setWholeLectures] = useState([]);
   const [searchedLectures, setSearchedLectures] = useState([]);
-  const [selectedPage, setSelectedPage] = useState(1);
-  const [selectedLectures, setSelectedLectures] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [searchType, setSearchType] = useState("강의명");
   const [searchDropIsOpen, setSearchDropIsOpen] = useState(false);
@@ -82,9 +81,9 @@ const StudentLectureManagePage = () => {
   ]
   const [syllabusModalOpen, setSyllabusModalOpen] = useState(false);
 
-  const initSearchedLectures = () => {
+  const initSearchedLectures = useCallback(() => {
     setSearchedLectures(wholeLectures);
-  }
+  },[wholeLectures])
 
   useEffect(() => {
     const fetchLectureAll = async () => {
@@ -121,39 +120,10 @@ const StudentLectureManagePage = () => {
     }
   }, []);
 
-  useEffect(initSearchedLectures, [ wholeLectures ])
-
-  //page control
-  let pages = 1;
-  if (searchedLectures !== undefined) pages = parseInt(searchedLectures.length / 10) + 1;
-  let pageButtons = [];
-  let start = selectedPage - ((selectedPage-1) % 10)
-  let end = start + 10
-  if(pages >= start && pages < end)end = pages + 1;
-  for (let i = start; i < end; i++) {
-    pageButtons.push(
-      <PageButton
-        onClick={() => {
-          setSelectedPage(i);
-        }}
-        index={i}
-        selectedPage={selectedPage}
-      >
-        {i}
-      </PageButton>
-    )
-  }
-
-  const sliceList = () => {
-    setSelectedLectures([]);
-    setSelectedLectures(searchedLectures.slice((selectedPage - 1) * 10, (selectedPage - 1) * 10 + 10));
-  };
-
-  useEffect(sliceList, [selectedPage, setSelectedLectures, searchedLectures]);
+  useEffect(initSearchedLectures, [ wholeLectures, initSearchedLectures ])
 
   //searchBar control
-  const onClickSearch = () => {
-    setSelectedPage(1);
+  const onClickSearch = useCallback(() => {
     if(searchText === ""){
       initSearchedLectures();
       setSearchType("강의명");
@@ -203,8 +173,12 @@ const StudentLectureManagePage = () => {
       )
     ))
     setSearchText("");
-  }
+  }, [initSearchedLectures, searchText, searchType, wholeLectures])
 
+  const handleSearchText = useCallback(((e) => {
+    setSearchText(e);
+  }),[])
+  
   return (
     <LectureManagePageWrap>
       <Modal
@@ -229,34 +203,12 @@ const StudentLectureManagePage = () => {
           <ListTitle>전체 강의 목록</ListTitle>
           <WholeLectureList>
             <RenderList
-              lectures={selectedLectures}
+              lectures={searchedLectures}
               button={"Add"}
-              rowPerPage={10}
               setSyllabusModalOpen={setSyllabusModalOpen}
               onButtonClick={onAddButtonClick}
             />
           </WholeLectureList>
-          <PageSelectorWrap>
-            <PageSelector>
-              <PageButtonWrap>
-                <PageButton>
-                  <LeftButton
-                    onClick={() => {
-                      if (selectedPage > 1) setSelectedPage(prev => prev - 1);
-                    }}
-                  />
-                </PageButton>
-                {pageButtons.map((e) => { return e; })}
-                <PageButton>
-                  <RightButton
-                    onClick={() => {
-                      if (selectedPage < pages) setSelectedPage(prev => prev + 1);
-                    }}
-                  />
-                </PageButton>
-              </PageButtonWrap>
-            </PageSelector>
-          </PageSelectorWrap>
           <LectureSearchBarWrap>
             <LectureSearchBar>
               <DropDownWrap>
@@ -275,7 +227,12 @@ const StudentLectureManagePage = () => {
               <SearchInput
                 value={searchText}
                 onChange={(e)=>{
-                  setSearchText(e.target.value);
+                  handleSearchText(e.target.value);
+                }}
+                onKeyPress={(e)=>{
+                  if(e.key === 'Enter'){
+                    onClickSearch();
+                  }
                 }}
               />
               <SearchIconWrap>

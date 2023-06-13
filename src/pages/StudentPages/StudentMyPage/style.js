@@ -1,10 +1,12 @@
-import styled from "styled-components";
-import { TbEdit } from "react-icons/tb";
 import Size from "@style/Size";
+import { TbEdit } from "react-icons/tb";
+import styled from "styled-components";
+import { RenderAnimation } from "../../../style/GlobalStyle";
 
 export const MyPageWrap = styled.div`
   width: 100%;
   margin-bottom: 5%;
+  animation: ${RenderAnimation} 1s;
 `
 
 export const ProfileWrap = styled.div`

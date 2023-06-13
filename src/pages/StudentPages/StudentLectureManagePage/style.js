@@ -1,11 +1,13 @@
 import Size from "@style/Size";
-import { TbArrowLeft, TbArrowRight, TbCirclePlus, TbReportSearch, TbSearch, TbTrash } from "react-icons/tb";
+import { TbCirclePlus, TbReportSearch, TbSearch, TbTrash } from "react-icons/tb";
 import styled from "styled-components";
+import { RenderAnimation } from "../../../style/GlobalStyle";
 
 export const LectureManagePageWrap = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  animation: ${RenderAnimation} 1s;
 `
 
 export const Body = styled.div`
@@ -68,6 +70,7 @@ export const WholeLectureList = styled.div`
 export const ListWrap = styled.div`
   width: 100%;
   height: 100%;
+  border-bottom: 1px solid var(--color-sh);
 `
 
 export const ListRow = styled.div`
@@ -87,7 +90,17 @@ export const ListHeader = styled(ListRow)`
 `
 
 export const ListBody = styled.div`
-
+  overflow: auto;
+  height: 35.625rem;
+  &::-webkit-scrollbar {
+    width: 0.25rem;
+    border-radius: 0.125rem;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  &::-webkit-scrollbar-thumb {
+      border-radius: 0.125rem;
+      background-color: var(--color-dg);
+  }
 `
 
 export const ListRowContent = styled.div`
@@ -175,81 +188,12 @@ export const AddButton = styled(TbCirclePlus)`
   }
 `
 
-export const PageSelectorWrap = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-`
-
-export const PageSelector = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  height: 2.5rem;
-`
-
-export const PageButtonWrap = styled.div`
-  width: 40rem;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  color: var(--color-dg);
-`
-
-export const PageButton = styled.div`
-  width: 6%;
-  font-size:var(--font-size-nm);
-  cursor: pointer;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  &:hover{
-    color: black;
-    transform: translateY(0);
-    transition: 0.3s;
-  }
-  ${(props)=>props.index === props.selectedPage ?
-      `
-        color: black;
-        cursor: default;
-      `
-    :
-      ``
-  }
-`
-
-export const LeftButton = styled(TbArrowLeft)`
-  margin-top: 0.25rem;
-  cursor: pointer;
-  color: var(--color-dg);
-  &:hover{
-    color: black;
-    transform: translateY(0);
-    transition: 0.3s;
-  }
-`
-
-export const RightButton = styled(TbArrowRight)`
-  margin-top: 0.25rem;
-  cursor: pointer;
-  color: var(--color-dg);
-  &:hover{
-    color: black;
-    transform: translateY(0);
-    transition: 0.3s;
-  }
-`
 
 export const LectureSearchBarWrap = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 1rem;
 `
 
 export const LectureSearchBar = styled.div`

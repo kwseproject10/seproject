@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import { RenderAnimation } from "../../../../style/GlobalStyle";
 
 export const MainWrap = styled.div`
   height: 100%;
   width: 100%;
   display:flex;
   flex-direction:column;
+  animation: ${RenderAnimation} 1s;
 `
 
 export const AttendanceRow = styled.div`

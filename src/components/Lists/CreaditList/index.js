@@ -38,7 +38,6 @@ const CreditList = () => {
         console.log("no credit data");
         return
       }
-      console.log(res.data);
       let temp = {
         creditCompleted : {
           major : 0,

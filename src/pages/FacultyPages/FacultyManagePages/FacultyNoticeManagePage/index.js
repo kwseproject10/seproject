@@ -332,6 +332,11 @@ const FacultyNoticeManagePage = ({ lectureName }) => {
                 onChange={(e) => {
                   setSearchText(e.target.value);
                 }}
+                onKeyPress={(e)=>{
+                  if(e.key === 'Enter'){
+                    onClickSearch();
+                  }
+                }}
               />
               <SearchIconWrap>
                 <SearchIcon

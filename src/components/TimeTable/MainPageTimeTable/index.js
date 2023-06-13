@@ -6,7 +6,6 @@ import { CardWrap, Left, Right } from "./Style";
 
 const MainPageTimeTable = ({ onClickPlusButton }) => {
   const lectures = useRecoilValue(LecturesState);
-  console.log("TEST", lectures);
   return (
     <CardWrap>
       {

@@ -1,6 +1,6 @@
+import Size from "@style/Size.js";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Size from "@style/Size.js";
 
 export const NavigationButtonStyle = styled.div`
   text-align: center;
@@ -39,8 +39,10 @@ export const NavigationButtonStyle = styled.div`
       ${Size('large')}{
         border-bottom: none;
         border-right: 0.125rem var(--color-dk) solid;
-        color:var(--color-dg);
+        color: var(--color-dg);
       }
+      transform: translateY(0);
+      transition: 0.3s;
     }
     `
   }

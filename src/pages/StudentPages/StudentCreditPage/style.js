@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import Size from "@style/Size";
+import styled from "styled-components";
+import { RenderAnimation } from "../../../style/GlobalStyle";
 
 export const CreditPageWrap = styled.div`
   width: 100%;
@@ -7,6 +8,7 @@ export const CreditPageWrap = styled.div`
   display: flex;
   flex-direction: column;
   overflow-Y: auto;
+  animation: ${RenderAnimation} 1s;
 `
 
 export const Top = styled.div`

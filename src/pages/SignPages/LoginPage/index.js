@@ -24,6 +24,7 @@ const LoginPage = () => {
     movePage('/faculty')
   }
 
+  //* flow: 학번, 비밀번호 적었는지 확인 => get/auth로 회원 검사 => true일 경우 userID, auth 설정하고 type검사 => type이 student이면 lecture와 inform load.*/
   const logInSubmit = async () => {
     if (inputID === "") {
       setAlret("학번을 입력하세요.");
@@ -40,32 +41,26 @@ const LoginPage = () => {
     if (res.data.result === "true") {
       setUserID(res.data.userID);
       setAuth(true);
-
-      route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/userinform?userID=${inputID}`;
-      const res_user = await axios.get(
-        route
-      );
-      if(res_user.data.result === "false") {
-        console.log("profile load error");
-        setAlret("회원정보 출력 오류가 발생하였습니다.");
-        return
-      }else{
-        route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/lectures?userID=${inputID}`;
-        const res_lectures = await axios.get(
+      if (res.data.userType === "student") {
+        route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/userinform?userID=${inputID}`;
+        const res_user = await axios.get(
           route
         );
-
-        //console
-        console.log("log in, userInform get",res_user.data);
-        setUserInform(res_user.data);
-        console.log("log in, lectureInform get",res_lectures.data);
-        setLectures(res_lectures.data);
-  
-        if (res.data.userType === "student") {
+        if (res_user.data.result === "false") {
+          console.log("profile load error");
+          setAlret("회원정보 출력 오류가 발생하였습니다.");
+          return
+        } else {
+          route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/lectures?userID=${inputID}`;
+          const res_lectures = await axios.get(
+            route
+          );
+          setUserInform(res_user.data);
+          setLectures(res_lectures.data);
           goStudent();
-        } else if (res.data.userType === "professor") {
-          goFaculty();
         }
+      } else {
+        goFaculty();
       }
     } else if (res.data.result === "false") {
       setAlret("로그인 정보가 일치하지 않습니다.");
@@ -96,7 +91,7 @@ const LoginPage = () => {
         value={inputID}
         placeholder="학번을 입력하세요."
         onKeyPress={(e) => {
-          if(e.key === 'Enter'){
+          if (e.key === 'Enter') {
             logInSubmit();
           }
         }}
@@ -111,7 +106,7 @@ const LoginPage = () => {
         value={inputPW}
         placeholder="비밀번호를 입력하세요."
         onKeyPress={(e) => {
-          if(e.key === 'Enter'){
+          if (e.key === 'Enter') {
             logInSubmit();
           }
         }}

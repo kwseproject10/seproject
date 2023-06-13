@@ -37,6 +37,8 @@ export const OpenButtonWrap = styled.div`
     `
     &:hover{
       color: black;
+      transform: translateY(0);
+      transition: 0.3s;
       ${Size('large')}{
         border-right: 0.125rem var(--color-dk) solid;
         color:var(--color-dg);

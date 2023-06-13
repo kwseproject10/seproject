@@ -1,5 +1,6 @@
 import Size from "@style/Size";
 import styled from "styled-components";
+import { RenderAnimation } from "../../../style/GlobalStyle";
 
 export const TimeTablePageWrap = styled.div`
   width: 100%;
@@ -7,6 +8,7 @@ export const TimeTablePageWrap = styled.div`
   display: flex;
   flex-direction:column;
   overflow-Y: hidden;
+  animation: ${RenderAnimation} 1s;
 `
 
 export const PageRow = styled.div`

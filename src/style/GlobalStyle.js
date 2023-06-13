@@ -1,5 +1,14 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, keyframes } from "styled-components";
 import Size from "./Size";
+
+export const RenderAnimation = keyframes`
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+`
 
 export const GlobalStyle = createGlobalStyle`
   * {

@@ -1,6 +1,6 @@
+import Size from "@style/Size.js";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Size from "@style/Size.js";
 
 export const AccordianWrap = styled.div`
   display: flex;
@@ -51,6 +51,11 @@ export const AccordianOpenButton = styled.div`
   font-weight: bold;
   ${Size('large')}{
     color: var(--color-gr);
+  }
+  &:hover{
+    color: var(--color-dg);
+    transform: translateY(0);
+    transition: 0.3s;
   }
 `
 

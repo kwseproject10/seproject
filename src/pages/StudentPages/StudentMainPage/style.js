@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import Size from "@style/Size.js";
+import styled from "styled-components";
+import { RenderAnimation } from "../../../style/GlobalStyle";
 
 export const MainPageWrap = styled.div`
   width: 100%;
@@ -7,6 +8,7 @@ export const MainPageWrap = styled.div`
   display: flex;
   flex-direction:column;
   overflow-X: hidden;
+  animation: ${RenderAnimation} 1s;
 `
 
 export const GridWrap = styled.div`

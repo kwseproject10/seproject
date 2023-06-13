@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import Size from "@style/Size.js";
+import styled from "styled-components";
+import { RenderAnimation } from "../../style/GlobalStyle";
 
 export const PageViewer = styled.div`
     z-index: 0;
@@ -20,6 +21,7 @@ export const PageLayout = styled.div`
     flex-direction: column;
     width: 100%;
     height: 100%;
+    animation: ${RenderAnimation} 1s;
 `
 
 export const BodyWrapper = styled.div`

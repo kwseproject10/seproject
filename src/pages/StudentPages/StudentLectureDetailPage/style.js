@@ -1,11 +1,13 @@
-import styled from "styled-components";
 import Size from "@style/Size";
+import styled from "styled-components";
+import { RenderAnimation } from './../../../style/GlobalStyle';
 
 export const DetailPageWrap = styled.div`
   min-height: 50rem;
   width: 100%;
   display: flex;
   flex-direction: column;
+  animation: ${RenderAnimation} 1s;
 `
 
 export const DetailPageHeader = styled.div`

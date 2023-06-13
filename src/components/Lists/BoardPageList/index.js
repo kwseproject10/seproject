@@ -161,6 +161,11 @@ const BoardPageList = ({ list, linePerPage, setInDetail, setPostID }) => {
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
+            onKeyPress={(e)=>{
+              if(e.key === 'Enter'){
+                onClickSearch();
+              }
+            }}
           />
           <SearchIconWrap>
             <SearchIcon
