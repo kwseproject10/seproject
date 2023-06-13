@@ -1,11 +1,13 @@
 import { StudentNavigationState } from '@./Atom';
 import NavigationButton from "@components/Buttons/NavigationButton";
-import { useRecoilState } from "recoil";
-import NavigationAccordian from '../../Accordian/NavigationAccordian';
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { StudentNavigationAccordianActivedState } from '../../../Atom';
+import StudentNavigationAccordian from '../../Accordian/StudentNavigationAccordian';
 import { ButtonWrap, NavigationBar, NavigationWrap } from "./style";
 
 const StudentNavigation = () => {
   const [actived, setActived] = useRecoilState(StudentNavigationState);
+  const setAccordianActived = useSetRecoilState(StudentNavigationAccordianActivedState);
   return (
     <NavigationWrap>
       <NavigationBar>
@@ -16,6 +18,7 @@ const StudentNavigation = () => {
             index={0}
             text={"MAIN"}
             link={"student"}
+            onClick={setAccordianActived}
           />
           <NavigationButton
             actived={actived}
@@ -23,8 +26,9 @@ const StudentNavigation = () => {
             index={1}
             text={"시간표 / 강의목록"}
             link={"student/timetable"}
+            onClick={setAccordianActived}
           />
-          <NavigationAccordian
+          <StudentNavigationAccordian
             actived={actived}
             setActived={setActived}
             index={5}
@@ -37,6 +41,7 @@ const StudentNavigation = () => {
             index={2}
             text={"성적 조회"}
             link={"student/credit"}
+            onClick={setAccordianActived}
           />
           <NavigationButton
             actived={actived}
@@ -44,6 +49,7 @@ const StudentNavigation = () => {
             index={3}
             text={"수강 관리"}
             link={"student/lecturemanage"}
+            onClick={setAccordianActived}
           />
           <NavigationButton
             actived={actived}
@@ -51,6 +57,7 @@ const StudentNavigation = () => {
             index={4}
             text={"개인정보 관리"}
             link={"student/mypage"}
+            onClick={setAccordianActived}
           />
         </ButtonWrap>
       </NavigationBar>

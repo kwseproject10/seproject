@@ -11,14 +11,14 @@ export const FacultyNavigationState = atom({
   default: 0
 })
 
-export const FacultyNavigationAccordianState = atom({
-  key: 'FacultyNavigationAccordian',
-  default: 0
+export const StudentNavigationAccordianActivedState = atom({
+  key: 'StudentNavigationAccordianActived',
+  default: false
 })
 
-export const LectureDetailActivedState = atom({
-  key: 'LectureDetailActived',
-  default: false
+export const FacultyNavigationAccordianActivedState = atom({
+  key: 'FacultyNavigationAccordianActived',
+  default: 0
 })
 
 

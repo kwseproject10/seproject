@@ -1,7 +1,20 @@
 import { TbPlus } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { LectureSelectedState, StudentNavigationAccordianActivedState, StudentNavigationState } from './../../../Atom';
 import { LectureProfessor, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitlePlusButton, TitleText } from "./style";
 
 const LectureList = ({ lectures, onClickPlusButton }) => {
+  const setSelectedLecture = useSetRecoilState(LectureSelectedState);
+  const setNavigationIndex = useSetRecoilState(StudentNavigationState);
+  const setNavAccordianActived = useSetRecoilState(StudentNavigationAccordianActivedState);
+  const movePage = useNavigate();
+  const onClickListRow = (lectureID, index) => {
+    setSelectedLecture(lectureID);
+    setNavigationIndex(5 + index);
+    setNavAccordianActived(true);
+    movePage('/student/lecturedetail');
+  }
   return(
     <ListWrap>
       <ListTitle>
@@ -17,7 +30,12 @@ const LectureList = ({ lectures, onClickPlusButton }) => {
       <ListBox>
         {lectures.map((element,index)=>{
           return(
-            <ListRow key={index}>
+            <ListRow
+              key={index}
+              onClick={() => {
+                onClickListRow(element.ID, index);
+              }}
+            >
               <Left>
                 <NoticeTitle>{
                   element.name.length > 30 ?

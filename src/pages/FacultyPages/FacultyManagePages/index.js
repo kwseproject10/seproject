@@ -1,7 +1,7 @@
 import DropDown from '@components/DropDown/';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { FacultyNavigationAccordianState, LectureSelectedState, LecturesState } from "../../../Atom";
+import { FacultyNavigationAccordianActivedState, LectureSelectedState, LecturesState } from "../../../Atom";
 import FacultyArchiveManagePage from './FacultyArchiveManagePage';
 import FacultyAssignmentManagePage from './FacultyAssignmentManagePage';
 import FacultyAttendanceManagePage from "./FacultyAttendanceManagePage";
@@ -11,7 +11,7 @@ import FacultyNoticeManagePage from './FacultyNoticeManagePage';
 import { DropDownRow, DropDownWrap, PageWrap } from "./style";
 
 const FacultyManagePage = () => {
-  const FacultyNavigationAccordian = useRecoilValue(FacultyNavigationAccordianState);
+  const FacultyNavigationAccordian = useRecoilValue(FacultyNavigationAccordianActivedState);
   const [selectedLecture, setSelectedLecture] = useState("");
   const setSelectedLectureID = useSetRecoilState(LectureSelectedState);
   const [lectureDropDown, setLectureDropDown] = useState(false);

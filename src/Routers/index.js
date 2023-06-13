@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import SignPages from "@pages/SignPages";
 import LoginPage from "@pages/SignPages/LoginPage";
@@ -26,6 +26,7 @@ import { AuthState } from "../Atom";
 const Routers = () => {
   const auth = useRecoilValue(AuthState);
   return (
+    <>
     <Routes>
       <Route path="/" element={<SignPages />}>
         <Route path="" element={<LoginPage />}></Route>
@@ -48,6 +49,8 @@ const Routers = () => {
       </Route>
       <Route path="/*" element={<ErrorPage />}/>
     </Routes>
+    {auth ? "" : <Navigate to ="/" />}
+    </>
   )
 }
 

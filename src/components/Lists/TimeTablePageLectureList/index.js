@@ -1,20 +1,31 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { userIDState } from "../../../Atom";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { LectureSelectedState, StudentNavigationAccordianActivedState, StudentNavigationState, userIDState } from "../../../Atom";
 import { AttendanceChart, AttendanceChartChild, AttendanceChartRow, DefaultRow, DetailCenter, DetailInformRow, DetailLeft, DetailRight, LectureProfessor, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitleText } from "./style";
 
 const TimeTablePageLectureList = ({ lectures }) => {
   const userID = useRecoilValue(userIDState);
-  const [ attendance, setAttendance ] = useState({});
-  
+  const [attendance, setAttendance] = useState({});
+  const setSelectedLecture = useSetRecoilState(LectureSelectedState);
+  const setNavigationIndex = useSetRecoilState(StudentNavigationState);
+  const setNavAccordianActived = useSetRecoilState(StudentNavigationAccordianActivedState);
+  const movePage = useNavigate();
+  const onClickListRow = (lectureID, index) => {
+    setSelectedLecture(lectureID);
+    setNavigationIndex(5 + index);
+    setNavAccordianActived(true);
+    movePage('/student/lecturedetail');
+  }
+
   useEffect(() => {
     const fetch = async () => {
       const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/wholeattendance?userID=${userID}`;
       const res = await axios.get(
         route
       );
-      if(res.data.result === "false") {
+      if (res.data.result === "false") {
         console.log("load fail");
         return
       }
@@ -23,9 +34,9 @@ const TimeTablePageLectureList = ({ lectures }) => {
     }
 
     fetch()
-  }, [ userID ])
+  }, [userID])
 
-  return(
+  return (
     <ListWrap>
       <ListTitle>
         <TitleText>
@@ -33,28 +44,33 @@ const TimeTablePageLectureList = ({ lectures }) => {
         </TitleText>
       </ListTitle>
       <ListBox>
-        {lectures.map((element,index)=>{
-          return(
+        {lectures.map((element, index) => {
+          return (
             <ListRow key={index}>
               <DefaultRow>
                 <Left>
-                  <NoticeTitle>{
-                    element.name.length > 30 ?
-                      element.name.slice(0,29) + "..."
-                    :
-                      element.name
-                  }</NoticeTitle>
+                  <NoticeTitle
+                    onClick={() => {
+                      onClickListRow(element.ID, index);
+                    }}
+                  >
+                    {
+                      element.name.length > 30 ?
+                        element.name.slice(0, 29) + "..."
+                        :
+                        element.name
+                    }</NoticeTitle>
                   <NoticeSubject>{element.ID}</NoticeSubject>
                 </Left>
-                  <LectureProfessor>
-                    교수 {element.professor}
-                  </LectureProfessor>
-                  <LectureType>
-                    분류 {element.type}
-                  </LectureType>
+                <LectureProfessor>
+                  교수 {element.professor}
+                </LectureProfessor>
+                <LectureType>
+                  분류 {element.type}
+                </LectureType>
                 <Right>
-                  장소(시간) {element.time.map((e, i)=>{
-                    return(
+                  장소(시간) {element.time.map((e, i) => {
+                    return (
                       e + "(" + (element.place[i]) + ")" + (i === element.time.length - 1 ? "" : " / ")
                     )
                   })}
@@ -77,40 +93,40 @@ const TimeTablePageLectureList = ({ lectures }) => {
                 <AttendanceChart>
                   {
                     attendance[element.ID] !== undefined ?
-                    attendance[element.ID].map(
-                      (week, weekIndex) => {
-                        if(week === undefined) return "";
-                        const attdays = week.reduce((a,b) => a+b, 0);
-                        const days = week.length;
-                        return(
-                          <>
-                            <AttendanceChartChild
-                              row={1}
-                              column={weekIndex + 1}
-                            >
-                              {weekIndex + 1}주차
-                            </AttendanceChartChild>
-                            <AttendanceChartChild
-                              row={2}
-                              column={weekIndex + 1}
-                              color={attdays === days ?
-                              "green"
-                              :
-                              (attdays === 0 ?
-                                "red"
-                                :
-                                "orange"
-                                )
-                              }
-                            >
-                              {week.reduce((a,b)=>a+b, 0)} / {week.length}
-                            </AttendanceChartChild>
-                          </>
-                        )
-                      }
-                    )
-                    :
-                    ""
+                      attendance[element.ID].map(
+                        (week, weekIndex) => {
+                          if (week === undefined) return "";
+                          const attdays = week.reduce((a, b) => a + b, 0);
+                          const days = week.length;
+                          return (
+                            <>
+                              <AttendanceChartChild
+                                row={1}
+                                column={weekIndex + 1}
+                              >
+                                {weekIndex + 1}주차
+                              </AttendanceChartChild>
+                              <AttendanceChartChild
+                                row={2}
+                                column={weekIndex + 1}
+                                color={attdays === days ?
+                                  "green"
+                                  :
+                                  (attdays === 0 ?
+                                    "red"
+                                    :
+                                    "orange"
+                                  )
+                                }
+                              >
+                                {week.reduce((a, b) => a + b, 0)} / {week.length}
+                              </AttendanceChartChild>
+                            </>
+                          )
+                        }
+                      )
+                      :
+                      ""
                   }
                 </AttendanceChart>
               </AttendanceChartRow>

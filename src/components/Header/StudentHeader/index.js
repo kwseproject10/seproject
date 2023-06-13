@@ -3,7 +3,7 @@ import HeaderButton from "@components/Buttons/HeaderButton";
 import HeaderLogoBlack from "@images/HeaderLogo.png";
 import { Link } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { AuthState, userIDState, userInformState } from './../../../Atom';
+import { AuthState, LecturesState, userIDState, userInformState } from './../../../Atom';
 import { ButtonPartition, HeaderBar, HeaderWrap, LeftContents, LeftContentsWrap, LogoWrap, RightContents, RightContentsWrap, UserName, UserType } from "./style";
 
 const StudentHeader = () => {
@@ -11,6 +11,7 @@ const StudentHeader = () => {
   const [userInform, setUserInform] = useRecoilState(userInformState);
   const [userID, setUserID] = useRecoilState(userIDState);
   const setAuth = useSetRecoilState(AuthState);
+  const setLectures = useSetRecoilState(LecturesState);
 
     return(
         <HeaderWrap>
@@ -45,6 +46,7 @@ const StudentHeader = () => {
                   setUserID(0);
                   setAuth(false);
                   setActived(0);
+                  setLectures(0);
                 }}/>
               </RightContents>
             </RightContentsWrap>

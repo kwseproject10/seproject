@@ -106,6 +106,13 @@ export const Cell = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  cursor: pointer;
+  &:hover{
+    background-color: var(--color-dk);
+    color: white;
+    transform: translateY(0);
+    transition: 0.3s;
+  }
 `
 
 export const LectureTitle = styled.div`

@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { LectureSelectedState, StudentNavigationAccordianActivedState, StudentNavigationState } from './../../Atom';
 import { Cell, HeaderLeft, HeaderRight, HeaderText, LectureTP, LectureTitle, Table, TableBox, TableHeader, TableWrap, Tbody, Td, Th, Thead, Tr } from "./Style";
 
 const RenderBody = ({ isDetail, lectures }) => {
@@ -25,20 +28,36 @@ const RenderBody = ({ isDetail, lectures }) => {
   };
   let classes = new Set([1,2,3,4,5,6]);
   let dates = ['월', '화', '수', '목', '금', '토'];
+  const setSelectedLecture = useSetRecoilState(LectureSelectedState);
+  const setNavigationIndex = useSetRecoilState(StudentNavigationState);
+  const setNavAccordianActived = useSetRecoilState(StudentNavigationAccordianActivedState);
+  const movePage = useNavigate();
+  const onClickListRow = (lectureID, index) => {
+    setSelectedLecture(lectureID);
+    setNavigationIndex(5 + index);
+    setNavAccordianActived(true);
+    movePage('/student/lecturedetail');
+  }
 
   for(let i = 0; i < lectures.length; i++){
+
     const name = lectures[i].name;
     let time = lectures[i].time;
     if(lectures[i].time > 11) time = 12;
     const place = lectures[i].place;
+    const ID = lectures[i].ID;
+
     for(let j = 0; j < time.length; j++){
       const cell = {
         name : name,
         time : time[j],
-        place : place[j]
+        place : place[j],
+        ID : ID,
+        index : i
       }
+
       let classNum = parseInt(cell.time.slice(1));
-      if(cells[classNum] === undefined) cells[classNum] = [{},{},{},{},{},{}];
+      if(cells[classNum] === undefined) cells[classNum] = [{},{},{},{},{},{}];  //존재하지않는 교시 생성
       let classDate = dates.indexOf(cell.time[0]);
       cells[classNum][classDate] = cell;
       classes.add(classNum);
@@ -58,8 +77,14 @@ const RenderBody = ({ isDetail, lectures }) => {
       }
       nowCell.forEach((e,index) => {
         if(Object.keys(e).length > 0){
-          Row.push(<Td key={i} isDetail={isDetail}>
-            <Cell>
+          Row.push(
+          <Td
+            key={i}
+            isDetail={isDetail}
+          >
+            <Cell
+              onClick={()=>{onClickListRow(e.ID,e.index)}}
+            >
               <LectureTitle>{e.name}</LectureTitle>
               <LectureTP>{e.time} {e.place}</LectureTP>
             </Cell>

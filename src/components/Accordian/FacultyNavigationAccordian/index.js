@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { FacultyNavigationAccordianState } from "../../../Atom";
+import { FacultyNavigationAccordianActivedState } from "../../../Atom";
 import { AccordianContent, AccordianContents, AccordianOpenButton, AccordianWrap, LinkStyle, OpenButtonWrap } from "./style";
 
 const FacultyNavigationAccordian = ({ actived, setActived, index, text, link }) => {
@@ -31,7 +31,7 @@ const FacultyNavigationAccordian = ({ actived, setActived, index, text, link }) 
       name: "과제 관리"
     }
   ];
-  const setFacultyNavigationAccordian = useSetRecoilState(FacultyNavigationAccordianState);
+  const setFacultyNavigationAccordian = useSetRecoilState(FacultyNavigationAccordianActivedState);
 
   const outsideRef = useRef(null);
   useEffect(() => {

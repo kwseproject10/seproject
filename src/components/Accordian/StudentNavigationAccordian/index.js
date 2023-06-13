@@ -1,14 +1,15 @@
 import { LectureSelectedState } from "@./Atom";
-import { useEffect, useRef, useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { LecturesState } from "../../../Atom";
+import { useEffect, useRef } from "react";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { LecturesState, StudentNavigationAccordianActivedState } from "../../../Atom";
 import { AccordianContent, AccordianContents, AccordianOpenButton, AccordianWrap, LinkStyle, OpenButtonWrap } from "./style";
 
-const NavigationAccordian = ({ actived, setActived, index, text, link }) => {
-  const [AccordianActived, setAccordianActived] = useState(false);
+const StudentNavigationAccordian = ({ actived, setActived, index, text, link }) => {
+  const [AccordianActived, setAccordianActived] = useRecoilState(StudentNavigationAccordianActivedState);
   const setSelectedLecture = useSetRecoilState(LectureSelectedState);
   const lectures = useRecoilValue(LecturesState);
 
+  //외부 클릭시 아코디언 닫히도록. 이거 nav 안에서 작동하도록 ref 수정해야함. 아니면 외부 컴포넌트에서 이거 온클릭으로 열었을 때는 작동 안하도록
   const outsideRef = useRef(null);
   useEffect(() => {
     function handleClickOutside(e) {
@@ -24,9 +25,8 @@ const NavigationAccordian = ({ actived, setActived, index, text, link }) => {
   }, [outsideRef, setAccordianActived]);
 
   return (
-    <AccordianWrap ref={outsideRef} actived={AccordianActived} numRows={lectures.length}>
+    <AccordianWrap actived={AccordianActived} numRows={lectures.length}>
       <OpenButtonWrap
-        AccordianActive={AccordianActived}
         actived={actived}
         index={index}
         onClick={() => { setAccordianActived(prev => !prev) }}
@@ -62,4 +62,4 @@ const NavigationAccordian = ({ actived, setActived, index, text, link }) => {
   )
 }
 
-export default NavigationAccordian;
+export default StudentNavigationAccordian;
