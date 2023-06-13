@@ -7,7 +7,6 @@ export const DetailWrap = styled.div`
   color: black;
   display: flex;
   justify-content: center;
-  margin-top: 3%;
   margin-bottom: 3%;
 `
 
@@ -22,7 +21,6 @@ export const ButtonWrap = styled.div`
 
 export const PostWrap = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -32,6 +30,7 @@ export const PostWrap = styled.div`
 export const PageHeader = styled.div`
   display: flex;
   margin-left: 2.5rem;
+  margin-top: 2.5rem;
   margin-bottom: 1rem;
   justify-content:space-between;
   width: 100%;
@@ -60,6 +59,14 @@ export const HeaderRow = styled.div`
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--color-gr);
+`
+
+export const NonSubmit = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 `
 
 export const PostTitle = styled.div`
@@ -136,13 +143,46 @@ export const ButtonRow = styled.div`
   width: 100%;
   display: flex;
   justify-content: right;
-  margin-top: 1rem;
+  margin-top: 2rem;
+`
+
+export const SubmitButton = styled.button`
+  cursor: pointer;
+  width: 8rem;
+  margin-left: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--color-nm);
+  font-weight: bold;
+  color: white;
+  border: 1px solid var(--color-dg);
+`
+
+export const UpdateButton = styled.button`
+  cursor: pointer;
+  width: 8rem;
+  margin-left: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--color-nm);
+  font-weight: bold;
+  color: white;
+  border: 1px solid var(--color-dg);
+`
+
+export const DeleteButton = styled.button`
+  cursor: pointer;
+  width: 8rem;
+  margin-left: 2.5rem;
+  height: 2.5rem;
+  background-color: rgb(139,11,2);
+  font-weight: bold;
+  color: white;
+  border: 1px solid var(--color-dg);
 `
 
 export const BackButton = styled.button`
   cursor: pointer;
-  margin-left: 1rem;
   width: 8rem;
+  margin-left: 2.5rem;
   height: 2.5rem;
   background-color: var(--color-gr);
   font-weight: bold;

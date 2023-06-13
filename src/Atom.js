@@ -22,7 +22,7 @@ export const FacultyNavigationAccordianActivedState = atom({
 })
 
 
-//전역 상태관리용 state
+//전역 상태관리용 state Student
 export const LectureSelectedState = atom({
   key: 'LectureSelected',
   default: ""
@@ -38,6 +38,23 @@ export const SemestersState = atom({
   default: []
 })
 
+//전역 상태관리용 state faculty
+
+export const FacultyLectureSelectedState = atom({
+  key: 'FacultyLectureSelected',
+  default: ""
+}) 
+
+export const FacultyLecturesState = atom({
+  key: 'FaccultyLectures',
+  default: ""
+})
+
+//회원가입 페이지 state
+export const signUpState = atom({
+  key: 'signup',
+  default: false
+})
 
 //로그인 이후 개인정보 state
 export const AuthState = atom({
@@ -52,7 +69,7 @@ export const userIDState = atom({
 
 export const userTypeState = atom({
   key: 'userType',
-  default: "s"
+  default: ""
 })
 
 export const userInformState = atom({

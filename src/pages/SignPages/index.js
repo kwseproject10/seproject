@@ -1,8 +1,8 @@
+import Modal from "@components/Modal";
+import InformPolicy from "@components/Modal/ModalContents/InformPolicy";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { LoginInnerWrapper, LoginInnerWrapper2, LoginPageBG, LoginPageFooter, LoginPageInner, LoginPageViwer } from "./style";
-import { useState } from "react";
-import InformPolicy from "@components/Modal/ModalContents/InformPolicy";
-import Modal from "@components/Modal";
 
 const SignPages = () => {
     const [ policyModalOpen, setPolicyModalOpen ] = useState(false);

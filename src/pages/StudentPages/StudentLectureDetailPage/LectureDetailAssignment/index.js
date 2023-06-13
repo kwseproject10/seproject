@@ -1,6 +1,6 @@
-import BoardPageList from "@components/Lists/BoardPageList";
-import PostDetail from "@components/Lists/BoardPageList/PostDetail";
 import { useEffect, useState } from "react";
+import AssignmentDetail from "../../../../components/Lists/AssignmentPageList/PostDetail";
+import AssignmentPageList from './../../../../components/Lists/AssignmentPageList/index';
 import { NoticePageWrap } from "./style";
 
 const LecutreDetailAssignment = () => {
@@ -17,7 +17,10 @@ const LecutreDetailAssignment = () => {
         subject: "소프트웨어공학",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "1",
@@ -25,7 +28,10 @@ const LecutreDetailAssignment = () => {
         subject: "소프트웨어공학",
         date: "2023.05.28(일)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "2",
@@ -33,7 +39,10 @@ const LecutreDetailAssignment = () => {
         subject: "임베디드시스템S/W설계",
         date: "2022.01.01(월)",
         poster: "김태석",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "3",
@@ -41,7 +50,10 @@ const LecutreDetailAssignment = () => {
         subject: "신호및시스템",
         date: "2022.01.01(월)",
         poster: "이성원",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "4",
@@ -49,7 +61,10 @@ const LecutreDetailAssignment = () => {
         subject: "머신러닝",
         date: "2022.01.01(월)",
         poster: "박철수",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "5",
@@ -57,7 +72,10 @@ const LecutreDetailAssignment = () => {
         subject: "소프트웨어공학",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "6",
@@ -65,7 +83,10 @@ const LecutreDetailAssignment = () => {
         subject: "소프트웨어공학",
         date: "2023.05.28(일)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "7",
@@ -73,7 +94,10 @@ const LecutreDetailAssignment = () => {
         subject: "임베디드시스템S/W설계",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "8",
@@ -81,7 +105,10 @@ const LecutreDetailAssignment = () => {
         subject: "신호및시스템",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "9",
@@ -89,7 +116,10 @@ const LecutreDetailAssignment = () => {
         subject: "머신러닝",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "10",
@@ -97,7 +127,10 @@ const LecutreDetailAssignment = () => {
         subject: "소프트웨어공학",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "11",
@@ -105,7 +138,10 @@ const LecutreDetailAssignment = () => {
         subject: "소프트웨어공학",
         date: "2023.05.28(일)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "12",
@@ -113,7 +149,10 @@ const LecutreDetailAssignment = () => {
         subject: "임베디드시스템S/W설계",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "13",
@@ -121,7 +160,10 @@ const LecutreDetailAssignment = () => {
         subject: "신호및시스템",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "14",
@@ -129,7 +171,10 @@ const LecutreDetailAssignment = () => {
         subject: "머신러닝",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "15",
@@ -137,7 +182,10 @@ const LecutreDetailAssignment = () => {
         subject: "소프트웨어공학",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "16",
@@ -145,7 +193,10 @@ const LecutreDetailAssignment = () => {
         subject: "소프트웨어공학",
         date: "2023.05.28(일)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "17",
@@ -153,7 +204,10 @@ const LecutreDetailAssignment = () => {
         subject: "임베디드시스템S/W설계",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "18",
@@ -161,7 +215,10 @@ const LecutreDetailAssignment = () => {
         subject: "신호및시스템",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "19",
@@ -169,7 +226,10 @@ const LecutreDetailAssignment = () => {
         subject: "머신러닝",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       },
       {
         ID: "20",
@@ -177,7 +237,10 @@ const LecutreDetailAssignment = () => {
         subject: "머신러닝",
         date: "2022.01.01(월)",
         poster: "이기훈",
-        hit: 10
+        hit: 10,
+        dueDate: "2023.06.15(금)",
+        Dday: 3,
+        state: "미제출"
       }
     ]);
   }
@@ -185,13 +248,13 @@ const LecutreDetailAssignment = () => {
   return (
     <NoticePageWrap>
     {inDetail ?
-      <PostDetail
+      <AssignmentDetail
         setInDetail={setInDetail}
         postID={assignmentID}
         boardName={"과제"}
       />
       :
-      <BoardPageList
+      <AssignmentPageList
         list={assignmentList}
         linePerPage={5}
         setInDetail={setInDetail}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DeleteButton, DeleteButtonWrap, ListBody, ListHeader, ListRow, ListTitle, ListWrap, ModifyButton, ModifyButtonWrap, PageWrap, PostButton, PostButtonWrap, PostButtons, PostDate, PostTitle, ViewButton, ViewButtonWrap } from "./style";
+import { AttendanceRatio, DeleteButton, DeleteButtonWrap, ListBody, ListHeader, ListRow, ListTitle, ListWrap, ModifyButton, ModifyButtonWrap, PageWrap, PostButton, PostButtonWrap, PostButtons, PostDate, PostSummary, PostTitle, ViewButton, ViewButtonWrap } from "./style";
 
 const FacultyAttendanceManagePage = ({ lectureName }) => {
   const [attendances, setAttendances] = useState([]);
@@ -195,6 +195,12 @@ const FacultyAttendanceManagePage = ({ lectureName }) => {
         <ListHeader>
           <PostTitle>주차 및 회차</PostTitle>
           <PostDate>등록일자</PostDate>
+          <PostSummary>출석</PostSummary>
+          <PostSummary>지각</PostSummary>
+          <PostSummary>결석</PostSummary>
+          <PostSummary>기타</PostSummary>
+          <PostSummary>총원</PostSummary>
+          <AttendanceRatio>출석율</AttendanceRatio>
           <PostButtons>
             <ViewButtonWrap>조회</ViewButtonWrap>
             <ModifyButtonWrap>수정</ModifyButtonWrap>
@@ -202,35 +208,53 @@ const FacultyAttendanceManagePage = ({ lectureName }) => {
           </PostButtons>
         </ListHeader>
         <ListBody>
-        {
-          attendances.map((week, weekIndex) => {
-            return (
-              week.map((day, dayIndex) => {
-                return (
-                  <ListRow>
-                    <PostTitle>
-                      {weekIndex + 1}주차 {dayIndex + 1}회차
-                    </PostTitle>
-                    <PostDate>
-                      {day["date"]}
-                    </PostDate>
-                    <PostButtons>
-                      <ViewButtonWrap>
-                        <ViewButton/>
-                      </ViewButtonWrap>
-                      <ModifyButtonWrap>
-                        <ModifyButton/>
-                      </ModifyButtonWrap>
-                      <DeleteButtonWrap>
-                        <DeleteButton/>
-                      </DeleteButtonWrap>
+          {
+            attendances.map((week, weekIndex) => {
+              return (
+                week.map((day, dayIndex) => {
+                  return (
+                    <ListRow>
+                      <PostTitle>
+                        {weekIndex + 1}주차 {dayIndex + 1}회차
+                      </PostTitle>
+                      <PostDate>
+                        {day["date"]}
+                      </PostDate>
+                      <PostSummary>
+                        {Object.values(day).filter(e=>e==="출석").length} 명
+                      </PostSummary>
+                      <PostSummary>
+                        {Object.values(day).filter(e=>e==="지각").length} 명
+                      </PostSummary>
+                      <PostSummary>
+                        {Object.values(day).filter(e=>e==="결석").length} 명
+                      </PostSummary>
+                      <PostSummary>
+                        {Object.values(day).length - Object.values(day).filter(e=>e==="출석").length - Object.values(day).filter(e=>e==="지각").length - Object.values(day).filter(e=>e==="결석").length} 명
+                      </PostSummary>
+                      <PostSummary>
+                        {Object.values(day).length} 명
+                      </PostSummary>
+                      <AttendanceRatio>
+                        {(Object.values(day).filter(e=>e==="출석").length / Object.values(day).length).toFixed(4) * 100} %
+                      </AttendanceRatio>
+                      <PostButtons>
+                        <ViewButtonWrap>
+                          <ViewButton />
+                        </ViewButtonWrap>
+                        <ModifyButtonWrap>
+                          <ModifyButton />
+                        </ModifyButtonWrap>
+                        <DeleteButtonWrap>
+                          <DeleteButton />
+                        </DeleteButtonWrap>
                       </PostButtons>
-                  </ListRow>
-                )
-              })
-            )
-          })
-        }
+                    </ListRow>
+                  )
+                })
+              )
+            })
+          }
         </ListBody>
       </ListWrap>
     </PageWrap>

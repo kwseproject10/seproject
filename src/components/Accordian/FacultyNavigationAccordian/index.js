@@ -48,7 +48,7 @@ const FacultyNavigationAccordian = ({ actived, setActived, index, text, link }) 
   }, [outsideRef, setAccordianActived]);
 
   return (
-    <AccordianWrap ref={outsideRef} actived={AccordianActived} numRows={menus.length}>
+    <AccordianWrap actived={AccordianActived} numRows={menus.length}>
       <OpenButtonWrap
         AccordianActive={AccordianActived}
         actived={actived}

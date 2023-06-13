@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { LecturesState, userIDState, userInformState } from './../../../Atom';
+import { LecturesState, signUpState, userIDState, userInformState } from './../../../Atom';
 import { AlretRow, ButtonRow, Input, InputTitle, LinkStyle, LoginPageLogo, SignButton } from "./style";
 
 const LoginPage = () => {
@@ -16,6 +16,7 @@ const LoginPage = () => {
   const movePage = useNavigate();
   const setUserInform = useSetRecoilState(userInformState);
   const setLectures = useSetRecoilState(LecturesState);
+  const setSignUp = useSetRecoilState(signUpState);
 
   const goStudent = () => {
     movePage('/student');
@@ -47,7 +48,6 @@ const LoginPage = () => {
           route
         );
         if (res_user.data.result === "false") {
-          console.log("profile load error");
           setAlret("회원정보 출력 오류가 발생하였습니다.");
           return
         } else {
@@ -124,8 +124,8 @@ const LoginPage = () => {
             LOG IN
           </SignButton>
         </LinkStyle>
-        <LinkStyle to="/signup">
-          <SignButton onClick={() => { }}>SIGN UP</SignButton>
+        <LinkStyle to="/signup" onClick={() => { setSignUp(true) }}>
+          <SignButton>SIGN UP</SignButton>
         </LinkStyle>
       </ButtonRow>
     </div>

@@ -10,3 +10,33 @@ facultyPage 구현
 라우터 트리 기획
 
 API 비동기 작업
+
+{
+    "key": "0",
+    "name": "대학물리학1",
+    "professor": [
+        "새빛205"
+    ],
+    "major": "소프트웨어융합대학",
+    "type": "기필",
+    "credit": "3",
+    "numOfTime": "3",
+    "time": [
+        "화4",
+        "목3"
+    ],
+    "place": [
+        "새빛205",
+        "새빛205"
+    ],
+    "ID": "H000-1-9753-3",
+    "todoAssignment" : [
+      assignment1, assignment2, ...(due date 가까운 순 정렬)
+    ],
+    "newNotice" : {
+      notice 포맷 맞춰서(이름만 전달해도 되긴 함)
+    },
+    "newArchive" : {
+      archive 포맷 맞춰서(이름만 전달해도 되긴 함)
+    }
+}

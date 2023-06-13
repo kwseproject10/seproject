@@ -35,13 +35,6 @@ export const OpenButtonWrap = styled.div`
     `
     :
     `
-    &:hover{
-      color: black;
-      ${Size('large')}{
-        border-right: 0.125rem var(--color-dk) solid;
-        color:var(--color-dg);
-      }
-    }
     `
   }
 `
@@ -52,10 +45,17 @@ export const AccordianOpenButton = styled.div`
   ${Size('large')}{
     color: var(--color-gr);
   }
-  &:hover{
-    color: var(--color-dg);
-    transform: translateY(0);
-    transition: 0.3s;
+  ${(props) => props.actived >= props.index || props.accordianActived ?`
+  
+  `
+  :
+  `
+    &:hover{
+      color: var(--color-dg);
+      transform: translateY(0);
+      transition: 0.3s;
+    }
+  `
   }
 `
 
@@ -97,8 +97,9 @@ export const AccordianContent = styled.div`
     &:hover{
       color: black;
       ${Size('large')}{
-        border-right: 0.125rem var(--color-dk) solid;
-        color:var(--color-dg);
+        color:var(--color-sh);
+        transform: translateY(0);
+        transition: 0.3s;
       }
     }
     `

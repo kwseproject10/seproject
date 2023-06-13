@@ -20,7 +20,7 @@ const LectureDetailMain = ({ setNavigationindex }) => {
   const userID = useRecoilValue(userIDState);
 
   useEffect(() => {
-    getAPI(setAttendance, 'attendance', userID).catch(error => console.log(error))
+    getAPI(setAttendance, 'attendance', userID)
   }, [ userID ]);
 
   const loadInforms = (selectedLecture) => {

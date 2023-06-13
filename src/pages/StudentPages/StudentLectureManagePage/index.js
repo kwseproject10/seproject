@@ -8,7 +8,6 @@ import { LecturesState } from "../../../Atom";
 import { AddButton, Body, ButtonWrap, DeleteButton, DropDownWrap, LectureCredit, LectureID, LectureMajor, LectureManagePageWrap, LectureNumOfTime, LectureProfessor, LectureSearchBar, LectureSearchBarWrap, LectureTimePlace, LectureTitle, LectureType, ListBody, ListHeader, ListRow, ListTitle, ListWrap, MyLectureList, MyLectureListWrap, SearchIcon, SearchIconWrap, SearchInput, SyllabusOpen, SyllabusOpenWrap, WholeLectureList, WholeLectureListWrap } from "./style";
 
 const RenderList = React.memo(({ lectures, button, rowPerPage, setSyllabusModalOpen, onButtonClick }) => {
-  console.log("ReRender")
   let Rows = [];
   for (let i = 0; i < lectures.length; i++) {
     const lecture = lectures[i]
@@ -26,14 +25,14 @@ const RenderList = React.memo(({ lectures, button, rowPerPage, setSyllabusModalO
           <LectureProfessor>{lecture.professor}</LectureProfessor>
           <LectureTimePlace>{lecture.time}</LectureTimePlace>
           <SyllabusOpenWrap
-            onClick={()=>{setSyllabusModalOpen(true)}}
+            onClick={() => { setSyllabusModalOpen(true) }}
           >
-            <SyllabusOpen/>
+            <SyllabusOpen />
           </SyllabusOpenWrap>
           <ButtonWrap
-            onClick={()=>{onButtonClick(lecture.ID, lecture.name)}}
+            onClick={() => { onButtonClick(lecture.ID, lecture.name) }}
           >
-            {button === "Add" ? <AddButton/> : <DeleteButton/>}
+            {button === "Add" ? <AddButton /> : <DeleteButton />}
           </ButtonWrap>
         </ListRow>
       )
@@ -83,7 +82,7 @@ const StudentLectureManagePage = () => {
 
   const initSearchedLectures = useCallback(() => {
     setSearchedLectures(wholeLectures);
-  },[wholeLectures])
+  }, [wholeLectures])
 
   useEffect(() => {
     const fetchLectureAll = async () => {
@@ -91,8 +90,7 @@ const StudentLectureManagePage = () => {
       const res = await axios.get(
         route
       );
-      if(res.data.result === "false") {
-        console.log("profile load error");
+      if (res.data.result === "false") {
         return
       }
       setWholeLectures(res.data);
@@ -103,9 +101,9 @@ const StudentLectureManagePage = () => {
 
   const onAddButtonClick = useCallback((lectureID, lectureName) => {
     let result = window.confirm(`${lectureID}: ${lectureName} 강의 수강을 신청하시겠습니까?`);
-    if(result){
+    if (result) {
       window.alert(`${lectureName} 강의 수강이 신청되었습니다.`);
-    }else{
+    } else {
       return;
     }
   }, []);
@@ -113,78 +111,59 @@ const StudentLectureManagePage = () => {
   const onDeleteButtonClick = useCallback((lectureID, lectureName) => {
     let result = window.confirm(`${lectureID}: ${lectureName} 강의를 삭제하시겠습니까?
     * 삭제시 출석, 성적 등 수강 관련 정보는 복구할 수 없습니다.`);
-    if(result){
+    if (result) {
       window.alert(`${lectureName} 강의가 수강목록에서 삭제되었습니다.`);
-    }else{
+    } else {
       return;
     }
   }, []);
 
-  useEffect(initSearchedLectures, [ wholeLectures, initSearchedLectures ])
+  useEffect(initSearchedLectures, [wholeLectures, initSearchedLectures])
 
   //searchBar control
   const onClickSearch = useCallback(() => {
-    if(searchText === ""){
+    if (searchText === "") {
       initSearchedLectures();
       setSearchType("강의명");
       return;
     }
     setSearchedLectures(wholeLectures.filter(
-      (e) => (
-        searchType === "강의명" ?
-            e.name.indexOf(searchText) !== -1
-          :
-            (
-              searchType === "학정번호" ?
-                e.ID.indexOf(searchText) !== -1
-              :
-                (
-                  searchType === "개설학과" ?
-                      e.major.indexOf(searchText) !== -1
-                    :
-                      (
-                        searchType === "학점" ?
-                            e.credit === parseInt(searchText)
-                          :
-                            (
-                              searchType === "시수" ?
-                                  e.numOfTime === parseInt(searchText)
-                                :
-                                  (
-                                    searchType === "분류" ?
-                                        e.type.indexOf(searchText) !== -1
-                                      :
-                                        (
-                                          searchType === "교수" ?
-                                              e.professor.indexOf(searchText) !== -1
-                                            :
-                                              (
-                                                searchType === "강의시간" ?
-                                                    e.time.indexOf(searchText) !== -1
-                                                  :
-                                                    true
-                                                )
-                                        )
-                                  )
-                            )
-                      )
-                )
-            )
-      )
+      (e) => {
+        switch (searchType) {
+          case ("강의명"):
+            return e.name !== null && e.name.indexOf(searchText) !== -1;
+          case ("학정번호"):
+            return e.ID !== null && e.ID.indexOf(searchText) !== -1;
+          case ("개설학과"):
+            return e.major !== null && e.major.indexOf(searchText) !== -1;
+          case ("학점"):
+            return e.credit !== null && e.credit === parseInt(searchText);
+          case ("시수"):
+            return e.numOfTime !== null && e.numOfTime === parseInt(searchText);
+          case ("분류"):
+            return e.type !== null && e.type.indexOf(searchText) !== -1;
+          case ("교수"):
+            return e.professor !== null && e.professor.indexOf(searchText) !== -1;
+          case ("강의시간"):
+            return e.time !== null && e.time.indexOf(searchText) !== -1;
+          default:
+            return true;
+        }
+      }
     ))
     setSearchText("");
   }, [initSearchedLectures, searchText, searchType, wholeLectures])
 
   const handleSearchText = useCallback(((e) => {
     setSearchText(e);
-  }),[])
-  
+  }), [])
+
   return (
     <LectureManagePageWrap>
       <Modal
         modalOpen={syllabusModalOpen}
         setModalOpen={setSyllabusModalOpen}
-        innerContents={<Syllabus setModalOpen={setSyllabusModalOpen}/>}
+        innerContents={<Syllabus setModalOpen={setSyllabusModalOpen} />}
       />
       <Body>
         <MyLectureListWrap>
@@ -202,12 +181,17 @@ const StudentLectureManagePage = () => {
         <WholeLectureListWrap>
           <ListTitle>전체 강의 목록</ListTitle>
           <WholeLectureList>
+            {wholeLectures === [] ?
+            ""
+            :
             <RenderList
               lectures={searchedLectures}
               button={"Add"}
               setSyllabusModalOpen={setSyllabusModalOpen}
               onButtonClick={onAddButtonClick}
             />
+            }
+            
           </WholeLectureList>
           <LectureSearchBarWrap>
             <LectureSearchBar>
@@ -226,11 +210,11 @@ const StudentLectureManagePage = () => {
               </DropDownWrap>
               <SearchInput
                 value={searchText}
-                onChange={(e)=>{
+                onChange={(e) => {
                   handleSearchText(e.target.value);
                 }}
-                onKeyPress={(e)=>{
-                  if(e.key === 'Enter'){
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
                     onClickSearch();
                   }
                 }}

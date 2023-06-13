@@ -1,12 +1,14 @@
 import { FacultyNavigationState } from '@./Atom';
 import NavigationButton from "@components/Buttons/NavigationButton";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { FacultyNavigationAccordianActivedState } from '../../../Atom';
 import FacultyNavigationAccordian from '../../Accordian/FacultyNavigationAccordian';
 import { ButtonWrap, NavigationBar, NavigationWrap } from "./style";
 
 
 const FacultyNavigation = () => {
   const [actived, setActived] = useRecoilState(FacultyNavigationState);
+  const setAccordianActived = useSetRecoilState(FacultyNavigationAccordianActivedState);
   return (
     <NavigationWrap>
       <NavigationBar>
@@ -17,6 +19,7 @@ const FacultyNavigation = () => {
             index={0}
             text={"MAIN"}
             link={"faculty"}
+            onClick={setAccordianActived}
           />
           <NavigationButton
             actived={actived}
@@ -24,6 +27,7 @@ const FacultyNavigation = () => {
             index={1}
             text={"시간표 / 강의 목록"}
             link={"faculty/timetable"}
+            onClick={setAccordianActived}
           />
           <FacultyNavigationAccordian
             actived={actived}
@@ -38,6 +42,7 @@ const FacultyNavigation = () => {
             index={3}
             text={"개인정보 관리"}
             link={"faculty/mypage"}
+            onClick={setAccordianActived}
           />
         </ButtonWrap>
       </NavigationBar>

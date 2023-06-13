@@ -120,7 +120,7 @@ export const PageButtonWrap = styled.div`
   width: 20%;
   height: 100%;
   display: flex;
-  justify-content: selector;
+  justify-content: center;
   color: var(--color-dg);
 `
 

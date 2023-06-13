@@ -9,7 +9,7 @@ export const PageWrap = styled.div`
 `
 
 export const ListWrap = styled.div`
-  width: 60%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   margin-top: 1.5rem;

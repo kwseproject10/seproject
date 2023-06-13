@@ -1,7 +1,7 @@
 import DropDown from '@components/DropDown/';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { FacultyNavigationAccordianActivedState, LectureSelectedState, LecturesState } from "../../../Atom";
+import { FacultyLectureSelectedState, FacultyLecturesState, FacultyNavigationAccordianActivedState } from "../../../Atom";
 import FacultyArchiveManagePage from './FacultyArchiveManagePage';
 import FacultyAssignmentManagePage from './FacultyAssignmentManagePage';
 import FacultyAttendanceManagePage from "./FacultyAttendanceManagePage";
@@ -12,18 +12,22 @@ import { DropDownRow, DropDownWrap, PageWrap } from "./style";
 
 const FacultyManagePage = () => {
   const FacultyNavigationAccordian = useRecoilValue(FacultyNavigationAccordianActivedState);
+  const setSelectedLectureID = useSetRecoilState(FacultyLectureSelectedState);
   const [selectedLecture, setSelectedLecture] = useState("");
-  const setSelectedLectureID = useSetRecoilState(LectureSelectedState);
   const [lectureDropDown, setLectureDropDown] = useState(false);
-  const lectures = useRecoilValue(LecturesState);
   const [lectureNameList, setLectureNameList] = useState([]);
+  const lectures = useRecoilValue(FacultyLecturesState);
 
+  //to add lecture load API
+  
   const loadLectureName = () => {
-    setLectureNameList([]);
-    lectures.forEach((e) => {
-      setLectureNameList((prev) => [...prev, e.name]);
-    })
-    setSelectedLecture(lectures[0].name);
+    if (lectures) {
+      setLectureNameList([]);
+      lectures.forEach((e) => {
+        setLectureNameList((prev) => [...prev, e.name]);
+      })
+      setSelectedLecture();
+    }
   }
 
   useEffect(loadLectureName, [lectures, setSelectedLecture]);
@@ -38,6 +42,7 @@ const FacultyManagePage = () => {
     setSelectedLectureID(lectureID);
     setSelectedLecture(value);
   }
+
   const RenderContents = () => {
     switch (FacultyNavigationAccordian) {
       case "0":
@@ -79,17 +84,22 @@ const FacultyManagePage = () => {
     <PageWrap>
       <DropDownRow>
         <DropDownWrap>
-          <DropDown
-            state={selectedLecture}
-            setState={handleLectureSelect}
-            isOpen={lectureDropDown}
-            setIsOpen={setLectureDropDown}
-            list={lectureNameList}
-            fontSize={"var(--font-size-xs)"}
-            width={"10rem"}
-            listWidth={"7.5rem"}
-            height={"1.875rem"}
-          />
+          {
+            lectures ?
+              <DropDown
+                state={selectedLecture}
+                setState={handleLectureSelect}
+                isOpen={lectureDropDown}
+                setIsOpen={setLectureDropDown}
+                list={lectureNameList}
+                fontSize={"var(--font-size-xs)"}
+                width={"10rem"}
+                listWidth={"7.5rem"}
+                height={"1.875rem"}
+              />
+              :
+              ""
+          }
         </DropDownWrap>
       </DropDownRow>
       <RenderContents />

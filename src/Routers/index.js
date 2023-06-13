@@ -21,35 +21,42 @@ import FacultyTimeTablePage from "@pages/FacultyPages/FacultyTimeTablePage";
 
 import ErrorPage from "@pages/ErrorPage";
 import { useRecoilValue } from "recoil";
-import { AuthState } from "../Atom";
+import { AuthState, signUpState } from "../Atom";
 
 const Routers = () => {
   const auth = useRecoilValue(AuthState);
+  const signUp = useRecoilValue(signUpState);
   return (
     <>
-    <Routes>
-      <Route path="/" element={<SignPages />}>
-        <Route path="" element={<LoginPage />}></Route>
-        <Route path="signup" element={<SignUpPage />}></Route>
-      </Route>
-      <Route path="/student" element={<StudentPages />}>
-        <Route path="" element={<StudentMainPage />}></Route>
-        <Route path="timetable" element={<StudentTimeTablePage />}></Route>
-        <Route path="credit" element={<StudentCreditPage />}></Route>
-        <Route path="mypage" element={<StudentMyPage />}></Route>
-        <Route path="lecturelist" element={<StudentLectureListPage />}></Route>
-        <Route path="lecturedetail" element={<StudentLectureDetailPage />}></Route>
-        <Route path="lecturemanage" element={<StudentLectureManagePage />}></Route>
-      </Route>
-      <Route path="/faculty" element={<FacultyPages />}>
-        <Route path="" element={<FacultyMainPage />}></Route>
-        <Route path="timetable" element={<FacultyTimeTablePage />}></Route>
-        <Route path="manage" element={<FacultyManagePages />}></Route>
-        <Route path="mypage" element={<FacultyMyPage/>}></Route>
-      </Route>
-      <Route path="/*" element={<ErrorPage />}/>
-    </Routes>
-    {auth ? "" : <Navigate to ="/" />}
+      <Routes>
+        <Route path="/" element={<SignPages />}>
+          <Route path="" element={<LoginPage />}></Route>
+          <Route path="signup" element={<SignUpPage />}></Route>
+        </Route>
+        <Route path="/student" element={<StudentPages />}>
+          <Route path="" element={<StudentMainPage />}></Route>
+          <Route path="timetable" element={<StudentTimeTablePage />}></Route>
+          <Route path="credit" element={<StudentCreditPage />}></Route>
+          <Route path="mypage" element={<StudentMyPage />}></Route>
+          <Route path="lecturelist" element={<StudentLectureListPage />}></Route>
+          <Route path="lecturedetail" element={<StudentLectureDetailPage />}></Route>
+          <Route path="lecturemanage" element={<StudentLectureManagePage />}></Route>
+        </Route>
+        <Route path="/faculty" element={<FacultyPages />}>
+          <Route path="" element={<FacultyMainPage />}></Route>
+          <Route path="timetable" element={<FacultyTimeTablePage />}></Route>
+          <Route path="manage" element={<FacultyManagePages />}></Route>
+          <Route path="mypage" element={<FacultyMyPage />}></Route>
+        </Route>
+        <Route path="/*" element={<ErrorPage />} />
+      </Routes>
+      {auth ? "" :
+        (
+          signUp ?
+            <Navigate to="/signup" />
+            :
+            <Navigate to="/" />
+        )}
     </>
   )
 }

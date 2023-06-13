@@ -21,10 +21,8 @@ const StudentCreditPage = () => {
         route
       );
       if (res.data.result === "false") {
-        console.log("load lectures fail");
         return
       } else {
-        console.log(res.data);
         setLectureEachSemeters(res.data);
       }
     }
@@ -40,10 +38,8 @@ const StudentCreditPage = () => {
         route
       );
       if (res.data.result === "false") {
-        console.log("load credit fail");
         return
       } else {
-        console.log(res.data);
         setSemesters(res.data);
       }
     }
@@ -59,10 +55,8 @@ const StudentCreditPage = () => {
         route
       );
       if (res.data.result === "false") {
-        console.log("load credit fail");
         return
       } else {
-        console.log(res.data.userCredit);
         setCreditEachSemesters(res.data.userCredit);
       }
     }

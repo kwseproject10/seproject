@@ -31,7 +31,11 @@ const StudentNavigationAccordian = ({ actived, setActived, index, text, link }) 
         index={index}
         onClick={() => { setAccordianActived(prev => !prev) }}
       >
-        <AccordianOpenButton>
+        <AccordianOpenButton
+          accordianActived={AccordianActived}
+          actived={actived}
+          index={index}
+        >
           {text}
         </AccordianOpenButton>
       </OpenButtonWrap>

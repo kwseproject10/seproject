@@ -26,10 +26,8 @@ const TimeTablePageLectureList = ({ lectures }) => {
         route
       );
       if (res.data.result === "false") {
-        console.log("load fail");
         return
       }
-      console.log(res.data);
       setAttendance(res.data);
     }
 

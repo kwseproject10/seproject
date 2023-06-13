@@ -2,16 +2,20 @@ import { StudentNavigationState } from '@./Atom';
 import HeaderButton from "@components/Buttons/HeaderButton";
 import HeaderLogoBlack from "@images/HeaderLogo.png";
 import { Link } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { AuthState, LecturesState, userIDState, userInformState } from './../../../Atom';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { AuthState, LectureSelectedState, LecturesState, StudentNavigationAccordianActivedState, userIDState, userInformState } from './../../../Atom';
 import { ButtonPartition, HeaderBar, HeaderWrap, LeftContents, LeftContentsWrap, LogoWrap, RightContents, RightContentsWrap, UserName, UserType } from "./style";
 
 const StudentHeader = () => {
-  const setActived = useSetRecoilState(StudentNavigationState);
-  const [userInform, setUserInform] = useRecoilState(userInformState);
-  const [userID, setUserID] = useRecoilState(userIDState);
-  const setAuth = useSetRecoilState(AuthState);
-  const setLectures = useSetRecoilState(LecturesState);
+  const userInform = useRecoilValue(userInformState);
+  const userID = useRecoilValue(userIDState);
+  const resetUserInform = useResetRecoilState(userInformState);
+  const resetUserID = useResetRecoilState(userIDState);
+  const resetAuth = useResetRecoilState(AuthState);
+  const resetLectures = useResetRecoilState(LecturesState);
+  const resetActived = useResetRecoilState(StudentNavigationState);
+  const resetSelectedLecture = useResetRecoilState(LectureSelectedState);
+  const resetStudentNavigationAccordianActived = useResetRecoilState(StudentNavigationAccordianActivedState);
 
     return(
         <HeaderWrap>
@@ -20,7 +24,7 @@ const StudentHeader = () => {
             <LeftContentsWrap>
               <LeftContents>
                 <Link to="" onClick={() => {
-                  setActived(0);
+                  resetActived();
                 }}>
                   <LogoWrap>
                     <img
@@ -42,11 +46,13 @@ const StudentHeader = () => {
                 <HeaderButton text={"광운대학교"} out={true} link={"https://www.kw.ac.kr/ko/"} onClick={() => {}}/>
                 <ButtonPartition/>
                 <HeaderButton text={"로그아웃"} out={false} link={""} onClick={() => {
-                  setUserInform({});
-                  setUserID(0);
-                  setAuth(false);
-                  setActived(0);
-                  setLectures(0);
+                  resetUserInform();
+                  resetUserID();
+                  resetAuth();
+                  resetLectures();
+                  resetActived();
+                  resetSelectedLecture();
+                  resetStudentNavigationAccordianActived();
                 }}/>
               </RightContents>
             </RightContentsWrap>

@@ -37,9 +37,8 @@ export const NavigationButtonStyle = styled.div`
       color: black;
       border-bottom: 0.125rem var(--color-dk) solid;
       ${Size('large')}{
-        border-bottom: none;
-        border-right: 0.125rem var(--color-dk) solid;
         color: var(--color-dg);
+        border-bottom: none;
       }
       transform: translateY(0);
       transition: 0.3s;

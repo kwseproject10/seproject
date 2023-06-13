@@ -35,7 +35,6 @@ const CreditList = () => {
         route
       );
       if(res.data.result === "false") {
-        console.log("no credit data");
         return
       }
       let temp = {

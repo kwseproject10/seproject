@@ -9,7 +9,7 @@ export const PageWrap = styled.div`
 `
 
 export const ListWrap = styled.div`
-  width: 60%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   margin-top: 1.5rem;
@@ -57,14 +57,19 @@ export const RowItem = styled.div`
 `
 
 export const PostTitle = styled(RowItem)`
-  width: 30%;
+  width: 15%;
+  margin-left: 3%;
 `
 
 export const PostDate = styled(RowItem)`
-  width: 20%;
+  width: 15%;
 `
 
-export const PostHit = styled(RowItem)`
+export const PostSummary = styled(RowItem)`
+  width: 5%;
+`
+
+export const AttendanceRatio = styled(RowItem)`
   width: 10%;
 `
 
