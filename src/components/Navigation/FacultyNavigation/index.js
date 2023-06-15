@@ -21,20 +21,20 @@ const FacultyNavigation = () => {
             link={"faculty"}
             onClick={setAccordianActived}
           />
-          <NavigationButton
-            actived={actived}
-            setActived={setActived}
-            index={1}
-            text={"시간표 / 강의 목록"}
-            link={"faculty/timetable"}
-            onClick={setAccordianActived}
-          />
           <FacultyNavigationAccordian
             actived={actived}
             setActived={setActived}
             index={4}
             text={"강의 관리"}
             link={"manage"}
+          />
+          <NavigationButton
+            actived={actived}
+            setActived={setActived}
+            index={2}
+            text={"강의 개설"}
+            link={"faculty/createlecture"}
+            onClick={setAccordianActived}
           />
           <NavigationButton
             actived={actived}

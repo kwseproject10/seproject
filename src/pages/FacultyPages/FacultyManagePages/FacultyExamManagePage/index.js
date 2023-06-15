@@ -1,39 +1,50 @@
 import { useEffect, useState } from "react";
-import DropDown from './../../../../components/DropDown/index';
-import { DeleteButton, DeleteButtonWrap, DropDownWrap, LectureSearchBar, LectureSearchBarWrap, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListTitleRow, ListWrap, ModifyButton, ModifyButtonWrap, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PageWrap, PostButton, PostButtonWrap, PostButtons, PostDate, PostHit, PostTitle, RightButton, SearchIcon, SearchIconWrap, SearchInput, ViewButton, ViewButtonWrap } from "./style";
+import DropDown from '../../../../components/DropDown/index';
+import { DeleteButton, DeleteButtonWrap, DropDownWrap, LectureSearchBar, LectureSearchBarWrap, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListTitleRow, ListWrap, ModifyButton, ModifyButtonWrap, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PageWrap, PostButton, PostButtonWrap, PostButtons, PostDate, PostTitle, RightButton, Scoring, SearchIcon, SearchIconWrap, SearchInput, SubmitCount, ViewButton, ViewButtonWrap } from "./style";
 
-const FacultyArchiveManagePage = ({ lectureName }) => {
-  const [archives, setArchives] = useState([]);
+const FacultyExamManagePage = ({ lectureName }) => {
+  const [exams, setExams] = useState([]);
 
   //API call
-  const loadArchives = () => {
-    setArchives([
+  const loadExams = () => {
+    setExams([
       {
         ID: "0",
-        title: "중간고사 시험범위",
-        subject: "소프트웨어공학",
-        date: "2022.01.01(월)",
+        title: "중간고사",
+        date: "2022.04.26(월)",
         poster: "이기훈",
-        hit: 10
+        submitCount: 30,
+        whole: 31,
+        scoring: true,  //성적입력 완료여부
       },
       {
         ID: "1",
-        title: "2차 프로젝트 점수 공지",
-        subject: "소프트웨어공학",
-        date: "2023.05.28(일)",
+        title: "중간고사 보강시험",
+        date: "2022.05.08(월)",
         poster: "이기훈",
-        hit: 10
+        submitCount: 30,
+        whole: 31,
+        scoring: true,  //성적입력 완료여부
+      },
+      {
+        ID: "2",
+        title: "기말고사",
+        date: "2022.06.14(수)",
+        poster: "이기훈",
+        submitCount: 28,
+        whole: 31,
+        scoring: false,  //성적입력 완료여부
       }
     ])
   }
 
 
   const initSearchedLectures = () => {
-    setSearchedList(archives);
+    setSearchedList(exams);
   }
 
-  useEffect(loadArchives, []);
-  useEffect(initSearchedLectures, [archives]);
+  useEffect(loadExams, []);
+  useEffect(initSearchedLectures, [exams]);
 
   const [searchedList, setSearchedList] = useState([]);
   const [selectedPage, setSelectedPage] = useState(1);
@@ -49,9 +60,9 @@ const FacultyArchiveManagePage = ({ lectureName }) => {
   let pages = 1;
   if (searchedList !== undefined) pages = parseInt(searchedList.length / 10) + 1;
   let pageButtons = [];
-  let start = selectedPage - ((selectedPage-1) % 10)
+  let start = selectedPage - ((selectedPage - 1) % 10)
   let end = start + 10
-  if(pages >= start && pages < end)end = pages + 1;
+  if (pages >= start && pages < end) end = pages + 1;
   for (let i = start; i < end; i++) {
     pageButtons.push(
       <PageButton
@@ -81,7 +92,7 @@ const FacultyArchiveManagePage = ({ lectureName }) => {
       setSearchType("제목");
       return;
     }
-    setSearchedList(archives.filter(
+    setSearchedList(exams.filter(
       (e) => {
         switch (searchType) {
           case "제목":
@@ -100,7 +111,7 @@ const FacultyArchiveManagePage = ({ lectureName }) => {
     <PageWrap>
       <ListWrap>
         <ListTitleRow>
-          <ListTitle>강의 자료실 관리</ListTitle>
+          <ListTitle>강의 시험 관리</ListTitle>
           <PostButtonWrap>
             <PostButton>새 글 쓰기</PostButton>
           </PostButtonWrap>
@@ -108,7 +119,8 @@ const FacultyArchiveManagePage = ({ lectureName }) => {
         <ListHeader>
           <PostTitle>제목</PostTitle>
           <PostDate>작성일자</PostDate>
-          <PostHit>조회수</PostHit>
+          <SubmitCount>응시인원</SubmitCount>
+          <Scoring>성적입력</Scoring>
           <PostButtons>
             <ViewButtonWrap>조회</ViewButtonWrap>
             <ModifyButtonWrap>수정</ModifyButtonWrap>
@@ -117,12 +129,13 @@ const FacultyArchiveManagePage = ({ lectureName }) => {
         </ListHeader>
         <ListBody>
           {
-            selectedList.map((archive, archiveIndex) => {
+            selectedList.map((exam, examIndex) => {
               return (
                 <ListRow>
-                  <PostTitle>{archive.title}</PostTitle>
-                  <PostDate>{archive.date}</PostDate>
-                  <PostHit>{archive.hit}</PostHit>
+                  <PostTitle>{exam.title}</PostTitle>
+                  <PostDate>{exam.date}</PostDate>
+                  <SubmitCount>{exam.submitCount} / {exam.whole}</SubmitCount>
+                  <Scoring scoring={exam.scoring}>{exam.scoring ? "완료" : "진행 중"}</Scoring>
                   <PostButtons>
                     <ViewButtonWrap>
                       <ViewButton />
@@ -180,8 +193,8 @@ const FacultyArchiveManagePage = ({ lectureName }) => {
               onChange={(e) => {
                 setSearchText(e.target.value);
               }}
-              onKeyPress={(e)=>{
-                if(e.key === 'Enter'){
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
                   onClickSearch();
                 }
               }}
@@ -198,4 +211,4 @@ const FacultyArchiveManagePage = ({ lectureName }) => {
   )
 }
 
-export default FacultyArchiveManagePage;
+export default FacultyExamManagePage;

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { LectureSelectedState, StudentNavigationAccordianActivedState, StudentNavigationState } from './../../Atom';
+import { FacultyLectureSelectedState, FacultyNavigationAccordianActivedState, FacultyNavigationState } from '../../../Atom';
 import { Cell, HeaderLeft, HeaderRight, HeaderText, LectureTP, LectureTitle, Table, TableBox, TableHeader, TableWrap, Tbody, Td, Th, Thead, Tr } from "./Style";
 
 const RenderBody = ({ isDetail, lectures }) => {
@@ -28,15 +28,15 @@ const RenderBody = ({ isDetail, lectures }) => {
   };
   let classes = new Set([1,2,3,4,5,6]);
   let dates = ['월', '화', '수', '목', '금', '토'];
-  const setSelectedLecture = useSetRecoilState(LectureSelectedState);
-  const setNavigationIndex = useSetRecoilState(StudentNavigationState);
-  const setNavAccordianActived = useSetRecoilState(StudentNavigationAccordianActivedState);
+  const setSelectedLecture = useSetRecoilState(FacultyLectureSelectedState);
+  const setNavigationIndex = useSetRecoilState(FacultyNavigationState);
+  const setNavAccordianActived = useSetRecoilState(FacultyNavigationAccordianActivedState);
   const movePage = useNavigate();
   const onClickListRow = (lectureID, index) => {
     setSelectedLecture(lectureID);
-    setNavigationIndex(5 + index);
-    setNavAccordianActived(true);
-    movePage('/student/lecturedetail');
+    setNavigationIndex(5);
+    setNavAccordianActived("3");
+    movePage('/faculty/manage');
   }
 
   for(let i = 0; i < lectures.length; i++){
@@ -103,7 +103,7 @@ const RenderBody = ({ isDetail, lectures }) => {
   )
 }
 
-const TimeTable = ({ selectedSemester, setSelectedSemester, semesters, lectures, isDetail }) => {
+const FacultyTimeTable = ({ selectedSemester, setSelectedSemester, semesters, lectures, isDetail }) => {
   console.log("TEST", lectures);
   let date = ['월','화','수','목','금','토'];
   if(isDetail) date = ['시간', '월', '화', '수', '목', '금', '토'];
@@ -133,17 +133,4 @@ const TimeTable = ({ selectedSemester, setSelectedSemester, semesters, lectures,
   )
 }
 
-export default TimeTable;
-
-/**
-  const [ semeseterDropDownisOpen, setSemesterDropDownisOpen ] = useState(false);
-  <DropDown
-    state={selectedSemester}
-    setState={setSelectedSemester}
-    isOpen={semeseterDropDownisOpen}
-    setIsOpen={setSemesterDropDownisOpen}
-    list={semesters}
-    width={"9rem"}
-    listWidth={"6.5rem"}
-  />
- */
+export default FacultyTimeTable;

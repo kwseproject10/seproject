@@ -44,6 +44,7 @@ const LectureDetailArchive = () => {
         linePerPage={10}
         setInDetail={setInDetail}
         setPostID={setArchiveID}
+        boardTitle={"자료실"}
       />
     }
     </NoticePageWrap>

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import DropDown from './../../../../components/DropDown/index';
-import { DeleteButton, DeleteButtonWrap, DropDownWrap, LectureSearchBar, LectureSearchBarWrap, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, ModifyButton, ModifyButtonWrap, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PageWrap, PostButton, PostButtonWrap, PostButtons, PostDate, PostHit, PostTitle, RightButton, SearchIcon, SearchIconWrap, SearchInput, ViewButton, ViewButtonWrap } from "./style";
+import { DeleteButton, DeleteButtonWrap, DropDownWrap, LectureSearchBar, LectureSearchBarWrap, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListTitleRow, ListWrap, ModifyButton, ModifyButtonWrap, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PageWrap, PostButton, PostButtonWrap, PostButtons, PostDate, PostHit, PostTitle, RightButton, SearchIcon, SearchIconWrap, SearchInput, ViewButton, ViewButtonWrap } from "./style";
 
 const FacultyNoticeManagePage = ({ lectureName }) => {
-  const [archives, setArchives] = useState([]);
+  const [notices, setNotices] = useState([]);
 
   //API call
-  const loadArchives = () => {
-    setArchives([
+  const loadNotices = () => {
+    setNotices([
       {
         ID: "0",
         title: "중간고사 시험범위",
@@ -181,11 +181,11 @@ const FacultyNoticeManagePage = ({ lectureName }) => {
 
 
   const initSearchedLectures = () => {
-    setSearchedList(archives);
+    setSearchedList(notices);
   }
 
-  useEffect(loadArchives, []);
-  useEffect(initSearchedLectures, [archives]);
+  useEffect(loadNotices, []);
+  useEffect(initSearchedLectures, [notices]);
 
   const [searchedList, setSearchedList] = useState([]);
   const [selectedPage, setSelectedPage] = useState(1);
@@ -233,7 +233,7 @@ const FacultyNoticeManagePage = ({ lectureName }) => {
       setSearchType("제목");
       return;
     }
-    setSearchedList(archives.filter(
+    setSearchedList(notices.filter(
       (e) => {
       switch (searchType){
         case "제목":
@@ -251,12 +251,12 @@ const FacultyNoticeManagePage = ({ lectureName }) => {
     return (
       <PageWrap>
         <ListWrap>
-          <ListHeader>
-            <ListTitle>강의 자료실 관리</ListTitle>
+          <ListTitleRow>
+            <ListTitle>강의 공지사항 관리</ListTitle>
             <PostButtonWrap>
               <PostButton>새 글 쓰기</PostButton>
             </PostButtonWrap>
-          </ListHeader>
+          </ListTitleRow>
           <ListHeader>
             <PostTitle>제목</PostTitle>
             <PostDate>작성일자</PostDate>
@@ -269,12 +269,12 @@ const FacultyNoticeManagePage = ({ lectureName }) => {
           </ListHeader>
           <ListBody>
             {
-              selectedList.map((archive, archiveIndex) => {
+              selectedList.map((notice, noticeIndex) => {
                 return (
                   <ListRow>
-                    <PostTitle>{archive.title}</PostTitle>
-                    <PostDate>{archive.date}</PostDate>
-                    <PostHit>{archive.hit}</PostHit>
+                    <PostTitle>{notice.title}</PostTitle>
+                    <PostDate>{notice.date}</PostDate>
+                    <PostHit>{notice.hit}</PostHit>
                     <PostButtons>
                       <ViewButtonWrap>
                         <ViewButton />

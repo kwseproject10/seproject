@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AttendanceRatio, DeleteButton, DeleteButtonWrap, ListBody, ListHeader, ListRow, ListTitle, ListWrap, ModifyButton, ModifyButtonWrap, PageWrap, PostButton, PostButtonWrap, PostButtons, PostDate, PostSummary, PostTitle, ViewButton, ViewButtonWrap } from "./style";
+import { AttendanceRatio, DeleteButton, DeleteButtonWrap, ListBody, ListHeader, ListRow, ListTitle, ListTitleRow, ListWrap, ModifyButton, ModifyButtonWrap, PageWrap, PostButton, PostButtonWrap, PostButtons, PostDate, PostSummary, PostTitle, ViewButton, ViewButtonWrap } from "./style";
 
 const FacultyAttendanceManagePage = ({ lectureName }) => {
   const [attendances, setAttendances] = useState([]);
@@ -186,12 +186,12 @@ const FacultyAttendanceManagePage = ({ lectureName }) => {
   return (
     <PageWrap>
       <ListWrap>
-        <ListHeader>
+        <ListTitleRow>
           <ListTitle>강의 출석 관리</ListTitle>
           <PostButtonWrap>
             <PostButton>출석 등록</PostButton>
           </PostButtonWrap>
-        </ListHeader>
+        </ListTitleRow>
         <ListHeader>
           <PostTitle>주차 및 회차</PostTitle>
           <PostDate>등록일자</PostDate>

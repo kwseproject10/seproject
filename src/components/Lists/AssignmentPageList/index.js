@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DropDown from "../../DropDown";
-import { DDay, DropDownWrap, DueDate, HeaderDDay, HeaderDueDate, HeaderPostDate, HeaderPostName, HeaderPoster, HeaderState, LeftButton, ListBody, ListHeader, ListRow, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostName, Poster, RightButton, SearchBar, SearchBarWrap, SearchIcon, SearchIconWrap, SearchInput, State } from "./style";
+import { DDay, DropDownWrap, DueDate, HeaderDDay, HeaderDueDate, HeaderPostDate, HeaderPostName, HeaderPoster, HeaderState, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostName, Poster, RightButton, SearchBar, SearchBarWrap, SearchIcon, SearchIconWrap, SearchInput, State } from "./style";
 
 const RenderList = ({ list, linePerPage, setInDetail, setPostID }) => {
   let Rows = [];
@@ -36,7 +36,7 @@ const RenderList = ({ list, linePerPage, setInDetail, setPostID }) => {
   )
 }
 
-const AssignmentPageList = ({ list, linePerPage, setInDetail, setPostID }) => {
+const AssignmentPageList = ({ boardTitle,list, linePerPage, setInDetail, setPostID }) => {
   const [selectedPage, setSelectedPage] = useState(1);
   const [selectedList, setSelectedList] = useState([]);
   const [searchedList, setSearchedList] = useState([]);
@@ -107,6 +107,7 @@ const AssignmentPageList = ({ list, linePerPage, setInDetail, setPostID }) => {
     <>
       <ListWrap>
         <ListWrapAlign>
+          <ListTitle>{boardTitle}</ListTitle>
           <ListHeader>
             <HeaderPostName>제목</HeaderPostName>
             <HeaderPoster>작성자</HeaderPoster>

@@ -14,6 +14,13 @@ export const ListWrap = styled.div`
   flex-direction: column;
   margin-top: 1.5rem;
 `
+export const ListTitleRow = styled.div`
+  display: flex;
+  height: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`
 
 export const ListHeader = styled.div`
   display: flex;
@@ -21,7 +28,10 @@ export const ListHeader = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid black;
+  border: 1px solid var(--color-nm);
+  background-color:var(--color-gr);
+  color:var(--color-nm);
+  font-weight: bold;
 `
 
 export const ListTitle = styled.div`
@@ -36,8 +46,9 @@ export const ListBody = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column-reverse;
-  border-top: 1px solid black;
-  border-bottom: 2px solid black;
+  border: 1px solid var(--color-nm);
+  border-top: none;
+  background-color:white;
 `
 
 export const ListRow = styled.div`
@@ -77,7 +88,8 @@ export const PostButtons = styled.div`
   display: flex;
   justify-content: space-between;
   width: 20%;
-  margin-right: 7%;
+  margin-left: 5%;
+  margin-right: 5%;
 `
 
 export const ViewButtonWrap = styled(RowItem)`
@@ -85,11 +97,11 @@ export const ViewButtonWrap = styled(RowItem)`
 
 export const ViewButton = styled(TbSearch)`
   cursor: pointer;
-  color: var(--color-dg);
+  color: var(--color-nm);
   width: 1.5rem;
   height: 1.5rem;
   &:hover{
-    color: black;
+    color: var(--color-dk);
     transform: translateY(0);
     transition: 0.3s;
   }
@@ -100,11 +112,11 @@ export const ModifyButtonWrap = styled(RowItem)`
 
 export const ModifyButton = styled(TbEdit)`
   cursor: pointer;
-  color: var(--color-dg);
+  color: var(--color-nm);
   width: 1.5rem;
   height: 1.5rem;
   &:hover{
-    color: black;
+    color: var(--color-dk);
     transform: translateY(0);
     transition: 0.3s;
   }
@@ -115,11 +127,11 @@ export const DeleteButtonWrap = styled(RowItem)`
 
 export const DeleteButton = styled(TbTrash)`
   cursor: pointer;
-  color: var(--color-dg);
+  color: var(--color-nm);
   width: 1.5rem;
   height: 1.5rem;
   &:hover{
-    color: black;
+    color: var(--color-dk);
     transform: translateY(0);
     transition: 0.3s;
   }

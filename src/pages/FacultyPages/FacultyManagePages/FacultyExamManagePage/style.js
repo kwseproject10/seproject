@@ -77,8 +77,13 @@ export const PostDate = styled(RowItem)`
   width: 20%;
 `
 
-export const PostHit = styled(RowItem)`
-  width: 7%;
+export const SubmitCount = styled(RowItem)`
+  width: 10%;
+`
+
+export const Scoring = styled(RowItem)`
+  width: 10%;
+  ${props => props.scoring ? `font-weight: bold;` : ``}
 `
 
 export const PostButtons = styled.div`

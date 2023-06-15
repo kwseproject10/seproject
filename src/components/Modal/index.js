@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { ComponentLayOut, BG, ModalInner } from "./style.js"
+import { BG, ComponentLayOut, ModalInner } from "./style.js";
 
 const Modal = ({ modalOpen, setModalOpen, innerContents, width }) => {
   const ModalBG = useRef();
@@ -14,7 +14,7 @@ const Modal = ({ modalOpen, setModalOpen, innerContents, width }) => {
                   setModalOpen(false);
                 }
               }}>
-                <ModalInner>
+                <ModalInner width={width}>
                   {innerContents}
                 </ModalInner>
               </BG>

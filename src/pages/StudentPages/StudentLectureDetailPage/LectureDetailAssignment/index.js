@@ -259,6 +259,7 @@ const LecutreDetailAssignment = () => {
         linePerPage={5}
         setInDetail={setInDetail}
         setPostID={setAssignmentID}
+        boardTitle={"과제"}
       />
     }
     </NoticePageWrap>

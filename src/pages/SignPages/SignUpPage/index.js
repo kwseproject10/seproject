@@ -1,4 +1,5 @@
 import DropDown from "@components/DropDown";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
@@ -17,13 +18,16 @@ const SignUpPage = () => {
   const [major, setMajor] = useState("컴퓨터정보공학부");
   const [majorDropDown, setMajorDropDown] = useState(false);
   const majorList = ['컴퓨터정보공학부', '소프트웨어학부', '정보융합학부', '법학부', '경영학부'];
+  const [type, setType] = useState('학생');
+  const [typeDropDown, setTypeDropDown] = useState(false);
+  const typeList = ['학생', '교수'];
 
   const checkInformPolicyHandler = () => {
     setCheckInformPolicy((prev) => !prev);
   }
   const { setPolicyModalOpen } = useOutletContext();
 
-  const [studentID, setStudentID] = useState("");
+  const [userID, setStudentID] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
   const [name, setName] = useState("");
@@ -37,13 +41,13 @@ const SignUpPage = () => {
   const [Alret, setAlret] = useState("학번을 입력해주세요.");
   const [canSubmit, setCanSubmit] = useState(false);
 
-  const checkValidate = (studentID, password, rePassword, name, phoneNum1, phoneNum2, phoneNum3, birthYear, birthMonth, birthDay, EmailID, EmailDomain, checkInformPolicy) => {
-    if (studentID === "") {
+  const checkValidate = (userID, password, rePassword, name, phoneNum1, phoneNum2, phoneNum3, birthYear, birthMonth, birthDay, EmailID, EmailDomain, checkInformPolicy) => {
+    if (userID === "") {
       setCanSubmit(false);
       setAlret("학번을 입력해주세요.");
       return;
     }
-    if (studentID.length !== 10) {
+    if (userID.length !== 10) {
       setCanSubmit(false);
       setAlret("학번 열 자리를 입력하세요.");
       return;
@@ -109,19 +113,20 @@ const SignUpPage = () => {
 
   useEffect(() => {
     const timeID = setTimeout(() => {
-      checkValidate(studentID, password, rePassword, name, phoneNum1, phoneNum2, phoneNum3, birthYear, birthMonth, birthDay, EmailID, EmailDomain, checkInformPolicy);
+      checkValidate(userID, password, rePassword, name, phoneNum1, phoneNum2, phoneNum3, birthYear, birthMonth, birthDay, EmailID, EmailDomain, checkInformPolicy);
     }, 300);
     return () => {
       clearTimeout(timeID);
     };
-  }, [studentID, password, rePassword, name, phoneNum1, phoneNum2, phoneNum3, birthYear, birthMonth, birthDay, EmailID, EmailDomain, checkInformPolicy, setCanSubmit]);
+  }, [userID, password, rePassword, name, phoneNum1, phoneNum2, phoneNum3, birthYear, birthMonth, birthDay, EmailID, EmailDomain, checkInformPolicy, setCanSubmit]);
 
   const OnSubmit = () => {
-    const request = {
-      "studentID": studentID,
-      "password": password,
-      "rePassword": rePassword,
-      "name": name,
+    const data = {
+      "userID": userID,
+      "PW": password,
+      "userName": name,
+      "type": type,
+      "major": major,
       "phoneNum1": phoneNum1,
       "phoneNum2": phoneNum2,
       "phoneNum3": phoneNum3,
@@ -130,9 +135,19 @@ const SignUpPage = () => {
       "birthDay": birthDay,
       "EmailID": EmailID,
       "EmailDomain": EmailDomain,
-      "checkInformPolicy": checkInformPolicy
     }
+    const fetch = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/signup`;
+      const res = await axios.post(
+        route, data
+      );
+      if (res.data.result === "false") {
+        return
+      }
+    }
+    fetch();
   }
+
   return (
     <div>
       <Title>
@@ -150,7 +165,7 @@ const SignUpPage = () => {
         onChange={(e) => {
           setStudentID(e.target.value);
         }}
-        value={studentID}
+        value={userID}
       />
 
       <InputTitle>PASSWORD</InputTitle>
@@ -180,6 +195,20 @@ const SignUpPage = () => {
         value={name}
       />
 
+      <InputTitle>TYPE</InputTitle>
+      <DropDown
+        state={type}
+        setState={setType}
+        isOpen={typeDropDown}
+        setIsOpen={setTypeDropDown}
+        list={typeList}
+        fontSize={"var(--font-size-xs)"}
+        width={"18.75rem"}
+        listWidth={"16.125rem"}
+        height={"1.875rem"}
+        listHeight={"3.75rem"}
+      />
+
       <InputTitle>MAJOR</InputTitle>
       <DropDown
         state={major}
@@ -189,7 +218,7 @@ const SignUpPage = () => {
         list={majorList}
         fontSize={"var(--font-size-xs)"}
         width={"18.75rem"}
-        listWidth={"23.75rem"}
+        listWidth={"16.125rem"}
         height={"1.875rem"}
       />
 

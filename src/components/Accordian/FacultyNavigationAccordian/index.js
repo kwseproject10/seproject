@@ -7,18 +7,6 @@ const FacultyNavigationAccordian = ({ actived, setActived, index, text, link }) 
   const [AccordianActived, setAccordianActived] = useState(false);
   const menus = [
     {
-      ID: "0",
-      name: "강의 종합"
-    },
-    {
-      ID: "1",
-      name: "출석 관리"
-    },
-    {
-      ID: "2",
-      name: "성적 관리"
-    },
-    {
       ID: "3",
       name: "공지사항 관리"
     },
@@ -29,6 +17,18 @@ const FacultyNavigationAccordian = ({ actived, setActived, index, text, link }) 
     {
       ID: "5",
       name: "과제 관리"
+    },
+    {
+      ID: "1",
+      name: "출석 관리"
+    },
+    {
+      ID: "0",
+      name: "시험 관리"
+    },
+    {
+      ID: "2",
+      name: "성적 관리"
     }
   ];
   const setFacultyNavigationAccordian = useSetRecoilState(FacultyNavigationAccordianActivedState);

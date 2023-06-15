@@ -197,6 +197,7 @@ const LectureDetailNotice = () => {
           linePerPage={10}
           setInDetail={setInDetail}
           setPostID={setNoticeID}
+          boardTitle={"강의 공지사항"}
         />
       }
     </NoticePageWrap>

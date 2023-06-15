@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DropDown from "../../DropDown";
-import { DropDownWrap, HeaderPostDate, HeaderPostHit, HeaderPostName, HeaderPoster, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostHit, PostName, Poster, RightButton, SearchBar, SearchBarWrap, SearchIcon, SearchIconWrap, SearchInput } from "./style";
+import { DropDownWrap, HeaderPostDate, HeaderPostHit, HeaderPostName, HeaderPoster, LeftButton, ListBody, ListHeader, ListRow, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostHit, PostName, Poster, RightButton, SearchBar, SearchBarWrap, SearchIcon, SearchIconWrap, SearchInput } from "./style";
 
 const RenderList = ({ list, linePerPage, setInDetail, setPostID }) => {
   let Rows = [];
@@ -34,7 +34,7 @@ const RenderList = ({ list, linePerPage, setInDetail, setPostID }) => {
   )
 }
 
-const BoardPageList = ({ boardTitle, list, linePerPage, setInDetail, setPostID }) => {
+const BoardPageList = ({ list, linePerPage, setInDetail, setPostID }) => {
   const [selectedPage, setSelectedPage] = useState(1);
   const [selectedList, setSelectedList] = useState([]);
   const [searchedList, setSearchedList] = useState([]);
@@ -50,9 +50,9 @@ const BoardPageList = ({ boardTitle, list, linePerPage, setInDetail, setPostID }
   let page = 1;
   if (searchedList !== undefined) page = parseInt(searchedList.length / 10) + 1;
   let pageButtons = [];
-  let start = selectedPage - ((selectedPage - 1) % 10)
+  let start = selectedPage - ((selectedPage-1) % 10)
   let end = start + 10
-  if (page >= start && page < end) end = page + 1;
+  if(page >= start && page < end)end = page + 1;
   for (let i = start; i < end; i++) {
     pageButtons.push(
       <PageButton
@@ -105,7 +105,6 @@ const BoardPageList = ({ boardTitle, list, linePerPage, setInDetail, setPostID }
     <>
       <ListWrap>
         <ListWrapAlign>
-          <ListTitle>{boardTitle}</ListTitle>
           <ListHeader>
             <HeaderPostName>제목</HeaderPostName>
             <HeaderPoster>작성자</HeaderPoster>
@@ -162,8 +161,8 @@ const BoardPageList = ({ boardTitle, list, linePerPage, setInDetail, setPostID }
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
+            onKeyPress={(e)=>{
+              if(e.key === 'Enter'){
                 onClickSearch();
               }
             }}

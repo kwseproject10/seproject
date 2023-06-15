@@ -1,9 +1,9 @@
+import { ReactComponent as ExpandIcon } from "@images/expand_down_icon.svg";
 import { useEffect, useRef } from "react";
 import { DropDownElement } from "./DropDownElement";
 import { DropDownButton, DropDownList, DropDownWrap, ExpandIconWrap } from "./style";
-import { ReactComponent as ExpandIcon } from "@images/expand_down_icon.svg"
 
-const DropDown = ({ state, setState, isOpen, setIsOpen, list, width, listWidth, height }) => {
+const DropDown = ({ state, setState, isOpen, setIsOpen, list, width, listWidth, height, listHeight }) => {
     const outsideRef = useRef(null);
     useEffect(()=> {
         function handleClickOutside(e){
@@ -37,7 +37,9 @@ const DropDown = ({ state, setState, isOpen, setIsOpen, list, width, listWidth, 
             {
                 isOpen ?
                     <DropDownList
-                    listWidth={listWidth}>
+                      listWidth={listWidth}
+                      listHeight={listHeight}
+                    >
                         {list.map((value, index) => {
                             return (
                                 <DropDownElement

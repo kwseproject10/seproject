@@ -1,4 +1,5 @@
-import { TbArrowLeft, TbArrowRight, TbSearch } from "react-icons/tb";
+import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import { TbSearch } from "react-icons/tb";
 import styled from "styled-components";
 
 
@@ -16,6 +17,15 @@ export const ListWrapAlign = styled.div`
   display: flex;
   flex-direction: column;
 `
+
+export const ListTitle = styled.div`
+  font-size:var(--font-size-xl);
+  font-weight: bold;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-left: 2.2rem;
+`
+
 
 export const ListRow = styled.div`
   display: flex;
@@ -41,12 +51,15 @@ export const ListRow = styled.div`
 `
 
 export const ListHeader = styled(ListRow)`
-  height: 10%;
+  height: 9%;
   font-weight: bold;
-  color:black;
+  color:var(--color-nm);
+  background-color: var(--color-gr);
+  border: 1px solid var(--color-nm);
+  border-bottom: none;
   cursor: default;
   &:hover{
-    color:black;
+    color:var(--color-nm);
   }
 `
 
@@ -55,8 +68,8 @@ export const ListBody = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border: 1px solid var(--color-nm);
+  background-color: white;
 `
 
 export const RowTitle = styled.div`
@@ -148,7 +161,7 @@ export const PageButton = styled.div`
   }
 `
 
-export const LeftButton = styled(TbArrowLeft)`
+export const LeftButton = styled(MdArrowBackIos)`
   margin-top: 0.25rem;
   cursor: pointer;
   color: var(--color-dg);
@@ -159,7 +172,8 @@ export const LeftButton = styled(TbArrowLeft)`
   }
 `
 
-export const RightButton = styled(TbArrowRight)`
+
+export const RightButton = styled(MdArrowForwardIos)`
   margin-top: 0.25rem;
   cursor: pointer;
   color: var(--color-dg);

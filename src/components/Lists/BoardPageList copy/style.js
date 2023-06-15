@@ -18,14 +18,6 @@ export const ListWrapAlign = styled.div`
   flex-direction: column;
 `
 
-export const ListTitle = styled.div`
-  font-size:var(--font-size-xl);
-  font-weight: bold;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  margin-left: 2.2rem;
-`
-
 export const ListRow = styled.div`
   display: flex;
   justify-content:space-between;
@@ -52,13 +44,10 @@ export const ListRow = styled.div`
 export const ListHeader = styled(ListRow)`
   height: 10%;
   font-weight: bold;
-  color:var(--color-nm);
-  background-color: var(--color-gr);
-  border: 1px solid var(--color-nm);
-  border-bottom: none;
+  color:black;
   cursor: default;
   &:hover{
-    color:var(--color-nm);
+    color:black;
   }
 `
 
@@ -67,8 +56,8 @@ export const ListBody = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--color-nm);
-  background-color: white;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 `
 
 export const RowTitle = styled.div`
@@ -89,23 +78,15 @@ export const PostName = styled(PostInform)`
 `
 
 export const Poster = styled(PostInform)`
-  width: 5%;
+  width: 15%;
 `
 
 export const PostDate = styled(PostInform)`
-  width: 10%;
+  width: 20%;
 `
 
-export const DueDate = styled(PostInform)`
-  width: 10%;
-`
-
-export const DDay = styled(PostInform)`
-  width: 5%;
-`
-
-export const State = styled(PostInform)`
-  width: 10%;
+export const PostHit = styled(PostInform)`
+  width: 15%;
 `
 
 export const HeaderPostName = styled(PostInform)`
@@ -119,14 +100,7 @@ export const HeaderPoster = styled(Poster)`
 export const HeaderPostDate = styled(PostDate)`
 `
 
-export const HeaderDueDate = styled(DueDate)`
-`
-
-export const HeaderDDay = styled(DDay)`
-`
-
-export const HeaderState = styled(State)`
-
+export const HeaderPostHit = styled(PostHit)`
 `
 
 export const PageSelectorWrap = styled.div`
@@ -175,7 +149,6 @@ export const PageButton = styled.div`
   }
 `
 
-
 export const LeftButton = styled(MdArrowBackIos)`
   margin-top: 0.25rem;
   cursor: pointer;
@@ -186,6 +159,7 @@ export const LeftButton = styled(MdArrowBackIos)`
     transition: 0.3s;
   }
 `
+
 
 export const RightButton = styled(MdArrowForwardIos)`
   margin-top: 0.25rem;

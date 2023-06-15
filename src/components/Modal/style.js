@@ -19,7 +19,7 @@ export const BG = styled.div`
 
 export const ModalInner = styled.div`
     z-index: 25;
-    width: 31.25rem;
+    width: ${props=>props.width ? props.width : `31.25rem`};
     height: 60%;
     background: white;
     position: fixed;

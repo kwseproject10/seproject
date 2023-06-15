@@ -5,8 +5,8 @@ import { FacultyLectureSelectedState, FacultyLecturesState, FacultyNavigationAcc
 import FacultyArchiveManagePage from './FacultyArchiveManagePage';
 import FacultyAssignmentManagePage from './FacultyAssignmentManagePage';
 import FacultyAttendanceManagePage from "./FacultyAttendanceManagePage";
+import FacultyExamManagePage from './FacultyExamManagePage';
 import FacultyGradeManagePage from './FacultyGradeManagePage';
-import FacultyLectureManagePage from './FacultyLectureManagePage';
 import FacultyNoticeManagePage from './FacultyNoticeManagePage';
 import { DropDownRow, DropDownWrap, PageWrap } from "./style";
 
@@ -47,7 +47,7 @@ const FacultyManagePage = () => {
     switch (FacultyNavigationAccordian) {
       case "0":
         return (
-          <FacultyLectureManagePage
+          <FacultyExamManagePage
           />
         );
       case "1":

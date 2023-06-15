@@ -34,10 +34,10 @@ export const DropDownList = styled.ul`
     position: absolute;
     background-color: white;
     width: ${(props) => props.listWidth || `3.75rem` };
+    height: ${(props) => props.listHeight || `5.625rem`};
     font-size: var(--font-size-xs);
     list-style: none;
     overflow-Y: scroll;
-    height: 5.625rem;
     border-radius: 0.1875rem;
     margin-top: 0.1875rem;
     border: 0.0625rem var(--color-gr) solid;

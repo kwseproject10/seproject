@@ -163,7 +163,8 @@ const StudentLectureManagePage = () => {
       <Modal
         modalOpen={syllabusModalOpen}
         setModalOpen={setSyllabusModalOpen}
-        innerContents={<Syllabus setModalOpen={setSyllabusModalOpen} />}
+        innerContents={<Syllabus setModalOpen={setSyllabusModalOpen}/>}
+        width={"62.5rem"}
       />
       <Body>
         <MyLectureListWrap>

@@ -42,12 +42,51 @@ export const SemestersState = atom({
 
 export const FacultyLectureSelectedState = atom({
   key: 'FacultyLectureSelected',
-  default: ""
-}) 
+  default: "H000-1-3095-1"
+})
 
 export const FacultyLecturesState = atom({
-  key: 'FaccultyLectures',
-  default: ""
+  key: 'FacultyLectures',
+  default: [{
+    "key": "0",
+    "name": "대학물리학1",
+    "professor": [
+      "새빛205"
+    ],
+    "major": "소프트웨어융합대학",
+    "type": "기필",
+    "credit": "3",
+    "numOfTime": "3",
+    "time": [
+      "화4",
+      "목3"
+    ],
+    "place": [
+      "새빛205",
+      "새빛205"
+    ],
+    "ID": "H000-1-9753-3"
+  },
+  {
+    "key": "1",
+    "name": "소프트웨어공학",
+    "professor": [
+      "새빛205"
+    ],
+    "major": "컴퓨터정보공학부",
+    "type": "전선",
+    "credit": "3",
+    "numOfTime": "3",
+    "time": [
+      "월5",
+      "수6"
+    ],
+    "place": [
+      "새빛205",
+      "새빛205"
+    ],
+    "ID": "H020-4-0846-1"
+  }]
 })
 
 //회원가입 페이지 state

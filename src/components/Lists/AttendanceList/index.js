@@ -2,13 +2,13 @@ import { AttendanceChart, AttendanceChartChild, ListBox, ListTitle, ListWrap, Ti
 
 const RenderChart = ({ list }) => {
   let maxDayOfWeek = 0;
-  if(list !== undefined){
-    for(let i = 0; i < list.length; i++){
-      if(list[i].length > maxDayOfWeek) maxDayOfWeek = list[i].length;
+  if (list !== undefined) {
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].length > maxDayOfWeek) maxDayOfWeek = list[i].length;
     }
   }
   let gridItems = [];
-  for(let weekIndex = 0; weekIndex < 16; weekIndex++){
+  for (let weekIndex = 0; weekIndex < 16; weekIndex++) {
     gridItems.push(
       <AttendanceChartChild
         row={1}
@@ -17,15 +17,29 @@ const RenderChart = ({ list }) => {
         {weekIndex + 1}주차
       </AttendanceChartChild>
     )
-    for(let dayIndex = 0; dayIndex < maxDayOfWeek; dayIndex++){
-      if(list[weekIndex] === undefined || list[weekIndex][dayIndex] === undefined){
+    if (maxDayOfWeek === 0) {
+      gridItems.push(
+        <AttendanceChartChild
+          row={2}
+          column={weekIndex + 1}
+        />
+      )
+      gridItems.push(
+        <AttendanceChartChild
+          row={3}
+          column={weekIndex + 1}
+        />
+      )
+    }
+    for (let dayIndex = 0; dayIndex < maxDayOfWeek; dayIndex++) {
+      if (list[weekIndex] === undefined || list[weekIndex][dayIndex] === undefined) {
         gridItems.push(
           <AttendanceChartChild
             row={dayIndex + 2}
             column={weekIndex + 1}
           />
         )
-      }else{
+      } else {
         const day = list[weekIndex][dayIndex];
         gridItems.push(
           <AttendanceChartChild
@@ -34,32 +48,32 @@ const RenderChart = ({ list }) => {
             value={day}
           >
             {day === 1 ?
-                "O"
+              "O"
               :
               (day === 0 ?
-                  "X"
+                "X"
                 :
                 (day === 0.6 ?
                   "L"
-                :
+                  :
                   "E"))}
           </AttendanceChartChild>
         )
       }
     }
   }
-  return(
+  return (
     <AttendanceChart
-      rows={maxDayOfWeek}
+      rows={maxDayOfWeek === 0 ? 2 : maxDayOfWeek}
       columns={16}
     >
-      {gridItems.map((e)=>{return e;})}
+      {gridItems.map((e) => { return e; })}
     </AttendanceChart>
   )
 }
 
 const AttendanceList = ({ listTitle, list, height, width }) => {
-  return(
+  return (
     <ListWrap>
       <ListTitle>
         <TitleText>
@@ -67,7 +81,7 @@ const AttendanceList = ({ listTitle, list, height, width }) => {
         </TitleText>
       </ListTitle>
       <ListBox>
-        <RenderChart list={list}/>
+        <RenderChart list={list} />
       </ListBox>
     </ListWrap>
   )

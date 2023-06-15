@@ -1,6 +1,7 @@
+import { BsPeople } from "react-icons/bs";
+import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { TbEdit, TbSearch, TbTrash } from "react-icons/tb";
 import styled from "styled-components";
-
 export const PageWrap = styled.div`
   width: 100%;
   height: 100%;
@@ -15,13 +16,24 @@ export const ListWrap = styled.div`
   margin-top: 1.5rem;
 `
 
+export const ListTitleRow = styled.div`
+  display: flex;
+  height: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`
+
 export const ListHeader = styled.div`
   display: flex;
   height: 3rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid black;
+  border: 1px solid var(--color-nm);
+  color:var(--color-nm);
+  background-color:var(--color-gr);
+  font-weight: bold;
 `
 
 export const ListTitle = styled.div`
@@ -36,13 +48,14 @@ export const ListBody = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column-reverse;
-  border-top: 1px solid black;
-  border-bottom: 2px solid black;
+  border: 1px solid var(--color-nm);
+  border-top: none;
+  background-color:white;
 `
 
 export const ListRow = styled.div`
   display: flex;
-  height: 5rem;
+  height: 3rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -58,21 +71,32 @@ export const RowItem = styled.div`
 
 export const PostTitle = styled(RowItem)`
   width: 30%;
+  margin-left: 2rem;
 `
 
 export const PostDate = styled(RowItem)`
-  width: 20%;
+  width: 10%;
 `
 
-export const PostHit = styled(RowItem)`
+export const DueDate = styled(RowItem)`
   width: 10%;
+`
+
+export const Dday = styled(RowItem)`
+  width: 10%;
+  ${props => props.dday === 0 ? `font-weight: bold;` : ``}
+`
+
+export const Count = styled(RowItem)`
+  width: 15%;
 `
 
 export const PostButtons = styled.div`
   display: flex;
   justify-content: space-between;
   width: 20%;
-  margin-right: 7%;
+  margin-left: 3%;
+  margin-right: 5%;
 `
 
 export const ViewButtonWrap = styled(RowItem)`
@@ -80,11 +104,11 @@ export const ViewButtonWrap = styled(RowItem)`
 
 export const ViewButton = styled(TbSearch)`
   cursor: pointer;
-  color: var(--color-dg);
+  color: var(--color-nm);
   width: 1.5rem;
   height: 1.5rem;
   &:hover{
-    color: black;
+    color: var(--color-dk);
     transform: translateY(0);
     transition: 0.3s;
   }
@@ -95,11 +119,25 @@ export const ModifyButtonWrap = styled(RowItem)`
 
 export const ModifyButton = styled(TbEdit)`
   cursor: pointer;
-  color: var(--color-dg);
+  color: var(--color-nm);
   width: 1.5rem;
   height: 1.5rem;
   &:hover{
-    color: black;
+    color: var(--color-dk);
+    transform: translateY(0);
+    transition: 0.3s;
+  }
+`
+export const AssignmentButtonWrap = styled(RowItem)`
+`
+
+export const AssignmentButton = styled(BsPeople)`
+  cursor: pointer;
+  color: var(--color-nm);
+  width: 1.8rem;
+  height: 1.8rem;
+  &:hover{
+    color: var(--color-dk);
     transform: translateY(0);
     transition: 0.3s;
   }
@@ -110,11 +148,11 @@ export const DeleteButtonWrap = styled(RowItem)`
 
 export const DeleteButton = styled(TbTrash)`
   cursor: pointer;
-  color: var(--color-dg);
+  color: var(--color-nm);
   width: 1.5rem;
   height: 1.5rem;
   &:hover{
-    color: black;
+    color: var(--color-dk);
     transform: translateY(0);
     transition: 0.3s;
   }
@@ -134,3 +172,120 @@ export const PostButton = styled.button`
   color: white;
 `
 
+export const PageSelectorWrap = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 0.5rem;
+`
+
+export const PageSelector = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 2.5rem;
+`
+
+export const PageButtonWrap = styled.div`
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  color: var(--color-dg);
+`
+
+export const PageButton = styled.div`
+  font-size:var(--font-size-lg);
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  &:hover{
+    color: black;
+    transform: translateY(0);
+    transition: 0.3s;
+  }
+  ${(props)=>props.index === props.selectedPage ?
+      `
+        color: black;
+        cursor: default;
+      `
+    :
+      ``
+  }
+`
+
+export const LeftButton = styled(MdArrowBackIos)`
+  margin-top: 0.25rem;
+  cursor: pointer;
+  color: var(--color-dg);
+  &:hover{
+    color: black;
+    transform: translateY(0);
+    transition: 0.3s;
+  }
+`
+
+export const RightButton = styled(MdArrowForwardIos)`
+  margin-top: 0.25rem;
+  cursor: pointer;
+  color: var(--color-dg);
+  &:hover{
+    color: black;
+    transform: translateY(0);
+    transition: 0.3s;
+  }
+`
+
+export const LectureSearchBarWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+`
+
+export const LectureSearchBar = styled.div`
+  height: 2.5rem;
+  width: 50%;
+  margin-right: 7%;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--color-gr);
+  border-radius: 0.25rem;
+  background-color: white;
+`
+
+export const SearchInput = styled.input`
+  width: 100%;
+  border: none;
+  margin-left: 3px;
+`
+
+export const SearchIconWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 3%;
+`
+export const SearchIcon = styled(TbSearch)`
+  cursor: pointer;
+  color: var(--color-dg);
+  width: 1.5rem;
+  height: 1.5rem;
+  &:hover{
+    color: black;
+    transform: translateY(0);
+    transition: 0.3s;
+  }
+`
+
+export const DropDownWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 2%;
+`
