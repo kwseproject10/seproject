@@ -38,6 +38,21 @@ export const SemestersState = atom({
   default: []
 })
 
+export const LectureDetailNavigationState = atom({
+  key: 'LectureDetailNavigation',
+  default : 0
+})
+
+export const SelectedPostIDState = atom({
+  key: 'SelectedPostID',
+  default : 0
+})
+
+export const SetInDetailPostState = atom({
+  key: 'SetInDetailPost',
+  default : false
+})
+
 //전역 상태관리용 state faculty
 
 export const FacultyLectureSelectedState = atom({

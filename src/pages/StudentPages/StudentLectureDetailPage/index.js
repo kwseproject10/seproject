@@ -1,7 +1,7 @@
 import { LectureSelectedState } from "@./Atom";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { LecturesState } from "../../../Atom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { LectureDetailNavigationState, LecturesState, SetInDetailPostState } from "../../../Atom";
 import LectureDetailArchive from "./LectureDetailArchive";
 import LectureDetailAssignment from "./LectureDetailAssignment";
 import LectureDetailMain from "./LectureDetailMain";
@@ -11,9 +11,9 @@ import { DetailPageContents, DetailPageHeader, DetailPageLectureName, DetailPage
 const StudentLectureDetailPage = () => {
   const selectedLecture = useRecoilValue(LectureSelectedState);
   const lectures = useRecoilValue(LecturesState);
+  const [navigationIndex, setNavigationindex] = useRecoilState(LectureDetailNavigationState);
   const [lectureName, setLectureName] = useState("")
-  const [navigationIndex, setNavigationindex] = useState(0);
-
+  const setInDetail = useSetRecoilState(SetInDetailPostState);
   useEffect(() => {
     lectures.forEach((lecture) => {
       if(lecture.ID === selectedLecture){
@@ -67,28 +67,40 @@ const StudentLectureDetailPage = () => {
                 <DetailPageNavigationButton
                   index={0}
                   navigationIndex={navigationIndex}
-                  onClick={()=>{setNavigationindex(0)}}
+                  onClick={()=>{
+                    setInDetail(false);
+                    setNavigationindex(0)
+                  }}
                 >
                   강의 종합
                 </DetailPageNavigationButton>
                 <DetailPageNavigationButton
                   index={1}
                   navigationIndex={navigationIndex}
-                  onClick={()=>{setNavigationindex(1)}}
+                  onClick={()=>{
+                    setInDetail(false);
+                    setNavigationindex(1)
+                  }}
                 >
                   공지사항
                 </DetailPageNavigationButton>
                 <DetailPageNavigationButton
                   index={2}
                   navigationIndex={navigationIndex}
-                  onClick={()=>{setNavigationindex(2)}}
+                  onClick={()=>{
+                    setInDetail(false);
+                    setNavigationindex(2)
+                  }}
                 >
                   자료실
                 </DetailPageNavigationButton>
                 <DetailPageNavigationButton
                   index={3}
                   navigationIndex={navigationIndex}
-                  onClick={()=>{setNavigationindex(3)}}
+                  onClick={()=>{
+                    setInDetail(false);
+                    setNavigationindex(3)
+                  }}
                 >
                   과제
                 </DetailPageNavigationButton>

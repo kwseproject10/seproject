@@ -29,7 +29,6 @@ const LectureDetailMain = ({ setNavigationindex }) => {
         console.log("attendance load fail");
         return
       }
-      console.log(res.data);
       setAttendance(res.data);
     }
 
@@ -46,7 +45,6 @@ const LectureDetailMain = ({ setNavigationindex }) => {
         console.log("archive load fail");
         return
       }
-      console.log(res.data);
       setArchiveList(res.data);
     }
     fetchArchive();
@@ -62,7 +60,6 @@ const LectureDetailMain = ({ setNavigationindex }) => {
         console.log("notice load fail");
         return
       }
-      console.log(res.data);
       setNoticeList(res.data);
     }
     fetchNotice();
@@ -78,7 +75,6 @@ const LectureDetailMain = ({ setNavigationindex }) => {
         console.log("assignment load fail");
         return
       }
-      console.log(res.data);
       setAssignmentList(res.data);
     }
     fetchAssignment();

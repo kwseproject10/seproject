@@ -22,7 +22,6 @@ const FacultyHeader = () => {
         console.log("assignment load fail");
         return
       }
-      console.log(res.data);
       setUserInform(res.data);
     }
     fetchAssignment();

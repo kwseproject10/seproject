@@ -1,5 +1,6 @@
-import { Dates, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitlePlusButton, TitleText } from "./style";
 import { TbPlus } from "react-icons/tb";
+import { toStringFormat } from './../../../utils/date';
+import { Dates, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitlePlusButton, TitleText } from "./style";
 
 const ArchiveList = ({ listTitle, list, maxRows, height, width, subjectName, onClickPlusButton }) => {
   return(
@@ -34,7 +35,7 @@ const ArchiveList = ({ listTitle, list, maxRows, height, width, subjectName, onC
               </Left>
               <Right>
                 <Dates>
-                 {element.date}
+                 {toStringFormat(element.date)}
                 </Dates>
               </Right>
             </ListRow>

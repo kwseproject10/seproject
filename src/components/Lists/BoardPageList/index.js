@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { SelectedPostIDState, SetInDetailPostState } from "../../../Atom";
 import DropDown from "../../DropDown";
+import { toStringFormat } from './../../../utils/date';
 import { DropDownWrap, HeaderPostDate, HeaderPostHit, HeaderPostName, HeaderPoster, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostHit, PostName, Poster, RightButton, SearchBar, SearchBarWrap, SearchIcon, SearchIconWrap, SearchInput } from "./style";
 
-const RenderList = ({ list, linePerPage, setInDetail, setPostID }) => {
+const RenderList = ({ list, linePerPage }) => {
+  const setInDetail = useSetRecoilState(SetInDetailPostState);
+  const setPostID = useSetRecoilState(SelectedPostIDState);
   let Rows = [];
   for (let i = 0; i < linePerPage; i++) {
     if (list === undefined || list[i] === undefined) {
@@ -15,14 +20,14 @@ const RenderList = ({ list, linePerPage, setInDetail, setPostID }) => {
           linePerPage={linePerPage}
           hidden={false}
           onClick={() => {
+            setPostID(list[i].key);
             setInDetail(true);
-            setPostID(list[i].ID);
           }}
           isLast={i === linePerPage}
         >
           <PostName>{list[i].title}</PostName>
           <Poster>{list[i].poster}</Poster>
-          <PostDate>{list[i].date}</PostDate>
+          <PostDate>{toStringFormat(list[i].date)}</PostDate>
           <PostHit>{list[i].hit}</PostHit>
         </ListRow>
       )
@@ -35,7 +40,7 @@ const RenderList = ({ list, linePerPage, setInDetail, setPostID }) => {
   )
 }
 
-const BoardPageList = ({ boardTitle, list, linePerPage, setInDetail, setPostID }) => {
+const BoardPageList = ({ boardTitle, list, linePerPage }) => {
   const [selectedPage, setSelectedPage] = useState(1);
   const [selectedList, setSelectedList] = useState([]);
   const [searchedList, setSearchedList] = useState([]);
@@ -117,8 +122,6 @@ const BoardPageList = ({ boardTitle, list, linePerPage, setInDetail, setPostID }
           <RenderList
             list={selectedList}
             linePerPage={linePerPage}
-            setInDetail={setInDetail}
-            setPostID={setPostID}
           />
         </ListWrapAlign>
       </ListWrap>

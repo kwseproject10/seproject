@@ -7,7 +7,7 @@ import { useRecoilValue } from "recoil";
 import { LecturesState } from "../../../Atom";
 import { AddButton, Body, ButtonWrap, DeleteButton, DropDownWrap, LectureCredit, LectureID, LectureMajor, LectureManagePageWrap, LectureNumOfTime, LectureProfessor, LectureSearchBar, LectureSearchBarWrap, LectureTimePlace, LectureTitle, LectureType, ListBody, ListHeader, ListRow, ListTitle, ListWrap, MyLectureList, MyLectureListWrap, SearchIcon, SearchIconWrap, SearchInput, SyllabusOpen, SyllabusOpenWrap, WholeLectureList, WholeLectureListWrap } from "./style";
 
-const RenderList = React.memo(({ lectures, button, rowPerPage, setSyllabusModalOpen, onButtonClick }) => {
+const RenderList = React.memo(({ lectures, button, rowPerPage, setSyllabusModalOpen, onButtonClick, setSyllabusID }) => {
   let Rows = [];
   for (let i = 0; i < lectures.length; i++) {
     const lecture = lectures[i]
@@ -25,7 +25,7 @@ const RenderList = React.memo(({ lectures, button, rowPerPage, setSyllabusModalO
           <LectureProfessor>{lecture.professor}</LectureProfessor>
           <LectureTimePlace>{lecture.time}</LectureTimePlace>
           <SyllabusOpenWrap
-            onClick={() => { setSyllabusModalOpen(true) }}
+            onClick={() => { setSyllabusModalOpen(true); setSyllabusID(lecture.ID); }}
           >
             <SyllabusOpen />
           </SyllabusOpenWrap>
@@ -63,6 +63,7 @@ const RenderList = React.memo(({ lectures, button, rowPerPage, setSyllabusModalO
 
 const StudentLectureManagePage = () => {
   const myLectures = useRecoilValue(LecturesState);
+  const [syllabusID, setSyllabusID] = useState("");
   const [wholeLectures, setWholeLectures] = useState([]);
   const [searchedLectures, setSearchedLectures] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -163,7 +164,10 @@ const StudentLectureManagePage = () => {
       <Modal
         modalOpen={syllabusModalOpen}
         setModalOpen={setSyllabusModalOpen}
-        innerContents={<Syllabus setModalOpen={setSyllabusModalOpen}/>}
+        innerContents={<Syllabus
+          syllabusID={syllabusID}
+          setModalOpen={setSyllabusModalOpen}
+        />}
         width={"62.5rem"}
       />
       <Body>
@@ -176,6 +180,7 @@ const StudentLectureManagePage = () => {
               rowPerPage={10}
               setSyllabusModalOpen={setSyllabusModalOpen}
               onButtonClick={onDeleteButtonClick}
+              setSyllabusID={setSyllabusID}
             />
           </MyLectureList>
         </MyLectureListWrap>
@@ -190,6 +195,7 @@ const StudentLectureManagePage = () => {
               button={"Add"}
               setSyllabusModalOpen={setSyllabusModalOpen}
               onButtonClick={onAddButtonClick}
+              setSyllabusID={setSyllabusID}
             />
             }
             

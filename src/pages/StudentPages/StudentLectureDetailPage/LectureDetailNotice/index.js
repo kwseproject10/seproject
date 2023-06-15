@@ -2,14 +2,14 @@ import BoardPageList from "@components/Lists/BoardPageList";
 import PostDetail from "@components/Lists/BoardPageList/PostDetail";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { LectureSelectedState, userIDState } from "../../../../Atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { LectureSelectedState, SelectedPostIDState, SetInDetailPostState, userIDState } from "../../../../Atom";
 import { NoticePageWrap } from "./style";
 
 const LectureDetailNotice = () => {
   const [noticeList, setNoticeList] = useState([]);
-  const [inDetail, setInDetail] = useState(false);
-  const [noticeID, setNoticeID] = useState("");
+  const [inDetail, setInDetail] = useRecoilState(SetInDetailPostState);
+  const [noticeID, setNoticeID] = useRecoilState(SelectedPostIDState);
 
   const userID = useRecoilValue(userIDState);
   const selectedLecture = useRecoilValue(LectureSelectedState);
@@ -24,7 +24,6 @@ const LectureDetailNotice = () => {
         console.log("notice load fail");
         return
       }
-      console.log(res.data);
       setNoticeList(res.data);
     }
     fetchNotice();

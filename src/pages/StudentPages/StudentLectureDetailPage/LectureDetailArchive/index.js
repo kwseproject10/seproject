@@ -2,14 +2,14 @@ import BoardPageList from "@components/Lists/BoardPageList";
 import PostDetail from "@components/Lists/BoardPageList/PostDetail";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { LectureSelectedState, userIDState } from "../../../../Atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { LectureSelectedState, SelectedPostIDState, SetInDetailPostState, userIDState } from "../../../../Atom";
 import { NoticePageWrap } from "./style";
 
 const LectureDetailArchive = () => {
   const [archiveList, setArchiveList] = useState([]);
-  const [inDetail, setInDetail] = useState(false);
-  const [archiveID, setArchiveID] = useState("");
+  const [inDetail, setInDetail] = useRecoilState(SetInDetailPostState);
+  const [archiveID, setArchiveID] = useRecoilState(SelectedPostIDState);
   
   const userID = useRecoilValue(userIDState);
   const selectedLecture = useRecoilValue(LectureSelectedState);

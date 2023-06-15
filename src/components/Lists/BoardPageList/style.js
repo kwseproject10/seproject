@@ -49,7 +49,9 @@ export const ListRow = styled.div`
     `
   }
   ${(props) => props.isLast ?
-    `border-bottom: none;`
+    `
+      border-bottom: none;
+    `
     :
     ``
   }
