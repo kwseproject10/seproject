@@ -1,18 +1,22 @@
 import { TbPlus } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { LectureSelectedState, StudentNavigationAccordianActivedState, StudentNavigationState } from './../../../Atom';
+import { LectureDetailNavigationState, LectureSelectedState, SetInDetailPostState, StudentNavigationAccordianActivedState, StudentNavigationState } from './../../../Atom';
 import { LectureProfessor, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitlePlusButton, TitleText } from "./style";
 
 const LectureList = ({ lectures, onClickPlusButton }) => {
   const setSelectedLecture = useSetRecoilState(LectureSelectedState);
   const setNavigationIndex = useSetRecoilState(StudentNavigationState);
   const setNavAccordianActived = useSetRecoilState(StudentNavigationAccordianActivedState);
+  const setInDetail = useSetRecoilState(SetInDetailPostState);
+  const setLectureDetailNavigation = useSetRecoilState(LectureDetailNavigationState);
   const movePage = useNavigate();
   const onClickListRow = (lectureID, index) => {
     setSelectedLecture(lectureID);
     setNavigationIndex(5 + index);
     setNavAccordianActived(true);
+    setLectureDetailNavigation(0);
+    setInDetail(false);
     movePage('/student/lecturedetail');
   }
   return(

@@ -1,6 +1,6 @@
 import { LinkStyle, NavigationButtonStyle } from "./style";
 
-const NavigationButton = ({ actived, setActived, index, text, link, setAccordianActived }) => {
+const NavigationButton = ({ onClick = () => {}, actived, setActived, index, text, link, setAccordianActived }) => {
   return (
     <LinkStyle to={`/${link}`}>
       <NavigationButtonStyle
@@ -9,6 +9,7 @@ const NavigationButton = ({ actived, setActived, index, text, link, setAccordian
         onClick={() => {
           setActived(index);
           setAccordianActived(false);
+          onClick();
         }}
       >
         {text}

@@ -3,12 +3,43 @@ import Modal from "@components/Modal";
 import Syllabus from "@components/Modal/ModalContents/Syllabus";
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { LecturesState } from "../../../Atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { LecturesState, userIDState } from "../../../Atom";
 import { AddButton, Body, ButtonWrap, DeleteButton, DropDownWrap, LectureCredit, LectureID, LectureMajor, LectureManagePageWrap, LectureNumOfTime, LectureProfessor, LectureSearchBar, LectureSearchBarWrap, LectureTimePlace, LectureTitle, LectureType, ListBody, ListHeader, ListRow, ListTitle, ListWrap, MyLectureList, MyLectureListWrap, SearchIcon, SearchIconWrap, SearchInput, SyllabusOpen, SyllabusOpenWrap, WholeLectureList, WholeLectureListWrap } from "./style";
 
 const RenderList = React.memo(({ lectures, button, rowPerPage, setSyllabusModalOpen, onButtonClick, setSyllabusID }) => {
   let Rows = [];
+  const userID = useRecoilValue(userIDState);
+  const setLectures = useSetRecoilState(LecturesState);
+  const addLecture = async (lectureID, lectureName) => {
+    
+    let result = window.confirm(`${lectureID}: ${lectureName} 강의 수강을 신청하시겠습니까?`);
+    if (result) {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/enrolllecture?userID=${userID}&lectureID=${lectureID}`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("enroll load fail");
+        window.alert(`수강 신청 오류가 발생하였습니다.`);
+        return
+      }
+      const reRoute = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/lectures?userID=${userID}`;
+      const reRes = await axios.get(
+        reRoute
+      );
+      if(reRes.data.result === "false"){
+        console.log("lectures reLoading fail");
+        window.alert(`강의 로딩 오류가 발생하였습니다.`);
+        return
+      }
+      setLectures(reRes.data);
+      window.alert(`${lectureName} 강의 수강이 신청되었습니다.`);
+    } else {
+      return;
+    }
+  }
+
   for (let i = 0; i < lectures.length; i++) {
     const lecture = lectures[i]
     if (lecture === undefined) {
@@ -32,7 +63,17 @@ const RenderList = React.memo(({ lectures, button, rowPerPage, setSyllabusModalO
           <ButtonWrap
             onClick={() => { onButtonClick(lecture.ID, lecture.name) }}
           >
-            {button === "Add" ? <AddButton /> : <DeleteButton />}
+            {button === "Add" ?
+              <AddButton
+                onClick={() => {
+                  addLecture(lecture.ID, lecture.name);
+                }}
+              />
+                :
+              <DeleteButton
+
+              />
+            }
           </ButtonWrap>
         </ListRow>
       )
@@ -101,12 +142,6 @@ const StudentLectureManagePage = () => {
   }, [])
 
   const onAddButtonClick = useCallback((lectureID, lectureName) => {
-    let result = window.confirm(`${lectureID}: ${lectureName} 강의 수강을 신청하시겠습니까?`);
-    if (result) {
-      window.alert(`${lectureName} 강의 수강이 신청되었습니다.`);
-    } else {
-      return;
-    }
   }, []);
 
   const onDeleteButtonClick = useCallback((lectureID, lectureName) => {

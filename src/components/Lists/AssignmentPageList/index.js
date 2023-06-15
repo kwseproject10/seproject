@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { SelectedPostIDState, SetInDetailPostState } from "../../../Atom";
 import DropDown from "../../DropDown";
 import { DDay, DropDownWrap, DueDate, HeaderDDay, HeaderDueDate, HeaderPostDate, HeaderPostName, HeaderPoster, HeaderState, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostName, Poster, RightButton, SearchBar, SearchBarWrap, SearchIcon, SearchIconWrap, SearchInput, State } from "./style";
 
-const RenderList = ({ list, linePerPage, setInDetail, setPostID }) => {
+const RenderList = ({ list, linePerPage }) => {
+  const setInDetail = useSetRecoilState(SetInDetailPostState);
+  const setPostID = useSetRecoilState(SelectedPostIDState);
   let Rows = [];
   for (let i = 0; i < linePerPage; i++) {
     if (list === undefined || list[i] === undefined) {
@@ -36,7 +40,7 @@ const RenderList = ({ list, linePerPage, setInDetail, setPostID }) => {
   )
 }
 
-const AssignmentPageList = ({ boardTitle,list, linePerPage, setInDetail, setPostID }) => {
+const AssignmentPageList = ({ boardTitle, list, linePerPage, setInDetail, setPostID }) => {
   const [selectedPage, setSelectedPage] = useState(1);
   const [selectedList, setSelectedList] = useState([]);
   const [searchedList, setSearchedList] = useState([]);

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { LectureSelectedState, StudentNavigationAccordianActivedState, StudentNavigationState } from './../../Atom';
+import { LectureDetailNavigationState, LectureSelectedState, SetInDetailPostState, StudentNavigationAccordianActivedState, StudentNavigationState } from './../../Atom';
 import { Cell, HeaderLeft, HeaderRight, HeaderText, LectureTP, LectureTitle, Table, TableBox, TableHeader, TableWrap, Tbody, Td, Th, Thead, Tr } from "./Style";
 
 const RenderBody = ({ isDetail, lectures }) => {
@@ -31,11 +31,15 @@ const RenderBody = ({ isDetail, lectures }) => {
   const setSelectedLecture = useSetRecoilState(LectureSelectedState);
   const setNavigationIndex = useSetRecoilState(StudentNavigationState);
   const setNavAccordianActived = useSetRecoilState(StudentNavigationAccordianActivedState);
+  const setInDetail = useSetRecoilState(SetInDetailPostState);
+  const setLectureDetailNavigation = useSetRecoilState(LectureDetailNavigationState);
   const movePage = useNavigate();
   const onClickListRow = (lectureID, index) => {
     setSelectedLecture(lectureID);
     setNavigationIndex(5 + index);
     setNavAccordianActived(true);
+    setLectureDetailNavigation(0);
+    setInDetail(false);
     movePage('/student/lecturedetail');
   }
 

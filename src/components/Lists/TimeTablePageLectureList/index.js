@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { LectureSelectedState, StudentNavigationAccordianActivedState, StudentNavigationState, userIDState } from "../../../Atom";
+import { LectureDetailNavigationState, LectureSelectedState, SetInDetailPostState, StudentNavigationAccordianActivedState, StudentNavigationState, userIDState } from "../../../Atom";
 import { AttendanceChart, AttendanceChartChild, AttendanceChartRow, DefaultRow, DetailCenter, DetailInformRow, DetailLeft, DetailRight, LectureProfessor, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitleText } from "./style";
 
 const TimeTablePageLectureList = ({ lectures }) => {
@@ -11,12 +11,55 @@ const TimeTablePageLectureList = ({ lectures }) => {
   const setSelectedLecture = useSetRecoilState(LectureSelectedState);
   const setNavigationIndex = useSetRecoilState(StudentNavigationState);
   const setNavAccordianActived = useSetRecoilState(StudentNavigationAccordianActivedState);
+  const setInDetail = useSetRecoilState(SetInDetailPostState);
+  const setLectureDetailNavigation = useSetRecoilState(LectureDetailNavigationState);
   const movePage = useNavigate();
   const onClickListRow = (lectureID, index) => {
     setSelectedLecture(lectureID);
     setNavigationIndex(5 + index);
     setNavAccordianActived(true);
+    setLectureDetailNavigation(0);
+    setInDetail(false);
     movePage('/student/lecturedetail');
+  }
+  const [renderData, setRenderData] = useState([]);
+
+  const loadRenderData = async() => {
+    let temp = [];
+    if(lectures){
+      for(let i = 0; i < lectures.length; i++){
+        const lecture = lectures[i];
+
+        const routeAssignment = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/assignment?lectureID=${lecture.ID}`;
+        const resAssignment = await axios.get(
+          routeAssignment
+        );
+
+        const routeArchive = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/archive?lectureID=${lecture.ID}`;
+        const resArchive = await axios.get(
+          routeArchive
+        );
+
+        const routeNotice = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/notice?lectureID=${lecture.ID}`;
+        const resNotice = await axios.get(
+          routeNotice
+        );
+
+        temp.push({
+          name : lecture.name,
+          ID : lecture.ID,
+          professor : lecture.professor,
+          type : lecture.type,
+          time : lecture.time,
+          place : lecture.place,
+          firstAssignment : ( resAssignment.data ? resAssignment.data[0] : null),
+          firstArchive : ( resArchive.data ? resArchive.data[0] : null),
+          firstNotice : ( resNotice.data ? resNotice.data[0] : null)
+        });
+      }
+    }
+    setRenderData(temp);
+    console.log("renderData" , renderData);
   }
 
   useEffect(() => {
@@ -30,8 +73,9 @@ const TimeTablePageLectureList = ({ lectures }) => {
       }
       setAttendance(res.data);
     }
-
-    fetch()
+    fetch().then(
+      loadRenderData()
+    )
   }, [userID])
 
   return (
@@ -42,7 +86,7 @@ const TimeTablePageLectureList = ({ lectures }) => {
         </TitleText>
       </ListTitle>
       <ListBox>
-        {lectures.map((element, index) => {
+        {renderData.map((element, index) => {
           return (
             <ListRow key={index}>
               <DefaultRow
@@ -78,13 +122,13 @@ const TimeTablePageLectureList = ({ lectures }) => {
 
               <DetailInformRow>
                 <DetailLeft>
-                  과제 1개 중 1개가 2일 남았습니다.
+                  최신 과제{renderData.firstAssignment ? renderData.firstAssignment.title : "가 없습니다."}
                 </DetailLeft>
                 <DetailCenter>
-                  최신 자료: [실습] 개발환경실습
+                  최신 자료{renderData.firstArchive ? renderData.firstArchive.title : "가 없습니다."}
                 </DetailCenter>
                 <DetailRight>
-                  최신 공지사항: 실습 수업 장소 및 자리 배치
+                  최신 공지{renderData.firstNotice ? renderData.firstNotice.title : "가 없습니다."}
                 </DetailRight>
               </DetailInformRow>
 
