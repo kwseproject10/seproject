@@ -18,7 +18,7 @@ const StudentNavigation = () => {
             index={0}
             text={"MAIN"}
             link={"student"}
-            onClick={setAccordianActived}
+            setAccordianActived={setAccordianActived}
           />
           <NavigationButton
             actived={actived}
@@ -26,7 +26,7 @@ const StudentNavigation = () => {
             index={1}
             text={"시간표 / 강의목록"}
             link={"student/timetable"}
-            onClick={setAccordianActived}
+            setAccordianActived={setAccordianActived}
           />
           <StudentNavigationAccordian
             actived={actived}
@@ -41,7 +41,7 @@ const StudentNavigation = () => {
             index={2}
             text={"성적 조회"}
             link={"student/credit"}
-            onClick={setAccordianActived}
+            setAccordianActived={setAccordianActived}
           />
           <NavigationButton
             actived={actived}
@@ -49,7 +49,7 @@ const StudentNavigation = () => {
             index={3}
             text={"수강 관리"}
             link={"student/lecturemanage"}
-            onClick={setAccordianActived}
+            setAccordianActived={setAccordianActived}
           />
           <NavigationButton
             actived={actived}
@@ -57,7 +57,7 @@ const StudentNavigation = () => {
             index={4}
             text={"개인정보 관리"}
             link={"student/mypage"}
-            onClick={setAccordianActived}
+            setAccordianActived={setAccordianActived}
           />
         </ButtonWrap>
       </NavigationBar>

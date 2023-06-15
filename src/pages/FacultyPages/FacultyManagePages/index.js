@@ -8,6 +8,7 @@ import FacultyAttendanceManagePage from "./FacultyAttendanceManagePage";
 import FacultyExamManagePage from './FacultyExamManagePage';
 import FacultyGradeManagePage from './FacultyGradeManagePage';
 import FacultyNoticeManagePage from './FacultyNoticeManagePage';
+import FacultySyllabiManagePage from './FacultySyllabiManagePage/index';
 import { DropDownRow, DropDownWrap, PageWrap } from "./style";
 
 const FacultyManagePage = () => {
@@ -19,7 +20,7 @@ const FacultyManagePage = () => {
   const lectures = useRecoilValue(FacultyLecturesState);
 
   //to add lecture load API
-  
+
   const loadLectureName = () => {
     if (lectures) {
       setLectureNameList([]);
@@ -45,34 +46,39 @@ const FacultyManagePage = () => {
 
   const RenderContents = () => {
     switch (FacultyNavigationAccordian) {
-      case "0":
-        return (
-          <FacultyExamManagePage
-          />
-        );
       case "1":
         return (
-          <FacultyAttendanceManagePage
+          <FacultySyllabiManagePage
           />
         );
       case "2":
         return (
-          <FacultyGradeManagePage
+          <FacultyNoticeManagePage
           />
         );
       case "3":
         return (
-          <FacultyNoticeManagePage
+          <FacultyArchiveManagePage
           />
         );
       case "4":
         return (
-          <FacultyArchiveManagePage
+          <FacultyAssignmentManagePage
           />
         );
       case "5":
         return (
-          <FacultyAssignmentManagePage
+          <FacultyAttendanceManagePage
+          />
+        );
+      case "6":
+        return (
+          <FacultyExamManagePage
+          />
+        );
+      case "7":
+        return (
+          <FacultyGradeManagePage
           />
         );
       default:

@@ -86,6 +86,26 @@ export const FacultyLecturesState = atom({
       "새빛205"
     ],
     "ID": "H020-4-0846-1"
+  },
+  {
+      "key": "2",
+      "name": "컴퓨터비젼",
+      "professor": [
+          "새빛205"
+      ],
+      "major": "컴퓨터정보공학부",
+      "type": "전선",
+      "credit": "3",
+      "numOfTime": "3",
+      "time": [
+          "월4",
+          "수3"
+      ],
+      "place": [
+          "새빛205",
+          "새빛205"
+      ],
+      "ID": "H020-4-4136-1"
   }]
 })
 

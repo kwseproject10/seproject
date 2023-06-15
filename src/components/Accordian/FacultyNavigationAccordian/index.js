@@ -1,33 +1,37 @@
-import { useEffect, useRef, useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useEffect, useRef } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { FacultyNavigationAccordianActivedState } from "../../../Atom";
 import { AccordianContent, AccordianContents, AccordianOpenButton, AccordianWrap, LinkStyle, OpenButtonWrap } from "./style";
 
 const FacultyNavigationAccordian = ({ actived, setActived, index, text, link }) => {
-  const [AccordianActived, setAccordianActived] = useState(false);
+  const [AccordianActived, setAccordianActived] = useRecoilState(FacultyNavigationAccordianActivedState);
   const menus = [
     {
-      ID: "3",
-      name: "공지사항 관리"
-    },
-    {
-      ID: "4",
-      name: "자료실 관리"
-    },
-    {
-      ID: "5",
-      name: "과제 관리"
-    },
-    {
       ID: "1",
-      name: "출석 관리"
-    },
-    {
-      ID: "0",
-      name: "시험 관리"
+      name: "강의계획서 관리"
     },
     {
       ID: "2",
+      name: "공지사항 관리"
+    },
+    {
+      ID: "3",
+      name: "자료실 관리"
+    },
+    {
+      ID: "4",
+      name: "과제 관리"
+    },
+    {
+      ID: "5",
+      name: "출석 관리"
+    },
+    {
+      ID: "6",
+      name: "시험 관리"
+    },
+    {
+      ID: "7",
       name: "성적 관리"
     }
   ];
@@ -72,8 +76,8 @@ const FacultyNavigationAccordian = ({ actived, setActived, index, text, link }) 
               >
                 <AccordianContent
                   actived={actived}
-                  index={lecIndex + 5}
-                  onClick={() => { setActived(lecIndex + 5) }}
+                  index={lecIndex + 4}
+                  onClick={() => { setActived(lecIndex + 4) }}
                 >
                   {element.name}
                 </AccordianContent>

@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { FacultyLectureSelectedState, FacultyNavigationAccordianActivedState, FacultyNavigationState, userIDState } from "../../../Atom";
-import { DefaultRow, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitleText } from "./style";
+import { Button, ButtonRow, ButtonRowsWrap, DefaultRow, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitleText } from "./style";
 
 const FacultyLectureList = ({ lectures }) => {
   const userID = useRecoilValue(userIDState);
@@ -9,14 +10,15 @@ const FacultyLectureList = ({ lectures }) => {
   const setNavigationIndex = useSetRecoilState(FacultyNavigationState);
   const setNavAccordianActived = useSetRecoilState(FacultyNavigationAccordianActivedState);
   const movePage = useNavigate();
+  const [actived, setActived] = useState(-1);
 
-  const onClickListRow = (lectureID, index) => {
+  const onClickButton = (lectureID, index, url) => {
+    setNavAccordianActived(`${index}`);
     setSelectedLecture(lectureID);
-    setNavigationIndex(5 + index);
-    setNavAccordianActived(true);
-    movePage('/faculty/manage');
+    setNavigationIndex(3 + index);
+    movePage(url);
   }
-  console.log(lectures);
+
   return (
     <ListWrap>
       <ListTitle>
@@ -28,13 +30,13 @@ const FacultyLectureList = ({ lectures }) => {
         {lectures.map((lecture, index) => {
           return (
             <ListRow key={index}>
-              <DefaultRow>
+              <DefaultRow
+                onClick={() => {
+                  setActived(index);
+                }}
+              >
                 <Left>
-                  <NoticeTitle
-                    onClick={() => {
-                      onClickListRow(lecture.ID, index);
-                    }}
-                  >
+                  <NoticeTitle>
                     {
                       lecture.name.length > 30 ?
                         lecture.name.slice(0, 29) + "..."
@@ -54,6 +56,62 @@ const FacultyLectureList = ({ lectures }) => {
                   })}
                 </Right>
               </DefaultRow>
+              <ButtonRowsWrap
+                actived={actived}
+                index={index}
+              >
+                <ButtonRow>
+                  <Button
+                    onClick={() => {
+                      onClickButton(lecture.ID, 1, 'manage')
+                    }}
+                  >
+                    강의계획서 관리
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      onClickButton(lecture.ID, 2, 'manage')
+                    }}
+                  >
+                    공지사항 관리
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      onClickButton(lecture.ID, 3, 'manage')
+                    }}
+                  >
+                    자료실 관리
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      onClickButton(lecture.ID, 4, 'manage')
+                    }}
+                  >
+                    과제 관리
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      onClickButton(lecture.ID, 5, 'manage')
+                    }}
+                  >
+                    출석 관리
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      onClickButton(lecture.ID, 6, 'manage')
+                    }}
+                  >
+                    시험 관리
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      onClickButton(lecture.ID, 7, 'manage')
+                    }}
+                  >
+                    성적 관리
+                  </Button>
+                </ButtonRow>
+              </ButtonRowsWrap>
             </ListRow>
           )
         })}

@@ -19,7 +19,7 @@ const FacultyNavigation = () => {
             index={0}
             text={"MAIN"}
             link={"faculty"}
-            onClick={setAccordianActived}
+            setAccordianActived={setAccordianActived}
           />
           <FacultyNavigationAccordian
             actived={actived}
@@ -34,7 +34,7 @@ const FacultyNavigation = () => {
             index={2}
             text={"강의 개설"}
             link={"faculty/createlecture"}
-            onClick={setAccordianActived}
+            setAccordianActived={setAccordianActived}
           />
           <NavigationButton
             actived={actived}
@@ -42,7 +42,7 @@ const FacultyNavigation = () => {
             index={3}
             text={"개인정보 관리"}
             link={"faculty/mypage"}
-            onClick={setAccordianActived}
+            setAccordianActived={setAccordianActived}
           />
         </ButtonWrap>
       </NavigationBar>
