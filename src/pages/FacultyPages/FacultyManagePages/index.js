@@ -1,6 +1,6 @@
 import DropDown from '@components/DropDown/';
-import { useEffect, useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useCallback, useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from "recoil";
 import { FacultyLectureSelectedState, FacultyLecturesState, FacultyNavigationAccordianActivedState } from "../../../Atom";
 import FacultyArchiveManagePage from './FacultyArchiveManagePage';
 import FacultyAssignmentManagePage from './FacultyAssignmentManagePage';
@@ -9,12 +9,12 @@ import FacultyExamManagePage from './FacultyExamManagePage';
 import FacultyGradeManagePage from './FacultyGradeManagePage';
 import FacultyNoticeManagePage from './FacultyNoticeManagePage';
 import FacultySyllabiManagePage from './FacultySyllabiManagePage/index';
-import { DropDownRow, DropDownWrap, PageWrap } from "./style";
+import { DropDownRow, DropDownWrap, LectureID, LectureTitle, PageWrap } from "./style";
 
 const FacultyManagePage = () => {
   const FacultyNavigationAccordian = useRecoilValue(FacultyNavigationAccordianActivedState);
-  const setSelectedLectureID = useSetRecoilState(FacultyLectureSelectedState);
-  const [selectedLecture, setSelectedLecture] = useState("");
+  const [selectedLectureID, setSelectedLectureID] = useRecoilState(FacultyLectureSelectedState);
+  const [selectedLectureName, setSelectedLectureName] = useState("");
   const [lectureDropDown, setLectureDropDown] = useState(false);
   const [lectureNameList, setLectureNameList] = useState([]);
   const lectures = useRecoilValue(FacultyLecturesState);
@@ -22,16 +22,17 @@ const FacultyManagePage = () => {
   //to add lecture load API
 
   const loadLectureName = () => {
-    if (lectures) {
-      setLectureNameList([]);
-      lectures.forEach((e) => {
-        setLectureNameList((prev) => [...prev, e.name]);
-      })
-      setSelectedLecture();
+    let names = [];
+    lectures.forEach((lecture, lectureIndex) => {
+      names.push(lecture.name)
+    })
+    if (names.length > 0) {
+      setLectureNameList(names);
+      setSelectedLectureName(names[0]);
     }
   }
 
-  useEffect(loadLectureName, [lectures, setSelectedLecture]);
+  useEffect(loadLectureName, [lectures]);
 
   const handleLectureSelect = (value) => {
     let lectureID = "";
@@ -41,10 +42,10 @@ const FacultyManagePage = () => {
       }
     })
     setSelectedLectureID(lectureID);
-    setSelectedLecture(value);
+    setSelectedLectureName(value);
   }
 
-  const RenderContents = () => {
+  const RenderContents = useCallback(() => {
     switch (FacultyNavigationAccordian) {
       case "1":
         return (
@@ -84,7 +85,7 @@ const FacultyManagePage = () => {
       default:
         return "error";
     }
-  }
+  }, [FacultyNavigationAccordian])
 
   return (
     <PageWrap>
@@ -93,7 +94,7 @@ const FacultyManagePage = () => {
           {
             lectures ?
               <DropDown
-                state={selectedLecture}
+                state={selectedLectureName}
                 setState={handleLectureSelect}
                 isOpen={lectureDropDown}
                 setIsOpen={setLectureDropDown}
@@ -107,6 +108,8 @@ const FacultyManagePage = () => {
               ""
           }
         </DropDownWrap>
+        <LectureTitle>{selectedLectureName}</LectureTitle>
+        <LectureID>{selectedLectureID}</LectureID>
       </DropDownRow>
       <RenderContents />
     </PageWrap>

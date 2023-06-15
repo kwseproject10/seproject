@@ -4,7 +4,7 @@ import { DeleteButton, DeleteButtonWrap, KnobBody, KnobHeader, KnobRow, KnobsWra
 const FacultyGradeManagePage = ({ lectureName }) => {
   const [grades, setGrades] = useState([]);
   const [orderedList, setOrderedList] = useState([]);
-  const [studednts, setStudents] = useState([]);
+  const [students, setStudents] = useState([]);
   //students는 듣는 모든 학생 정보
   const loadStudents = () => {
     setStudents([
@@ -37,7 +37,8 @@ const FacultyGradeManagePage = ({ lectureName }) => {
       { name: "홍희태", ID: "2020601556" },
       { name: "풍병준", ID: "2020493879" },
       { name: "강범호", ID: "2020858655" },
-      { name: "설성기", ID: "2020851136" }])
+      { name: "설성기", ID: "2020851136" }
+    ])
   }
   //API call
   const loadGrades = () => {

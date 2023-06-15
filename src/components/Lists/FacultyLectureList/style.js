@@ -17,9 +17,10 @@ export const TitleText = styled.div`
 
 export const ListBox = styled.div`
   border-top: 0.125rem var(--color-dk) solid;
+  border-bottom: 0.125rem var(--color-dk) solid;
   list-style: none;
   margin: 0;
-  overflow-Y: none;
+  overflow-Y: auto;
 `
 
 export const ListRow = styled.div`

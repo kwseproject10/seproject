@@ -3,9 +3,9 @@ import ArchiveList from "@components/Lists/ArchiveList";
 import AssignmentList from "@components/Lists/AssignmentList";
 import AttendanceList from "@components/Lists/AttendanceList";
 import NoticeList from "@components/Lists/NoticeList";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { getAPI } from "../../../../APIs";
 import { userIDState } from "../../../../Atom";
 import { ArchiveCard, AssignmentCard, AttendanceCard, AttendanceRow, BottomContents, BottomContentsWrap, MainWrap, NoticeCard } from "./style";
 
@@ -20,152 +20,77 @@ const LectureDetailMain = ({ setNavigationindex }) => {
   const userID = useRecoilValue(userIDState);
 
   useEffect(() => {
-    getAPI(setAttendance, 'attendance', userID)
-  }, [ userID ]);
+    const fetchAttendance = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/attendance?userID=${userID}&lectureID=${selectedLecture}`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("attendance load fail");
+        return
+      }
+      console.log(res.data);
+      setAttendance(res.data);
+    }
 
-  const loadInforms = (selectedLecture) => {
-    setAssignmentList([
-      {
-        key: "0",
-        title: "Implementation of Ripple Carry Adder using Verilog",
-        subject: "디지털논리회로1",
-        startDate: "2022.01.01(월)",
-        endDate: "2023.12.31(월)",
-        due: "3"
-      },
-      {
-        key: "1",
-        title: "3차 프로젝트",
-        subject: "소프트웨어공학",
-        startDate: "2023.05.10(일)",
-        endDate: "2023.06.16(월)",
-        due: "6"
-      },
-      {
-        key: "2",
-        title: "Term Project",
-        subject: "컴퓨터네트워크",
-        startDate: "2022.01.01(월)",
-        endDate: "2023.12.31(월)",
-        due: "6"
-      },
-      {
-        key: "3",
-        title: "Signal&System HW #5",
-        subject: "신호및시스템",
-        startDate: "2022.01.01(월)",
-        endDate: "2023.12.31(월)",
-        due: "13"
-      },
-      {
-        key: "4",
-        title: "[project]embedded system design on uCOS - final",
-        subject: "임베디드시스템S/W설계",
-        startDate: "2022.01.01(월)",
-        endDate: "2023.12.31(월)",
-        due: "20"
+    fetchAttendance();
+  }, [ userID, selectedLecture ])
+  
+  useEffect(() => {
+    const fetchArchive = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/archive?lectureID=${selectedLecture}`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("archive load fail");
+        return
       }
-    ]);
-    setNoticeList([
-      {
-        key: "0",
-        title: "중간고사 시험범위",
-        subject: "소프트웨어공학",
-        date: "2022.01.01(월)"
-      },
-      {
-        key: "1",
-        title: "2차 프로젝트 점수 공지",
-        subject: "소프트웨어공학",
-        date: "2023.05.28(일)"
-      },
-      {
-        key: "2",
-        title: "[자료] uCoS 예제소스 컴파일 시 발생하는 문제 해결방법",
-        subject: "임베디드시스템S/W설계",
-        date: "2022.01.01(월)"
-      },
-      {
-        key: "3",
-        title: "Assignment for INCOMPLETE PREREQUISITE",
-        subject: "신호및시스템",
-        date: "2022.01.01(월)"
-      },
-      {
-        key: "4",
-        title: "금일 수업 휴강 공지",
-        subject: "머신러닝",
-        date: "2022.01.01(월)"
+      console.log(res.data);
+      setArchiveList(res.data);
+    }
+    fetchArchive();
+  }, [ userID, selectedLecture ])
+  
+  useEffect(() => {
+    const fetchNotice = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/notice?lectureID=${selectedLecture}`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("notice load fail");
+        return
       }
-    ]);
-    setArchiveList([
-      {
-        key: "0",
-        title: "A. Exception Handling",
-        subject: "소프트웨어공학",
-        date: "2023.06.05(월)",
-        hit: 6
-      },
-      {
-        key: "1",
-        title: "11-2, 3 Reliability",
-        subject: "소프트웨어공학",
-        date: "2023.06.03(토)",
-        hit: 21
-      },
-      {
-        key: "2",
-        title: "11-1 Reliability",
-        subject: "소프트웨어공학",
-        date: "2023.05.25(목)",
-        hit: 11
-      },
-      {
-        key: "3",
-        title: "10 Dependable Systems",
-        subject: "소프트웨어공학",
-        date: "2023.05.25(목)",
-        hit: 11
-      },
-      {
-        key: "4",
-        title: "09 Software Evolution",
-        subject: "소프트웨어공학",
-        date: "2023.05.13(토)",
-        hit: 24
-      },
-      {
-        key: "5",
-        title: "08 Software Testing",
-        subject: "소프트웨어공학",
-        date: "2023.05.07(일)",
-        hit: 11
-      },
-      {
-        key: "6",
-        title: "07 Design and Implementation",
-        subject: "소프트웨어공학",
-        date: "2023.05.01(월)",
-        hit: 29
-      },
-      {
-        key: "7",
-        title: "06 Architectural Design",
-        subject: "소프트웨어공학",
-        date: "2023.04.11(화)",
-        hit: 30
+      console.log(res.data);
+      setNoticeList(res.data);
+    }
+    fetchNotice();
+  }, [ userID, selectedLecture ])
+  
+  useEffect(() => {
+    const fetchAssignment = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/assignment?lectureID=${selectedLecture}`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("assignment load fail");
+        return
       }
-    ]);
-  }
-
-  useEffect(() => { loadInforms(selectedLecture) }, [selectedLecture]);
+      console.log(res.data);
+      setAssignmentList(res.data);
+    }
+    fetchAssignment();
+  }, [ userID, selectedLecture ])
+  
   return (
     <MainWrap>
       <AttendanceRow>
         <AttendanceCard>
           <AttendanceList
             listTitle={"출석 현황"}
-            list={attendance[selectedLecture]}
+            list={attendance}
           />
         </AttendanceCard>
       </AttendanceRow>

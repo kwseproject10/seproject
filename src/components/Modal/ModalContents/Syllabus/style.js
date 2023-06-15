@@ -71,3 +71,35 @@ export const CloseButton =styled.button`
   font-weight: bold;
   border: none;
 `
+export const RatioChart = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--color-nm);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+`
+
+export const ChartColumn = styled.div`
+  display: flex;
+  width: 25%;
+  text-align: center;
+  flex-direction: column;
+`
+
+export const ChartHeader = styled.div`
+  width: 100%;
+  height: 2.5rem;
+  border-bottom: 1px solid var(--color-gr);
+  background-color:var(--color-sh);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+
+export const ChartValue = styled.div`
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`

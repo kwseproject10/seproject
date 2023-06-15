@@ -1,64 +1,70 @@
 import HeaderButton from "@components/Buttons/HeaderButton";
 import HeaderLogoBlack from "@images/HeaderLogo.png";
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSetRecoilState } from 'recoil';
-import { FacultyNavigationState } from '../../../Atom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { FacultyNavigationState, userIDState, userInformState } from '../../../Atom';
 import { ButtonPartition, HeaderBar, HeaderWrap, LeftContents, LeftContentsWrap, LogoWrap, RightContents, RightContentsWrap, UserName, UserType } from "./style";
 
 const FacultyHeader = () => {
   const setActived = useSetRecoilState(FacultyNavigationState);
-  const [ userName, setUserName ] = useState("");
-  const [ userID, setUserID ] = useState("");
-  const [ userMajor, setUserMajor ] = useState("");
-  const [ userType, setUserType ] = useState("");
+  const userID = useRecoilValue(userIDState);
+  const [userInform, setUserInform] = useRecoilState(userInformState);
 
-  //API call
-  const getUserInform = () => {
-    setUserName("홍길동");
-    setUserID("1998123456");
-    setUserMajor("컴퓨터정보공학부");
-    setUserType("교수");
-  }
-  useEffect(getUserInform,[]);
+  useEffect(() => {
+    const fetchAssignment = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/userinform?userID=${userID}`;
+      const res = await axios.get(
+        route
+      );
+      if (res.data.result === "false") {
+        console.log("assignment load fail");
+        return
+      }
+      console.log(res.data);
+      setUserInform(res.data);
+    }
+    fetchAssignment();
+  }, [userID, setUserInform])
 
-    return(
-        <HeaderWrap>
-          <HeaderBar>
+  return (
+    <HeaderWrap>
+      <HeaderBar>
 
-            <LeftContentsWrap>
-              <LeftContents>
-                <Link to="" onClick={() => {
-                  setActived(0);
-                }}>
-                  <LogoWrap>
-                    <img
-                      src={HeaderLogoBlack}
-                      height="34"
-                      alt="HeaderLogoBlack"
-                    />
-                  </LogoWrap>
-                </Link>
-                <UserName>{userName} 님</UserName>
-                <UserType>{userMajor} {userType} ({userID})</UserType>
-              </LeftContents>
-            </LeftContentsWrap>
+        <LeftContentsWrap>
+          <LeftContents>
+            <Link to="" onClick={() => {
+              setActived(0);
+            }}>
+              <LogoWrap>
+                <img
+                  src={HeaderLogoBlack}
+                  height="34"
+                  alt="HeaderLogoBlack"
+                />
+              </LogoWrap>
+            </Link>
+            <UserName>{userInform.name} 님</UserName>
+            <UserType>{userInform.major}  {userInform.type === "student" ? "학부생" : "교수"}({userInform.ID})</UserType>
+          </LeftContents>
+        </LeftContentsWrap>
 
-            <RightContentsWrap>
-              <RightContents>
-                <HeaderButton text={"github"} out={true} link={"https://github.com/kwseproject10/seproject"} onClick={() => {}}/>
-                <ButtonPartition/>
-                <HeaderButton text={"광운대학교"} out={true} link={"https://www.kw.ac.kr/ko/"} onClick={() => {}}/>
-                <ButtonPartition/>
-                <HeaderButton text={"로그아웃"} out={false} link={""} onClick={() => {
-                  setActived(0);
-                }}/>
-              </RightContents>
-            </RightContentsWrap>
+        <RightContentsWrap>
+          <RightContents>
+            <HeaderButton text={"github"} out={true} link={"https://github.com/kwseproject10/seproject"} onClick={() => { }} />
+            <ButtonPartition />
+            <HeaderButton text={"광운대학교"} out={true} link={"https://www.kw.ac.kr/ko/"} onClick={() => { }} />
+            <ButtonPartition />
+            <HeaderButton text={"로그아웃"} out={false} link={""} onClick={() => {
+              setActived(0);
+            }} />
+          </RightContents>
+        </RightContentsWrap>
 
-          </HeaderBar>
-        </HeaderWrap>
-    )
+      </HeaderBar>
+    </HeaderWrap>
+  )
 }
 
 export default FacultyHeader;

@@ -104,7 +104,6 @@ const RenderBody = ({ isDetail, lectures }) => {
 }
 
 const TimeTable = ({ selectedSemester, setSelectedSemester, semesters, lectures, isDetail }) => {
-  console.log("TEST", lectures);
   let date = ['월','화','수','목','금','토'];
   if(isDetail) date = ['시간', '월', '화', '수', '목', '금', '토'];
   return (

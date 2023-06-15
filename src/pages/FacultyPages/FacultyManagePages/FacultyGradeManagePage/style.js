@@ -1,10 +1,12 @@
 import { TbEdit, TbSearch, TbTrash } from "react-icons/tb";
 import styled from "styled-components";
+import { RenderAnimation } from "../../../../style/GlobalStyle";
 export const PageWrap = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
+  animation: ${RenderAnimation} 1s;
 `
 
 export const ListWrap = styled.div`

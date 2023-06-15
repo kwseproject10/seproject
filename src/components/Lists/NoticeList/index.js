@@ -1,3 +1,4 @@
+import { toStringFormat } from './../../../utils/date';
 import { Dates, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitleText } from "./style";
 
 const NoticeList = ({ listTitle, list, maxRows, height, width, subjectName }) => {
@@ -15,7 +16,7 @@ const NoticeList = ({ listTitle, list, maxRows, height, width, subjectName }) =>
             <ListRow key={index}>
               <Left>
                 <NoticeTitle subjectName={subjectName}>{
-                  element.title.length > 30 ?
+                  element.title && element.title.length > 30 ?
                     element.title.slice(0,29) + "..."
                   :
                     element.title
@@ -28,7 +29,7 @@ const NoticeList = ({ listTitle, list, maxRows, height, width, subjectName }) =>
               </Left>
               <Right>
                 <Dates>
-                 {element.date}
+                 {toStringFormat(element.date)}
                 </Dates>
               </Right>
             </ListRow>

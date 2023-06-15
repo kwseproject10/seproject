@@ -47,6 +47,7 @@ const LoginPage = () => {
         const res_user = await axios.get(
           route
         );
+        console.log(res_user.data);
         if (res_user.data.result === "false") {
           setAlret("회원정보 출력 오류가 발생하였습니다.");
           return

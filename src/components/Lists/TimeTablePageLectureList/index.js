@@ -45,19 +45,20 @@ const TimeTablePageLectureList = ({ lectures }) => {
         {lectures.map((element, index) => {
           return (
             <ListRow key={index}>
-              <DefaultRow>
+              <DefaultRow
+                onClick={() => {
+                  onClickListRow(element.ID, index);
+                }}
+              >
                 <Left>
-                  <NoticeTitle
-                    onClick={() => {
-                      onClickListRow(element.ID, index);
-                    }}
-                  >
+                  <NoticeTitle>
                     {
                       element.name.length > 30 ?
                         element.name.slice(0, 29) + "..."
                         :
                         element.name
-                    }</NoticeTitle>
+                    }
+                  </NoticeTitle>
                   <NoticeSubject>{element.ID}</NoticeSubject>
                 </Left>
                 <LectureProfessor>

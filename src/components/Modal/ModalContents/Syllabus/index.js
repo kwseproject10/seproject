@@ -1,10 +1,9 @@
-import { useState } from "react";
-import { BodyRow, ButtonRow, ButtonWrap, CloseButton, RowContent, RowTitle, SyllabusBody, SyllabusHeader, SyllabusTitle, SyllabusWrap } from "./style";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { BodyRow, ButtonRow, ButtonWrap, ChartColumn, ChartHeader, ChartValue, CloseButton, RatioChart, RowContent, RowTitle, SyllabusBody, SyllabusHeader, SyllabusTitle, SyllabusWrap } from "./style";
 
 const Syllabus = ({ lectureID, setModalOpen }) => {
   const [lecture, setLecture] = useState({});
-
+  
   //API call
   const loadLectureInform = () => {
     setLecture(
@@ -105,13 +104,24 @@ const Syllabus = ({ lectureID, setModalOpen }) => {
               ""
               :
               <RowContent>
-                출석: {lecture.evaluationRatio.attendance}%<br />
-                중간고사: {lecture.evaluationRatio.midTermExam}%<br />
-                기말고사: {lecture.evaluationRatio.finalExam}%<br />
-                과제: {lecture.evaluationRatio.assignment}%<br />
-                수강태도: {lecture.evaluationRatio.attitude}%<br />
-                퀴즈: {lecture.evaluationRatio.quiz}%<br />
-                기타: {lecture.evaluationRatio.etc}%
+              <RatioChart>
+                <ChartColumn>
+                  <ChartHeader>출석</ChartHeader>
+                  <ChartValue>{lecture.evaluationRatio.attendance} %</ChartValue>
+                </ChartColumn>
+                <ChartColumn>
+                  <ChartHeader>중간고사</ChartHeader>
+                  <ChartValue>{lecture.evaluationRatio.midTermExam} %</ChartValue>
+                </ChartColumn>
+                <ChartColumn>
+                  <ChartHeader>기말고사</ChartHeader>
+                  <ChartValue>{lecture.evaluationRatio.finalExam} %</ChartValue>
+                </ChartColumn>
+                <ChartColumn>
+                  <ChartHeader>과제</ChartHeader>
+                  <ChartValue>{lecture.evaluationRatio.assignment} %</ChartValue>
+                </ChartColumn>
+              </RatioChart>
               </RowContent>
             }
           </BodyRow>

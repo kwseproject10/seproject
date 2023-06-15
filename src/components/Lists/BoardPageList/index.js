@@ -18,6 +18,7 @@ const RenderList = ({ list, linePerPage, setInDetail, setPostID }) => {
             setInDetail(true);
             setPostID(list[i].ID);
           }}
+          isLast={i === linePerPage}
         >
           <PostName>{list[i].title}</PostName>
           <Poster>{list[i].poster}</Poster>
@@ -69,13 +70,14 @@ const BoardPageList = ({ boardTitle, list, linePerPage, setInDetail, setPostID }
 
   const sliceList = () => {
     setSelectedList([]);
-    setSelectedList(list.slice((selectedPage - 1) * linePerPage, (selectedPage - 1) * linePerPage + linePerPage));
+    let temp = searchedList.slice((selectedPage - 1) * linePerPage, (selectedPage - 1) * linePerPage + linePerPage)
+    setSelectedList(temp);
   };
   const initSearchedList = () => {
     setSearchedList(list);
   }
 
-  useEffect(sliceList, [selectedPage, setSelectedList, list, linePerPage]);
+  useEffect(sliceList, [selectedPage, setSelectedList, searchedList, linePerPage]);
   useEffect(initSearchedList, [list]);
 
   //searchBar control
@@ -113,7 +115,7 @@ const BoardPageList = ({ boardTitle, list, linePerPage, setInDetail, setPostID }
             <HeaderPostHit>조회수</HeaderPostHit>
           </ListHeader>
           <RenderList
-            list={searchedList}
+            list={selectedList}
             linePerPage={linePerPage}
             setInDetail={setInDetail}
             setPostID={setPostID}

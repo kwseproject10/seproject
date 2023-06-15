@@ -34,8 +34,8 @@ const RenderBody = ({ isDetail, lectures }) => {
   const movePage = useNavigate();
   const onClickListRow = (lectureID, index) => {
     setSelectedLecture(lectureID);
-    setNavigationIndex(5);
-    setNavAccordianActived("3");
+    setNavigationIndex(4);
+    setNavAccordianActived("1");
     movePage('/faculty/manage');
   }
 
@@ -104,7 +104,6 @@ const RenderBody = ({ isDetail, lectures }) => {
 }
 
 const FacultyTimeTable = ({ selectedSemester, setSelectedSemester, semesters, lectures, isDetail }) => {
-  console.log("TEST", lectures);
   let date = ['월','화','수','목','금','토'];
   if(isDetail) date = ['시간', '월', '화', '수', '목', '금', '토'];
   return (

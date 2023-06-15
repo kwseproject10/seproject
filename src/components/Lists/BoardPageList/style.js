@@ -31,7 +31,7 @@ export const ListRow = styled.div`
   display: flex;
   justify-content:space-between;
   width: 100%;
-  height: ${(props)=> (100 / props.linePerPage) }%;
+  height: ${(props) => (100 / props.linePerPage)}%;
   border-bottom: 1px solid var(--color-gr);
   color:var(--color-dg);
   &:hover{
@@ -47,6 +47,11 @@ export const ListRow = styled.div`
     `
       cursor: pointer;
     `
+  }
+  ${(props) => props.isLast ?
+    `border-bottom: none;`
+    :
+    ``
   }
 `
 
@@ -151,13 +156,13 @@ export const PageButton = styled.div`
     transform: translateY(0);
     transition: 0.3s;
   }
-  ${(props)=>props.index === props.selectedPage ?
-      `
+  ${(props) => props.index === props.selectedPage ?
+    `
         color: black;
         cursor: default;
       `
     :
-      ``
+    ``
   }
 `
 

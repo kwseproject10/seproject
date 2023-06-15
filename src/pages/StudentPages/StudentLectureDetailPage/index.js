@@ -1,6 +1,7 @@
 import { LectureSelectedState } from "@./Atom";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
+import { LecturesState } from "../../../Atom";
 import LectureDetailArchive from "./LectureDetailArchive";
 import LectureDetailAssignment from "./LectureDetailAssignment";
 import LectureDetailMain from "./LectureDetailMain";
@@ -9,43 +10,19 @@ import { DetailPageContents, DetailPageHeader, DetailPageLectureName, DetailPage
 
 const StudentLectureDetailPage = () => {
   const selectedLecture = useRecoilValue(LectureSelectedState);
-  const [lectureInform, setLectureInform] = useState({})
+  const lectures = useRecoilValue(LecturesState);
+  const [lectureName, setLectureName] = useState("")
   const [navigationIndex, setNavigationindex] = useState(0);
 
-  const loadLectureInform = () => {
-    switch(selectedLecture){
-      case "H020-4-0846-01":
-        setLectureInform({
-          lectureName : "소프트웨어공학",
-        })
-        break;
-      case "H020-2-0453-01":
-        setLectureInform({
-          lectureName : "디지털논리회로1",
-        })
-        break;
-      case "H020-3-2004-01":
-        setLectureInform({
-          lectureName : "신호및시스템",
-        })
-        break;
-      case "H020-4-5861-01":
-        setLectureInform({
-          lectureName : "임베디드시스템S/W설계",
-        })
-        break;
-      case "H020-4-8483-01":
-        setLectureInform({
-          lectureName : "머신러닝",
-        })
-        break;
-      default:
-        setLectureInform({
-          lectureName : "ERROR",
-        })
-        break;
-    }
-  }
+  useEffect(() => {
+    lectures.forEach((lecture) => {
+      if(lecture.ID === selectedLecture){
+        setLectureName(lecture.name);
+        return;
+      }
+    })
+  }, [ lectures, selectedLecture ])
+
   const RenderContents = () => {
     switch (navigationIndex){
       case 0:
@@ -77,12 +54,12 @@ const StudentLectureDetailPage = () => {
         return "error";
     }
   }
-  useEffect(loadLectureInform,[ selectedLecture ]);
+
     return(
         <DetailPageWrap>
           <DetailPageHeader>
             <DetailPageLectureWrap>
-              <DetailPageLectureName>{lectureInform.lectureName}</DetailPageLectureName>
+              <DetailPageLectureName>{lectureName}</DetailPageLectureName>
               <DetailPageLectureNum>{selectedLecture}</DetailPageLectureNum>
             </DetailPageLectureWrap>
             <DetailPageNavigation>

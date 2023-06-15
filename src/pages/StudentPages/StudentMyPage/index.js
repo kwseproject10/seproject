@@ -7,7 +7,6 @@ import { ButtonRow, ButtonWrap, FileInputWrap, HeaderTitle, ModifyButton, Modify
 
 const StudentMyPageAuthed = () => {
   const [modifyMode, setModifyMode] = useState(false);
-  const [inputBirthDay, setInputBirthDay] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputPhoneNum, setInputPhoneNum] = useState("");
   const [modifyPW, setModifyPW] = useState("");
@@ -15,7 +14,6 @@ const StudentMyPageAuthed = () => {
   const userInform = useRecoilValue(userInformState);
 
   const initInput = () => {
-    setInputBirthDay(userInform.birthday);
     setInputEmail(userInform.email);
     setInputPhoneNum(userInform.phoneNum);
   }
@@ -89,20 +87,7 @@ const StudentMyPageAuthed = () => {
           </ProfileRow>
           <ProfileRow>
             <RowTitle>생년월일</RowTitle>
-            {!modifyMode ?
             <RowContent>{userInform.birthday}</RowContent>
-              :
-              <RowInputWrap>
-              <RowInput
-                type="text"
-                onChange={(e) => {
-                  setInputBirthDay(e.target.value);
-                }}
-                value={inputBirthDay}
-                placeholder="0000.00.00"
-              />
-            </RowInputWrap>
-            }
           </ProfileRow>
           <ProfileRow>
             <RowTitle>e-mail</RowTitle>

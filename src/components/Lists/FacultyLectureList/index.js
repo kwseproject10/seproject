@@ -32,7 +32,8 @@ const FacultyLectureList = ({ lectures }) => {
             <ListRow key={index}>
               <DefaultRow
                 onClick={() => {
-                  setActived(index);
+                  if (index === actived ) { setActived(-1); }
+                  else { setActived(index); }
                 }}
               >
                 <Left>

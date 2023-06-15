@@ -1,10 +1,12 @@
 import Size from "@style/Size.js";
 import styled from "styled-components";
+import { RenderAnimation } from "../../style/GlobalStyle";
 
 export const PageViewer = styled.div`
     z-index: 0;
     width: 100%;
     height: 100%;
+    animation: ${RenderAnimation} 1s;
 `
 
 export const PageBG = styled.div`

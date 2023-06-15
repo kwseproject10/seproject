@@ -1,6 +1,9 @@
 import BoardPageList from "@components/Lists/BoardPageList";
 import PostDetail from "@components/Lists/BoardPageList/PostDetail";
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { LectureSelectedState, userIDState } from "../../../../Atom";
 import { NoticePageWrap } from "./style";
 
 const LectureDetailArchive = () => {
@@ -8,28 +11,25 @@ const LectureDetailArchive = () => {
   const [inDetail, setInDetail] = useState(false);
   const [archiveID, setArchiveID] = useState("");
   
-  //API call
-  const loadNoticeList = () => {
-    setArchiveList([
-      {
-      ID: "0",
-      title: "중간고사 시험범위",
-      subject: "소프트웨어공학",
-      date: "2022.01.01(월)",
-      poster: "이기훈",
-      hit: 10
-    },
-    {
-      ID: "1",
-      title: "2차 프로젝트 점수 공지",
-      subject: "소프트웨어공학",
-      date: "2023.05.28(일)",
-      poster: "이기훈",
-      hit: 10
+  const userID = useRecoilValue(userIDState);
+  const selectedLecture = useRecoilValue(LectureSelectedState);
+  
+  useEffect(() => {
+    const fetchArchive = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/archive?lectureID=${selectedLecture}`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("archive load fail");
+        return
+      }
+      console.log(res.data);
+      setArchiveList(res.data);
     }
-  ]);
-  }
-  useEffect(loadNoticeList, []);
+    fetchArchive();
+  }, [ userID, selectedLecture ])
+
   return (
     <NoticePageWrap>
     {inDetail ?

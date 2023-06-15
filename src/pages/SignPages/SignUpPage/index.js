@@ -1,7 +1,7 @@
 import DropDown from "@components/DropDown";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { signUpState } from "../../../Atom";
 import { AlretRow, BirthDayRow, ButtonRow, CheckBox, CheckRow, EmailRow, Input, InputBirth, InputEmail, InputNum, InputTitle, LinkStyle, PhoneNumRow, Policy, SignButton, Title } from "./style";
@@ -37,6 +37,7 @@ const SignUpPage = () => {
   const [birthMonth, setBirthMonth] = useState("");
   const [birthDay, setBirthDay] = useState("");
   const [EmailID, setEmailID] = useState("");
+  const movePage = useNavigate();
 
   const [Alret, setAlret] = useState("학번을 입력해주세요.");
   const [canSubmit, setCanSubmit] = useState(false);
@@ -146,6 +147,8 @@ const SignUpPage = () => {
       }
     }
     fetch();
+    setSignUp(false);
+    movePage(-1);
   }
 
   return (
@@ -337,7 +340,9 @@ const SignUpPage = () => {
             <LinkStyle to="/">
               <SignButton
                 BG={"green"}
-                onClick={() => { OnSubmit(); }}
+                onClick={() => {
+                  OnSubmit();
+                }}
                 Enable={true}
               >
                 SIGN UP
