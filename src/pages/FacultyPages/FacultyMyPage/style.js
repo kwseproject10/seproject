@@ -165,7 +165,7 @@ export const PasswordSubmit = styled.button`
   border: none;
 `
 
-export const ModifySubmitButton = styled.button`
+export const ModifySubmitButton = styled.input`
   cursor: pointer;
   width: 8rem;
   height: 2.5rem;

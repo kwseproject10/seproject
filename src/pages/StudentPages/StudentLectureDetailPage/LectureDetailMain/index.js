@@ -31,7 +31,6 @@ const LectureDetailMain = ({ setNavigationindex }) => {
       }
       setAttendance(res.data);
     }
-
     fetchAttendance();
   }, [ userID, selectedLecture ])
   
@@ -75,7 +74,13 @@ const LectureDetailMain = ({ setNavigationindex }) => {
         console.log("assignment load fail");
         return
       }
-      setAssignmentList(res.data);
+      let temp = [];
+      for(let i = 0; i < res.data.length; i++ ) {
+        if(parseInt(res.data[i].due) > 0){
+          temp.push(res.data[i]);
+        }
+      }
+      setAssignmentList(temp);
     }
     fetchAssignment();
   }, [ userID, selectedLecture ])

@@ -1,7 +1,7 @@
 import EmptyProfileImage from "@images/EmptyProfileImage.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { userIDState, userInformState } from "../../../Atom";
 import { ButtonRow, ButtonWrap, FileInputWrap, HeaderTitle, ModifyButton, ModifyCancelButton, ModifySubmitButton, MyPageWrap, PasswordSubmit, PhotoRow, PhotoRowContent, Profile, ProfileHeader, ProfileRow, ProfileWrap, RowContent, RowInput, RowInputWrap, RowTitle, SubmitButtonWrap, SubmitWrap, UserPhotoWrap } from "./style";
 
@@ -11,7 +11,9 @@ const StudentMyPageAuthed = () => {
   const [inputPhoneNum, setInputPhoneNum] = useState("");
   const [modifyPW, setModifyPW] = useState("");
   const [reModifyPW, setReModifyPW] = useState("");
-  const userInform = useRecoilValue(userInformState);
+  const [files, setFiles] = useState();
+  const [userInform,setUserInform] = useRecoilState(userInformState);
+  const userID = useRecoilValue(userIDState);
 
   const initInput = () => {
     setInputEmail(userInform.email);
@@ -20,13 +22,97 @@ const StudentMyPageAuthed = () => {
 
   useEffect(initInput, [userInform.birthday, userInform.email, userInform.phoneNum]);
 
-  //API call
-  const submitModifiedInform = () => {
-    //post API
-  }
+  const onChangeFiles = (e) => {
+    const fileList = e.target.files;
+    if (fileList !== null) {
+      setFiles(fileList);
+    }
+  };
+
+  const upload = async (e) => {
+    if (modifyPW === "") {
+      window.alert("비밀번호를 입력해주세요.");
+      return;
+    }
+    if (reModifyPW === "") {
+      window.alert("비밀번호를 다시 입력해주세요.");
+      return;
+    }
+    if (modifyPW !== reModifyPW) {
+      window.alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+    if (inputPhoneNum === "") {
+      window.alert("연락처를 입력해주세요.");
+      return;
+    }
+    if (inputEmail === "") {
+      window.alert("email을 입력해주세요.");
+      return;
+    }
+    e.preventDefault();
+    const formData = new FormData();
+    if(files !== undefined){
+      Array.from(files).forEach((el) => {
+        formData.append("file", el);
+      });
+    }
+    formData.append("userID", userInform.ID);
+    formData.append("Email", inputEmail);
+    formData.append("PhoneNum", inputPhoneNum);
+    formData.append("PW", modifyPW);
+
+    try {
+      
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/updateuserinform`;
+      const res = await axios.post(
+        route,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          transformRequest: [
+            function () {
+              return formData;
+            },
+          ],
+        }
+      );
+      if(res.data.result === "false"){
+        console.log("post error");
+        return
+      }
+      console.log(res.data);
+      window.alert("회원정보가 수정되었습니다.");
+      const fetch = async () => {
+        const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/userinform?userID=${userID}`;
+        const res = await axios.get(
+          route
+        );
+        if(res.data.result === "false") {
+          console.log("load fail");
+          return
+        }
+        console.log(res.data);
+        setUserInform(res.data);
+      }
+
+      fetch();
+      initInput();
+      setModifyMode(false);
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <SubmitWrap>
+    <form
+      onSubmit={upload}
+      encType="multipart/form-data"
+    >
       <ProfileWrap>
         <Profile>
           <ProfileHeader>
@@ -57,6 +143,8 @@ const StudentMyPageAuthed = () => {
                 <FileInputWrap>
                 <RowInput
                   type="file"
+                  name="file"
+                  onChange={onChangeFiles}
                 />
                 </FileInputWrap>
                 :
@@ -161,13 +249,9 @@ const StudentMyPageAuthed = () => {
         {modifyMode ?
           <SubmitButtonWrap>
             <ModifySubmitButton
-              onClick={() => {
-                submitModifiedInform();
-                setModifyMode(false);
-              }}
-            >
-              확인
-            </ModifySubmitButton>
+            type="submit"
+            value="확인"
+            />
             <ModifyCancelButton
               onClick={() => {
                 setModifyMode(false);
@@ -180,6 +264,8 @@ const StudentMyPageAuthed = () => {
           ""
         }
       </ButtonRow>
+      
+      </form>
     </SubmitWrap>
   )
 }
@@ -246,6 +332,7 @@ const StudentMyPage = () => {
           </ButtonRow>
         </SubmitWrap>
       }
+      
     </MyPageWrap>
   )
 }

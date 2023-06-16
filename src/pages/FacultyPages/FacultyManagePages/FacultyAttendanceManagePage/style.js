@@ -18,7 +18,7 @@ export const ListWrap = styled.div`
 `
 export const ListTitleRow = styled.div`
   display: flex;
-  height: 3rem;
+  min-height: 3rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -26,7 +26,7 @@ export const ListTitleRow = styled.div`
 
 export const ListHeader = styled.div`
   display: flex;
-  height: 3rem;
+  min-height: 3rem;
   width: 100%;
   display: flex;
   justify-content: space-between;

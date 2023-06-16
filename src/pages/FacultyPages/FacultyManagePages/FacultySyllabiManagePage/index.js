@@ -1,4 +1,7 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { FacultyLectureSelectedState } from "../../../../Atom";
 import { BodyRow, ButtonWrap, Buttons, CancelButton, CancelButtonWrap, ChartColumn, ChartHeader, ChartInput, ChartValue, LeftPadding, RatioChart, RowContent, RowInput, RowTextArea, RowTitle, SubmitButton, SubmitButtonWrap, SyllabusBody, SyllabusHeader, SyllabusTitle, SyllabusWrap, UpdateButton, UpdateButtonWrap } from "./style";
 
 const FacultySyllabiManagePage = () => {
@@ -13,6 +16,7 @@ const FacultySyllabiManagePage = () => {
   const [inputRatMid, setInputRatMid] = useState(0);
   const [inputRatFin, setInputRatFin] = useState(0);
   const [inputRatAss, setInputRatAss] = useState(0);
+  const FacultySelectedLecture = useRecoilValue(FacultyLectureSelectedState);
 
   const onSubmit = () => {
     const data = {
@@ -34,41 +38,20 @@ const FacultySyllabiManagePage = () => {
   }
 
   //API call
-  const loadLectureInform = () => {
-    setLecture(
-      {
-        key: "0",
-        name: "소프트웨어공학",
-        professor: "이기훈",
-        professorPhone: "02-940-8674",
-        professorEmail: "kihoonlee@kw.ac.kr",
-        major: "컴퓨터정보공학부",
-        type: "전선",
-        credit: "3",
-        numOfTime: "3",
-        time: ["월5", "수6"],
-        place: "새빛205",
-        ID: "H020-4-0846-01",
-        textBook: {
-          name: "Software Engineering 10th Edition",
-          author: "Ian Sommerville",
-          publisher: "Addison-Wesley"
-        },
-        description: "본 과정은 소프트웨어 공학에 관한 일반적인 입문 과정으로, 소프트웨어 공학의 기본 개념, methods, 실무활용 예 및 최근 기술동향 등을 소개한다.",
-        evaluationRatio: {
-          attendance: "10",
-          midTermExam: "30",
-          finalExam: "30",
-          assignment: "30",
-          attitude: "0",
-          quiz: "0",
-          etc: "0"
-        }
-      })
-  }
 
-  useEffect(loadLectureInform, []);
-
+  console.log(FacultySelectedLecture);
+  useEffect(() => {
+    const fetch = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/syllabus?lectureID=${FacultySelectedLecture}`;
+      const res = await axios.get(
+        route
+      );
+      console.log(res.data[0]);
+      setLecture(res.data[0]);
+    }
+    fetch();
+  }, [ FacultySelectedLecture ])
+  
   const handleModifyMode = () => {
     setInputPlace(lecture.place);
     setInputDescription(lecture.description);

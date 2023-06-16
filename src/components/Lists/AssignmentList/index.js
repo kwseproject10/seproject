@@ -24,7 +24,6 @@ const AssignmentList = ({ listTitle, list, maxRows, height, width, subjectName }
       }
     })
   }
-
   return (
     <ListWrap>
       <ListTitle>

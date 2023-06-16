@@ -86,7 +86,7 @@ export const DueDate = styled(RowItem)`
 
 export const Dday = styled(RowItem)`
   width: 10%;
-  ${props => props.dday === 0 ? `font-weight: bold;` : ``}
+  ${props => props.dday <= 0 ? `font-weight: bold;` : ``}
 `
 
 export const Count = styled(RowItem)`

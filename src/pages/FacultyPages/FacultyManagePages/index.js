@@ -1,7 +1,7 @@
 import DropDown from '@components/DropDown/';
 import { useCallback, useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from "recoil";
-import { FacultyLectureSelectedState, FacultyLecturesState, FacultyNavigationAccordianActivedState } from "../../../Atom";
+import { FacultyLectureSelectedState, FacultyLecturesState, FacultyNavigationAccordianActivedState, FacultySelectedLectureNameState } from "../../../Atom";
 import FacultyArchiveManagePage from './FacultyArchiveManagePage';
 import FacultyAssignmentManagePage from './FacultyAssignmentManagePage';
 import FacultyAttendanceManagePage from "./FacultyAttendanceManagePage";
@@ -14,7 +14,7 @@ import { DropDownRow, DropDownWrap, LectureID, LectureTitle, PageWrap } from "./
 const FacultyManagePage = () => {
   const FacultyNavigationAccordian = useRecoilValue(FacultyNavigationAccordianActivedState);
   const [selectedLectureID, setSelectedLectureID] = useRecoilState(FacultyLectureSelectedState);
-  const [selectedLectureName, setSelectedLectureName] = useState("");
+  const [selectedLectureName, setSelectedLectureName] = useRecoilState(FacultySelectedLectureNameState);
   const [lectureDropDown, setLectureDropDown] = useState(false);
   const [lectureNameList, setLectureNameList] = useState([]);
   const lectures = useRecoilValue(FacultyLecturesState);
@@ -28,22 +28,35 @@ const FacultyManagePage = () => {
     })
     if (names.length > 0) {
       setLectureNameList(names);
-      setSelectedLectureName(names[0]);
     }
   }
 
   useEffect(loadLectureName, [lectures]);
 
-  const handleLectureSelect = (value) => {
-    let lectureID = "";
+  const handleSelectedLectureName = () => {
     lectures.forEach((e) => {
-      if (e.name === value) {
-        lectureID = e.ID;
+      if (e.name === selectedLectureID) {
+        setSelectedLectureName(e.name);
+        return;
       }
     })
-    setSelectedLectureID(lectureID);
-    setSelectedLectureName(value);
   }
+
+  const handleSelectedLectureID = () => {
+    lectures.forEach((e) => {
+      if(e.name === selectedLectureName){
+        setSelectedLectureID(e.ID);
+        return;
+      }
+    })
+  }
+
+  useEffect(
+    handleSelectedLectureID, [ selectedLectureName, lectures ]
+  )
+  useEffect(
+    handleSelectedLectureName, [ selectedLectureID, lectures ]
+  )
 
   const RenderContents = useCallback(() => {
     switch (FacultyNavigationAccordian) {
@@ -95,7 +108,7 @@ const FacultyManagePage = () => {
             lectures ?
               <DropDown
                 state={selectedLectureName}
-                setState={handleLectureSelect}
+                setState={setSelectedLectureName}
                 isOpen={lectureDropDown}
                 setIsOpen={setLectureDropDown}
                 list={lectureNameList}

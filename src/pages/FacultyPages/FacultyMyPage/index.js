@@ -1,34 +1,118 @@
 import EmptyProfileImage from "@images/EmptyProfileImage.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { userIDState, userInformState } from "../../../Atom";
 import { ButtonRow, ButtonWrap, FileInputWrap, HeaderTitle, ModifyButton, ModifyCancelButton, ModifySubmitButton, MyPageWrap, PasswordSubmit, PhotoRow, PhotoRowContent, Profile, ProfileHeader, ProfileRow, ProfileWrap, RowContent, RowInput, RowInputWrap, RowTitle, SubmitButtonWrap, SubmitWrap, UserPhotoWrap } from "./style";
 
-const StudentMyPageAuthed = () => {
+const FacultyMyPage = () => {
   const [modifyMode, setModifyMode] = useState(false);
-  const [inputBirthDay, setInputBirthDay] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputPhoneNum, setInputPhoneNum] = useState("");
   const [modifyPW, setModifyPW] = useState("");
   const [reModifyPW, setReModifyPW] = useState("");
-  const userInform = useRecoilValue(userInformState);
+  const [files, setFiles] = useState();
+  const [userInform,setUserInform] = useRecoilState(userInformState);
+  const userID = useRecoilValue(userIDState);
 
   const initInput = () => {
-    setInputBirthDay(userInform.birthday);
     setInputEmail(userInform.email);
     setInputPhoneNum(userInform.phoneNum);
   }
 
   useEffect(initInput, [userInform.birthday, userInform.email, userInform.phoneNum]);
 
-  //API call
-  const submitModifiedInform = () => {
-    //post API
-  }
+  const onChangeFiles = (e) => {
+    const fileList = e.target.files;
+    if (fileList !== null) {
+      setFiles(fileList);
+    }
+  };
+
+  const upload = async (e) => {
+    if (modifyPW === "") {
+      window.alert("비밀번호를 입력해주세요.");
+      return;
+    }
+    if (reModifyPW === "") {
+      window.alert("비밀번호를 다시 입력해주세요.");
+      return;
+    }
+    if (modifyPW !== reModifyPW) {
+      window.alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+    if (inputPhoneNum === "") {
+      window.alert("연락처를 입력해주세요.");
+      return;
+    }
+    if (inputEmail === "") {
+      window.alert("email을 입력해주세요.");
+      return;
+    }
+    e.preventDefault();
+    const formData = new FormData();
+    if(files !== undefined){
+      Array.from(files).forEach((el) => {
+        formData.append("file", el);
+      });
+    }
+    formData.append("userID", userInform.ID);
+    formData.append("Email", inputEmail);
+    formData.append("PhoneNum", inputPhoneNum);
+    formData.append("PW", modifyPW);
+
+    try {
+      
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/updateuserinform`;
+      const res = await axios.post(
+        route,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          transformRequest: [
+            function () {
+              return formData;
+            },
+          ],
+        }
+      );
+      if(res.data.result === "false"){
+        console.log("post error");
+        return
+      }
+      console.log(res.data);
+      window.alert("회원정보가 수정되었습니다.");
+      const fetch = async () => {
+        const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/userinform?userID=${userID}`;
+        const res = await axios.get(
+          route
+        );
+        if(res.data.result === "false") {
+          console.log("load fail");
+          return
+        }
+        console.log(res.data);
+        setUserInform(res.data);
+      }
+
+      fetch();
+      initInput();
+      setModifyMode(false);
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <SubmitWrap>
+    <form
+      onSubmit={upload}
+      encType="multipart/form-data"
+    >
       <ProfileWrap>
         <Profile>
           <ProfileHeader>
@@ -59,6 +143,8 @@ const StudentMyPageAuthed = () => {
                 <FileInputWrap>
                 <RowInput
                   type="file"
+                  name="file"
+                  onChange={onChangeFiles}
                 />
                 </FileInputWrap>
                 :
@@ -80,29 +166,12 @@ const StudentMyPageAuthed = () => {
             <RowContent>{userInform.major}</RowContent>
           </ProfileRow>
           <ProfileRow>
-            <RowTitle>상태</RowTitle>
-            <RowContent>{userInform.grade}학년, {userInform.numberOfTerm}학기 {userInform.state === "enroll" ? "재학" : "휴학"} 중</RowContent>
-          </ProfileRow>
-          <ProfileRow>
             <RowTitle>학번</RowTitle>
             <RowContent>{userInform.ID}</RowContent>
           </ProfileRow>
           <ProfileRow>
             <RowTitle>생년월일</RowTitle>
-            {!modifyMode ?
             <RowContent>{userInform.birthday}</RowContent>
-              :
-              <RowInputWrap>
-              <RowInput
-                type="text"
-                onChange={(e) => {
-                  setInputBirthDay(e.target.value);
-                }}
-                value={inputBirthDay}
-                placeholder="0000.00.00"
-              />
-            </RowInputWrap>
-            }
           </ProfileRow>
           <ProfileRow>
             <RowTitle>e-mail</RowTitle>
@@ -176,13 +245,9 @@ const StudentMyPageAuthed = () => {
         {modifyMode ?
           <SubmitButtonWrap>
             <ModifySubmitButton
-              onClick={() => {
-                submitModifiedInform();
-                setModifyMode(false);
-              }}
-            >
-              확인
-            </ModifySubmitButton>
+            type="submit"
+            value="확인"
+            />
             <ModifyCancelButton
               onClick={() => {
                 setModifyMode(false);
@@ -195,11 +260,13 @@ const StudentMyPageAuthed = () => {
           ""
         }
       </ButtonRow>
+      
+      </form>
     </SubmitWrap>
   )
 }
 
-const FacultyMyPage = () => {
+const StudentMyPage = () => {
   const [inputPW, setInputPW] = useState("");
   const [authed, setAuthed] = useState(false);
   const userID = useRecoilValue(userIDState);
@@ -220,7 +287,7 @@ const FacultyMyPage = () => {
   return (
     <MyPageWrap>
       {authed ?
-        <StudentMyPageAuthed/>
+        <FacultyMyPage/>
         :
         <SubmitWrap>
           <ProfileWrap>
@@ -261,8 +328,9 @@ const FacultyMyPage = () => {
           </ButtonRow>
         </SubmitWrap>
       }
+      
     </MyPageWrap>
   )
 }
 
-export default FacultyMyPage;
+export default StudentMyPage;

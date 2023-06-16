@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import DropDown from '../../../../components/DropDown/index';
-import { DeleteButton, DeleteButtonWrap, DropDownWrap, LectureSearchBar, LectureSearchBarWrap, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListTitleRow, ListWrap, ModifyButton, ModifyButtonWrap, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PageWrap, PostButton, PostButtonWrap, PostButtons, PostDate, PostTitle, RightButton, Scoring, SearchIcon, SearchIconWrap, SearchInput, SubmitCount, ViewButton, ViewButtonWrap } from "./style";
+import { DeleteButton, DeleteButtonWrap, ListBody, ListHeader, ListRow, ListTitle, ListTitleRow, ListWrap, ModifyButton, ModifyButtonWrap, PageButton, PageWrap, PostButton, PostButtonWrap, PostButtons, PostDate, PostTitle, Scoring, SubmitCount, ViewButton, ViewButtonWrap } from "./style";
 
 const FacultyExamManagePage = ({ lectureName }) => {
   const [exams, setExams] = useState([]);
@@ -12,15 +11,6 @@ const FacultyExamManagePage = ({ lectureName }) => {
         ID: "0",
         title: "중간고사",
         date: "2022.04.26(월)",
-        poster: "이기훈",
-        submitCount: 30,
-        whole: 31,
-        scoring: true,  //성적입력 완료여부
-      },
-      {
-        ID: "1",
-        title: "중간고사 보강시험",
-        date: "2022.05.08(월)",
         poster: "이기훈",
         submitCount: 30,
         whole: 31,
@@ -152,60 +142,6 @@ const FacultyExamManagePage = ({ lectureName }) => {
             })
           }
         </ListBody>
-        <PageSelectorWrap>
-          <PageSelector>
-            <PageButtonWrap>
-              <PageButton>
-                <LeftButton
-                  onClick={() => {
-                    if (selectedPage > 1) setSelectedPage(prev => prev - 1);
-                  }}
-                />
-              </PageButton>
-              {pageButtons.map((e) => { return e; })}
-              <PageButton>
-                <RightButton
-                  onClick={() => {
-                    if (selectedPage < pages) setSelectedPage(prev => prev + 1);
-                  }}
-                />
-              </PageButton>
-            </PageButtonWrap>
-          </PageSelector>
-        </PageSelectorWrap>
-        <LectureSearchBarWrap>
-          <LectureSearchBar>
-            <DropDownWrap>
-              <DropDown
-                state={searchType}
-                setState={setSearchType}
-                isOpen={searchDropIsOpen}
-                setIsOpen={setSearchDropIsOpen}
-                list={searchTypeList}
-                fontSize={"var(--font-size-xs)"}
-                width={"6rem"}
-                listWidth={"3.5rem"}
-                height={"1.875rem"}
-              />
-            </DropDownWrap>
-            <SearchInput
-              value={searchText}
-              onChange={(e) => {
-                setSearchText(e.target.value);
-              }}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  onClickSearch();
-                }
-              }}
-            />
-            <SearchIconWrap>
-              <SearchIcon
-                onClick={onClickSearch}
-              />
-            </SearchIconWrap>
-          </LectureSearchBar>
-        </LectureSearchBarWrap>
       </ListWrap>
     </PageWrap>
   )
