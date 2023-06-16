@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { SelectedPostIDState, SetInDetailPostState } from "../../../Atom";
+import { SetInDetailPostState } from "../../../Atom";
 import DropDown from "../../DropDown";
 import { toStringFormat } from './../../../utils/date';
 import { DDay, DropDownWrap, DueDate, HeaderDDay, HeaderDueDate, HeaderPostDate, HeaderPostName, HeaderState, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostName, RightButton, SearchBar, SearchBarWrap, SearchIcon, SearchIconWrap, SearchInput, State } from "./style";
 
-const RenderList = ({ list, linePerPage }) => {
+const RenderList = ({ list, linePerPage, setPostID }) => {
   const setInDetail = useSetRecoilState(SetInDetailPostState);
-  const setPostID = useSetRecoilState(SelectedPostIDState);
   let Rows = [];
   for (let i = 0; i < linePerPage; i++) {
     if (list === undefined || list[i] === undefined) {
@@ -20,8 +19,8 @@ const RenderList = ({ list, linePerPage }) => {
           linePerPage={linePerPage}
           hidden={false}
           onClick={() => {
+            setPostID(list[i].key);
             setInDetail(true);
-            setPostID(list[i].ID);
           }}
         >
           <PostName>{list[i].title}</PostName>

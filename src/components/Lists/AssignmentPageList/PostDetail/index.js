@@ -1,56 +1,54 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { fileSize } from "../../../../utils/file";
-import { userIDState } from './../../../../Atom';
+import { SelectedPostIDState, userIDState } from './../../../../Atom';
+import { toStringFormat } from './../../../../utils/date';
 import { BackButton, ButtonRow, ButtonWrap, DeleteButton, DetailWrap, HeaderRow, HeaderTitle, LeftPadding, NonSubmit, PageHeader, PostBody, PostBodyText, PostFileDownload, PostFileIcon, PostFileIconWrap, PostFileRow, PostFileWrap, PostHeader, PostInform, PostTitle, PostWrap, SubmitButton, UpdateButton } from "./style";
 
 const AssignmentDetail = ({ setInDetail, postID, boardName }) => {
   const userID = useRecoilValue(userIDState);
+  const selectedPostID = useRecoilValue(SelectedPostIDState);
   const [isSubmit, setIsSubmit] = useState(true);
-
+  console.log(selectedPostID);
   //API call
   const [post, setPost] = useState();
-
-  const loadPost = () => {
-    setPost({
-      name: "3차 프로젝트",
-      poster: "이기훈",
-      postDate: "2020.06.08(목) 20:32",
-      dueDate: "2023.06.16(금) 23:59",
-      Dday: 3,
-      state: "제출",
-      postHit: "10",
-      postText: `3차 프로젝트입니다.
-
-
-
-3차 프로젝트에서는 1차 프로젝트에서 설계한 웹 애플리케이션을 구현하는 것을 목표로 합니다.
-
-
-
-사용하는 웹 기술에 제한은 없으므로 자유롭게 사용하시면 됩니다.
-
-
-
-YouTube 동영상 업로드와 git repository, 보고서는 팀 당 하나만 제출하시면 됩니다.
-
-
-
-보고서는 pdf로 변환하여 제출해주시기 바랍니다.
-
-
-
-제출 기한은 6월 16일 23:59 입니다.`,
-      postFile: {
-          name: "2023_Project_3.pdf",
-          size: "110.37 KB",
-          url: ""
-        }
-    })
-  }
-  useEffect(loadPost, []);
-
   const [submitted, setSubmitted] = useState({});
+
+  useEffect(() => {
+    const fetchAssignment = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/assignmentpost?ID=${selectedPostID}`;
+      const res = await axios.get(
+        route
+      );
+      if (res.data.result === "false") {
+        console.log("assignment load fail");
+        return
+      }
+      console.log(res.data);
+      setIsSubmit(res.data.submit === "제출")
+      setPost(res.data.post);
+    }
+    fetchAssignment();
+  }, [selectedPostID])
+
+  /*useEffect(() => {
+    const fetchSubmit = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/assignmentpost?ID=${selectedPostID}`;
+      const res = await axios.get(
+        route
+      );
+      if(res.data.result === "false") {
+        console.log("assignment load fail");
+        return
+      }
+      console.log(res.data);
+      setIsSubmit(res.data.submit === "제출")
+      setPost(res.data.post);
+    }
+    fetchSubmit();
+  }, [ selectedPostID ])
+  */
 
   const loadSubmitted = () => {
     setSubmitted({
@@ -65,14 +63,13 @@ YouTube 동영상 업로드와 git repository, 보고서는 팀 당 하나만 �
 추가로 프로젝트 미팅 스케줄 관련하여 메일 드렸으니 확인 부탁드립니다.
 감사합니다.`,
       postFile: {
-          name: "2023_10_project.pdf",
-          size: "110.37 KB",
-          url: ""
-        }
+        name: "2023_10_project.pdf",
+        size: "110.37 KB",
+        url: ""
+      }
     })
   }
   useEffect(loadSubmitted, []);
-
 
   return (
     <DetailWrap>
@@ -95,17 +92,17 @@ YouTube 동영상 업로드와 git repository, 보고서는 팀 당 하나만 �
               <HeaderRow>
                 <LeftPadding />
                 <HeaderTitle>작성일시&nbsp;:&nbsp;</HeaderTitle>
-                <PostInform>{post.postDate}</PostInform>
+                <PostInform>{toStringFormat(post.postDate)}</PostInform>
               </HeaderRow>
               <HeaderRow>
                 <LeftPadding />
                 <HeaderTitle>마감일시&nbsp;:&nbsp;</HeaderTitle>
-                <PostInform>{post.dueDate}</PostInform>
+                <PostInform>{toStringFormat(post.dueDate)}</PostInform>
               </HeaderRow>
               <HeaderRow>
                 <LeftPadding />
                 <HeaderTitle>D-day&nbsp;:&nbsp;</HeaderTitle>
-                <PostInform>{post.Dday}</PostInform>
+                <PostInform>{post.Dday <= 0 ? "마감" : post.Dday}</PostInform>
               </HeaderRow>
               <HeaderRow>
                 <LeftPadding />
@@ -114,26 +111,24 @@ YouTube 동영상 업로드와 git repository, 보고서는 팀 당 하나만 �
               </HeaderRow>
             </PostHeader>
             <PostBody>
-              <PostFileWrap>
-                {
-                  post.postFile.name === null ?
-                    ""
-                    :
-                    <PostFileWrap>
-                      <PostFileRow>
-                        <LeftPadding />
-                        <PostFileDownload
-                          url={post.postFile.url}
-                        >
-                          <PostFileIconWrap>
-                            <PostFileIcon />
-                          </PostFileIconWrap>
-                          {post.postFile.name} / {fileSize(post.postFile.size)}
-                        </PostFileDownload>
-                      </PostFileRow>
-                    </PostFileWrap>
-                }
-              </PostFileWrap>
+              {
+                post.postFile.name === null ?
+                  ""
+                  :
+                  <PostFileWrap>
+                    <PostFileRow>
+                      <LeftPadding />
+                      <PostFileDownload
+                        href={`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/files/${post.postFile.url}`} download
+                      >
+                        <PostFileIconWrap>
+                          <PostFileIcon />
+                        </PostFileIconWrap>
+                        {post.postFile.name} / {fileSize(post.postFile.size)}
+                      </PostFileDownload>
+                    </PostFileRow>
+                  </PostFileWrap>
+              }
               <PostBodyText>
                 {post.postText}
               </PostBodyText>
@@ -168,29 +163,26 @@ YouTube 동영상 업로드와 git repository, 보고서는 팀 당 하나만 �
                   <HeaderRow>
                     <LeftPadding />
                     <HeaderTitle>작성일시&nbsp;:&nbsp;</HeaderTitle>
-                    <PostInform>{submitted.postDate}</PostInform>
+                    <PostInform>{toStringFormat(submitted.postDate)}</PostInform>
                   </HeaderRow>
                 </PostHeader>
                 <PostBody>
                   <PostFileWrap>
                     {
-                      submitted.postFile.map(
-                        (file, index) => {
-                          return (
-                            <PostFileRow>
-                              <LeftPadding />
-                              <PostFileDownload
-                                url={file.url}
-                              >
-                                <PostFileIconWrap>
-                                  <PostFileIcon />
-                                </PostFileIconWrap>
-                                {file.name} / {file.size}
-                              </PostFileDownload>
-                            </PostFileRow>
-                          )
-                        }
-                      )
+                      submitted.postFile === undefined ?
+                        ""
+                        :
+                        <PostFileRow>
+                          <LeftPadding />
+                          <PostFileDownload
+                            href={`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/files/${submitted.postFile.url}`} download
+                          >
+                            <PostFileIconWrap>
+                              <PostFileIcon />
+                            </PostFileIconWrap>
+                            {submitted.postFile.name} / {submitted.postFile.size}
+                          </PostFileDownload>
+                        </PostFileRow>
                     }
                   </PostFileWrap>
                   <PostBodyText>

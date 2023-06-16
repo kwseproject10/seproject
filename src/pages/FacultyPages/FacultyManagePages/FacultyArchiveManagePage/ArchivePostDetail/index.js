@@ -57,23 +57,17 @@ const ArchivePostDetail = ({ selectedPostID, setPageIndex }) => {
                   ""
                   :
                   <PostFileWrap>
-                    {post.postFile.map(
-                      (file, index) => {
-                        return (
                           <PostFileRow>
                             <LeftPadding />
                             <PostFileDownload
-                              url={file.url}
+                              url={post.postfile.url}
                             >
                               <PostFileIconWrap>
                                 <PostFileIcon />
                               </PostFileIconWrap>
-                              {file.name} / {file.size}
+                              {post.postfile.name} / {post.postfile.size}
                             </PostFileDownload>
                           </PostFileRow>
-                        )
-                      }
-                    )}
                   </PostFileWrap>
               }
               <PostBodyText>

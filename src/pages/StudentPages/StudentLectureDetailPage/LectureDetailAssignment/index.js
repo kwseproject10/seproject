@@ -1,15 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { LectureSelectedState, userIDState } from "../../../../Atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { LectureSelectedState, SelectedPostIDState, SetInDetailPostState, userIDState } from "../../../../Atom";
 import AssignmentDetail from "../../../../components/Lists/AssignmentPageList/PostDetail";
 import AssignmentPageList from './../../../../components/Lists/AssignmentPageList/index';
 import { NoticePageWrap } from "./style";
 
 const LecutreDetailAssignment = () => {
   const [assignmentList, setAssignmentList] = useState([]);
-  const [inDetail, setInDetail] = useState(false);
-  const [assignmentID, setAssignmentID] = useState("");
+  const [inDetail, setInDetail] = useRecoilState(SetInDetailPostState);
+  const [assignmentID, setAssignmentID] = useRecoilState(SelectedPostIDState);
   const userID = useRecoilValue(userIDState);
   const selectedLecture = useRecoilValue(LectureSelectedState);
   
