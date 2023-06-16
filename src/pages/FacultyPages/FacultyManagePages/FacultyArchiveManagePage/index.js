@@ -16,7 +16,7 @@ const FacultyArchiveManagePage = ({ lectureName }) => {
   const [selectedPostID, setSelectedPostID] = useState("");
 
   useEffect(() => {
-    const fetchNotice = async () => {
+    const fetchArchive = async () => {
       const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/archive?lectureID=${selectedLecture}`;
       const res = await axios.get(
         route
@@ -28,7 +28,7 @@ const FacultyArchiveManagePage = ({ lectureName }) => {
       console.log(res.data);
       setArchives(res.data);
     }
-    fetchNotice();
+    fetchArchive();
   }, [selectedLecture])
 
   const initSearchedLectures = () => {
@@ -98,9 +98,33 @@ const FacultyArchiveManagePage = ({ lectureName }) => {
     setSearchText("");
   }
 
-  //delete notice API
-  const deleteSubmit = () => {
-
+  //delete archive API
+  const deleteSubmit = (key) => {
+    const fetch = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/deletearchive?archiveID=${key}`;
+      const res = await axios.delete(
+        route
+      );
+      if (res.data.result === "false") {
+        console.log("delete fail");
+        return
+      }
+      console.log(res.data);
+    }
+    const fetchArchive = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/archive?lectureID=${selectedLecture}`;
+      const res = await axios.get(
+        route
+      );
+      if (res.data.result === "false") {
+        console.log("archive load fail");
+        return
+      }
+      console.log(res.data);
+      setArchives(res.data);
+    }
+    
+    fetch().then(fetchArchive);
   }
 
   return (
@@ -173,10 +197,10 @@ const FacultyArchiveManagePage = ({ lectureName }) => {
                           <DeleteButtonWrap>
                             <DeleteButton
                               onClick={() => {
-                                let result = window.confirm(`공지사항을 삭제하시겠습니까?`);
+                                let result = window.confirm(`자료실 게시물을 삭제하시겠습니까?`);
                                 if (result) {
                                   deleteSubmit(archive.key);
-                                  window.alert(`공지사항이 삭제되었습니다.`);
+                                  window.alert(`자료실 게시물이 삭제되었습니다.`);
                                 } else {
                                   return;
                                 }

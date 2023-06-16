@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { SelectedPostIDState, SetInDetailPostState } from "../../../Atom";
 import DropDown from "../../DropDown";
-import { DDay, DropDownWrap, DueDate, HeaderDDay, HeaderDueDate, HeaderPostDate, HeaderPostName, HeaderPoster, HeaderState, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostName, Poster, RightButton, SearchBar, SearchBarWrap, SearchIcon, SearchIconWrap, SearchInput, State } from "./style";
+import { toStringFormat } from './../../../utils/date';
+import { DDay, DropDownWrap, DueDate, HeaderDDay, HeaderDueDate, HeaderPostDate, HeaderPostName, HeaderState, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostName, RightButton, SearchBar, SearchBarWrap, SearchIcon, SearchIconWrap, SearchInput, State } from "./style";
 
 const RenderList = ({ list, linePerPage }) => {
   const setInDetail = useSetRecoilState(SetInDetailPostState);
@@ -24,10 +25,9 @@ const RenderList = ({ list, linePerPage }) => {
           }}
         >
           <PostName>{list[i].title}</PostName>
-          <Poster>{list[i].poster}</Poster>
-          <PostDate>{list[i].date}</PostDate>
-          <DueDate>{list[i].dueDate}</DueDate>
-          <DDay>D - {list[i].Dday}</DDay>
+          <PostDate>{toStringFormat(list[i].startDate)}</PostDate>
+          <DueDate>{toStringFormat(list[i].endDate)}</DueDate>
+          <DDay>{list[i].due <= 0 ? "마감" : `D - ${list[i].due}`}</DDay>
           <State>{list[i].state}</State>
         </ListRow>
       )
@@ -49,7 +49,6 @@ const AssignmentPageList = ({ boardTitle, list, linePerPage, setInDetail, setPos
   const [searchDropIsOpen, setSearchDropIsOpen] = useState(false);
   const searchTypeList = [
     "제목",
-    "작성자",
     "작성일"
   ]
   //page control
@@ -114,7 +113,6 @@ const AssignmentPageList = ({ boardTitle, list, linePerPage, setInDetail, setPos
           <ListTitle>{boardTitle}</ListTitle>
           <ListHeader>
             <HeaderPostName>제목</HeaderPostName>
-            <HeaderPoster>작성자</HeaderPoster>
             <HeaderPostDate>작성일</HeaderPostDate>
             <HeaderDueDate>마감일</HeaderDueDate>
             <HeaderDDay>D-Day</HeaderDDay>

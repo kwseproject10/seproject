@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { FacultyLectureSelectedState, userIDState } from "../../../../../Atom";
 import { BackButton, ButtonRow, ButtonWrap, DetailWrap, HeaderRow, LeftPadding, PageHeader, PostBody, PostBodyText, PostButton, PostFileDownload, PostFileIcon, PostFileIconWrap, PostFileRow, PostFileWrap, PostHeader, PostInput, PostTextInput, PostTitle, PostWrap } from "./style";
 
-const Post = ({ setSelectedPostID, setPageIndex }) => {
+const Post = ({ setNotices, setSelectedPostID, setPageIndex }) => {
   const [postTitle, setPostTitle] = useState("");
   const [postText, setPostText] = useState("");
   const [files, setFiles] = useState();
@@ -31,9 +31,8 @@ const Post = ({ setSelectedPostID, setPageIndex }) => {
     formData.append("postTitle", postTitle);
     formData.append("lectureID", selectedLectureID);
     formData.append("content", postText);
-
+    
     try {
-      
       const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/postnotice`;
       const res = await axios.post(
         route,
@@ -53,8 +52,8 @@ const Post = ({ setSelectedPostID, setPageIndex }) => {
         console.log("post error");
         return
       }
-      console.log(res.data);
       window.alert("게시물이 등록되었습니다.");
+
       setSelectedPostID(res.data.boKey);
       setPageIndex(2);
     } catch (error) {

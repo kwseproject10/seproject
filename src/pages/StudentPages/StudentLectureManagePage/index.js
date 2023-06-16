@@ -11,15 +11,15 @@ const RenderList = React.memo(({ lectures, button, rowPerPage, setSyllabusModalO
   let Rows = [];
   const userID = useRecoilValue(userIDState);
   const setLectures = useSetRecoilState(LecturesState);
+
   const addLecture = async (lectureID, lectureName) => {
-    
     let result = window.confirm(`${lectureID}: ${lectureName} 강의 수강을 신청하시겠습니까?`);
     if (result) {
       const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/enrolllecture?userID=${userID}&lectureID=${lectureID}`;
       const res = await axios.get(
         route
       );
-      if(res.data.result === "false") {
+      if (res.data.result === "false") {
         console.log("enroll load fail");
         window.alert(`수강 신청 오류가 발생하였습니다.`);
         return
@@ -28,13 +28,43 @@ const RenderList = React.memo(({ lectures, button, rowPerPage, setSyllabusModalO
       const reRes = await axios.get(
         reRoute
       );
-      if(reRes.data.result === "false"){
+      if (reRes.data.result === "false") {
         console.log("lectures reLoading fail");
         window.alert(`강의 로딩 오류가 발생하였습니다.`);
         return
       }
       setLectures(reRes.data);
       window.alert(`${lectureName} 강의 수강이 신청되었습니다.`);
+    } else {
+      return;
+    }
+  }
+
+  //delete notice API
+  const deleteLecture = async (lectureID, lectureName) => {
+    let result = window.confirm(`${lectureID}: ${lectureName} 강의를 삭제하시겠습니까?
+    * 삭제시 출석, 성적 등 수강 관련 정보는 복구할 수 없습니다.`);
+    if (result) {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/deletelecture?userID=${userID}&lectureID=${lectureID}`;
+      const res = await axios.delete(
+        route
+      );
+      if (res.data.result === "false") {
+        console.log("delete fail");
+        window.alert(`수강 삭제 오류가 발생하였습니다.`);
+        return
+      }
+      const reRoute = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/lectures?userID=${userID}`;
+      const reRes = await axios.get(
+        reRoute
+      );
+      if (reRes.data.result === "false") {
+        console.log("lectures reLoading fail");
+        window.alert(`강의 로딩 오류가 발생하였습니다.`);
+        return
+      }
+      setLectures(reRes.data);
+      window.alert(`${lectureName} 강의가 수강목록에서 삭제되었습니다.`);
     } else {
       return;
     }
@@ -69,9 +99,11 @@ const RenderList = React.memo(({ lectures, button, rowPerPage, setSyllabusModalO
                   addLecture(lecture.ID, lecture.name);
                 }}
               />
-                :
+              :
               <DeleteButton
-
+                onClick={() => {
+                  deleteLecture(lecture.ID, lecture.name);
+                }}
               />
             }
           </ButtonWrap>
@@ -145,13 +177,6 @@ const StudentLectureManagePage = () => {
   }, []);
 
   const onDeleteButtonClick = useCallback((lectureID, lectureName) => {
-    let result = window.confirm(`${lectureID}: ${lectureName} 강의를 삭제하시겠습니까?
-    * 삭제시 출석, 성적 등 수강 관련 정보는 복구할 수 없습니다.`);
-    if (result) {
-      window.alert(`${lectureName} 강의가 수강목록에서 삭제되었습니다.`);
-    } else {
-      return;
-    }
   }, []);
 
   useEffect(initSearchedLectures, [wholeLectures, initSearchedLectures])
@@ -223,17 +248,17 @@ const StudentLectureManagePage = () => {
           <ListTitle>전체 강의 목록</ListTitle>
           <WholeLectureList>
             {wholeLectures === [] ?
-            ""
-            :
-            <RenderList
-              lectures={searchedLectures}
-              button={"Add"}
-              setSyllabusModalOpen={setSyllabusModalOpen}
-              onButtonClick={onAddButtonClick}
-              setSyllabusID={setSyllabusID}
-            />
+              ""
+              :
+              <RenderList
+                lectures={searchedLectures}
+                button={"Add"}
+                setSyllabusModalOpen={setSyllabusModalOpen}
+                onButtonClick={onAddButtonClick}
+                setSyllabusID={setSyllabusID}
+              />
             }
-            
+
           </WholeLectureList>
           <LectureSearchBarWrap>
             <LectureSearchBar>

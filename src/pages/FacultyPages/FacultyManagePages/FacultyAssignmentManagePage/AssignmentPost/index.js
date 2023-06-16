@@ -103,8 +103,13 @@ const AssignmentPost = ({ setSelectedPostID, setPageIndex }) => {
                 </PostTitle>
               </HeaderRow>
               <HeaderRow>
+                <LeftPadding />
                 <DateInput
                   type="number"
+                  onInput={(e) => {
+                    if (e.target.value.length > e.target.maxLength)
+                      e.target.value = e.target.value.slice(0, e.target.maxLength);
+                  }}
                   maxLength={4}
                   onChange={(e) => {
                     setYear(e.target.value);
@@ -113,6 +118,10 @@ const AssignmentPost = ({ setSelectedPostID, setPageIndex }) => {
                 <DateWrap>년</DateWrap>
                 <DateInput
                   type="number"
+                  onInput={(e) => {
+                    if (e.target.value.length > e.target.maxLength)
+                      e.target.value = e.target.value.slice(0, e.target.maxLength);
+                  }}
                   maxLength={2}
                   onChange={(e) => {
                     setMonth(e.target.value);
@@ -121,6 +130,10 @@ const AssignmentPost = ({ setSelectedPostID, setPageIndex }) => {
                 <DateWrap>월</DateWrap>
                 <DateInput
                   type="number"
+                  onInput={(e) => {
+                    if (e.target.value.length > e.target.maxLength)
+                      e.target.value = e.target.value.slice(0, e.target.maxLength);
+                  }}
                   maxLength={2}
                   onChange={(e) => {
                     setDay(e.target.value);

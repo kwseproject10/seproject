@@ -17,7 +17,8 @@ const AssignmentPostDetail = ({ selectedPostID, setPageIndex }) => {
         console.log("post load fail");
         return
       }
-      setPost(res.data);
+      console.log(res.data);
+      setPost(res.data.post);
     }
     fetch();
   }, [selectedPostID])
@@ -47,8 +48,13 @@ const AssignmentPostDetail = ({ selectedPostID, setPageIndex }) => {
               </HeaderRow>
               <HeaderRow>
                 <LeftPadding />
-                <HeaderTitle>조회수&nbsp;:&nbsp;</HeaderTitle>
-                <PostInform>{post.postHit}</PostInform>
+                <HeaderTitle>마감일시&nbsp;:&nbsp;</HeaderTitle>
+                <PostInform>{toStringFormat(post.dueDate)}</PostInform>
+              </HeaderRow>
+              <HeaderRow>
+                <LeftPadding />
+                <HeaderTitle>D-day&nbsp;:&nbsp;</HeaderTitle>
+                <PostInform>{post.Dday <= 0 ? "마감" : `D-${post.Dday}`}</PostInform>
               </HeaderRow>
             </PostHeader>
             <PostBody>
@@ -57,23 +63,17 @@ const AssignmentPostDetail = ({ selectedPostID, setPageIndex }) => {
                   ""
                   :
                   <PostFileWrap>
-                    {post.postFile.map(
-                      (file, index) => {
-                        return (
                           <PostFileRow>
                             <LeftPadding />
                             <PostFileDownload
-                              url={file.url}
+                              url={post.postFile.url}
                             >
                               <PostFileIconWrap>
                                 <PostFileIcon />
                               </PostFileIconWrap>
-                              {file.name} / {file.size}
+                              {post.postFile.name} / {post.postFile.size}
                             </PostFileDownload>
                           </PostFileRow>
-                        )
-                      }
-                    )}
                   </PostFileWrap>
               }
               <PostBodyText>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { FacultyLectureSelectedState } from "../../../../Atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { FacultyLectureSelectedState, SelectedPostIDState } from "../../../../Atom";
 import { toStringFormat } from "../../../../utils/date";
 import DropDown from './../../../../components/DropDown/index';
 import AssignmentPost from "./AssignmentPost";
@@ -13,7 +13,7 @@ const FacultyAssignmentManagePage = ({ lectureName }) => {
   const [assignments, setAssignments] = useState([]);
   const selectedLecture = useRecoilValue(FacultyLectureSelectedState);
   const [pageIndex, setPageIndex] = useState(0);
-  const [selectedPostID, setSelectedPostID] = useState("");
+  const [selectedPostID, setSelectedPostID] = useRecoilState(SelectedPostIDState);
 
   useEffect(() => {
     const fetchNotice = async () => {
@@ -29,7 +29,7 @@ const FacultyAssignmentManagePage = ({ lectureName }) => {
       setAssignments(res.data);
     }
     fetchNotice();
-  }, [selectedLecture])
+  }, [selectedLecture, pageIndex])
 
 
   const initSearchedLectures = () => {
@@ -100,8 +100,32 @@ const FacultyAssignmentManagePage = ({ lectureName }) => {
   }
 
   //delete notice API
-  const deleteSubmit = () => {
-
+  const deleteSubmit = (key) => {
+    const fetch = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/deleteassignment?assignmentID=${key}`;
+      const res = await axios.delete(
+        route
+      );
+      if (res.data.result === "false") {
+        console.log("delete fail");
+        return
+      }
+      console.log(res.data);
+    }
+    const fetchArchive = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/assignment?lectureID=${selectedLecture}`;
+      const res = await axios.get(
+        route
+      );
+      if (res.data.result === "false") {
+        console.log("assignment load fail");
+        return
+      }
+      console.log(res.data);
+      setAssignments(res.data);
+    }
+    
+    fetch().then(fetchArchive);
   }
 
   return (

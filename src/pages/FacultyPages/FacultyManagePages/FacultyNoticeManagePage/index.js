@@ -97,9 +97,34 @@ const FacultyNoticeManagePage = ({ lectureName }) => {
     setSearchText("");
   }
 
-  //delete notice API
-  const deleteSubmit = () => {
 
+  //delete notice API
+  const deleteSubmit = (key) => {
+    const fetch = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/deletenotice?noticeID=${key}`;
+      const res = await axios.delete(
+        route
+      );
+      if (res.data.result === "false") {
+        console.log("delete fail");
+        return
+      }
+      console.log(res.data);
+    }
+    const fetchNotice = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/notice?lectureID=${selectedLecture}`;
+      const res = await axios.get(
+        route
+      );
+      if (res.data.result === "false") {
+        console.log("notice load fail");
+        return
+      }
+      console.log(res.data);
+      setNotices(res.data);
+    }
+    
+    fetch().then(fetchNotice);
   }
 
   return (
@@ -173,10 +198,10 @@ const FacultyNoticeManagePage = ({ lectureName }) => {
                             <DeleteButton
                               onClick={() => {
                                 let result = window.confirm(`공지사항을 삭제하시겠습니까?`);
-                                if(result){
+                                if (result) {
                                   deleteSubmit(notice.key);
                                   window.alert(`공지사항이 삭제되었습니다.`);
-                                }else{
+                                } else {
                                   return;
                                 }
                               }}

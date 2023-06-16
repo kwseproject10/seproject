@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { SelectedPostIDState } from "../../../../Atom";
 import { toStringFormat } from "../../../../utils/date";
+import { fileSize } from './../../../../utils/file';
 import { BackButton, ButtonRow, ButtonWrap, DetailWrap, HeaderRow, HeaderTitle, LeftPadding, PageHeader, PostBody, PostBodyText, PostFileDownload, PostFileIcon, PostFileIconWrap, PostFileRow, PostFileWrap, PostHeader, PostInform, PostTitle, PostWrap } from "./style";
 
 const PostDetail = ({ setInDetail, boardName }) => {
@@ -20,6 +21,7 @@ const PostDetail = ({ setInDetail, boardName }) => {
         console.log("post load fail");
         return
       }
+      console.log(res.data);
       setPost(res.data);
     }
     fetch();
@@ -56,27 +58,21 @@ const PostDetail = ({ setInDetail, boardName }) => {
             </PostHeader>
             <PostBody>
               {
-                !post.postfile ?
+                post.postFile.name === null ?
                   ""
                   :
                   <PostFileWrap>
-                    {post.postFile.map(
-                      (file, index) => {
-                        return (
-                          <PostFileRow>
-                            <LeftPadding />
-                            <PostFileDownload
-                              url={file.url}
-                            >
-                              <PostFileIconWrap>
-                                <PostFileIcon />
-                              </PostFileIconWrap>
-                              {file.name} / {file.size}
-                            </PostFileDownload>
-                          </PostFileRow>
-                        )
-                      }
-                    )}
+                    <PostFileRow>
+                      <LeftPadding />
+                      <PostFileDownload
+                        href={`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/files/${post.postFile.url}`} download
+                      >
+                        <PostFileIconWrap>
+                          <PostFileIcon />
+                        </PostFileIconWrap>
+                        {post.postFile.name} / {fileSize(post.postFile.size)}
+                      </PostFileDownload>
+                    </PostFileRow>
                   </PostFileWrap>
               }
               <PostBodyText>

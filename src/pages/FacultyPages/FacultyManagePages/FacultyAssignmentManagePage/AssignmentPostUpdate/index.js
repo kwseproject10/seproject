@@ -31,10 +31,10 @@ const AssignmentPostUpdate = ({ selectedPostID, setPageIndex }) => {
         console.log("post load fail");
         return
       }
-      setPost(res.data);
-      setPostTitle(res.data.name);
-      setPostURL(res.data.postFile.url);
-      setPostText(res.data.postText);
+      setPost(res.data.post);
+      setPostTitle(res.data.post.name);
+      setPostURL(res.data.post.postFile.url);
+      setPostText(res.data.post.postText);
     }
     fetch();
   }, [selectedPostID])
@@ -45,7 +45,7 @@ const AssignmentPostUpdate = ({ selectedPostID, setPageIndex }) => {
         ""
         :
         <ButtonWrap>
-          <PageHeader>공지사항 수정</PageHeader>
+          <PageHeader>과제 수정</PageHeader>
           <PostWrap>
             <PostHeader>
               <HeaderRow>
@@ -70,8 +70,13 @@ const AssignmentPostUpdate = ({ selectedPostID, setPageIndex }) => {
               </HeaderRow>
               <HeaderRow>
                 <LeftPadding />
-                <HeaderTitle>조회수&nbsp;:&nbsp;</HeaderTitle>
-                <PostInform>{post.postHit}</PostInform>
+                <HeaderTitle>마감일시&nbsp;:&nbsp;</HeaderTitle>
+                <PostInform>{toStringFormat(post.dueDate)}</PostInform>
+              </HeaderRow>
+              <HeaderRow>
+                <LeftPadding />
+                <HeaderTitle>D-day&nbsp;:&nbsp;</HeaderTitle>
+                <PostInform>{post.Dday <= 0 ? "마감" : `D-${post.Dday}`}</PostInform>
               </HeaderRow>
             </PostHeader>
             <PostBody>

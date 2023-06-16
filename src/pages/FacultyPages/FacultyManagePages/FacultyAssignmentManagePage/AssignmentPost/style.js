@@ -95,12 +95,15 @@ export const DateWrap = styled.div`
   display: flex;
   flex-direction;
   justify-content: center;
+  margin: 0.25rem;
+  margin-right: 1rem;
 `
 
 export const DateInput = styled.input`
   width: 5%;
   border: 1px solid var(--color-nm);
   height: 1.5rem;
+  margin-top: 0.125rem;
 `
 
 export const PostTextInput = styled.textarea`

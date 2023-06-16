@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
+import { fileSize } from "../../../../utils/file";
 import { userIDState } from './../../../../Atom';
 import { BackButton, ButtonRow, ButtonWrap, DeleteButton, DetailWrap, HeaderRow, HeaderTitle, LeftPadding, NonSubmit, PageHeader, PostBody, PostBodyText, PostFileDownload, PostFileIcon, PostFileIconWrap, PostFileRow, PostFileWrap, PostHeader, PostInform, PostTitle, PostWrap, SubmitButton, UpdateButton } from "./style";
 
@@ -40,18 +41,11 @@ YouTube 동영상 업로드와 git repository, 보고서는 팀 당 하나만 �
 
 
 제출 기한은 6월 16일 23:59 입니다.`,
-      postFile: [
-        {
+      postFile: {
           name: "2023_Project_3.pdf",
           size: "110.37 KB",
           url: ""
-        },
-        {
-          name: "SE_Project03_xx조.docx",
-          size: "43.08 KB",
-          url: ""
         }
-      ]
     })
   }
   useEffect(loadPost, []);
@@ -70,18 +64,11 @@ YouTube 동영상 업로드와 git repository, 보고서는 팀 당 하나만 �
 프로젝트 주제는 학사관리 시스템 웹개발입니다.
 추가로 프로젝트 미팅 스케줄 관련하여 메일 드렸으니 확인 부탁드립니다.
 감사합니다.`,
-      postFile: [
-        {
+      postFile: {
           name: "2023_10_project.pdf",
           size: "110.37 KB",
           url: ""
-        },
-        {
-          name: "2023_10_project_source_code.zip",
-          size: "1.5 MB",
-          url: ""
         }
-      ]
     })
   }
   useEffect(loadSubmitted, []);
@@ -129,23 +116,22 @@ YouTube 동영상 업로드와 git repository, 보고서는 팀 당 하나만 �
             <PostBody>
               <PostFileWrap>
                 {
-                  post.postFile.map(
-                    (file, index) => {
-                      return (
-                        <PostFileRow>
-                          <LeftPadding />
-                          <PostFileDownload
-                            url={file.url}
-                          >
-                            <PostFileIconWrap>
-                              <PostFileIcon />
-                            </PostFileIconWrap>
-                            {file.name} / {file.size}
-                          </PostFileDownload>
-                        </PostFileRow>
-                      )
-                    }
-                  )
+                  post.postFile.name === null ?
+                    ""
+                    :
+                    <PostFileWrap>
+                      <PostFileRow>
+                        <LeftPadding />
+                        <PostFileDownload
+                          url={post.postFile.url}
+                        >
+                          <PostFileIconWrap>
+                            <PostFileIcon />
+                          </PostFileIconWrap>
+                          {post.postFile.name} / {fileSize(post.postFile.size)}
+                        </PostFileDownload>
+                      </PostFileRow>
+                    </PostFileWrap>
                 }
               </PostFileWrap>
               <PostBodyText>
@@ -155,7 +141,7 @@ YouTube 동영상 업로드와 git repository, 보고서는 팀 당 하나만 �
           </PostWrap>
           <PageHeader>과제 제출내역</PageHeader>
           {
-            !isSubmit?
+            !isSubmit ?
               <PostWrap>
                 <NonSubmit>
                   <LeftPadding />
@@ -214,11 +200,11 @@ YouTube 동영상 업로드와 git repository, 보고서는 팀 당 하나만 �
               </PostWrap>
           }
           <ButtonRow>
-            {!isSubmit?
+            {!isSubmit ?
               <SubmitButton
-              onClick={() => {
-                setIsSubmit(true);
-              }}
+                onClick={() => {
+                  setIsSubmit(true);
+                }}
               >
                 제출
               </SubmitButton>
@@ -228,19 +214,19 @@ YouTube 동영상 업로드와 git repository, 보고서는 팀 당 하나만 �
                 수정
               </UpdateButton>
             }
-            {!isSubmit?
+            {!isSubmit ?
               ""
               :
               <DeleteButton
-              onClick={() => {
-                let result = window.confirm(`제출한 내용을 삭제하시겠습니까?`);
-                if(result){
-                  window.alert(`제출한 과제가 삭제되었습니다.`);
-                  setIsSubmit(false);
-                }else{
-                  return;
-                }
-              }}
+                onClick={() => {
+                  let result = window.confirm(`제출한 내용을 삭제하시겠습니까?`);
+                  if (result) {
+                    window.alert(`제출한 과제가 삭제되었습니다.`);
+                    setIsSubmit(false);
+                  } else {
+                    return;
+                  }
+                }}
               >
                 삭제
               </DeleteButton>

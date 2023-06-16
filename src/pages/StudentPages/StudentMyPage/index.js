@@ -1,4 +1,4 @@
-import EmptyProfileImage from "@images/EmptyProfileImage.png";
+import EmptyProfileImage from '@images/EmptyProfileImage.png';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -14,6 +14,7 @@ const StudentMyPageAuthed = () => {
   const [files, setFiles] = useState();
   const [userInform,setUserInform] = useRecoilState(userInformState);
   const userID = useRecoilValue(userIDState);
+  const endPoint = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/api/render-image/${userInform.filePath !== undefined && userInform.filePath !== null ? userInform.filePath.split('\\')[2] : "" }`;
 
   const initInput = () => {
     setInputEmail(userInform.email);
@@ -132,12 +133,21 @@ const StudentMyPageAuthed = () => {
             <RowContent>
               <PhotoRowContent>
               <UserPhotoWrap>
-                <img
-                  src={EmptyProfileImage}
-                  width="100%"
-                  height="100%"
-                  alt="EmptyProfileImage"
-                />
+          {userInform.filePath !== undefined && userInform.filePath !== null ?
+          <img
+            src={endPoint}
+            width="100%"
+            height="100%"
+            alt="Profile"
+          />
+          : 
+          <img
+            src={EmptyProfileImage}
+            width="100%"
+            height="100%"
+            alt="EmptyProfileImage"
+          />
+          }
               </UserPhotoWrap>
               {modifyMode ?
                 <FileInputWrap>
