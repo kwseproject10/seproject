@@ -3,7 +3,7 @@ import { useSetRecoilState } from "recoil";
 import { SetInDetailPostState } from "../../../Atom";
 import DropDown from "../../DropDown";
 import { toStringFormat } from './../../../utils/date';
-import { DDay, DropDownWrap, DueDate, HeaderDDay, HeaderDueDate, HeaderPostDate, HeaderPostName, HeaderState, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostName, RightButton, SearchBar, SearchBarWrap, SearchIcon, SearchIconWrap, SearchInput, State } from "./style";
+import { DDay, DropDownWrap, DueDate, HeaderDDay, HeaderDueDate, HeaderPostDate, HeaderPostName, LeftButton, ListBody, ListHeader, ListRow, ListTitle, ListWrap, ListWrapAlign, PageButton, PageButtonWrap, PageSelector, PageSelectorWrap, PostDate, PostName, RightButton, SearchBar, SearchBarWrap, SearchIcon, SearchIconWrap, SearchInput } from "./style";
 
 const RenderList = ({ list, linePerPage, setPostID }) => {
   const setInDetail = useSetRecoilState(SetInDetailPostState);
@@ -27,7 +27,6 @@ const RenderList = ({ list, linePerPage, setPostID }) => {
           <PostDate>{toStringFormat(list[i].startDate)}</PostDate>
           <DueDate>{toStringFormat(list[i].endDate)}</DueDate>
           <DDay>{list[i].due <= 0 ? "마감" : `D - ${list[i].due}`}</DDay>
-          <State>{list[i].state}</State>
         </ListRow>
       )
     }
@@ -115,7 +114,6 @@ const AssignmentPageList = ({ boardTitle, list, linePerPage, setInDetail, setPos
             <HeaderPostDate>작성일</HeaderPostDate>
             <HeaderDueDate>마감일</HeaderDueDate>
             <HeaderDDay>D-Day</HeaderDDay>
-            <HeaderState>제출여부</HeaderState>
           </ListHeader>
           <RenderList
             list={searchedList}

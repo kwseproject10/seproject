@@ -9,6 +9,15 @@ export const PageWrap = styled.div`
   animation: ${RenderAnimation} 1s;
 `
 
+export const Form = styled.form`
+  width: 100%;
+  height: 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+`
+
 export const ListWrap = styled.div`
   width: 80%;
   display: flex;
@@ -22,6 +31,7 @@ export const ListTitleRow = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1rem;
 `
 
 export const KnobsWrap = styled.div`
@@ -50,10 +60,10 @@ export const KnobRow = styled.div`
 
 export const ListHeader = styled.div`
   display: flex;
-  height: 3rem;
+  min-height: 3rem;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   border: 1px solid var(--color-nm);
   color:var(--color-nm);
   background-color:var(--color-gr);
@@ -79,10 +89,10 @@ export const ListBody = styled.div`
 
 export const ListRow = styled.div`
   display: flex;
-  height: 3rem;
+  min-height: 3rem;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   border-bottom: 1px solid var(--color-gr);
 `
 
@@ -91,6 +101,18 @@ export const RowItem = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: center;
+`
+
+export const PostConWrap = styled(RowItem)`
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+export const PostCon = styled(RowItem)`
+  width: 15%;
+  align-items: center;
 `
 
 export const PostTitle = styled(RowItem)`
@@ -162,7 +184,7 @@ export const DeleteButton = styled(TbTrash)`
 export const PostButtonWrap = styled.div`
 `
 
-export const PostButton = styled.button`
+export const PostButton = styled.input`
   cursor: pointer;
   margin-left: 1rem;
   width: 8rem;
@@ -171,4 +193,15 @@ export const PostButton = styled.button`
   font-weight: bold;
   border: 1px solid var(--color-dg);
   color: white;
+  text-align: center;
+`
+
+export const PostInput = styled.input`
+  width: 4rem;
+  text-align: center;
+`
+
+export const Select = styled.select`
+  width: 4rem;
+  text-align: center;
 `

@@ -101,13 +101,6 @@ const FacultyLectureList = ({ lectures }) => {
                   </Button>
                   <Button
                     onClick={() => {
-                      onClickButton(lecture.ID, lecture.name, 6, 'manage')
-                    }}
-                  >
-                    시험 관리
-                  </Button>
-                  <Button
-                    onClick={() => {
                       onClickButton(lecture.ID, lecture.name, 7, 'manage')
                     }}
                   >

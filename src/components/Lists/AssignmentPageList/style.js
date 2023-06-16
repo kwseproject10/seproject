@@ -93,15 +93,15 @@ export const Poster = styled(PostInform)`
 `
 
 export const PostDate = styled(PostInform)`
-  width: 10%;
+  width: 15%;
 `
 
 export const DueDate = styled(PostInform)`
-  width: 10%;
+  width: 15%;
 `
 
 export const DDay = styled(PostInform)`
-  width: 5%;
+  width: 15%;
 `
 
 export const State = styled(PostInform)`

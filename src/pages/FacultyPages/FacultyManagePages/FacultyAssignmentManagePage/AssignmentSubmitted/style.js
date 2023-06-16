@@ -87,10 +87,6 @@ export const PostInform = styled.div`
 export const PostBody = styled.div`
 `
 
-export const SubmitBody = styled.div`
-
-`
-
 export const SubmitInform = styled.div`
 
 `
@@ -147,4 +143,29 @@ export const BackButton = styled.button`
   background-color: var(--color-gr);
   font-weight: bold;
   border: 1px solid var(--color-dg);
+`
+
+export const SubmitRow = styled.div`
+
+`
+
+export const SubmitHeader = styled.div`
+
+`
+
+export const SubmitBody = styled.div`
+
+`
+
+export const SubmitText = styled.div`
+
+`
+
+export const Submits = styled.div`
+  border-bottom: 2px solid var(--color-nm);
+  border-top: 2px solid var(--color-nm);
+`
+
+export const SubmitFile = styled.div`
+
 `

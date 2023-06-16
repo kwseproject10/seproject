@@ -26,10 +26,6 @@ const FacultyNavigationAccordian = ({ actived, setActived, index, text, link }) 
       name: "출석 관리"
     },
     {
-      ID: "6",
-      name: "시험 관리"
-    },
-    {
       ID: "7",
       name: "성적 관리"
     }

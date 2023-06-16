@@ -1,7 +1,8 @@
 import { toStringFormat } from "@utils/date";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { BackButton, ButtonRow, ButtonWrap, DetailWrap, HeaderRow, HeaderTitle, LeftPadding, PageHeader, PostBody, PostBodyText, PostFileDownload, PostFileIcon, PostFileIconWrap, PostFileRow, PostFileWrap, PostHeader, PostInform, PostTitle, PostWrap } from "./style";
+import { fileSize } from './../../../../../utils/file';
+import { BackButton, ButtonRow, ButtonWrap, DetailWrap, HeaderRow, HeaderTitle, LeftPadding, PageHeader, PostBody, PostBodyText, PostFileDownload, PostFileIcon, PostFileIconWrap, PostFileRow, PostFileWrap, PostHeader, PostInform, PostTitle, PostWrap, Submits } from "./style";
 
 const AssignmentSubmit = ({ selectedPostID, setPageIndex }) => {
 
@@ -19,6 +20,23 @@ const AssignmentSubmit = ({ selectedPostID, setPageIndex }) => {
       }
       console.log(res.data);
       setPost(res.data.post);
+    }
+    fetch();
+  }, [selectedPostID])
+
+  const [submits, setSubmits] = useState();
+  useEffect(() => {
+    const fetch = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/submitall?ID=${selectedPostID}`;
+      const res = await axios.get(
+        route
+      );
+      if (res.data.result === "false") {
+        console.log("post load fail");
+        return
+      }
+      console.log("submit", res.data);
+      setSubmits(res.data);
     }
     fetch();
   }, [selectedPostID])
@@ -51,35 +69,52 @@ const AssignmentSubmit = ({ selectedPostID, setPageIndex }) => {
                 <HeaderTitle>마감일시&nbsp;:&nbsp;</HeaderTitle>
                 <PostInform>{toStringFormat(post.dueDate)}</PostInform>
               </HeaderRow>
-              <HeaderRow>
-                <LeftPadding />
-                <HeaderTitle>D-day&nbsp;:&nbsp;</HeaderTitle>
-                <PostInform>{post.Dday <= 0 ? "마감" : `D-${post.Dday}`}</PostInform>
-              </HeaderRow>
             </PostHeader>
-            <PostBody>
-              {
-                !post.postfile ?
-                  ""
-                  :
-                  <PostFileWrap>
+          </PostWrap>
+          <br /><br />
+          <PageHeader>제출내역</PageHeader>
+          <PostWrap>
+            {submits === undefined ?
+            ""
+            :
+            submits.map((submit, submitIndex) => {
+              return (
+                <Submits>
+                  <HeaderRow>
+                    <LeftPadding />
+                    <PostTitle>{submit.name}</PostTitle>
+                  </HeaderRow>
+                  <HeaderRow>
+                    <LeftPadding />
+                    <HeaderTitle>작성자&nbsp;:&nbsp;</HeaderTitle>
+                    <PostInform>{submit.ID}</PostInform>
+                  </HeaderRow>
+                  <PostBody>
+                    {
+                      submit.postFile.name === null?
+                        ""
+                        :
+                        <PostFileWrap>
                           <PostFileRow>
                             <LeftPadding />
                             <PostFileDownload
-                              url={post.postFile.url}
+                              url={submit.postFile.url}
                             >
                               <PostFileIconWrap>
                                 <PostFileIcon />
                               </PostFileIconWrap>
-                              {post.postFile.name} / {post.postFile.size}
+                              {submit.postFile.name} / {fileSize(submit.postFile.size)}
                             </PostFileDownload>
                           </PostFileRow>
-                  </PostFileWrap>
-              }
-              <PostBodyText>
-                {post.postText}
-              </PostBodyText>
-            </PostBody>
+                        </PostFileWrap>
+                    }
+                    <PostBodyText>
+                      {submit.content}
+                    </PostBodyText>
+                  </PostBody>
+                </Submits>
+              )
+            })}
           </PostWrap>
           <ButtonRow>
             <BackButton

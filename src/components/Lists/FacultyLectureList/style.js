@@ -95,7 +95,7 @@ export const ButtonRowsWrap = styled.div`
   transition: height ease 0.3s;
   ${(props) => props.actived === props.index ?
     `
-      height: 17.9375rem;
+      height: 15.375rem;
     `
   :
     `
