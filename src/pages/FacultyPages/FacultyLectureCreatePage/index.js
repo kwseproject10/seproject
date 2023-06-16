@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { BodyRow, ButtonWrap, Buttons, CancelButton, CancelButtonWrap, ChartColumn, ChartHeader, ChartInput, ChartValue, LeftPadding, RatioChart, RowContent, RowInput, RowTextArea, RowTitle, SubmitButton, SubmitButtonWrap, SyllabusBody, SyllabusHeader, SyllabusTitle, SyllabusWrap } from "./style";
 
@@ -19,7 +20,7 @@ const FacultyLectureCreatePage = () => {
   const [inputRatFin, setInputRatFin] = useState(0);
   const [inputRatAss, setInputRatAss] = useState(0);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const data = {
       name: inputName,
       type: inputType,
@@ -44,7 +45,15 @@ const FacultyLectureCreatePage = () => {
         assignment: inputRatAss
       }
     }
-    console.log(data);
+    const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/createlecture`;
+    const res = await axios.post(
+      route, data
+    );
+    if(res.data.result === "false") {
+      console.log("lecture create fail.");
+      return
+    }
+    console.log(res.data);
   }
 
   //API call

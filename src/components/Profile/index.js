@@ -6,12 +6,12 @@ import { AdvisorEmail, AdvisorName, AdvisorNum, Bottom, Center, Grade, GradeWrap
 
 const Profile = ({ onClickPlusButton }) => {
   const userInform = useRecoilValue(userInformState);
-  const endPoint = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/api/render-image/${userInform.filePath !== undefined && userInform.filePath !== null ? userInform.filePath.split('\\')[2] : "" }`;
+  const endPoint = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/api/render-image/${userInform.fileName}`;
   return (
     <ProfileWrap>
       <Top>
         <UserPhotoWrap>
-          {userInform.filePath !== undefined && userInform.filePath !== null ?
+          {userInform.fileName !== undefined && userInform.fileName !== null ?
           <img
             src={endPoint}
             width="100%"

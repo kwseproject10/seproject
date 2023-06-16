@@ -2,8 +2,66 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { LectureDetailNavigationState, LectureSelectedState, SetInDetailPostState, StudentNavigationAccordianActivedState, StudentNavigationState, userIDState } from "../../../Atom";
+import { LectureDetailNavigationState, LectureSelectedState, SelectedPostIDState, SetInDetailPostState, StudentNavigationAccordianActivedState, StudentNavigationState, userIDState } from "../../../Atom";
 import { AttendanceChart, AttendanceChartChild, AttendanceChartRow, DefaultRow, DetailCenter, DetailInformRow, DetailLeft, DetailRight, LectureProfessor, LectureType, Left, ListBox, ListRow, ListTitle, ListWrap, NoticeSubject, NoticeTitle, Right, TitleText } from "./style";
+
+const DetailInform = ({ lectureID,lectureIndex }) => {
+  const [lastNotice, setLastNotice] = useState();
+  const [lastArchive, setLastArchive] = useState();
+  const [lastAssignment, setLastAssignment] = useState();
+  useEffect(() => {
+    const fetchAssignment = async () => {
+      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/lecturelastboard?lectureID=${lectureID}`;
+      const res = await axios.get(
+        route
+      );
+      if (res.data.error === "No result found" || res.data.result === "false") {
+        console.log("assignment load fail");
+        return
+      }
+      console.log(res.data);
+      res.data.forEach((e) => {
+        if (e.type === "notice") {
+          setLastNotice(e)
+        } else if (e.type === "download") {
+          setLastArchive(e)
+        } else if (e.type === "assignment") {
+          setLastAssignment(e)
+        }
+      })
+    }
+    fetchAssignment();
+  }, [lectureID])
+
+  const movePage = useNavigate();
+  const setStudentNavigation = useSetRecoilState(StudentNavigationState);
+  const setStudentNavigationAccordianActived = useSetRecoilState(StudentNavigationAccordianActivedState);
+  const setSelectedLecture = useSetRecoilState(LectureSelectedState);
+  const setLectureDetailNavigationState = useSetRecoilState(LectureDetailNavigationState);
+  const setSelectedPostID = useSetRecoilState(SelectedPostIDState);
+  const setInDetail = useSetRecoilState(SetInDetailPostState);
+  return (
+    <DetailInformRow>
+      <DetailLeft
+      >
+        최신 과제
+        {!lastAssignment ? "가 없습니다." : ` ${lastAssignment.title}`}
+      </DetailLeft>
+      <DetailCenter
+
+      >
+        최신 자료
+        {!lastArchive ? "가 없습니다." : ` ${lastArchive.title}`}
+      </DetailCenter>
+      <DetailRight
+
+      >
+        최신 공지
+        {!lastNotice ? "가 없습니다." : ` ${lastNotice.title}`}
+      </DetailRight>
+    </DetailInformRow>
+  )
+}
 
 const TimeTablePageLectureList = ({ lectures }) => {
   const userID = useRecoilValue(userIDState);
@@ -22,45 +80,6 @@ const TimeTablePageLectureList = ({ lectures }) => {
     setInDetail(false);
     movePage('/student/lecturedetail');
   }
-  const [renderData, setRenderData] = useState([]);
-
-  const loadRenderData = async() => {
-    let temp = [];
-    if(lectures){
-      for(let i = 0; i < lectures.length; i++){
-        const lecture = lectures[i];
-
-        const routeAssignment = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/assignment?lectureID=${lecture.ID}`;
-        const resAssignment = await axios.get(
-          routeAssignment
-        );
-
-        const routeArchive = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/archive?lectureID=${lecture.ID}`;
-        const resArchive = await axios.get(
-          routeArchive
-        );
-
-        const routeNotice = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/notice?lectureID=${lecture.ID}`;
-        const resNotice = await axios.get(
-          routeNotice
-        );
-
-        temp.push({
-          name : lecture.name,
-          ID : lecture.ID,
-          professor : lecture.professor,
-          type : lecture.type,
-          time : lecture.time,
-          place : lecture.place,
-          firstAssignment : ( resAssignment.data ? resAssignment.data[0] : null),
-          firstArchive : ( resArchive.data ? resArchive.data[0] : null),
-          firstNotice : ( resNotice.data ? resNotice.data[0] : null)
-        });
-      }
-    }
-    setRenderData(temp);
-    console.log("renderData" , renderData);
-  }
 
   useEffect(() => {
     const fetch = async () => {
@@ -73,9 +92,7 @@ const TimeTablePageLectureList = ({ lectures }) => {
       }
       setAttendance(res.data);
     }
-    fetch().then(
-      loadRenderData()
-    )
+    fetch()
   }, [userID])
 
   return (
@@ -86,7 +103,7 @@ const TimeTablePageLectureList = ({ lectures }) => {
         </TitleText>
       </ListTitle>
       <ListBox>
-        {renderData.map((element, index) => {
+        {lectures.map((element, index) => {
           return (
             <ListRow key={index}>
               <DefaultRow
@@ -120,17 +137,7 @@ const TimeTablePageLectureList = ({ lectures }) => {
                 </Right>
               </DefaultRow>
 
-              <DetailInformRow>
-                <DetailLeft>
-                  최신 과제{renderData.firstAssignment ? renderData.firstAssignment.title : "가 없습니다."}
-                </DetailLeft>
-                <DetailCenter>
-                  최신 자료{renderData.firstArchive ? renderData.firstArchive.title : "가 없습니다."}
-                </DetailCenter>
-                <DetailRight>
-                  최신 공지{renderData.firstNotice ? renderData.firstNotice.title : "가 없습니다."}
-                </DetailRight>
-              </DetailInformRow>
+              <DetailInform lectureID={element.ID} lectureIndex={index}/>
 
               <AttendanceChartRow col={16}>
                 <AttendanceChart>
