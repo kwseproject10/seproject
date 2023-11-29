@@ -19,6 +19,9 @@ const StudentMainPage = () => {
     //전체 과제 현황 받아옴
     const fetch = async () => {
       // const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/wholeassignment?userID=${userID}`;
+      // const res = await axios.get(
+      //   route
+      // ).catch(e => {throw e});
       const res = {
         data: [
           {
@@ -63,9 +66,6 @@ const StudentMainPage = () => {
           }
         ]
       }
-      // const res = await axios.get(
-      //   route
-      // ).catch(e => {throw e});
       if (res.data.result === "false") {
         console.log("load fail");
         return
