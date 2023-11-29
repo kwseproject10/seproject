@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { FacultyLectureSelectedState } from './../../../../Atom';
@@ -10,10 +9,46 @@ const FacultyGradeManagePage = () => {
   const [reqBody, setReqBody] = useState([]);
   useEffect(() => {
     const fetchAssignment = async () => {
-      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/enrolllist?lectureID=${selectedLecture}`;
-      const res = await axios.get(
-        route
-      );
+      // const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/enrolllist?lectureID=${selectedLecture}`;
+      // const res = await axios.get(
+      //   route
+      // );
+      const res = {
+        data : [
+          {
+            ID: "2020123123",
+            name: "홍길동"
+          },
+          {
+            ID: "2020123123",
+            name: "홍길동"
+          },
+          {
+            ID: "2020123123",
+            name: "홍길동"
+          },
+          {
+            ID: "2020123123",
+            name: "홍길동"
+          },
+          {
+            ID: "2020123123",
+            name: "홍길동"
+          },
+          {
+            ID: "2020123123",
+            name: "홍길동"
+          },
+          {
+            ID: "2020123123",
+            name: "홍길동"
+          },
+          {
+            ID: "2020123123",
+            name: "홍길동"
+          }
+        ]
+      }
       if(res.data.result === "false") {
         console.log("assignment load fail");
         return

@@ -287,10 +287,17 @@ const StudentMyPage = () => {
 
   //API call
   const submitPW = async() => {
-    let route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/auth?userID=${userID}&PW=${inputPW}`;
-    const res = await axios.get(
-      route
-    );
+    // let route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/auth?userID=${userID}&PW=${inputPW}`;
+    // const res = await axios.get(
+    //   route
+    // );
+    const res = {
+      data: {
+        "result" : "true",
+        "userID" : "2023123456",
+        "userType" : "student"
+      }
+    }
     if(res.data.result === "true"){
       setAuthed(true);
     }else{

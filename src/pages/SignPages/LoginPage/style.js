@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const LoginPageLogo = styled.div`
     text-align: center;
@@ -48,8 +48,22 @@ export const ButtonRow = styled.div`
     font-size: var(--font-size-sm);
 `
 
+export const TestButton = styled.div`
+    width: 100%;
+    height: 1.875rem;
+    line-height: 1.875rem;
+    text-align: center;
+    background-color: var(--color-nm);
+    color: white;
+    &:hover{
+        color: black;
+        transform: translateY(0);
+        transition: 0.3s;
+    }
+`
+
 export const SignButton = styled.div`
-    width: 7.8125rem;
+    width: 100%;
     height: 1.875rem;
     line-height: 1.875rem;
     text-align: center;
@@ -62,5 +76,6 @@ export const SignButton = styled.div`
     }
 `
 export const LinkStyle = styled(Link)`
+    width: 45%;
     text-decoration: none;
 `

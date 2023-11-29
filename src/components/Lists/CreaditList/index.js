@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { userIDState } from './../../../Atom';
@@ -30,10 +29,79 @@ const CreditList = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/credit?userID=${userID}`;
-      const res = await axios.get(
-        route
-      );
+      // const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/credit?userID=${userID}`;
+      // const res = await axios.get(
+      //   route
+      // );
+      const res = {
+        data: {
+          "userCredit" : {
+            "2023": {
+              "1": {
+                "major": 15,
+                "general": 0,
+                "etc": 0,
+                "total": 15,
+                "GPA": -1
+              }
+            },
+            "2022": {
+              "2": {
+                "major": 18,
+                "general": 0,
+                "etc": 0,
+                "total": 18,
+                "GPA": 4.1
+              },
+              "1": {
+                "major": 17,
+                "general": 0,
+                "etc": 0,
+                "total": 17,
+                "GPA": 4.0
+              }
+            },
+            "2021": {
+              "2": {
+                "major": 18,
+                "general": 0,
+                "etc": 0,
+                "total": 18,
+                "GPA": 4.0
+              },
+              "1": {
+                "major": 15,
+                "general": 6,
+                "etc": 0,
+                "total": 21,
+                "GPA": 4.0
+              }
+            },
+            "2020": {
+              "2": {
+                "major": 9,
+                "general": 16,
+                "etc": 0,
+                "total": 25,
+                "GPA": 4.0
+              },
+              "1": {
+                "major": 6,
+                "general": 13,
+                "etc": 0,
+                "total": 19,
+                "GPA": 4.0
+              }
+            }
+          },
+          "creditForGrad" : {
+              "major" : 39,
+              "general" : 40,
+              "etc" : 0,
+              "total" : 130
+          }
+        }
+      }
       if(res.data.result === "false") {
         return
       }

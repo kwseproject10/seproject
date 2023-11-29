@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -11,10 +10,29 @@ const DetailInform = ({ lectureID,lectureIndex }) => {
   const [lastAssignment, setLastAssignment] = useState();
   useEffect(() => {
     const fetchAssignment = async () => {
-      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/lecturelastboard?lectureID=${lectureID}`;
-      const res = await axios.get(
-        route
-      );
+      // const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/lecturelastboard?lectureID=${lectureID}`;
+      // const res = await axios.get(
+      //   route
+      // );
+      const res = {
+        data: [
+          {
+              "key": 115,
+              "title": "중간/기말고사 성적 문의 및 조회",
+              "type": "notice"
+          },
+          {
+              "key": 82,
+              "title": "[실습] 개발환경 & 디바이스 드라이버 자료 (일부 updated)",
+              "type": "download"
+          },
+          {
+              "key": 41,
+              "title": "\t3차 프로젝트",
+              "type": "assignment"
+          }
+      ]
+      }
       if (res.data.error === "No result found" || res.data.result === "false") {
         console.log("assignment load fail");
         return
@@ -83,10 +101,290 @@ const TimeTablePageLectureList = ({ lectures }) => {
 
   useEffect(() => {
     const fetch = async () => {
-      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/wholeattendance?userID=${userID}`;
-      const res = await axios.get(
-        route
-      );
+      // const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/wholeattendance?userID=${userID}`;
+      // const res = await axios.get(
+      //   route
+      // );
+      const res = {
+        data: {
+          "H020-4-0846-01": [
+              [
+                  1,
+                  0
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  0,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ]
+          ],
+          "H020-2-0453-01": [
+              [
+                  1
+              ],
+              [
+                  0.6
+              ],
+              [
+                  1
+              ],
+              [
+                  1
+              ],
+              [
+                  0
+              ],
+              [
+                  1
+              ],
+              [
+                  1
+              ],
+              [
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  0,
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ]
+          ],
+          "H020-3-2004-01": [
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  0
+              ],
+              [
+                  0,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [],
+              [
+                  0.6,
+                  0
+              ],
+              [
+                  1,
+                  0.6
+              ],
+              [
+                  1,
+                  0.6
+              ],
+              [
+                  1,
+                  0.6
+              ],
+              [
+                  1,
+                  1
+              ]
+          ],
+          "H020-4-5861-01": [
+              [
+                  0
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  0
+              ],
+              [
+                  1,
+                  1
+              ]
+          ],
+          "H020-4-8483-01": [
+              [
+                  1,
+                  1,
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1,
+                  1,
+                  0
+              ],
+              [
+                  1,
+                  1,
+                  0,
+                  0
+              ],
+              [
+                  1,
+                  1,
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1,
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1,
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1,
+                  1,
+                  1
+              ],
+              [
+                  1,
+                  1,
+                  1,
+                  1
+              ],
+              [
+                  1
+              ],
+              [
+                  1
+              ],
+              [
+                  1
+              ],
+              [
+                  0
+              ],
+              [
+                  1,
+                  0
+              ],
+              [
+                  1
+              ]
+          ]
+      }
+      }
       if (res.data.result === "false") {
         return
       }

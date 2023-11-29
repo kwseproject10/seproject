@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { LecturesState, signUpState, userIDState, userInformState } from './../../../Atom';
-import { AlretRow, ButtonRow, Input, InputTitle, LinkStyle, LoginPageLogo, SignButton } from "./style";
+import { AlretRow, ButtonRow, Input, InputTitle, LinkStyle, LoginPageLogo, SignButton, TestButton } from "./style";
 
 const LoginPage = () => {
   const [inputID, setInputID] = useState("");
@@ -36,39 +36,161 @@ const LoginPage = () => {
       return;
     }
     let route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/auth?userID=${inputID}&PW=${inputPW}`;
-    const res = await axios.get(
-      route
-    );
-    if (res.data.result === "true") {
-      setUserID(res.data.userID);
-      setAuth(true);
-      if (res.data.userType === "student") {
-        route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/userinform?userID=${inputID}`;
-        const res_user = await axios.get(
-          route
-        );
-        console.log(res_user.data);
-        if (res_user.data.result === "false") {
-          setAlret("회원정보 출력 오류가 발생하였습니다.");
-          return
-        } else {
-          route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/lectures?userID=${inputID}`;
-          const res_lectures = await axios.get(
+    try {
+      const res = await axios.get(
+        route
+      )
+      if (res.data.result === "true") {
+        setUserID(res.data.userID);
+        setAuth(true);
+        if (res.data.userType === "student") {
+          route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/userinform?userID=${inputID}`;
+          const res_user = await axios.get(
             route
           );
-          setUserInform(res_user.data);
-          setLectures(res_lectures.data);
-          goStudent();
+          console.log(res_user.data);
+          if (res_user.data.result === "false") {
+            setAlret("회원정보 출력 오류가 발생하였습니다.");
+            return
+          } else {
+            route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/lectures?userID=${inputID}`;
+            const res_lectures = await axios.get(
+              route
+            );
+            setUserInform(res_user.data);
+            setLectures(res_lectures.data);
+            goStudent();
+          }
+        } else {
+          goFaculty();
         }
-      } else {
-        goFaculty();
+      } else if (res.data.result === "false") {
+        setAlret("로그인 정보가 일치하지 않습니다.");
+        return;
       }
-    } else if (res.data.result === "false") {
-      setAlret("로그인 정보가 일치하지 않습니다.");
+    } catch (e) {
+      setAlret("로그인 오류가 발생하였습니다.");
       return;
     }
-    setAlret("로그인 오류가 발생하였습니다.");
-    return;
+  }
+
+  const logInTestStudent = () => {
+    setAuth(true);
+    setUserID("2023123456");
+    setUserInform({
+      name: "홍길동",
+      type: "학부생",
+      major: "컴퓨터정보공학부",
+      ID: "2023123456",
+      grade: 4,
+      numberOfTerm: 7,
+      email: "gildong@gmail.com",
+      phoneNum: "010-1234-5678",
+      birthday: "1900.01.01",
+      advisor: "이기훈",
+      advisorEmail: "kihoonlee@kw.ac.kr",
+      advisorNum: "02-940-8674",
+      state: "재학"
+    })
+    setLectures([
+      {
+        "key": "0",
+        "name": "소프트웨어공학",
+        "professor": "이기훈",
+        "major": "컴퓨터정보공학부",
+        "type": "전선",
+        "credit": "3",
+        "numOfTime": "3",
+        "time": [
+          "월5",
+          "수6"
+        ],
+        "place": [
+          "새빛205",
+          "새빛205"
+        ],
+        "ID": "H020-4-0846-01"
+      },
+      {
+        "key": "0",
+        "name": "디지털논리회로1",
+        "professor": "유지현",
+        "major": "컴퓨터정보공학부",
+        "type": "전필",
+        "credit": "3",
+        "numOfTime": "3",
+        "time": [
+          "금5",
+          "금6"
+        ],
+        "place": [
+          "새빛203",
+          "새빛203"
+        ],
+        "ID": "H020-2-0453-01"
+      },
+      {
+        "key": "0",
+        "name": "신호및시스템",
+        "professor": "이성원",
+        "major": "컴퓨터정보공학부",
+        "type": "전선",
+        "credit": "3",
+        "numOfTime": "3",
+        "time": [
+          "월4",
+          "수3"
+        ],
+        "place": [
+          "새빛102",
+          "새빛102"
+        ],
+        "ID": "H020-3-2004-01"
+      },
+      {
+        "key": "0",
+        "name": "임베디드시스템S/W설계",
+        "professor": "김태석",
+        "major": "컴퓨터정보공학부",
+        "type": "전선",
+        "credit": "3",
+        "numOfTime": "3",
+        "time": [
+          "월6",
+          "수5"
+        ],
+        "place": [
+          "새빛205",
+          "새빛205"
+        ],
+        "ID": "H020-4-5861-01"
+      },
+      {
+        "key": "0",
+        "name": "머신러닝",
+        "professor": "박철수",
+        "major": "컴퓨터정보공학부",
+        "type": "전선",
+        "credit": "3",
+        "numOfTime": "3",
+        "time": [
+          "월3",
+          "수4"
+        ],
+        "place": [
+          "새빛203",
+          "새빛203"
+        ],
+        "ID": "H020-4-8483-01"
+      }
+    ])
+    goStudent();
+  }
+
+  const logInTestFaculty = () => {
+    setAuth(true);
+    setUserID("2023123456");
+    goFaculty();
   }
 
   return (
@@ -127,6 +249,23 @@ const LoginPage = () => {
         </LinkStyle>
         <LinkStyle to="/signup" onClick={() => { setSignUp(true) }}>
           <SignButton>SIGN UP</SignButton>
+        </LinkStyle>
+      </ButtonRow>
+
+      <ButtonRow>
+        <LinkStyle to="/student">
+          <TestButton
+            onClick={logInTestStudent}
+          >
+            LOGIN TEST(학부)
+          </TestButton>
+        </LinkStyle>
+        <LinkStyle to="/faculty">
+          <TestButton
+            onClick={logInTestFaculty}
+          >
+            LOGIN TEST(교수)
+          </TestButton>
         </LinkStyle>
       </ButtonRow>
     </div>

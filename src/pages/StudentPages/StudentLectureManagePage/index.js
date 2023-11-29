@@ -160,10 +160,266 @@ const StudentLectureManagePage = () => {
 
   useEffect(() => {
     const fetchLectureAll = async () => {
-      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/loadlectureall`;
-      const res = await axios.get(
-        route
-      );
+      // const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/loadlectureall`;
+      // const res = await axios.get(
+      //   route
+      // );
+      const res = {
+        data : [
+          {
+            key: "0",
+            ID: "H020-3-3831-01",
+            name: "컴퓨터구조실험",
+            major: "컴퓨터정보공학부",
+            type: "전선",
+            credit: "1",
+            numOfTime: "2",
+            professor: "이성원",
+            time: "수7,8",
+            place: ""
+          },
+          {
+            key: "1",
+            ID: "H020-3-3831-02",
+            name: "컴퓨터구조실험",
+            major: "컴퓨터정보공학부",
+            type: "전선",
+            credit: "1",
+            numOfTime: "2",
+            professor: "이혁준",
+            time: "금3,4",
+            place: ""
+          },
+          {
+            key: "2",
+            ID: "H020-3-8993-01",
+            name: "소프트웨어프로젝트1",
+            major: "컴퓨터정보공학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "4",
+            professor: "이우신",
+            time: "월1,7,8,수2",
+            place: ""
+          },
+          {
+            key: "3",
+            ID: "H020-4-0846-01",
+            name: "소프트웨어공학",
+            major: "컴퓨터정보공학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "이기훈",
+            time: "월5,수6",
+            place: ""
+          },
+          {
+            key: "4",
+            ID: "H020-4-3112-01",
+            name: "무선이동네트워크및5G",
+            major: "컴퓨터정보공학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "이형근",
+            time: "화5,목6",
+            place: ""
+          },
+          {
+            key: "5",
+            ID: "H020-4-4136-01",
+            name: "컴퓨터비젼",
+            major: "컴퓨터정보공학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "심동규",
+            time: "월4,수3",
+            place: ""
+          },
+          {
+            key: "6",
+            ID: "H020-4-5861-01",
+            name: "임베디드시스템S/W설계",
+            major: "컴퓨터정보공학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "김태석",
+            time: "월6,수5",
+            place: ""
+          },
+          {
+            key: "7",
+            ID: "H020-4-8483-01",
+            name: "머신러닝",
+            major: "컴퓨터정보공학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "박철수",
+            time: "월3,수4",
+            place: ""
+          },
+          {
+            key: "8",
+            ID: "H020-4-8995-01",
+            name: "산학협력캡스톤설계1",
+            major: "컴퓨터정보공학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "이형근",
+            time: "화6,목5",
+            place: ""
+          },
+          {
+            key: "9",
+            ID: "F030-3-3873-01",
+            name: "상표법",
+            major: "법학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "권지현",
+            time: "금5,6",
+            place: ""
+          },
+          {
+            key: "10",
+            ID: "F030-3-4221-01",
+            name: "민사집행법",
+            major: "법학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "",
+            time: "화2,목1",
+            place: ""
+          },
+          {
+            key: "0",
+            ID: "F030-3-5564-01",
+            name: "정보통신법개론",
+            major: "법학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "",
+            time: "화4,목3",
+            place: ""
+          },
+          {
+            key: "0",
+            ID: "F030-3-5694-01",
+            name: "경력개발과취업전략",
+            major: "법학부",
+            type: "전선",
+            credit: "2",
+            numOfTime: "2",
+            professor: "권지현",
+            time: "목6,7",
+            place: ""
+          },
+          {
+            key: "0",
+            ID: "F030-3-8544-01",
+            name: "부동산공법",
+            major: "법학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "정영철",
+            time: "월6,수5",
+            place: ""
+          },
+          {
+            key: "0",
+            ID: "F030-3-8908-01",
+            name: "사회보장법",
+            major: "법학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "이준희",
+            time: "월5,수6",
+            place: ""
+          },
+          {
+            key: "0",
+            ID: "F030-4-0121-01",
+            name: "경제법",
+            major: "법학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "조현진",
+            time: "수5",
+            place: ""
+          },
+          {
+            key: "0",
+            ID: "F030-4-1898-01",
+            name: "형사소송실무",
+            major: "법학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "이두희",
+            time: "금1,2",
+            place: ""
+          },
+          {
+            key: "0",
+            ID: "F030-4-3759-01",
+            name: "디지털법률행위론",
+            major: "법학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "",
+            time: "목8,9,10",
+            place: ""
+          },
+          {
+            key: "0",
+            ID: "F030-4-5541-01",
+            name: "형사법판례세미나",
+            major: "법학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "한재경",
+            time: "월2,수1",
+            place: ""
+          },
+          {
+            key: "0",
+            ID: "F030-4-5570-01",
+            name: "특허심판과소송실무",
+            major: "법학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "오승준",
+            time: "월1",
+            place: ""
+          },
+          {
+            key: "0",
+            ID: "F030-4-9226-01",
+            name: "행정법판례세미나",
+            major: "법학부",
+            type: "전선",
+            credit: "3",
+            numOfTime: "3",
+            professor: "정영철",
+            time: "월5,수6",
+            place: ""
+          }
+    ]
+      }
       if (res.data.result === "false") {
         return
       }

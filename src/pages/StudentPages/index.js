@@ -1,10 +1,10 @@
-import { Outlet } from "react-router-dom";
-import { Body, BodyWrapper, PageBG, PageLayout, PageViewer } from "./style";
-import { useState } from "react";
-import StudentNavigation from "@components/Navigation/StudentNavigation";
+import StudentHeader from "@components/Header/StudentHeader";
 import Modal from "@components/Modal";
 import TestContent from "@components/Modal/ModalContents/TestContents";
-import StudentHeader from "@components/Header/StudentHeader";
+import StudentNavigation from "@components/Navigation/StudentNavigation";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
+import { Body, BodyWrapper, PageBG, PageLayout, PageViewer } from "./style";
 
 const StudentPages = () => {
   const [modalOpen, setModalOpen] = useState(false);

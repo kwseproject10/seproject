@@ -1,6 +1,5 @@
 import HeaderButton from "@components/Buttons/HeaderButton";
 import HeaderLogoBlack from "@images/HeaderLogo.png";
-import axios from "axios";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -14,10 +13,27 @@ const FacultyHeader = () => {
 
   useEffect(() => {
     const fetchAssignment = async () => {
-      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/userinform?userID=${userID}`;
-      const res = await axios.get(
-        route
-      );
+      // const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/userinform?userID=${userID}`;
+      // const res = await axios.get(
+      //   route
+      // );
+      const res = {
+        data : {
+          name: "홍길동",
+          type: "학부생",
+          major: "컴퓨터정보공학부",
+          ID: "2023123456",
+          grade: 4,
+          numberOfTerm: 7,
+          email: "gildong@gmail.com",
+          phoneNum: "010-1234-5678",
+          birthday: "1900.01.01",
+          advisor: "이기훈",
+          advisorEmail: "kihoonlee@kw.ac.kr",
+          advisorNum: "02-940-8674",
+          state: "재학"
+      }
+      }
       if (res.data.result === "false") {
         console.log("assignment load fail");
         return

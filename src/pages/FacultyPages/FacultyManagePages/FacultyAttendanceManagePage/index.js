@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { FacultyLectureSelectedState } from './../../../../Atom';
@@ -11,10 +10,32 @@ const FacultyAttendanceManagePage = ({ lectureName }) => {
 
   useEffect(() => {
     const fetchAssignment = async () => {
-      const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/lectureattendance?lectureID=${selectedLecture}`;
-      const res = await axios.get(
-        route
-      );
+      // const route = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_HOST_PORT}/lectureattendance?lectureID=${selectedLecture}`;
+      // const res = await axios.get(
+      //   route
+      // );
+      const res = {
+        data : [
+          {
+            classID : "1",
+            classDate : "2023-03-23T12:00:00Z",
+            classWeek : "1",
+            classDay : "1",
+            numOfAtt : 22,
+            numOfAbs : 5,
+            numOflat : 2
+          },
+          {
+            classID : "2",
+            classDate : "2023-03-25T12:00:00Z",
+            classWeek : "1",
+            classDay : "2",
+            numOfAtt : 23,
+            numOfAbs : 5,
+            numOflat : 2
+          }
+        ]
+      }
       if (res.data.result === "false") {
         console.log("attendance load fail");
         return
@@ -59,13 +80,13 @@ const FacultyAttendanceManagePage = ({ lectureName }) => {
                 {toStringFormat(ele.classDate)}
               </PostDate>
               <PostSummary>
-                {ele.numOfAtt} 명
+                {`${ele.numOfAtt}`} 명
               </PostSummary>
               <PostSummary>
-                {ele.numOflat} 명
+                {`${ele.numOflat}`} 명
               </PostSummary>
               <PostSummary>
-                {ele.numOfAbs} 명
+                {`${ele.numOfAbs}`} 명
               </PostSummary>
               <PostSummary>
                 0 명
